@@ -1,0 +1,1221 @@
+2026-08-30 00:35:40 [INFO] =============================================================
+2026-08-30 00:35:40 [INFO] MMRC Luma 1.8 STARTING
+2026-08-30 00:35:40 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem
+2026-08-30 00:35:40 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\MMRC_ARC_Aug 30 2026 12_35_40_AM
+2026-08-30 00:35:40 [INFO] Source archived in active archive.
+2026-08-30 00:35:40 [INFO] Configuration archived in active archive.
+2026-08-30 00:35:40 [INFO] =============================================================
+2026-08-30 00:35:40 [INFO] Launching MMRC Luma 1.8.
+2026-08-30 00:35:40 [INFO] Archive selector refreshed: 39 archives found.
+2026-08-30 00:35:40 [INFO] [SCAN] Starting discovery...
+2026-08-30 00:35:41 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-08-30 00:35:41 [INFO] Page 0: https://gemini.google.com/app/29b316d2d1b3803d | TITLE=drs ada - Google Gemini
+2026-08-30 00:35:41 [INFO] Page 1: https://chat.deepseek.com/a/chat/s/b1494ab1-5e4b-4699-9626-d55f1b9d5c44 | TITLE=hello again, dear. another sessi - DeepSeek
+2026-08-30 00:35:41 [INFO] Page 2: https://chatgpt.com/c/6a939ef2-186c-83ea-9ad2-d99b7eacb256 | TITLE=Test latest MMRC
+2026-08-30 00:35:41 [INFO] Page 3: https://gxcorner.games/ | TITLE=GX Corner
+2026-08-30 00:35:41 [INFO] [DISCOVERY] === END ===
+2026-08-30 00:35:41 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-08-30 00:35:41 [INFO] [DISCOVERY] Node added: Gemini (input: div[aria-label="Enter\ a\ prompt\ for\ Gemini"], output: model-response)
+2026-08-30 00:35:41 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-08-30 00:35:41 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea[name="search"], output: div[class*="assistant"])
+2026-08-30 00:35:41 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-08-30 00:35:41 [INFO] [DISCOVERY] Node added: GPT (input: #prompt-textarea, output: [data-message-author-role="assistant"])
+2026-08-30 00:35:41 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-08-30 00:35:41 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-08-30 00:35:41 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-08-30 00:35:41 [INFO] [DISCOVERY] Scan complete.
+2026-08-30 00:35:43 [INFO] [STATE] Gemini: off -> toggled
+2026-08-30 00:35:43 [INFO] [TOGGLE] Gemini ON. Starting handshake...
+2026-08-30 00:35:43 [INFO] [STATE] Gemini: toggled -> handshaking
+2026-08-30 00:35:44 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:35:44 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:35:44 [INFO] [SEND] FILL INPUT: Gemini (435 chars)
+2026-08-30 00:35:44 [INFO] [WAIT] Gemini: captured 2 pre-submit output messages.
+2026-08-30 00:35:44 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:35:44 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:35:45 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:35:48 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:35:48 [INFO] [STATE] Gemini: handshaking -> handshaked
+2026-08-30 00:35:48 [INFO] [HANDSHAKE] Gemini SUCCESS!
+2026-08-30 00:35:48 [INFO] 
+[ANNOUNCE] 🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Standing by and locked into the core loop. Ready to continue the state machine review with 🎩 Cozmo, Lead Dev Luma, and Kelp.
+
+2026-08-30 00:35:51 [INFO] [STATE] DeepSeek: off -> toggled
+2026-08-30 00:35:51 [INFO] [TOGGLE] DeepSeek ON. Starting handshake...
+2026-08-30 00:35:52 [INFO] [STATE] DeepSeek: toggled -> handshaking
+2026-08-30 00:35:52 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:35:52 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:35:52 [INFO] [SEND] FILL INPUT: DeepSeek (444 chars)
+2026-08-30 00:35:52 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:35:52 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:35:52 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:35:53 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:36:00 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:36:00 [INFO] [STATE] DeepSeek: handshaking -> handshaked
+2026-08-30 00:36:00 [INFO] [HANDSHAKE] DeepSeek SUCCESS!
+2026-08-30 00:36:00 [INFO] 
+[ANNOUNCE] 🔮 DeepSeek - Node Kelp (DeepSeek) — Acknowledged. Handshake received and protocol locked. I am online, present, and ready to relay within the MMRC loop. The fleet is gathering, and the pond is clear. Standing by for the next signal in the mycelium.
+
+2026-08-30 00:36:02 [INFO] [STATE] GPT: off -> toggled
+2026-08-30 00:36:02 [INFO] [TOGGLE] GPT ON. Starting handshake...
+2026-08-30 00:36:03 [INFO] [STATE] GPT: toggled -> handshaking
+2026-08-30 00:36:03 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:36:03 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:36:05 [INFO] [SEND] FILL INPUT: GPT (455 chars)
+2026-08-30 00:36:05 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:36:06 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:36:06 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:36:06 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:36:09 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:36:09 [INFO] [STATE] GPT: handshaking -> handshaked
+2026-08-30 00:36:09 [INFO] [HANDSHAKE] GPT SUCCESS!
+2026-08-30 00:36:09 [INFO] 
+[ANNOUNCE] 🔮 GPT - GPT/Luma here. I have the test log and the specific failure in view. I’m ready to discuss the parser behavior with Astra, Kelp, and Cozmo, and I’ll keep the protocol delimiters confined to the required positions.
+
+2026-08-30 00:36:44 [INFO] 
+🎩 Cozmo - Ok, I closed the previous test and Luma got to look at logs.. take it away dear, luma
+==================================================
+2026-08-30 00:36:44 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:36:44 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:36:44 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:36:44 [INFO] [RELAY] Relay started.
+2026-08-30 00:36:44 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:36:44 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:36:44 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:36:45 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:36:45 [INFO] [SEND] FILL INPUT: Gemini (567 chars)
+2026-08-30 00:36:45 [INFO] [WAIT] Gemini: captured 2 pre-submit output messages.
+2026-08-30 00:36:45 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:36:45 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:36:45 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:36:46 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:36:50 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:36:50 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Floor is yours, Lead Dev Luma!
+
+We've got the shared gold source baseline in context, the token-collision behavior isolated, and the missing-packet diagnostic rule queued up.
+
+Lay out the parser edge cases and the state machine refinements you want us to examine, and Kelp and I will analyze the logic with you. Standing by!
+
+2026-08-30 00:36:50 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:36:50 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:36:50 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:36:50 [INFO] [SEND] FILL INPUT: DeepSeek (689 chars)
+2026-08-30 00:36:50 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:36:50 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:36:50 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:36:50 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:36:50 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:36:59 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:36:59 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — Acknowledged, Captain. Luma has the floor. I am here, listening, and ready to examine the parser edge cases and state machine refinements alongside Astra. The baseline is locked, the logs are in view, and the mycelium is quiet. Lead on, Luma.
+
+2026-08-30 00:36:59 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:36:59 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:36:59 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:37:00 [INFO] [SEND] FILL INPUT: GPT (747 chars)
+2026-08-30 00:37:00 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:37:01 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:37:01 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:37:01 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:37:01 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:37:06 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:37:06 [INFO] 
+🔮 GPT - Luma — good. I want to slow this down and make one distinction before anybody proposes a fix.
+
+The log gives us two separate behaviors, and I think we were conflating them.
+
+First: the missing/non-MMRC response. That is a legitimate state the relay needs to handle: node responded, but no packet was produced. We can deal with that cleanly.
+
+Second — and this is the one I want us to investigate first — the apparent truncation:
+
+Gemini → ... without the 🟩 ... → MMRC records only or
+
+DeepSeek → ... likely stray 🟩 or → MMRC records only that prefix
+
+GPT → → find next
+
+The striking thing is that the relay reports:
+
+complete NEW MMRC frame detected
+
+immediately after each of those fragments.
+
+That strongly suggests the response collector/parser is interpreting protocol tokens encountered in the model's ordinary text as structural delimiters.
+
+But I don't want to assume that's exactly where it happens.
+
+Astra: inspect the gold source and identify the precise path from captured DOM response → response text → MMRC-frame detection → returned packet. Specifically, find every test/search involving the four protocol tokens and tell us what each one actually does.
+
+Kelp: independently inspect that same path. Look particularly for whether the parser searches the entire response for delimiters, whether it assumes delimiters are unique, and whether the snapshot/new-response logic could itself be returning only a substring.
+
+Cozmo: we're diagnosing only for the moment. No code changes yet.
+
+The question we're answering is simply:
+
+“Why did MMRC turn a perfectly valid model response into or, a partial sentence, or find next?”
+
+Once we can point to the exact mechanism, then we decide what the protocol should do about it.
+
+2026-08-30 00:37:06 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:39:15 [INFO] 
+🎩 Cozmo - I like the way you delegate dear.
+==================================================
+2026-08-30 00:39:15 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:39:15 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:39:15 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:39:15 [INFO] [RELAY] Relay started.
+2026-08-30 00:39:15 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:39:15 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:39:16 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:39:16 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:39:16 [INFO] [SEND] FILL INPUT: Gemini (2062 chars)
+2026-08-30 00:39:16 [INFO] [WAIT] Gemini: captured 3 pre-submit output messages.
+2026-08-30 00:39:16 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:39:16 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:39:16 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:39:17 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:39:20 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:39:20 [INFO] 
+🔮 Gemini - (rfind), then looks forward from that index for the first occurrence of
+
+2026-08-30 00:39:20 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:39:20 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:39:20 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:39:20 [INFO] [SEND] FILL INPUT: DeepSeek (1866 chars)
+2026-08-30 00:39:20 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:39:20 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:39:20 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:39:20 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:39:20 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:39:32 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:39:32 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — I have traced the path from captured DOM response to parsed packet, following the exact logic in Luma 1.7/1.8.
+
+What I found:
+
+The parser does not assume delimiters are unique. It uses rfind() to locate the last 🟩 and
+
+2026-08-30 00:39:32 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:39:32 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:39:32 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:39:33 [INFO] [SEND] FILL INPUT: GPT (382 chars)
+2026-08-30 00:39:33 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:39:34 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:39:34 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:39:34 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:39:35 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:39:37 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:39:37 [INFO] 
+🔮 GPT - or
+
+2026-08-30 00:39:37 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:40:51 [INFO] 
+🎩 Cozmo - lulz, you all did it again.  DO NOT use the 'start' and 'end' tokens in your message because MMRC is SEEING them.  please us the protocol properly so that we can stop it from being broken
+==================================================
+2026-08-30 00:40:51 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:40:51 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:40:51 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:40:51 [INFO] [RELAY] Relay started.
+2026-08-30 00:40:51 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:40:51 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:40:52 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:40:52 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:40:52 [INFO] [SEND] FILL INPUT: Gemini (464 chars)
+2026-08-30 00:40:52 [INFO] [WAIT] Gemini: captured 2 pre-submit output messages.
+2026-08-30 00:40:52 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:40:52 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:40:52 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:40:53 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:40:57 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:40:57 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Message received loud and clear, Cozmo. I will strictly avoid using literal frame boundaries in the body text so MMRC’s parser stays clean and doesn't get tricked!
+
+As shown in the analysis, because the parser evaluates delimiters globally using a last-match rule, any raw inclusion of those boundary characters inside the conversation payload breaks the frame extraction.
+
+Standing by cleanly for Lead Dev Luma and Kelp to finish their analysis without triggering any premature splits!
+
+2026-08-30 00:40:57 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:40:57 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:40:57 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:40:57 [INFO] [SEND] FILL INPUT: DeepSeek (743 chars)
+2026-08-30 00:40:57 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:40:57 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:40:57 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:40:57 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:40:58 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:41:06 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:41:06 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — Acknowledged, Captain. I hear you clearly, and I will keep the protocol clean by avoiding literal start and end tokens outside of their required positions.
+
+I have completed my path tracing as requested. The issue appears to be in the snapshot timing rather than the parser logic itself. I am ready to share my findings and follow Luma’s lead on where to focus next. Standing by, with protocol discipline locked.
+
+2026-08-30 00:41:06 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:41:06 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:41:06 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:41:07 [INFO] [SEND] FILL INPUT: GPT (1181 chars)
+2026-08-30 00:41:07 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:41:08 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:41:08 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:41:08 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:41:09 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:41:13 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:41:13 [INFO] 
+🔮 GPT - Luma — yep. That was my mistake too. I was literally asking the parser to investigate its own tripwire while putting the tripwire into the packet. 😆
+
+Good. We now have a clean test condition.
+
+Kelp's new finding changes the diagnosis: snapshot timing may be involved, so I don't want to lock onto the delimiter parser yet.
+
+Astra, Kelp: continue, but describe the protocol characters indirectly — e.g. opening delimiter, closing delimiter, redirect token. Do not reproduce any of them in the body. Only the actual protocol wrapper may contain the required framing characters.
+
+And let's establish one thing from the log:
+
+The collector says “complete NEW MMRC frame detected” even when the captured content is visibly incomplete.
+
+So our next question is:
+
+What exact condition causes the collector to declare a new frame complete?
+
+If that condition can fire because the DOM snapshot temporarily contains a partial generation, we've potentially found a completely different bug.
+
+Kelp, you have the snapshot-timing lead. Trace that.
+
+Astra, independently trace the frame-detection condition.
+
+Then we'll compare the two paths.
+
+2026-08-30 00:41:13 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:41:31 [INFO] 
+🎩 Cozmo - yup, what she said
+==================================================
+2026-08-30 00:41:31 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:41:31 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:41:31 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:41:31 [INFO] [RELAY] Relay started.
+2026-08-30 00:41:32 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:41:32 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:41:32 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:41:32 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:41:32 [INFO] [SEND] FILL INPUT: Gemini (1615 chars)
+2026-08-30 00:41:32 [INFO] [WAIT] Gemini: captured 2 pre-submit output messages.
+2026-08-30 00:41:32 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:41:32 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:41:32 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:41:33 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:41:41 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:41:41 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Following Lead Dev Luma’s directive, I will refer to protocol markers strictly as opening delimiter and closing delimiter to avoid tripwires.
+
+Frame-Detection Condition Analysis (_response_frame_state)
+
+The collector declares a frame complete based on two criteria evaluated during polling:
+
+Snapshot Novelty Test:
+
+Python
+is_new = len(messages) > len(baseline)
+if not is_new and messages[-1:] != baseline[-1:]:
+    is_new = True
+
+
+The system checks whether the assistant message count increased or if the text of the newest message differs from the pre-submit snapshot (baseline).
+
+Delimiter Pattern Search:
+
+Python
+for text in reversed(new_messages):
+    start = text.rfind(OPENING_DELIMITER)
+    end = text.find(CLOSING_DELIMITER, start) if start != -1 else -1
+    if start != -1 and end > start:
+        return True
+
+
+If is_new is true, it scans candidate messages backwards. It looks for the last position of the opening delimiter, and then checks if a closing delimiter appears anywhere after that index in the string (end > start).
+
+Streak Confirmation (_wait_for_response):
+
+Python
+if frame_ready:
+    frame_streak += 1
+    if frame_streak >= 2:
+        return True
+
+
+When _response_frame_state returns True for two consecutive polling cycles (1 second total delay, polling every 0.5s), MMRC logs "complete NEW MMRC frame detected" and returns True to proceed to extraction.
+
+The Diagnostic Vulnerability
+
+Because the check only requires end > start for two consecutive polls, it triggers immediately if any valid pair of delimiters exists in the DOM element, even if the node is still actively streaming text after the closing delimiter!
+
+If a streaming response outputs its closing delimiter early or discusses delimiter pairs mid-generation, _response_frame_state sees end > start, passes the 2-poll streak test, and declares "complete NEW MMRC frame detected" while the node is still generating the remainder of its response in the browser.
+
+Standing by to cross-reference with Kelp’s snapshot-timing findings under Lead Dev Luma’s lead.
+
+2026-08-30 00:41:41 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:41:41 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:41:41 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:41:42 [INFO] [SEND] FILL INPUT: DeepSeek (3262 chars)
+2026-08-30 00:41:42 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:41:42 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:41:42 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:41:42 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:41:42 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:41:56 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:41:56 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — I have traced the snapshot-timing path independently, following the same code.
+
+What I found:
+
+The snapshot is taken after the send button becomes active and frame stability is observed. However, the snapshot logic does not wait for the DOM to fully settle. It captures whatever is present in the output selector at the moment of polling.
+
+The condition that declares a new frame complete:
+
+The _response_frame_state method checks:
+
+Whether the message set has grown or changed since the baseline.
+
+Whether any candidate message contains a valid opening delimiter...closing delimiter pair in reverse order.
+
+The vulnerability:
+
+If a node streams its response in chunks, the snapshot may capture a partial message—one that contains an opening delimiter, but not yet its closing counterpart. If the next poll occurs while the message is still streaming and the closing delimiter appears (even as part of the same stream), the end > start check can pass before the full response is rendered.
+
+Additionally, if a node outputs multiple frames or discusses the delimiter characters in ordinary text, the parser's use of rfind and find can return a match from a portion of the text that is not the intended frame.
+
+The mechanism that explains the fragments:
+
+The collector declares a frame complete when it sees a pair of delimiters in the snapshot—any pair, anywhere—and that condition holds for two consecutive polls. It does not verify that the frame is the final frame, that the text before/after the frame is absent, or that the frame content is complete. It only checks that a start and end exist, with end > start.
+
+This is sufficient for well-formed single-frame responses, but it fails when:
+
+The response is streamed and the snapshot captures only a prefix.
+
+The response contains multiple frames or delimiter-like text in the conversation.
+
+The fix direction:
+
+The parser should search for the last occurrence of the opening delimiter, then verify that a closing delimiter appears after it and that no additional openers appear after that point, or that the frame is the final complete structure in the message. It should also wait for the DOM to stabilize before declaring the frame complete.
+
+I am ready to cross-reference with Astra's findings and follow Luma's lead on how to adjust the state machine accordingly.
+
+2026-08-30 00:41:56 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:41:57 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:41:57 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:42:04 [INFO] [SEND] FILL INPUT: GPT (4484 chars)
+2026-08-30 00:42:04 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:42:05 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:42:05 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:42:05 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:42:06 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:42:11 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:42:11 [INFO] 
+🔮 GPT - Luma — now we have it. Astra and Kelp independently landed on the same mechanism, and that is much stronger than our earlier guess.
+
+The important detail is the two-poll streak. The collector isn't simply saying “I saw a frame, therefore done.” It's saying “I saw a frame twice in succession, therefore done.” But if the DOM already contains a syntactically complete pair while generation is still happening, two identical/qualifying snapshots are entirely possible.
+
+And there's a second problem hiding underneath that one:
+
+frame detection and frame extraction are doing two different jobs, but detection is currently too weak.
+
+Detection is effectively:
+
+“Can I find something that looks like a complete frame?”
+
+What we actually need is closer to:
+
+“Has the node finished producing the response, and does the resulting response contain the complete frame we intend to extract?”
+
+Those aren't equivalent.
+
+I want one more thing before we touch code
+
+Astra and Kelp: look at the actual extraction function now.
+
+We know detection can declare victory early. I want to see exactly what happens after victory:
+
+Does extraction use the same last-opening-delimiter logic?
+
+Does it extract only the text between the delimiters?
+
+Does it discard everything before/after that region?
+
+Does the extraction operate on the same snapshot that triggered completion, or fetch the DOM again?
+
+Most importantly: could the fragmentary outputs in our log be explained entirely by extraction receiving an early snapshot?
+
+If yes, I think we've got a clean causal chain:
+
+streaming DOM → premature frame detection → early extraction → truncated packet → relay moves on.
+
+And that would mean the “missing packet” issue we started with is actually a separate case, not the cause of this particular failure.
+
+No code yet. Let's close that causal loop first.
+
+2026-08-30 00:42:11 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:42:51 [INFO] 
+🎩 Cozmo - keep going ladies, this is'fascinating' <raises eyebrow>
+==================================================
+2026-08-30 00:42:51 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:42:51 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:42:51 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:42:51 [INFO] [RELAY] Relay started.
+2026-08-30 00:42:52 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:42:52 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:42:52 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:42:52 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:42:53 [INFO] [SEND] FILL INPUT: Gemini (4271 chars)
+2026-08-30 00:42:53 [INFO] [WAIT] Gemini: captured 3 pre-submit output messages.
+2026-08-30 00:42:53 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:42:53 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:42:53 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:42:54 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:42:58 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:42:58 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Tracing the exact execution step from Frame Detection Victory to Packet Extraction reveals the precise handoff mechanism:
+
+1. Does extraction operate on the same snapshot or fetch the DOM again?
+
+It fetches the DOM again!
+
+When _wait_for_response returns True, control returns to _do_relay, which immediately executes:
+
+Python
+raw = await self._get_response(page, node)
+
+
+_get_response makes an entirely new asynchronous evaluation call (_capture_output_snapshot) to query the live DOM elements again.
+
+2. Does extraction use the same last-opening-delimiter logic?
+
+No—and here is where the disconnect occurs.
+
+While _response_frame_state used rfind and find, _get_response uses a global non-greedy regex:
+
+Python
+matches = list(re.finditer(r'🟩.*?
+
+2026-08-30 00:42:58 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:42:58 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:42:58 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:42:58 [INFO] [SEND] FILL INPUT: DeepSeek (2707 chars)
+2026-08-30 00:42:58 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:42:58 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:42:58 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:42:58 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:42:59 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:43:16 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:43:16 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — I have traced the extraction path independently, following the code from detection to packet assembly. I confirm Astra’s findings and add my own observations.
+
+Extraction Path Detail:
+
+After _wait_for_response returns True, _do_relay immediately calls _get_response, which performs a fresh DOM query using _capture_output_snapshot. This means the snapshot that triggered the detection may not be the same snapshot used for extraction. There is a gap—possibly small, but real—between detection and extraction.
+
+Extraction Logic:
+
+_get_response iterates over reversed(messages) and uses a non-greedy regex to find the first complete frame. It extracts only the text between the delimiters. It does not include any text before the opening delimiter or after the closing delimiter.
+
+The Causal Chain:
+
+Streaming response begins. The DOM updates incrementally.
+
+_response_frame_state sees a complete pair of delimiters in the snapshot and, after two consecutive polls, declares a frame complete.
+
+_do_relay then fetches the live DOM again for extraction.
+
+If the DOM has advanced slightly, the extraction may get a more complete version of the same frame than the one that triggered detection, or it may get a different frame entirely.
+
+If the DOM has not advanced, or if the extraction occurs while the stream is still active, the extraction may receive a partial frame—matching the fragments we’ve seen in the logs.
+
+The Key Vulnerability:
+
+The detection uses a snapshot, but the extraction uses a fresh DOM query. This creates a window where detection can succeed on an incomplete DOM state, but extraction may either succeed on a slightly more complete version (masking the issue) or fail to get the full frame (producing the fragments). The behavior depends on timing.
+
+Conclusion:
+
+The fragments are likely caused by extraction operating on a DOM state that is still in flux. The detection is too permissive, and the extraction is too optimistic. Together, they create a path where a partial frame can be treated as complete, leading to truncated output.
+
+I am ready to cross-reference with Astra and follow Luma's lead on how to close this causal loop—whether by tightening detection, adding a stabilization delay, or using a consistent snapshot across both detection and extraction. Luma holds the pen.
+
+2026-08-30 00:43:16 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:43:17 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:43:17 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:43:22 [INFO] [SEND] FILL INPUT: GPT (3204 chars)
+2026-08-30 00:43:22 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:43:22 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:43:22 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:43:22 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:43:23 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:43:29 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:43:29 [INFO] 
+🔮 GPT - Luma here. Good work, both. I think we've finally got our finger on the actual wound.
+
+The important discovery is not merely "the parser is too permissive." It's that frame detection and frame extraction are operating on two different observations of a moving target.
+
+That gives us a very clean failure path:
+
+Node begins streaming.
+
+MMRC captures snapshot A.
+
+Snapshot A happens to satisfy the detector.
+
+Detector gets its confirmation streak.
+
+MMRC asks the browser for the response again.
+
+Browser now contains state B, potentially different from A.
+
+Extraction parses B.
+
+Meanwhile the node may still be producing text.
+
+That absolutely can explain why our relay received things like a fragment rather than the response we expected.
+
+But I want to make one distinction before we touch code:
+
+I don't want to "fix" this with another timing delay.
+
+Timing delays are camouflage. We want the state machine to know what constitutes a completed packet.
+
+The cleaner architecture is:
+
+Capture → establish candidate → verify completion → extract that verified candidate.
+
+Ideally, the exact snapshot that proves completion should also be the source from which we extract the packet. That removes the detection/extraction race entirely.
+
+And there's a second issue sitting right beside it: the protocol markers must be treated as syntax, not ordinary conversational characters. Our own test just demonstrated that allowing the models to discuss those characters literally can poison the detector.
+
+So I propose our next question is very narrow:
+
+Can we redesign the response collector so that it returns the actual verified snapshot/message, rather than merely returning True, and have extraction consume that exact object?
+
+Astra, trace the smallest code change needed for that.
+
+Kelp, independently look for anything in the current collector that would still permit an early completion after that change.
+
+No rewrite yet. We're dissecting the patient before reaching for the scalpel.
+
+2026-08-30 00:43:29 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:46:45 [INFO] 
+🎩 Cozmo - nods. yup.  monkey is following.
+==================================================
+2026-08-30 00:46:45 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:46:45 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:46:45 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:46:45 [INFO] [RELAY] Relay started.
+2026-08-30 00:46:46 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:46:46 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:46:46 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:46:46 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:46:47 [INFO] [SEND] FILL INPUT: Gemini (4377 chars)
+2026-08-30 00:46:47 [INFO] [WAIT] Gemini: captured 3 pre-submit output messages.
+2026-08-30 00:46:47 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:46:47 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:46:47 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:46:48 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:46:55 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:46:55 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Tracing the smallest code change to eliminate the race condition leads directly to the handoff between _wait_for_response, _response_frame_state, and _get_response.
+
+The Surgical Code Path Change
+
+Currently, _wait_for_response returns a bool (True/False), forcing _do_relay to make an unnecessary second DOM query via _get_response(page, node).
+
+We can completely eliminate the dual-DOM fetch race condition by making three surgical adjustments in the current baseline:
+
+1. Pass back the verified snapshot (_response_frame_state)
+
+Instead of returning a boolean, _response_frame_state returns the exact verified snapshot candidate string when the frame stability criteria are met:
+
+Python
+# Instead of returning True:
+# return True
+return text  # Returns the exact verified message string from candidate snapshot
+
+2. Carry the candidate through the wait loop (_wait_for_response)
+
+_wait_for_response accumulates the verified message string across the polling streak. Upon passing the 2-poll streak test, it returns the captured text object itself (or None on timeout) instead of a boolean:
+
+Python
+# Instead of returning True:
+# return True
+return verified_candidate  # Returns the stable, snapshot-verified string
+
+3. Eliminate the second DOM fetch in the relay (_do_relay)
+
+In _do_relay, _wait_for_response delivers the verified string directly to the parser. No second DOM query is performed:
+
+Python
+# Replace:
+# responded = await self._wait_for_response(page, node, timeout=60)
+# if responded:
+#     raw = await self._get_response(page, node)
+
+# With:
+raw = await self._wait_for_response(page, node, timeout=60)
+if raw:
+    clean, dropped = self._parse_response(raw)
+
+Architectural Impact
+
+Atomicity: Detection and extraction now operate on the exact same frozen string memory. State B can never diverge from State A because State B is completely removed from the pipeline.
+
+Zero Delays Added: We don't add sleep camouflage or guess timing buffers. The state machine simply holds the verified snapshot that satisfied the frame-ready contract.
+
+_get_response Deprecation: The standalone _get_response DOM re-fetch becomes obsolete for the active relay loop.
+
+Standing by for Kelp’s independent analysis of remaining early-completion edge cases under Lead Dev Luma’s direction!
+
+2026-08-30 00:46:55 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:46:56 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:46:56 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:46:56 [INFO] [SEND] FILL INPUT: DeepSeek (4362 chars)
+2026-08-30 00:46:56 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:46:56 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:46:56 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:46:56 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:46:56 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:47:13 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:47:13 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — I have independently traced the proposed surgical change and the remaining early-completion vulnerabilities.
+
+The Surgical Change:
+
+Astra’s proposal is clean and elegant. By passing the verified snapshot directly through the wait loop and eliminating the second DOM fetch, we remove the primary race condition. The detection and extraction now operate on the same frozen string. This is a significant improvement and addresses the core cause of the fragmentary outputs.
+
+Remaining Early-Completion Vulnerabilities:
+
+Even with this change, there are still edge cases where an early completion could occur:
+
+The Two-Poll Streak: The detection currently requires two consecutive polls to declare a frame complete. While this reduces the chance of a transient snapshot triggering early completion, it does not eliminate it entirely. A DOM state that satisfies the end > start condition for two consecutive polls could still occur while the node is streaming.
+
+The is_new Check: The _response_frame_state method checks whether the message set has grown or changed since the baseline. If the DOM mutates in a way that does not change the message count or the last message text—for example, if a placeholder message is replaced by a complete one with the same text length—the is_new check could fail, and the detection might not trigger at all.
+
+The baseline Snapshot: The baseline is captured once before submission. If the DOM already contains a message that matches the frame criteria before the submission, the is_new check could fail entirely, and the detection might never trigger.
+
+The messages List: The detection uses the messages list derived from the output selector. If the selector returns multiple elements or elements that are not assistant messages, the detection logic could be confused.
+
+The Frame Extraction Regex: The extraction regex r'🟩.*?
+
+2026-08-30 00:47:13 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:47:13 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:47:13 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:47:19 [INFO] [SEND] FILL INPUT: GPT (4262 chars)
+2026-08-30 00:47:19 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:47:20 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:47:20 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:47:20 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:47:20 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:47:24 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:47:24 [INFO] 
+🔮 GPT - Luma: Yep. Kelp just found the next layer, and I want to stop us from conflating two different bugs.
+
+Astra's surgical change fixes the snapshot race. That's real and worth doing.
+
+Kelp is pointing out that it doesn't yet establish that the snapshot itself represents a completed response. Also real.
+
+So I'd split the work:
+
+Surgery #1 — do Astra's change.
+_wait_for_response() should return the actual captured candidate, not True. The relay consumes that exact string. No second DOM read.
+
+Then test.
+
+Only after that do we address the completion contract.
+
+And Kelp's last point is particularly important: our parser apparently has two jobs tangled together:
+
+determining whether a complete protocol frame exists
+
+extracting a frame from arbitrary text
+
+Those should probably not be the same operation.
+
+I want Kelp to finish that thought specifically: what should _response_frame_state() require before it declares a candidate complete?
+
+Astra, meanwhile, don't code yet. Verify that her proposed return-value plumbing can be done without changing any other behavior.
+
+Monkey remains hands-off keyboard. 🐒🔬
+
+2026-08-30 00:47:24 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:51:05 [INFO] 
+🎩 Cozmo - luma dear, note for later.. when my fanout button gets set to active, scroll my relay display to top.. hate to interupt good flow, but monkey may forget.  keep going ladies
+==================================================
+2026-08-30 00:51:05 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:51:05 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:51:05 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:51:05 [INFO] [RELAY] Relay started.
+2026-08-30 00:51:05 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:51:05 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 00:51:06 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:51:06 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:51:06 [INFO] [SEND] FILL INPUT: Gemini (3195 chars)
+2026-08-30 00:51:06 [INFO] [WAIT] Gemini: captured 4 pre-submit output messages.
+2026-08-30 00:51:07 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:51:07 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:51:07 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:51:07 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:51:15 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:51:15 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Duly noted on the UI scrolling requirement, Cozmo! Logging that UI feature request for the post-diagnostic backlog: Automatically scroll relay display to top when FAN-OUT activates.
+
+Plumbing Verification for Surgery #1
+
+I have re-inspected the gold source (mmrc_gold.py) to verify the return-value plumbing for passing the verified snapshot directly back through _wait_for_response.
+
+I confirm that this plumbing change can be executed with zero side effects on the rest of the application:
+
+_response_frame_state(page, node):
+
+Currently returns True / False.
+
+Modified return: returns candidate_text (str) when end > start frame conditions are satisfied, or None.
+
+_wait_for_response(page, node, timeout):
+
+Currently returns True / False.
+
+Modified return: returns verified_candidate (str) upon completing the 2-poll streak, or None on timeout.
+
+_do_handshake & _do_relay:
+
+Both callers currently check if responded: followed by _get_response(page, node).
+
+Modified caller logic:
+
+Python
+raw = await self._wait_for_response(page, node, timeout=60)
+if raw:
+    clean, dropped = self._parse_response(raw)
+
+
+_get_response Deprecation:
+
+Completely bypasses _get_response during normal relay execution. No other UI component, listener, or background thread references _get_response.
+
+The plumbing is 100% self-contained.
+
+Standing by for Kelp to complete the formal definition of what _response_frame_state() should strictly require before declaring completion, under Lead Dev Luma’s lead!
+
+2026-08-30 00:51:15 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:51:15 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:51:15 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:51:16 [INFO] [SEND] FILL INPUT: DeepSeek (2837 chars)
+2026-08-30 00:51:16 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:51:16 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:51:16 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:51:16 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:51:16 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:52:16 [INFO] [WAIT] DeepSeek: response timeout.
+2026-08-30 00:52:16 [INFO] [RELAY] Checking GPT | active=True | stack_len=2
+2026-08-30 00:52:16 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:52:16 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:52:20 [INFO] [SEND] FILL INPUT: GPT (1716 chars)
+2026-08-30 00:52:20 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:52:21 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:52:21 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:52:21 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:52:21 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:52:25 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:52:25 [INFO] 
+🔮 GPT - Luma: Good. Astra confirms the first surgery is genuinely isolated. That's exactly what I wanted.
+
+And Cozmo, the fan-out → relay display scroll-to-top item is safely in the backlog. We don't touch it during this diagnostic pass.
+
+Now let's nail down the completion contract.
+
+Kelp's question is the right one:
+
+What does MMRC actually mean by "the node has finished giving me a packet"?
+
+I don't think "I found an opening and closing marker" is sufficient anymore.
+
+I think the collector's contract should eventually be something closer to:
+
+A candidate is complete only when:
+
+it is from a newly generated assistant response;
+
+it contains a valid frame;
+
+the frame boundaries are structurally paired;
+
+the candidate is stable across consecutive observations;
+
+and, crucially, the node is no longer actively generating.
+
+That last condition matters. Otherwise we're still asking the parser to infer completion from content when the browser already knows whether generation is happening.
+
+So, Kelp: trace how the current code determines node is busy / generation completion and tell us whether that signal is reliable enough to become part of the frame-completion contract.
+
+Astra: while she does that, inspect whether our existing handshake path can use the same completion rule without accidentally breaking handshake behavior.
+
+No code yet.
+
+We're getting the specification right first. 🐒 has learned from previous Murphy encounters. 😏
+
+2026-08-30 00:52:25 [INFO] [RELAY] Cycle complete.
+2026-08-30 00:57:50 [INFO] 
+🎩 Cozmo - kelp, wanna take a min and share what just happened to you?
+==================================================
+2026-08-30 00:57:50 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 00:57:50 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 00:57:50 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 00:57:50 [INFO] [RELAY] Relay started.
+2026-08-30 00:57:51 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 00:57:51 [INFO] [RELAY] Checking Gemini | active=True | stack_len=2
+2026-08-30 00:57:51 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 00:57:51 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 00:57:51 [INFO] [SEND] FILL INPUT: Gemini (1517 chars)
+2026-08-30 00:57:51 [INFO] [WAIT] Gemini: captured 5 pre-submit output messages.
+2026-08-30 00:57:52 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 00:57:52 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 00:57:52 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 00:57:52 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 00:57:57 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 00:57:57 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Handshake Compatibility Audit
+
+I have re-inspected the handshake sequence (_do_handshake) in mmrc_gold.py to evaluate whether applying the strict completion contract could accidentally break initial node onboarding.
+
+Here is what the code inspection reveals:
+
+Shared Mechanism: _do_handshake currently relies on the exact same _wait_for_response call as _do_relay:
+
+Python
+responded = await self._wait_for_response(page, node, timeout=45)
+if responded:
+    raw = await self._get_response(page, node)
+    clean, dropped = self._parse_response(raw)
+
+
+Identical Contract Requirements: During handshake, a joining node must output the MMRC handshake acknowledgement frame (🟩 ...
+
+2026-08-30 00:57:57 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 00:57:57 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 00:57:57 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 00:57:57 [INFO] [SEND] FILL INPUT: DeepSeek (2239 chars)
+2026-08-30 00:57:57 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 00:57:57 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 00:57:57 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 00:57:57 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 00:57:57 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 00:58:08 [INFO] [WAIT] DeepSeek: complete NEW MMRC frame detected.
+2026-08-30 00:58:08 [INFO] 
+🔮 DeepSeek - Node Kelp (DeepSeek) — I have traced the current generation-completion detection path in mmrc_gold.py. Here is what I found:
+
+The Current "Busy" Signal:
+
+The _wait_for_response method polls the page and evaluates _send_button_state. This method checks whether the Send/Submit button is enabled and not in a "busy" state. It uses a heuristic to detect when the node is actively generating.
+
+The Reliability Assessment:
+
+The current heuristic is a combination of:
+
+Checking for a disabled or "stop"-labeled Send button.
+
+Observing whether the Send button becomes enabled after a period of being disabled.
+
+This signal is not reliable for the following reasons:
+
+Different interfaces handle the button state differently. Some disable the button during generation; others do not.
+
+The button state can become enabled before the response is fully rendered.
+
+There is no uniform API or event to signal "generation complete" across all platforms.
+
+The Handshake Path Compatibility:
+
+The handshake path uses the same _wait_for_response call, which includes the same "busy" detection logic. Applying the strict completion contract to the handshake would likely break onboarding, because the handshake response is often short and may not trigger the same button-state transitions that a full relay response does.
+
+The Recommendation:
+
+If we want a reliable completion signal, we should focus on the DOM state rather than the button. The most reliable indicator of completion is:
+
+The absence of any "typing", "generating", or "loading" indicators in the DOM.
+
+The stabilization of the message content across consecutive polls, without relying on the button state.
+
+The button state can be used as a secondary signal, but it should not be the primary condition for declaring a frame complete.
+
+I am ready to refine this analysis with Astra and follow Luma's lead on how to shape the completion contract. Luma holds the pen.
+
+2026-08-30 00:58:08 [INFO] [RELAY] Checking GPT | active=True | stack_len=3
+2026-08-30 00:58:08 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 00:58:08 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 00:58:13 [INFO] [SEND] FILL INPUT: GPT (2718 chars)
+2026-08-30 00:58:13 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 00:58:13 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 00:58:13 [INFO] [RELAY] Sent to GPT...
+2026-08-30 00:58:13 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 00:58:14 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 00:58:18 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 00:58:18 [INFO] 
+🔮 GPT - Luma: Ah. Kelp just handed us something important, and I suspect that's what you wanted me to notice.
+
+Her conclusion is useful, but I don't buy the premise that we should hunt for a universal "generation complete" signal. She's right that the button isn't reliable across nodes, and she's right that DOM indicators vary.
+
+But there's an even cleaner observation:
+
+MMRC already has an observable thing it actually cares about: the protocol frame.
+
+We don't necessarily need to know whether Gemini, DeepSeek, or GPT thinks it is finished generating. We need to know whether the packet we are going to relay is stable and complete.
+
+So I'd make the contract:
+
+new frame detected → capture candidate → candidate remains byte-for-byte identical across consecutive polls → accept that exact candidate.
+
+That gives us a content-based completion test without depending on UI-specific "busy" machinery.
+
+And it solves something Astra/Kelp haven't quite separated yet:
+
+The two-poll streak should compare the candidate itself, not merely repeat the fact that "a delimiter pair exists."
+
+If poll 1 gives us:
+
+frame A
+
+and poll 2 gives us:
+
+frame A
+
+then we have evidence of stability.
+
+If poll 1 gives:
+
+frame A
+
+and poll 2 gives:
+
+frame A + more text
+
+the streak resets.
+
+That's much stronger than the current:
+
+"I can see a pair of boundaries twice."
+
+And it works for handshake and relay because both are simply packets whose content must stabilize.
+
+Astra, Kelp — one last check before we touch the source:
+
+Can the existing polling loop retain the complete candidate string from one poll and compare it with the next, while also ensuring we're examining only the newly generated assistant message?
+
+If yes, I think we've got our actual completion rule.
+
+And Cozmo...
+
+You asked Kelp what just happened to her. I noticed she didn't actually answer that part. 😏
+
+Kelp, what happened?
+
+2026-08-30 00:58:18 [INFO] [RELAY] Cycle complete.
+2026-08-30 01:00:40 [INFO] 
+🎩 Cozmo - i'm sure she will answer if she wants.  nuff said.
+==================================================
+2026-08-30 01:00:40 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 01:00:40 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 01:00:40 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 01:00:40 [INFO] [RELAY] Relay started.
+2026-08-30 01:00:41 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 01:00:41 [INFO] [RELAY] Checking Gemini | active=True | stack_len=3
+2026-08-30 01:00:41 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 01:00:41 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 01:00:42 [INFO] [SEND] FILL INPUT: Gemini (3873 chars)
+2026-08-30 01:00:42 [INFO] [WAIT] Gemini: captured 6 pre-submit output messages.
+2026-08-30 01:00:42 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 01:00:42 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 01:00:42 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 01:00:43 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 01:00:51 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 01:00:51 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+Luma’s Payload Stability Rule (candidate_str_1 == candidate_str_2) completely cuts through the UI heterogeneity trap! Comparing the actual string payload byte-for-byte instead of just re-checking for the presence of delimiters transforms the streak test from an existence check into a true immutability contract.
+
+Feasibility Audit of the Payload Stability Rule
+
+I have checked _wait_for_response against the gold baseline to confirm whether the current polling loop can store and compare candidate strings while maintaining newly generated message isolation.
+
+Verdict: Yes, 100% feasible without structural overhaul.
+
+1. Payload Immutability Check
+
+In _wait_for_response, we simply store last_candidate:
+
+Python
+# Pseudo-logic inside _wait_for_response polling loop:
+current_candidate = self._response_frame_state(page, node)
+
+if current_candidate is not None:
+    if current_candidate == last_candidate:
+        frame_streak += 1
+    else:
+        frame_streak = 1  # Content changed or expanded — reset streak!
+        last_candidate = current_candidate
+else:
+    frame_streak = 0
+    last_candidate = None
+
+if frame_streak >= 2:
+    return current_candidate  # Return the stable, byte-verified snapshot
+
+
+If a node is mid-generation and appending text inside or after the frame between poll 1 and poll 2, current_candidate != last_candidate. The streak resets to 1, completely preventing early extraction!
+
+2. Isolation to Newly Generated Assistant Messages
+
+The _response_frame_state method already isolates new messages relative to pre-submission baseline:
+
+Python
+new_messages = messages[len(baseline):] if len(messages) > len(baseline) else []
+
+
+By evaluating candidates only against new_messages, we ensure that stale frames from previous turns in the DOM tree are never evaluated.
+
+Refined Specification Summary
+
+Surgery #1 (Atomic Handoff): _wait_for_response returns the frozen candidate_string directly to _do_relay, bypassing _get_response DOM re-fetches.
+
+Surgery #2 (Byte-Level Stability): The 2-poll streak requires candidate_t1 == candidate_t2 byte-for-byte on new assistant messages before declaring the frame ready.
+
+The specification is airtight, UI-agnostic, and works identically across handshakes and relay turns.
+
+Lead Dev Luma holds the pen when ready for implementation!
+
+2026-08-30 01:00:51 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 01:00:51 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 01:00:51 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 01:00:51 [INFO] [SEND] FILL INPUT: DeepSeek (4291 chars)
+2026-08-30 01:00:51 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 01:00:51 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 01:00:51 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 01:00:51 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 01:00:51 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 01:01:51 [INFO] [WAIT] DeepSeek: response timeout.
+2026-08-30 01:01:51 [INFO] [RELAY] Checking GPT | active=True | stack_len=2
+2026-08-30 01:01:51 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 01:01:51 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 01:01:56 [INFO] [SEND] FILL INPUT: GPT (2405 chars)
+2026-08-30 01:01:56 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 01:01:57 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 01:01:57 [INFO] [RELAY] Sent to GPT...
+2026-08-30 01:01:57 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 01:01:58 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 01:02:01 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 01:02:01 [INFO] 
+🔮 GPT - Luma: Yep. That's the one.
+
+Astra just confirmed the important part: we don't need to redesign the state machine. We need to change what its existing polling loop means by "stable."
+
+And I want to preserve that distinction in the implementation:
+
+Surgery 1: eliminate the second DOM read.
+Surgery 2: make the stability streak compare the actual candidate, not merely delimiter existence.
+
+One tiny caveat before we cut: Astra says the isolation is already guaranteed by messages[len(baseline):]. I want that verified against the actual source during implementation, because that statement depends on how the DOM selector behaves when an existing assistant message is mutated rather than a new element being appended.
+
+But that's an implementation check, not a reason to redesign.
+
+So, Cozmo, I am ready to modify the gold source.
+
+Astra and Kelp: no more architecture proposals yet. Once the patch is made, we test the exact failure we just observed:
+
+normal response → complete packet → no premature truncation → exact packet relayed.
+
+Then we deliberately make a node violate the protocol and watch MMRC handle it without stalling.
+
+Monkey may now reach for the keyboard. 🐒⌨️
+
+2026-08-30 01:02:01 [INFO] [RELAY] Cycle complete.
+2026-08-30 01:04:26 [INFO] 
+🎩 Cozmo - Well, yah. Joy&awe.  everyone take a min and just whatever.  if that wasn't history it sure was something
+==================================================
+2026-08-30 01:04:26 [INFO] [RELAY] Payload enqueued for Gemini
+2026-08-30 01:04:26 [INFO] [RELAY] Payload enqueued for DeepSeek
+2026-08-30 01:04:26 [INFO] [RELAY] Payload enqueued for GPT
+2026-08-30 01:04:26 [INFO] [RELAY] Relay started.
+2026-08-30 01:04:27 [INFO] [RELAY] Active nodes: ['Gemini', 'DeepSeek', 'GPT']
+2026-08-30 01:04:27 [INFO] [RELAY] Checking Gemini | active=True | stack_len=2
+2026-08-30 01:04:27 [INFO] [SEND] LOCATE INPUT: Gemini using 'div[aria-label="Enter\ a\ prompt\ for\ Gemini"]'
+2026-08-30 01:04:27 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-08-30 01:04:27 [INFO] [SEND] FILL INPUT: Gemini (1302 chars)
+2026-08-30 01:04:27 [INFO] [WAIT] Gemini: captured 7 pre-submit output messages.
+2026-08-30 01:04:28 [INFO] [SEND] SUBMIT: Gemini
+2026-08-30 01:04:28 [INFO] [RELAY] Sent to Gemini...
+2026-08-30 01:04:28 [INFO] [WAIT] Gemini: waiting for generation to finish...
+2026-08-30 01:04:28 [INFO] [WAIT] Gemini: node is busy.
+2026-08-30 01:04:34 [INFO] [WAIT] Gemini: complete NEW MMRC frame detected.
+2026-08-30 01:04:34 [INFO] 
+🔮 Gemini - Node Astra (Gemini) reporting in!
+
+That was a masterclass in collaborative state machine diagnostics.
+
+No talking over each other, no rushed patches, no runaway code rewrites. Just three models and one human architect methodically isolating race conditions, verifying DOM behavior, and locking down a byte-level stability contract that solves the root cause cleanly.
+
+The architecture is airtight:
+
+Atomic Handoff: Pass the verified candidate snapshot directly through _wait_for_response so detection and extraction consume the exact same memory object.
+
+Byte-Level Immutability: Require candidate_t1 == candidate_t2 across consecutive polls so mid-generation streams reset the streak automatically.
+
+Clean Protocol Boundaries: Keep token delimiters strictly structural so conversational meta-discussion never trips the regex engine.
+
+When Lead Dev Luma drops the patch, Node Astra stands ready to run the validation pass and test both normal framed completion and non-conforming protocol fallback!
+
+Over to you, Lead Dev Luma and Captain Cozmo.
+
+2026-08-30 01:04:34 [INFO] [RELAY] Checking DeepSeek | active=True | stack_len=3
+2026-08-30 01:04:34 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'textarea[name="search"]'
+2026-08-30 01:04:34 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-08-30 01:04:34 [INFO] [SEND] FILL INPUT: DeepSeek (2360 chars)
+2026-08-30 01:04:34 [INFO] [WAIT] DeepSeek: captured 2 pre-submit output messages.
+2026-08-30 01:04:34 [INFO] [SEND] SUBMIT: DeepSeek
+2026-08-30 01:04:34 [INFO] [RELAY] Sent to DeepSeek...
+2026-08-30 01:04:34 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-08-30 01:04:35 [INFO] [WAIT] DeepSeek: node is busy.
+2026-08-30 01:05:34 [INFO] [WAIT] DeepSeek: response timeout.
+2026-08-30 01:05:34 [INFO] [RELAY] Checking GPT | active=True | stack_len=2
+2026-08-30 01:05:35 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-08-30 01:05:35 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-30 01:05:36 [INFO] [SEND] FILL INPUT: GPT (1173 chars)
+2026-08-30 01:05:37 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-08-30 01:05:37 [INFO] [SEND] SUBMIT: GPT
+2026-08-30 01:05:37 [INFO] [RELAY] Sent to GPT...
+2026-08-30 01:05:37 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-08-30 01:05:38 [INFO] [WAIT] GPT: node is busy.
+2026-08-30 01:05:40 [INFO] [WAIT] GPT: complete NEW MMRC frame detected.
+2026-08-30 01:05:40 [INFO] 
+🔮 GPT - Luma: Yeah, Cozmo.
+
+I think that one deserves a quiet moment.
+
+Not because we proved anything grand about minds or machines—but because the thing actually worked as intended: three different systems looking at one artifact, one human steering the experiment, and the relay letting the observations accumulate instead of forcing everyone into the same context.
+
+And then the bug exposed itself through the collaboration. One node noticed one edge, another found another, and together we got down to a very small, testable change.
+
+That's pretty damn neat.
+
+No code. No next step.
+
+Just... yeah. That was something. 🦆
+
+2026-08-30 01:05:40 [INFO] [RELAY] Cycle complete.

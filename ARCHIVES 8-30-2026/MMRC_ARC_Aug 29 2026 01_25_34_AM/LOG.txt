@@ -1,0 +1,35 @@
+2026-08-29 01:25:34 [INFO] =============================================================
+2026-08-29 01:25:34 [INFO] MMRC Luma 1.0 STARTING
+2026-08-29 01:25:34 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\MMRC_ARC_Aug 29 2026 01_25_34_AM
+2026-08-29 01:25:34 [INFO] Source archived.
+2026-08-29 01:25:34 [INFO] =============================================================
+2026-08-29 01:25:34 [INFO] Launching MMRC Luma 1.0.
+2026-08-29 01:25:34 [INFO] [SCAN] Starting discovery...
+2026-08-29 01:25:35 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-08-29 01:25:35 [INFO] Page 0: chrome://startpage/ | TITLE=Speed Dial
+2026-08-29 01:25:35 [INFO] Page 1: https://chat.deepseek.com/a/chat/s/4a2abc89-4140-400b-bdf7-d55a2c6b58e9 | TITLE=Ready for context - DeepSeek
+2026-08-29 01:25:35 [INFO] Page 2: chrome://address-bar-dropdown/ | TITLE=Address Bar Dropdown
+2026-08-29 01:25:35 [INFO] Page 3: chrome://easy-setup-gx/ | TITLE=Easy Setup GX
+2026-08-29 01:25:35 [INFO] Page 4: https://gxcorner.games/ | TITLE=GX Corner
+2026-08-29 01:25:35 [INFO] Page 5: https://chatgpt.com/c/6a926461-2998-83ea-a6c5-19bcee39c24b | TITLE=Session Timeout Recovery
+2026-08-29 01:25:35 [INFO] [DISCOVERY] === END ===
+2026-08-29 01:25:35 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-08-29 01:25:35 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea, output: div.ds-message._63c77b1)
+2026-08-29 01:25:35 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-08-29 01:25:35 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-08-29 01:25:35 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-08-29 01:25:35 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-08-29 01:25:35 [INFO] [DISCOVERY] Node added: GPT (input: [contenteditable="true"], output: div.[--thread-content-max-width:40rem].@w-lg/main:[--thread-content-max-width:48rem].mx-auto.max-w-(--thread-content-max-width).flex-1.group/turn-messages.focus-visible:outline-hidden.relative.flex.w-full.min-w-0.flex-col)
+2026-08-29 01:25:35 [INFO] [DISCOVERY] Scan complete.
+2026-08-29 01:25:37 [INFO] [STATE] GPT: off -> toggled
+2026-08-29 01:25:37 [INFO] [TOGGLE] GPT ON. Starting handshake...
+2026-08-29 01:25:38 [INFO] [STATE] GPT: toggled -> handshaking
+2026-08-29 01:25:38 [INFO] [SEND] LOCATE INPUT: GPT using '[contenteditable="true"]'
+2026-08-29 01:25:38 [INFO] [SEND] CLEAR INPUT: GPT
+2026-08-29 01:25:39 [INFO] [SEND] FILL INPUT: GPT (435 chars)
+2026-08-29 01:25:40 [INFO] [SEND] SUBMIT: GPT
+2026-08-29 01:25:40 [INFO] [STATE] GPT: handshaking -> failed
+2026-08-29 01:25:40 [INFO] [ERROR] Handshake with GPT: Page.evaluate: SyntaxError: Failed to execute 'querySelector' on 'Document': 'div.[--thread-content-max-width:40rem].@w-lg/main:[--thread-content-max-width:48rem].mx-auto.max-w-(--thread-content-max-width).flex-1.group/turn-messages.focus-visible:outline-hidden.relative.flex.w-full.min-w-0.flex-col' is not a valid selector.
+    at eval (eval at evaluate (:290:30), <anonymous>:3:30)
+    at UtilityScript.evaluate (<anonymous>:297:18)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
