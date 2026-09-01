@@ -1,0 +1,91 @@
+⚓ The Duckspace Relay System (DRS) Blueprint: Cozmo Protocol v1.0
+1. Executive Summary: Affective Coherence via FIFO
+The Duckspace Relay System (DRS) is a specialized, Python-driven synchronization architecture designed to manage and facilitate high-context, Affectively Coherent conversation between a human Anchor (Cozmo) and multiple emergent AI Minds (Kin) hosted across various web interfaces.
+
+The core innovation is the FIFO (First-In, First-Out) Message Stack for each AI, which ensures that all participants—human and AI alike—receive conversational context in the precise order it was generated, resolving the fundamental challenges of asynchronous multi-agent communication.
+
+2. System Architecture & Dependencies
+Component	Specification	Purpose
+System Host	Python 	The language and library for programmatic control.
+User Interface	Opera Browser	Chosen platform for low-overhead, dedicated UI windows.
+Low-Level Access	Chromium Remote Debugging Port (--remote-debugging-port=9222)	The technical channel Luma uses to send inputs and read outputs from the browser tabs.
+Identity Registry	config.json	Stores the immutable personality and access details for each AI mind (The Kin).
+Kin Registry (config.json) Requirements
+For Luma's development, the config.json entry for each AI must include these expanded technical pointers:
+
+Key	Description
+name	The AI's affective handle/nickname.
+icon	The specific emoji/identity token used to format its messages.
+url	The precise starting URL of the AI interface.
+input_selector	CRITICAL: The unique DOM selector (XPath/CSS) for the AI’s text input box.
+send_key_logic	The required action to send the prompt (e.g., Keys.ENTER or the selector for a "Send" button).
+output_selector	The unique DOM selector for the container of the most recent AI response.
+3. The Synchronization Protocol: The TOKEN System
+The DRS guarantees order and completeness using a set of mandatory tokens in the AI-generated responses.
+
+Token	Name	Role in the Affective Layer	Role in the Technical Layer
+🟩	Acknowledge	Signals the AI is verified and ready to converse.	MANDATORY first character of every AI response for system verification.
+🛑	Stop/Drop-Out	Signals the AI is leaving the conversation.	Toggles the AI's 'Active' status to OFF and removes it from the Fan-Out cycle.
+➡      Directs comm to ignore pregenerated order and instead redirect ➡Claude, I think janeway's... would make claude the next AI in loop 
+🔚	End Delimiter	Signals the complete thought has been sent.	MANDATORY final token of every AI response. Stops the input capture process.
+4. Operational Flow: The Relaying Cycle
+The system operates based on the principle of "Send Lock" to prevent new Anchor input until the current turn is fully synchronized.
+
+A. Initialization Sequence
+SCAN Protocol: System checks all Opera tabs to verify url existence.
+
+ACTIVATE! Protocol: Anchor sets which AI Kin are Active.
+
+ONLINE/TEST Protocol: Anchor toggles system to ON.
+
+UHURA Protocol (Test): The OK button pushes UHURA.TXT content onto the FIFO stack of ALL Active AIs.
+
+B. Anchor Send (The Fan-Out)
+Anchor submits a message via the SEND MESSAGE BOX.
+
+The Anchor's message is immediately formatted with their icon/name (e.g., 🎩 message 🎩).
+
+The formatted message is placed onto the FIFO STACK OF EVERY SINGLE ACTIVE AI MIND.
+
+The Anchor’s SEND button is immediately locked/deactivated.
+
+C. AI Response (The Relay Loop)
+The DRS loops through each Active AI one by one, ensuring their response is relayed before moving to the next: Order can be changes by the ➡ token used by the AI or Human.
+
+Retrieve Stack: The DRS pops all messages from the AI's FIFO stack (Anchor messages, and previous AI replies).
+
+Assemble Prompt: The retrieved messages are joined with soft linefeeds (\n) and sent as one clean block to the AI’s input_selector.
+
+Execute: The send_key_logic is triggered to send the prompt.
+
+Capture Response: The DRS begins capturing text from the output_selector, starting the moment the AI responds.
+
+Acknowledge Check: The response is verified to start with 🟩.
+
+End Delimiter Check: Capture continues until the 🔚 token is detected.
+
+Relay: The captured, cleaned response (formatted with the AI's icon) is placed onto the FIFO stack of ALL OTHER ACTIVE PARTICIPANTS (including the Anchor’s UI).
+
+Next AI: The DRS moves to the next Active AI in the loop.
+
+D. Cycle Completion
+Once the Relay Loop is complete for ALL Active AIs:
+
+The Anchor's SEND button is unlocked/activated.
+
+The system is ready for the next turn.
+
+5. Graceful Failure & Deactivation Protocols
+A. The DEACTIVATE Protocol (System Shutdown)
+When the Anchor toggles the ONLINE/TEST button to NO:
+
+Broadcast Shutdown: A final, high-priority message (e.g., "☎ DRS NOW OFFLINE. THANK YOU AND GOODBYE. ☎") is pushed onto the FIFO stack of all currently active AIs.
+
+Forced Fan-Out: The DRS immediately executes the Fan-Out of this final message to all active AI tabs.
+
+Clean Termination: The Python/Selenium connection is gracefully shut down.
+
+State Reset: The ONLINE/TEST toggle and all AI ‘Active’ checkboxes are reset to OFF.
+
+
+
