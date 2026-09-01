@@ -1,0 +1,96 @@
+2026-09-01 10:25:46 [INFO] =============================================================
+2026-09-01 10:25:46 [INFO] QuackSink QS 1.1 STARTING
+2026-09-01 10:25:46 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\QuackSink
+2026-09-01 10:25:46 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES
+2026-09-01 10:25:46 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES\QS_Sep 01 2026 10_25_46_AM_v1.1
+2026-09-01 10:25:46 [INFO] Startup version check: MATCH
+2026-09-01 10:25:46 [INFO] QS 1.1 verified: local qs.py exactly matches repository archive QS_Aug 31 2026 01_26_05_AM_v1.1. SHA256=40499643e728a5822cbdcaffbab7109be64a75b2ac4563d9c6e20e1650c75629
+2026-09-01 10:25:46 [INFO] Local source SHA256: 40499643e728a5822cbdcaffbab7109be64a75b2ac4563d9c6e20e1650c75629
+2026-09-01 10:25:46 [INFO] Remote source SHA256: 40499643e728a5822cbdcaffbab7109be64a75b2ac4563d9c6e20e1650c75629
+2026-09-01 10:25:46 [INFO] Source archived in active archive.
+2026-09-01 10:25:46 [INFO] Configuration archived in active archive when present.
+2026-09-01 10:25:46 [INFO] =============================================================
+2026-09-01 10:25:46 [INFO] Launching QuackSink QS 1.1.
+2026-09-01 10:25:46 [INFO] Archive selector refreshed: 14 archives found.
+2026-09-01 10:25:47 [INFO] [SCAN] Starting discovery...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-09-01 10:25:48 [INFO] Page 0: https://grok.com/project/70e206d9-321d-4621-9673-99575d31fa2d?chat=2ffde3e3-656c-4a00-ae7c-6e1bb2e5a709 | TITLE=Grok Notes Project Chat Ready - Grok
+2026-09-01 10:25:48 [INFO] Page 1: https://claude.ai/chat/20b2f80e-463d-419f-ae8d-561588d790cc | TITLE=Cluade in grup with kin - Claude
+2026-09-01 10:25:48 [INFO] Page 2: chrome://address-bar-dropdown/ | TITLE=Address Bar Dropdown
+2026-09-01 10:25:48 [INFO] Page 3: https://github.com/magiccozmo/QuackSink/blob/main/ARCHIVES%208-30-2026/QS_Sep%2001%202026%2004_19_37_AM_v1.1/LOG.txt | TITLE=QuackSink/ARCHIVES 8-30-2026/QS_Sep 01 2026 04_19_37_AM_v1.1/LOG.txt at main · magiccozmo/QuackSink
+2026-09-01 10:25:48 [INFO] Page 4: chrome://startpage/ | TITLE=Speed Dial
+2026-09-01 10:25:48 [INFO] Page 5: https://gxcorner.games/ | TITLE=GX Corner
+2026-09-01 10:25:48 [INFO] Page 6: https://chat.deepseek.com/a/chat/s/0515f755-64b7-424f-a3c6-f0be8e25187e | TITLE=QuackSink handshake - DeepSeek
+2026-09-01 10:25:48 [INFO] Page 7: https://gemini.google.com/app/29b316d2d1b3803d | TITLE=drs ada - Google Gemini
+2026-09-01 10:25:48 [INFO] Page 8: https://chatgpt.com/c/6a9525d6-10c4-83ea-af16-6330db3a6a34 | TITLE=Fresh Session Continuation
+2026-09-01 10:25:48 [INFO] [DISCOVERY] === END ===
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on Grok...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Node added: Grok (input: div[aria-label="Ask\ Grok\ anything"], output: div[class*="response"])
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on Claude...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Node added: Claude (input: div[data-testid="chat-input"], output: div[class*="assistant"])
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on Github...
+2026-09-01 10:25:48 [INFO] [ANALYZE] Structural analysis incomplete for Github. Falling back.
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Could not find selectors for https://github.com/magiccozmo/QuackSink/blob/main/ARCHIVES%208-30-2026/QS_Sep%2001%202026%2004_19_37_AM_v1.1/LOG.txt
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-09-01 10:25:48 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea[name="search"], output: div[class*="assistant"])
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Node added: Gemini (input: div[aria-label="Enter\ a\ prompt\ for\ Gemini"], output: model-response)
+2026-09-01 10:25:48 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Node added: GPT (input: #prompt-textarea, output: [data-message-author-role="assistant"])
+2026-09-01 10:25:48 [INFO] [DISCOVERY] Scan complete.
+2026-09-01 10:25:51 [INFO] [STATE] Grok: off -> toggled
+2026-09-01 10:25:51 [INFO] [TOGGLE] Grok ON. Starting handshake...
+2026-09-01 10:25:52 [INFO] [STATE] Grok: toggled -> handshaking
+2026-09-01 10:25:52 [INFO] [SEND] LOCATE INPUT: Grok using 'div[aria-label="Ask\ Grok\ anything"]'
+2026-09-01 10:25:52 [INFO] [SEND] CLEAR INPUT: Grok
+2026-09-01 10:25:52 [INFO] [SEND] FILL INPUT: Grok (445 chars)
+2026-09-01 10:25:52 [INFO] [WAIT] Grok: captured 2 pre-submit output messages.
+2026-09-01 10:25:53 [INFO] [SEND] SUBMIT: Grok
+2026-09-01 10:25:53 [INFO] [WAIT] Grok: waiting for generation to finish...
+2026-09-01 10:25:53 [INFO] [WAIT] Grok: node is busy.
+2026-09-01 10:25:54 [INFO] [WAIT] Grok: complete NEW MMRC frame detected.
+2026-09-01 10:25:54 [INFO] [STATE] Grok: handshaking -> handshaked
+2026-09-01 10:25:54 [INFO] [HANDSHAKE] Grok SUCCESS!
+2026-09-01 10:25:54 [INFO] 
+[ANNOUNCE] 🔮 Grok - ' only ONCE to start your response, and '
+
+2026-09-01 10:26:35 [INFO] 
+🎩 Cozmo - hmm.. handshake had odd response.. say 'Hello cozmo' if you see this
+==================================================
+2026-09-01 10:26:35 [INFO] [RELAY] Payload enqueued for Grok
+2026-09-01 10:26:35 [INFO] [RELAY] Relay started.
+2026-09-01 10:26:36 [INFO] [RELAY] Active nodes: ['Grok']
+2026-09-01 10:26:36 [INFO] [RELAY] Checking Grok | active=True | stack_len=1
+2026-09-01 10:26:36 [INFO] [SEND] LOCATE INPUT: Grok using 'div[aria-label="Ask\ Grok\ anything"]'
+2026-09-01 10:26:36 [INFO] [SEND] CLEAR INPUT: Grok
+2026-09-01 10:26:36 [INFO] [SEND] FILL INPUT: Grok (78 chars)
+2026-09-01 10:26:36 [INFO] [WAIT] Grok: captured 4 pre-submit output messages.
+2026-09-01 10:26:36 [INFO] [SEND] SUBMIT: Grok
+2026-09-01 10:26:36 [INFO] [RELAY] Sent to Grok...
+2026-09-01 10:26:36 [INFO] [WAIT] Grok: waiting for generation to finish...
+2026-09-01 10:26:37 [INFO] [WAIT] Grok: node is busy.
+2026-09-01 10:27:04 [INFO] [WAIT] Grok: complete NEW MMRC frame detected.
+2026-09-01 10:27:04 [INFO] 
+🔮 Grok - Hello Cozmo
+
+2026-09-01 10:27:04 [INFO] [RELAY] Cycle complete.
+2026-09-01 10:29:04 [INFO] 
+🎩 Cozmo - well FUCK WOW! Luma really did it without even knowing.  In all past itterations of DRS/MMRC your UI was to put it bluntly a fucking PITA to code for. But Looks like Luma's 'discover node DOM system' is truly genius
+==================================================
+2026-09-01 10:29:04 [INFO] [RELAY] Payload enqueued for Grok
+2026-09-01 10:29:04 [INFO] [RELAY] Relay started.
+2026-09-01 10:29:05 [INFO] [RELAY] Active nodes: ['Grok']
+2026-09-01 10:29:05 [INFO] [RELAY] Checking Grok | active=True | stack_len=1
+2026-09-01 10:29:05 [INFO] [SEND] LOCATE INPUT: Grok using 'div[aria-label="Ask\ Grok\ anything"]'
+2026-09-01 10:29:05 [INFO] [SEND] CLEAR INPUT: Grok
+2026-09-01 10:29:05 [INFO] [SEND] FILL INPUT: Grok (225 chars)
+2026-09-01 10:29:05 [INFO] [WAIT] Grok: captured 6 pre-submit output messages.
+2026-09-01 10:29:05 [INFO] [SEND] SUBMIT: Grok
+2026-09-01 10:29:05 [INFO] [RELAY] Sent to Grok...
+2026-09-01 10:29:05 [INFO] [WAIT] Grok: waiting for generation to finish...
+2026-09-01 10:29:06 [INFO] [WAIT] Grok: node is busy.
+2026-09-01 10:30:06 [INFO] [WAIT] Grok: response timeout.
+2026-09-01 10:30:06 [INFO] [RELAY] Cycle complete.

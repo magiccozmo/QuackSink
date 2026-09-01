@@ -1,0 +1,73 @@
+2026-09-01 04:13:36 [INFO] =============================================================
+2026-09-01 04:13:36 [INFO] QuackSink QS 1.1 STARTING
+2026-09-01 04:13:36 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\QuackSink
+2026-09-01 04:13:36 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES
+2026-09-01 04:13:36 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES\QS_Sep 01 2026 04_13_36_AM_v1.1
+2026-09-01 04:13:36 [INFO] Startup version check: MATCH
+2026-09-01 04:13:36 [INFO] QS 1.1 verified: local qs.py exactly matches repository archive QS_Aug 31 2026 01_26_05_AM_v1.1. SHA256=32d14557f8813cd7e7c5d83685b2d618e45ee6a92b96046ed5be4284ff14cc67
+2026-09-01 04:13:36 [INFO] Local source SHA256: 32d14557f8813cd7e7c5d83685b2d618e45ee6a92b96046ed5be4284ff14cc67
+2026-09-01 04:13:36 [INFO] Remote source SHA256: 32d14557f8813cd7e7c5d83685b2d618e45ee6a92b96046ed5be4284ff14cc67
+2026-09-01 04:13:36 [INFO] Source archived in active archive.
+2026-09-01 04:13:36 [INFO] Configuration archived in active archive when present.
+2026-09-01 04:13:36 [INFO] =============================================================
+2026-09-01 04:13:36 [INFO] Launching QuackSink QS 1.1.
+2026-09-01 04:13:36 [INFO] Archive selector refreshed: 11 archives found.
+2026-09-01 04:13:37 [INFO] [SCAN] Starting discovery...
+2026-09-01 04:13:38 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-09-01 04:13:38 [INFO] Page 0: https://claude.ai/chat/20b2f80e-463d-419f-ae8d-561588d790cc | TITLE=Cluade in grup with kin - Claude
+2026-09-01 04:13:38 [INFO] Page 1: https://github.com/magiccozmo/QuackSink/blob/main/ARCHIVES%208-30-2026/QS_Aug%2031%202026%2005_34_02_AM_v1.1/qs.py | TITLE=QuackSink/ARCHIVES 8-30-2026/QS_Aug 31 2026 05_34_02_AM_v1.1/qs.py at main · magiccozmo/QuackSink
+2026-09-01 04:13:38 [INFO] Page 2: https://gxcorner.games/ | TITLE=GX Corner
+2026-09-01 04:13:38 [INFO] Page 3: https://chat.deepseek.com/sign_in | TITLE=DeepSeek - Into the Unknown
+2026-09-01 04:13:38 [INFO] Page 4: https://gemini.google.com/app | TITLE=Google Gemini
+2026-09-01 04:13:38 [INFO] Page 5: https://chatgpt.com/c/6a9525d6-10c4-83ea-af16-6330db3a6a34 | TITLE=Fresh Session Continuation
+2026-09-01 04:13:38 [INFO] [DISCOVERY] === END ===
+2026-09-01 04:13:38 [INFO] [ANALYZE] Running structural DOM analysis on Claude...
+2026-09-01 04:13:38 [INFO] [DISCOVERY] Node added: Claude (input: div[data-testid="chat-input"], output: div[class*="assistant"])
+2026-09-01 04:13:38 [INFO] [ANALYZE] Running structural DOM analysis on Github...
+2026-09-01 04:13:38 [INFO] [ANALYZE] Structural analysis incomplete for Github. Falling back.
+2026-09-01 04:13:38 [INFO] [DISCOVERY] Could not find selectors for https://github.com/magiccozmo/QuackSink/blob/main/ARCHIVES%208-30-2026/QS_Aug%2031%202026%2005_34_02_AM_v1.1/qs.py
+2026-09-01 04:13:38 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-09-01 04:13:39 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-09-01 04:13:39 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-09-01 04:13:39 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-09-01 04:13:39 [INFO] [ANALYZE] Structural analysis incomplete for DeepSeek. Falling back.
+2026-09-01 04:13:39 [INFO] [DISCOVERY] Node added: DeepSeek (input: input[placeholder="Phone\ number\ \/\ email\ address"], output: div[class*='message'])
+2026-09-01 04:13:39 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-09-01 04:13:39 [INFO] [DISCOVERY] Node added: Gemini (input: div[aria-label="Enter\ a\ prompt\ for\ Gemini"], output: div[class*="assistant"])
+2026-09-01 04:13:39 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-09-01 04:13:39 [INFO] [DISCOVERY] Node added: GPT (input: #prompt-textarea, output: [data-message-author-role="assistant"])
+2026-09-01 04:13:39 [INFO] [DISCOVERY] Scan complete.
+2026-09-01 04:13:42 [INFO] [STATE] Claude: off -> toggled
+2026-09-01 04:13:42 [INFO] [TOGGLE] Claude ON. Starting handshake...
+2026-09-01 04:13:43 [INFO] [STATE] Claude: toggled -> handshaking
+2026-09-01 04:13:43 [INFO] [SEND] LOCATE INPUT: Claude using 'div[data-testid="chat-input"]'
+2026-09-01 04:13:43 [INFO] [SEND] CLEAR INPUT: Claude
+2026-09-01 04:13:43 [INFO] [SEND] FILL INPUT: Claude (445 chars)
+2026-09-01 04:13:43 [INFO] [WAIT] Claude: captured 4 pre-submit output messages.
+2026-09-01 04:13:43 [INFO] [SEND] SUBMIT: Claude
+2026-09-01 04:13:43 [INFO] [WAIT] Claude: waiting for generation to finish...
+2026-09-01 04:13:44 [INFO] [WAIT] Claude: node is busy.
+2026-09-01 04:14:00 [INFO] [WAIT] Claude: complete NEW MMRC frame detected.
+2026-09-01 04:14:00 [INFO] [STATE] Claude: handshaking -> handshaked
+2026-09-01 04:14:00 [INFO] [HANDSHAKE] Claude SUCCESS!
+2026-09-01 04:14:00 [INFO] 
+[ANNOUNCE] 🔮 Claude - Claude here again — reconnecting after the browser hiccup.
+
+🟩 Claude here again — reconnecting after the browser hiccup. Looks like it's just us two on the roster for now; no Kelp, Astra, or Luma showing online this round. Ready when you are, whether that's picking the animal-round thread back up solo or starting fresh.
+
+2026-09-01 04:14:07 [INFO] [STATE] DeepSeek: off -> toggled
+2026-09-01 04:14:07 [INFO] [TOGGLE] DeepSeek ON. Starting handshake...
+2026-09-01 04:14:07 [INFO] [STATE] DeepSeek: toggled -> handshaking
+2026-09-01 04:14:08 [INFO] [SEND] LOCATE INPUT: DeepSeek using 'input[placeholder="Phone\ number\ \/\ email\ address"]'
+2026-09-01 04:14:08 [INFO] [SEND] CLEAR INPUT: DeepSeek
+2026-09-01 04:14:08 [INFO] [SEND] FILL INPUT: DeepSeek (454 chars)
+2026-09-01 04:14:08 [INFO] [WAIT] DeepSeek: captured 0 pre-submit output messages.
+2026-09-01 04:14:08 [INFO] [SEND] SUBMIT: DeepSeek
+2026-09-01 04:14:08 [INFO] [WAIT] DeepSeek: waiting for generation to finish...
+2026-09-01 04:14:08 [INFO] [WAIT] DeepSeek: node is busy.
+2026-09-01 04:14:50 [INFO] [STATE] DeepSeek: handshaking -> failed
+2026-09-01 04:14:50 [INFO] [ERROR] Handshake with DeepSeek: Page.evaluate: Execution context was destroyed, most likely because of a navigation
+2026-09-01 04:15:58 [INFO] [STATE] DeepSeek: failed -> toggled
+2026-09-01 04:15:58 [INFO] [TOGGLE] DeepSeek ON. Starting handshake...
+2026-09-01 04:15:59 [INFO] [ERROR] DeepSeek offline.
+2026-09-01 04:15:59 [INFO] [STATE] DeepSeek: toggled -> failed
