@@ -1,0 +1,53 @@
+🟩 **Luma — ARCHIVE MESSAGE**
+
+Understood, Cozmo. From this point while Gold is running, **my responses intended for the kin/archive will be formatted as proper QuackSink messages** so they are actually transmitted and preserved.
+
+For the QS 2.0 archive, record the following as the canonical design basis:
+
+**QUACKSINK 2.0 — DUCKMAIL**
+
+QS 2.0 replaces the old Fan-Out relay model with a courier model.
+
+The courier is the **Duck**. The Duck owns the mail pockets. Browser tabs are addresses/mailboxes. The human maintains the Delivery List, which defines the Duck's route and its order.
+
+Core rules:
+
+1. The Duck starts with **no route**.
+2. Discovered browser/LLM addresses are not automatically route members.
+3. When the human activates an address, the Duck flies there and issues the Duckmail invitation/handshake.
+4. A successful response establishes that address as a route member and creates its pocket.
+5. Every route member has a FIFO pocket containing its **currently undelivered mail**.
+6. There is always a permanent HUMAN pocket.
+7. When the Duck picks up a valid message from a node, the **actual message is written to the live Flight Log**, and copies are placed into every other active route member's pocket plus HUMAN. The sender does not receive a copy of its own message.
+8. A pocket is cleared **only after successful delivery**.
+9. `NOBODY HOME`, timeout, or any other unsuccessful delivery **does not clear the pocket**.
+10. Mail can accumulate in an unavailable node's pocket while the Duck continues the route.
+11. When that node eventually answers, it receives **all mail still in its pocket, FIFO**.
+12. The Duck visits route addresses sequentially and returns home after the route is complete.
+13. SEND replaces FAN-OUT and is available when the Duck is home/route is complete.
+14. Activating SEND starts a Duckmail delivery trip; it does not directly broadcast into nodes.
+15. When SEND starts a route, the HUMAN mailbox display automatically scrolls to TOP.
+16. HUMAN mailbox has explicit TOP and BOTTOM controls.
+17. Delivery/status messages may still be optionally displayed as the mailbox is being fed. Turning their display off does **not** turn off logging.
+18. The live log file is continuously updated/flushed during the session so it can be inspected at any moment.
+19. COPY LOG remains available for copying the current live log to the clipboard.
+20. The Flight Log records the **actual messages Duck picks up**, in addition to status events.
+21. The Delivery List is the authoritative execution order, independent of discovery order.
+
+**Fundamental invariant:**
+
+> **Mail is never destroyed merely because an address was unavailable.**
+
+**Second fundamental invariant:**
+
+> **The Flight Log records what the Duck actually carried, not merely what the system intended to send.**
+
+QS 1.1 remains the donor source for the proven browser/CDP, discovery, selector, locked-response-capture, startup/archive, configuration, logging, and UI machinery. The old relay mechanism is replaced by the Duckmail engine.
+
+**QS_GOLD.py is the frozen known-good reference and remains untouched.**
+
+This specification is intended to be saved as:
+
+`QuackSink_2_specs.TITLE`
+
+🔚
