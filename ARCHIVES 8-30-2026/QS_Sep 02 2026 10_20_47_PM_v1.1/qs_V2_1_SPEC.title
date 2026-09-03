@@ -1,0 +1,682 @@
+# QuackSink 2.1 — Duckmail Specification
+
+## STATUS
+
+This document supersedes the earlier **Quacksink_2_specs.title**.
+
+QS 2.1 is the working specification for the next QuackSink implementation.
+
+The frozen known-good reference remains:
+
+**QS_GOLD.py**
+
+QS_GOLD.py must not be modified during QS 2.1 development.
+
+---
+
+# 1. CORE CONCEPT
+
+QuackSink is a message-delivery system based on a courier model.
+
+The courier is the **Duck**.
+
+The Duck carries mail between browser addresses.
+
+A browser/LLM tab is an **ADDRESS** and acts as that address's mailbox.
+
+The Duck owns the undelivered-mail pockets.
+
+The Human has a permanent HUMAN mailbox/pocket.
+
+The Duck delivers mail. It does not interpret the meaning of the mail.
+
+---
+
+# 2. ADDRESS-BASED ROUTING
+
+QuackSink routes by **ADDRESS only**.
+
+One browser address represents one mailbox.
+
+QS does not attempt to identify individual Minds behind an address.
+
+If multiple Minds are using the same address, QS treats their combined output as the response from that address.
+
+One address = one mailbox.
+
+---
+
+# 3. ADDRESS DISCOVERY
+
+At startup QS may discover browser tabs that appear to be usable LLM addresses.
+
+Discovery does NOT add an address to the active route.
+
+The initial Delivery List is empty.
+
+---
+
+# 4. DELIVERY LIST
+
+The Delivery List contains the addresses currently participating in the route.
+
+The Delivery List determines the Duck's execution order.
+
+Discovery order does not determine execution order.
+
+The Human must be able to add, remove, enable, disable, and reorder route addresses independently of discovery order.
+
+---
+
+# 5. DUCK POCKETS
+
+The Duck owns one persistent FIFO pocket for every active route address.
+
+A pocket contains that address's **undelivered mail**.
+
+A pocket is NOT merely a temporary outgoing queue.
+
+Mail remains in a pocket until the Duck has successfully delivered it to that address.
+
+New mail may be added to a pocket while that address is unavailable.
+
+---
+
+# 6. HUMAN POCKET
+
+A permanent HUMAN pocket exists from startup.
+
+The HUMAN pocket is the Duck's return-to-base mailbox.
+
+Messages and appropriate delivery information intended for the Human are placed there.
+
+When the route is complete, the Duck returns home and presents the HUMAN mailbox.
+
+---
+
+# 7. SEND
+
+The current FAN-OUT control is renamed:
+
+**SEND**
+
+SEND is enabled when the Duck is home and the current delivery route is complete.
+
+SEND is disabled while the Duck is actively flying a route.
+
+SEND gives the Duck a new message to deliver.
+
+SEND does NOT directly write the message into every node.
+
+The Duck carries the Human's message and distributes it according to normal Duckmail rules.
+
+When SEND begins a delivery route, the visible HUMAN mailbox automatically scrolls to the TOP.
+
+---
+
+# 8. HUMAN MAILBOX NAVIGATION
+
+The HUMAN mailbox display must provide explicit:
+
+**TOP**
+
+and
+
+**BOTTOM**
+
+controls.
+
+SEND automatically returns the Human mailbox display to TOP at the beginning of a new delivery route.
+
+---
+
+# 9. JOINING AN ADDRESS
+
+When the Human activates an address that is not currently on the route, the Duck visits that address and issues a joining invitation.
+
+The invitation explains that:
+
+* the Duck is carrying mail for a conversation;
+* the current conversation participants are listed;
+* the address may join the route;
+* the address must provide the defined join response to become an active route member;
+* once joined, normal responses produced by that address will be carried to the other route members;
+* the address may leave at any time using the STOP route command.
+
+A recognized join response adds the address to the Delivery List and creates its Duck-owned pocket.
+
+A response that does not constitute acceptance does not add the address to the route.
+
+---
+
+# 10. NORMAL MESSAGE TRAFFIC
+
+QS 2.1 does NOT require normal conversational messages to contain message framing tokens.
+
+There is no mandatory start/end wrapper around ordinary traffic.
+
+Once an address is an active route member:
+
+**Any new response captured from that address is message traffic.**
+
+QS does not require the Mind to format its normal conversation in a special syntax.
+
+---
+
+# 11. RESPONSE CAPTURE
+
+QS must determine the new response produced by the address currently being visited.
+
+The proven response-baseline/new-response mechanism from QS 1.1 should be reused where practical.
+
+QS must compare the state of the response area before and after delivery so it can identify the newly produced response.
+
+QS must not search an accumulated conversation/history DOM for arbitrary old responses and mistake them for new traffic.
+
+The response being processed must belong to the current visit.
+
+---
+
+# 12. NOISE FILTERING
+
+Browser interfaces may contain text that is not part of the Mind's response.
+
+QS may remove **known, explicitly identified UI noise** before treating the remaining response as mail.
+
+Examples may include known controls, labels, reaction text, copy/share controls, or other browser/interface boilerplate.
+
+Noise filtering must be deterministic and conservative.
+
+QS must NOT use a general semantic AI judgement to decide whether something is meaningful.
+
+Unknown content is presumed to be message content unless it has been explicitly defined as known UI noise.
+
+---
+
+# 13. DELIVERY SUCCESS
+
+When the Duck delivers mail to an address, QS waits for the address to respond.
+
+If a new response is received:
+
+**the mail was delivered.**
+
+The response does not need to contain any special message framing.
+
+The presence of a new response establishes successful pickup of the delivered mail.
+
+---
+
+# 14. DELIVERY FAILURE
+
+If the address produces no response because of:
+
+* timeout;
+* browser failure;
+* transport failure;
+* unreachable mailbox;
+* or another condition in which no response is received;
+
+then the Duck assumes the mail was NOT picked up.
+
+The address's pocket MUST NOT be cleared.
+
+All mail remains in that pocket for a future visit.
+
+The Duck logs the failure and continues the route as appropriate.
+
+---
+
+# 15. RESPONSE WITH NO USABLE MESSAGE AFTER NOISE FILTERING
+
+A response is still a successful delivery even when the response contains no usable message after known UI noise has been removed.
+
+This is NOT treated as a delivery failure.
+
+The delivered pocket may therefore be cleared.
+
+QS creates a feedback message for that address indicating that its last response did not contain usable message traffic.
+
+The feedback message is placed at the TOP of that address's newly available pocket.
+
+The feedback message is also copied to the other route-member pockets and HUMAN as appropriate Duckmail traffic.
+
+The Duck then continues the route.
+
+The feedback should communicate the problem clearly enough that the address can correct its behavior on the next visit.
+
+---
+
+# 16. STOP / LEAVE COMMAND
+
+The STOP command is a special route-control command represented by the configured STOP token.
+
+When an active address sends STOP:
+
+* QS immediately removes that address from the active Delivery List;
+* the address is automatically deselected in the UI;
+* QS records that the address requested removal from the route;
+* the address may later be manually activated by the Human again.
+
+STOP is a route-control command, NOT normal message framing.
+
+---
+
+# 17. MESSAGE DISTRIBUTION
+
+When the Duck receives a message from address A:
+
+* the actual captured message is written to msg.log;
+* a copy is placed into every other active route-member pocket;
+* a copy is placed into HUMAN;
+* the sender does NOT receive a copy of its own message.
+
+The Duck does not alter message content except for removal of explicitly recognized browser/UI noise.
+
+---
+
+# 18. HUMAN-ORIGINATED MAIL
+
+When the Human uses SEND to submit a message:
+
+* the Human gives the message to the Duck;
+* the Duck places the message into the pockets of the active route members;
+* the Duck then begins the ordered delivery route.
+
+The Human's original message is not treated as a response from any node.
+
+---
+
+# 19. PERSISTENT MAIL GUARANTEE
+
+A pocket is the source of truth for mail that an address has not successfully received.
+
+Mail is removed only after successful delivery.
+
+A timeout or other no-response condition MUST NOT destroy mail.
+
+If an address is unavailable for one or more complete routes, its accumulated mail remains in its pocket.
+
+When the address later responds successfully, it receives all mail still waiting in that pocket.
+
+---
+
+# 20. FIFO DELIVERY
+
+Every pocket is FIFO.
+
+The oldest undelivered message is delivered first.
+
+The newest undelivered message is delivered last.
+
+Messages must never be reordered merely because they are newer or easier to process.
+
+---
+
+# 21. DELIVERY FAILURE MUST NOT LOSE PARTIAL CARGO
+
+If QS cannot establish that mail was successfully delivered, it must preserve the undelivered mail.
+
+QS must not silently empty a pocket merely because a delivery attempt was started.
+
+The implementation must maintain enough state to avoid losing mail when a delivery operation fails unexpectedly.
+
+---
+
+# 22. DUCK FLIGHT ORDER
+
+The Duck processes one address at a time.
+
+A normal route is:
+
+HOME
+
+to the first address,
+
+then to the second,
+
+then to the third,
+
+and so forth,
+
+until every address on the Delivery List has been visited.
+
+The Duck then returns HOME.
+
+The operator-defined Delivery List order is authoritative.
+
+---
+
+# 23. DYNAMIC ROUTE CHANGES
+
+Route membership can change while the system is running.
+
+An address that sends STOP is removed immediately.
+
+An address can later be activated again by the Human.
+
+The implementation must ensure that current route execution does not corrupt pockets when route membership changes.
+
+The Duck must not accidentally discard undelivered mail merely because an address temporarily leaves the route.
+
+---
+
+# 24. TWO LIVE LOG FILES
+
+QS 2.1 maintains two separate live log files in each session archive.
+
+## sys.log
+
+Contains runtime/system information such as:
+
+* startup;
+* version verification;
+* archive creation;
+* configuration;
+* browser/CDP activity;
+* address discovery;
+* selector activity;
+* DOM/capture diagnostics;
+* route changes;
+* Duck state transitions;
+* delivery attempts;
+* timeout conditions;
+* browser errors;
+* exceptions;
+* debugging information.
+
+## msg.log
+
+Contains ONLY message traffic and message-related Duckmail activity such as:
+
+* Human-originated messages;
+* actual node messages picked up by the Duck;
+* messages carried between route members;
+* messages placed into HUMAN;
+* Duck-generated feedback messages that are themselves carried as mail;
+* message-copy/delivery records needed to preserve the traffic history.
+
+The actual content picked up by the Duck is recorded in msg.log.
+
+---
+
+# 25. LOGS MUST BE LIVE
+
+Both sys.log and msg.log must remain current throughout the session.
+
+Entries must be written as events occur and flushed so the files remain usable during a live session.
+
+A current log must be available for diagnosis even if the QuackSink session is still running.
+
+---
+
+# 26. COPY LOG
+
+The UI retains a COPY LOG capability so the current diagnostic log can be copied to the clipboard.
+
+This capability must work during a live session.
+
+---
+
+# 27. STATUS MESSAGE DISPLAY
+
+The Human may toggle whether delivery/status information is displayed in the visible HUMAN mailbox while the Duck is operating.
+
+Turning status display OFF does NOT disable logging.
+
+Status display and logging are separate functions.
+
+The system must continue recording status information in sys.log regardless of whether the Human is watching it.
+
+---
+
+# 28. ARCHIVE NOTE FACILITY
+
+The UI should provide a separate operator note facility.
+
+It should contain:
+
+TITLE FILENAME
+
+a text field for the desired filename/title,
+
+NOTE CONTENTS
+
+a multiline text area,
+
+and
+
+SAVE
+
+The SAVE action writes the note into the current session archive.
+
+These notes are operator-created archive artifacts and are separate from sys.log and msg.log.
+
+---
+
+# 29. NO MESSAGE SEMANTIC POLICING
+
+QS does not decide whether a message is:
+
+* intelligent;
+* useful;
+* relevant;
+* polite;
+* correct;
+* funny;
+* meaningful;
+* or otherwise worthy.
+
+The Duck delivers.
+
+The Minds determine what they want to say.
+
+---
+
+# 30. NO NORMAL MESSAGE TOKENS
+
+The former DRS message-framing protocol is removed from normal traffic.
+
+Normal responses do not require special delimiters.
+
+The historical token system existed because the original DRS needed a simple mechanical method for identifying message boundaries.
+
+QS 2.1 already knows:
+
+* which address it is visiting;
+* which response area belongs to that address;
+* what the response looked like before delivery;
+* what new response appeared afterward.
+
+Therefore normal message framing tokens are unnecessary.
+
+The old token system is considered historical scaffolding and is not part of normal QS 2.1 message traffic.
+
+---
+
+# 31. STOP IS DIFFERENT
+
+STOP remains because it is not message framing.
+
+STOP is a control instruction to the Duck:
+
+remove this address from the route.
+
+It therefore belongs to the route-control layer rather than the normal message layer.
+
+---
+
+# 32. STATE-MACHINE DESIGN PHILOSOPHY
+
+QS 2.1 is to be designed primarily as a system of interacting state machines.
+
+Python is the implementation of that model.
+
+The design should begin with:
+
+* states;
+* transitions;
+* ownership;
+* events;
+* terminal conditions;
+* failure behavior;
+
+and then implement those behaviors in Python.
+
+The system should not be structured primarily around inherited 1.1 control flow.
+
+---
+
+# 33. DUCK STATE MACHINE
+
+The central Duck state machine should explicitly represent states corresponding to behaviors such as:
+
+HOME
+
+FLYING
+
+ARRIVED
+
+DELIVERING
+
+WAITING
+
+CAPTURING
+
+PROCESSING
+
+COPYING
+
+NEXT_ADDRESS
+
+RETURNING
+
+COMPLETE
+
+ERROR
+
+The exact implementation may refine these states as needed, but the state transitions must remain explicit and understandable.
+
+---
+
+# 34. ADDRESS STATE AND DUCK STATE ARE DISTINCT
+
+An address has membership/state information.
+
+The Duck has flight/delivery state information.
+
+These are different concerns and must not be collapsed into a single state machine.
+
+---
+
+# 35. PROVEN QS 1.1 COMPONENTS TO PILLAGE
+
+QS 2.1 should reuse proven functionality from the current 1.1 implementation where practical, including:
+
+* startup;
+* version identification;
+* archive creation;
+* source/version verification;
+* configuration handling;
+* browser/CDP connection;
+* browser/tab discovery;
+* DOM access;
+* selectors;
+* response-baseline capture;
+* new-response detection;
+* existing UI foundations;
+* proven logging mechanisms.
+
+The purpose is to preserve proven browser machinery while replacing the old relay architecture.
+
+---
+
+# 36. OLD RELAY ARCHITECTURE IS REPLACED
+
+The old 1.1 model based on node-owned message stacks and a central relay machine is not the target architecture for 2.1.
+
+The new model is:
+
+ADDRESS = mailbox location
+
+DUCK = courier
+
+POCKET = persistent undelivered mail
+
+DELIVERY LIST = route
+
+HUMAN = home/base mailbox
+
+sys.log = system/diagnostic record
+
+msg.log = traffic record
+
+---
+
+# 37. IMPORTANT DESIGN PRINCIPLE
+
+**DEFINE DELIVERY, NOT MEANING.**
+
+QS should determine:
+
+* where the Duck is;
+* what address it is visiting;
+* what mail the Duck is carrying;
+* whether delivery succeeded;
+* whether a new response appeared;
+* what known UI noise should be removed;
+* where captured mail must be copied next.
+
+QS does not need to understand the meaning of the content.
+
+---
+
+# 38. CORE INVARIANTS
+
+1. The Duck owns the pockets.
+
+2. A pocket contains undelivered mail.
+
+3. Mail is removed only after successful delivery.
+
+4. A no-response timeout/error never destroys mail.
+
+5. New mail may accumulate in an unavailable address's pocket.
+
+6. A later successful visit delivers all accumulated mail FIFO.
+
+7. Any new response from an active address constitutes message traffic after known UI noise is removed.
+
+8. Normal message traffic requires no framing tokens.
+
+9. STOP is a route-control command, not normal message framing.
+
+10. Address is the routing identity.
+
+11. The Duck does not interpret message meaning.
+
+12. Actual message traffic picked up by the Duck is preserved in msg.log.
+
+13. System/debug information is preserved separately in sys.log.
+
+14. The Delivery List determines route execution order.
+
+15. The Human mailbox is the Duck's home/base mailbox.
+
+16. The live logs remain usable during a running session.
+
+---
+
+# 39. IMPLEMENTATION GOAL
+
+The goal of QS 2.1 is not to reproduce the complexity of the original DRS.
+
+The goal is to preserve the parts that proved reliable while building a substantially simpler delivery machine around the Duckmail model.
+
+The Duck should be mechanically reliable.
+
+The Minds should be free to speak naturally.
+
+The relay should carry the conversation rather than policing it.
+
+END OF QUACKSINK 2.1 SPECIFICATION
