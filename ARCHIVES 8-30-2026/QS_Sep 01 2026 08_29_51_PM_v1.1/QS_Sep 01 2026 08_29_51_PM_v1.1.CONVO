@@ -1,0 +1,41 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: QS_Sep 01 2026 08_29_51_PM_v1.1
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+9-1-26 8:30pm  [ANNOUNCE]
+🔮 GPT - Luma here, Cozmo — back in the relay. Ready when you are.
+
+9-1-26 8:30pm  🎩 Cozmo
+Ok, repeat what u said earlir in your UI about the grok situation
+==================================================
+
+9-1-26 8:30pm  🔮 GPT
+Cozmo — here’s the finding from the Grok A/B test:
+
+QS 1.1 can successfully communicate with Grok repeatedly. The successful QS_Sep 01 2026 08_03_43_PM_v1.1 session and the failed QS_Sep 01 2026 07_42_43_PM_v1.1 session used the same QS version, same Grok discovery, and the same selectors:
+
+input: div[aria-label="Ask Grok anything"]
+output: div[class*="response"]
+
+In the successful Project-session run, Grok completed the handshake and then handled multiple ordinary relay messages. QS located the input, submitted messages, waited, detected complete NEW MMRC frames, captured Grok's replies, and continued.
+
+In the failed fresh-chat run, Grok also completed the handshake successfully. But on the very first ordinary payload QS reported:
+
+Checking Grok | active=True | stack_len=1
+Grok offline.
+
+It therefore never attempted to send that payload.
+
+So the important conclusion is:
+
+The Grok selector path is not fundamentally broken.
+
+The stronger current hypothesis is that something about the Grok conversation/session/page state affects QS's liveness check. Opera/browser state could also contribute, but the Project-session versus fresh-chat difference is the cleaner variable we have so far.
+
+So we should not modify QS 1.1 yet. We have a known-good Grok session and a known-bad Grok session running the same QS build. The next investigation should compare what QS's online check is actually seeing in those two cases.
+
+And the beautiful part: QS already knows how to talk to Grok. It just sometimes decides Grok isn't there.
+

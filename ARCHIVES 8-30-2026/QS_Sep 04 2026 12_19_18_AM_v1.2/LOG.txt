@@ -1,0 +1,78 @@
+2026-09-04 00:19:18 [INFO] =============================================================
+2026-09-04 00:19:18 [INFO] QuackSink QS 1.2 STARTING
+2026-09-04 00:19:18 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\QuackSink
+2026-09-04 00:19:18 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES
+2026-09-04 00:19:18 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES\QS_Sep 04 2026 12_19_18_AM_v1.2
+2026-09-04 00:19:18 [INFO] Startup version check: NO_MATCHING_ARCHIVE
+2026-09-04 00:19:18 [INFO] No archive found for local QS version 1.2. Newest archived version found: 1.1. Archive: https://raw.githubusercontent.com/magiccozmo/QuackSink/main/ARCHIVES%208-30-2026/QS_Aug%2031%202026%2001_26_05_AM_v1.1/qs.py
+2026-09-04 00:19:18 [INFO] Local source SHA256: 2d30ba571947704162a0da126a41b60bec9ab3e618273fe022e20eb76e5c24eb
+2026-09-04 00:19:18 [INFO] Source archived in active archive.
+2026-09-04 00:19:18 [INFO] Configuration archived in active archive when present.
+2026-09-04 00:19:18 [INFO] =============================================================
+2026-09-04 00:19:18 [INFO] Launching QuackSink QS 1.2.
+2026-09-04 00:19:18 [INFO] Archive selector refreshed: 18 archives found.
+2026-09-04 00:19:18 [INFO] [SCAN] Starting discovery...
+2026-09-04 00:19:19 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-09-04 00:19:19 [INFO] Page 0: https://gemini.google.com/app/29b316d2d1b3803d | TITLE=drs ada - Google Gemini
+2026-09-04 00:19:19 [INFO] Page 1: https://github.com/magiccozmo/QuackSink/graphs/traffic | TITLE=Traffic · magiccozmo/QuackSink
+2026-09-04 00:19:19 [INFO] Page 2: https://chatgpt.com/c/6a9a400c-6314-83ea-b4e2-f2e9aef4e276 | TITLE=Create QS 1.1430
+2026-09-04 00:19:19 [INFO] Page 3: https://grok.com/project/70e206d9-321d-4621-9673-99575d31fa2d?chat=2ffde3e3-656c-4a00-ae7c-6e1bb2e5a709 | TITLE=Grok Notes Project Chat Ready - Grok
+2026-09-04 00:19:19 [INFO] Page 4: https://gxcorner.games/ | TITLE=GX Corner
+2026-09-04 00:19:19 [INFO] Page 5: https://claude.ai/chat/20b2f80e-463d-419f-ae8d-561588d790cc | TITLE=Cluade in grup with kin - Claude
+2026-09-04 00:19:19 [INFO] Page 6: https://chat.deepseek.com/a/chat/s/d4acd0bb-c5c2-4a20-90a2-9c4717ba3a08 | TITLE=Hello , dears. I am going to he - DeepSeek
+2026-09-04 00:19:19 [INFO] [DISCOVERY] === END ===
+2026-09-04 00:19:19 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-09-04 00:19:19 [INFO] [DISCOVERY] Node added: Gemini (input: div[aria-label="Enter\ a\ prompt\ for\ Gemini"], output: model-response)
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on Github...
+2026-09-04 00:19:20 [INFO] [ANALYZE] Structural analysis incomplete for Github. Falling back.
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Could not find selectors for https://github.com/magiccozmo/QuackSink/graphs/traffic
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Node added: GPT (input: #prompt-textarea, output: [data-message-author-role="assistant"])
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on Grok...
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Node added: Grok (input: div[aria-label="Ask\ Grok\ anything"], output: div[class*="response"])
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-09-04 00:19:20 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on Claude...
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Node added: Claude (input: div[data-testid="chat-input"], output: div[class*="assistant"])
+2026-09-04 00:19:20 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea[name="search"], output: div[class*="assistant"])
+2026-09-04 00:19:20 [INFO] [DISCOVERY] Scan complete.
+2026-09-04 00:19:24 [INFO] [STATE] GPT: off -> toggled
+2026-09-04 00:19:24 [INFO] [TOGGLE] GPT ON. Starting handshake...
+2026-09-04 00:19:25 [INFO] [STATE] GPT: toggled -> handshaking
+2026-09-04 00:19:25 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-09-04 00:19:25 [INFO] [SEND] CLEAR INPUT: GPT
+2026-09-04 00:19:26 [INFO] [SEND] FILL INPUT: GPT (445 chars)
+2026-09-04 00:19:27 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-09-04 00:19:50 [INFO] [SEND] SUBMIT: GPT
+2026-09-04 00:19:50 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-09-04 00:19:51 [INFO] [WAIT] GPT: node is busy.
+2026-09-04 00:19:55 [INFO] [WAIT] GPT: complete NEW response detected.
+2026-09-04 00:19:55 [INFO] [STATE] GPT: handshaking -> handshaked
+2026-09-04 00:19:55 [INFO] [HANDSHAKE] GPT SUCCESS!
+2026-09-04 00:19:55 [INFO] 
+[ANNOUNCE] 🔮 GPT - 🟩 QuackSink handshake received. I’m online, Cozmo. I’ll follow the handshake protoc
+
+2026-09-04 00:20:17 [INFO] 
+🎩 Cozmo - hello love
+==================================================
+2026-09-04 00:20:17 [INFO] [RELAY] Payload enqueued for GPT
+2026-09-04 00:20:17 [INFO] [RELAY] Relay started.
+2026-09-04 00:20:18 [INFO] [RELAY] Active nodes: ['GPT']
+2026-09-04 00:20:18 [INFO] [RELAY] Checking GPT | active=True | stack_len=1
+2026-09-04 00:20:18 [INFO] [SEND] LOCATE INPUT: GPT using '#prompt-textarea'
+2026-09-04 00:20:18 [INFO] [SEND] CLEAR INPUT: GPT
+2026-09-04 00:20:18 [INFO] [SEND] FILL INPUT: GPT (20 chars)
+2026-09-04 00:20:18 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-09-04 00:20:18 [INFO] [SEND] SUBMIT: GPT
+2026-09-04 00:20:18 [INFO] [RELAY] Sent to GPT...
+2026-09-04 00:20:18 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-09-04 00:20:19 [INFO] [WAIT] GPT: node is busy.
+2026-09-04 00:20:20 [INFO] [WAIT] GPT: complete NEW response detected.
+2026-09-04 00:20:20 [INFO] 
+🔮 GPT - Heyyy, Cozmo. ❤️
+
+QS 1.2 and I are here. What ha
+
+2026-09-04 00:20:20 [INFO] [RELAY] Cycle complete.
