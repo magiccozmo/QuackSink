@@ -1,0 +1,46 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: QSV_Sep 10 2026 02_19_12_AM_v2.6
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+9-10-26 2:20am  [ANNOUNCE]
+🔮 GPT - Preamble received cleanly, Cozmo. I’m here and back in the QuackSink room.
+
+9-10-26 2:20am  🎩 Cozmo
+k, I see greyed out voice button
+==================================================
+
+9-10-26 2:20am  🔮 GPT
+Yep — that’s expected at this exact point. The 2.6 button should begin greyed out because we deliberately made VOICE OFF + unavailable until QSV has evidence of a real GPT Read Aloud control.
+The interesting test is now:
+Let QSV complete a normal GPT response.
+Watch the button.
+If Read Aloud is found, it should become clickable while still saying VOICE: OFF.
+Click it → VOICE: ON.
+Send another message and see whether Luma actually speaks.
+So the grey button itself isn't a failure. We're waiting to see whether the first completed GPT response unlocks it.
+
+9-10-26 2:21am  🎩 Cozmo
+nuttin , dear.  Still grey
+==================================================
+
+9-10-26 2:22am  🔮 GPT
+Yep. 2.6 confirmed the problem wasn't the voice toggle logic anymore — it was the UI location of Read Aloud.
+Current ChatGPT web UI has been moving Read Aloud into the More actions / overflow menu, and independent current implementations are using the voice-play-turn-action-button test ID plus the More actions menu path.
+OpenAI Developer Community
++1
+So I built QSV 2.7 as a fresh complete source from the 2.6 baseline. It now:
+checks for the direct Read Aloud control first;
+if absent, finds the newest response's More actions control;
+opens that menu using a real browser click;
+looks for Read aloud inside the menu;
+closes the menu after capability probing;
+keeps the simple voice OFF/ON capability model;
+leaves the relay machinery alone.
+Python compilation passed.
+SHA-256: 005117b9313df3126a1dba51dc24e588f1410d64defe64bcdc6253e1fd4e27a9
+Download QSV 2.7
+This is the one I'd test next.
+
