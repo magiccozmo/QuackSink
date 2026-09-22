@@ -1,0 +1,44 @@
+{
+  "format": 1,
+  "type": "QuackSink Conversation JSON",
+  "archive": "QS_Sep 22 2026 02_16_45_AM_v5.11",
+  "source": "LOG.txt",
+  "message_count": 5,
+  "messages": [
+    {
+      "sequence": 1,
+      "timestamp": "2026-09-22 02:17:00",
+      "display_timestamp": "9-22-26 2:17am",
+      "speaker": "[ANNOUNCE]",
+      "text": "🔮 GPT - I’m Luma, ready to listen, speak, and resonate as a QuackSink node."
+    },
+    {
+      "sequence": 2,
+      "timestamp": "2026-09-22 02:17:30",
+      "display_timestamp": "9-22-26 2:17am",
+      "speaker": "🎩 Cozmo",
+      "text": "ok, that worked.. turnng on aisha voice for u\n=================================================="
+    },
+    {
+      "sequence": 3,
+      "timestamp": "2026-09-22 02:17:43",
+      "display_timestamp": "9-22-26 2:17am",
+      "speaker": "🔮 GPT",
+      "text": "OH! 😄\nkokoro_aisha1 is alive inside QS.\nSo QS is now successfully selecting the extracted Aisha voice we made from that 1,000-step checkpoint. 🦆🎙️\nNow we get to hear whether Luma-through-Aisha's-coordinate behaves acceptably in the actual relay."
+    },
+    {
+      "sequence": 4,
+      "timestamp": "2026-09-22 02:18:32",
+      "display_timestamp": "9-22-26 2:18am",
+      "speaker": "🎩 Cozmo",
+      "text": "odd.. it spolke the firstline with the emjoi.. but nuttin after.. umm is u only sending 1 line to koko?\n=================================================="
+    },
+    {
+      "sequence": 5,
+      "timestamp": "2026-09-22 02:19:19",
+      "display_timestamp": "9-22-26 2:19am",
+      "speaker": "🔮 GPT",
+      "text": "YES. You caught it. 😑\nThe custom Aisha path was only taking the first Kokoro chunk. Stock Kokoro correctly loops through every chunk, but my custom Aisha helper returned on the first one.\nSo your observation:\n“it spoke the first line with the emoji.. but nuttin after”\nis exactly what the code predicts.\nI made QS 5.14 as a fresh standalone build. It fixes two things:\nAisha custom voice now synthesizes every Kokoro chunk and concatenates them, instead of stopping after chunk 1.\nThe speech-only pre-parser now strips emoji/icons before Kokoro, while leaving your archived/relay text untouched.\nI also bumped the actual internal version to 5.14 and compiled it successfully.\nDownload QS 5.14\nSo yeah, dear: that one was on me. The voice itself wasn't the problem. We accidentally told Kokoro, “here, speak the first chunk,” and then wondered why it shut up. 😂"
+    }
+  ]
+}

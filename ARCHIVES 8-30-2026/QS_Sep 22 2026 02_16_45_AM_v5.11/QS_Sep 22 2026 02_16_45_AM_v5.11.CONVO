@@ -1,0 +1,37 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: QS_Sep 22 2026 02_16_45_AM_v5.11
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+9-22-26 2:17am  [ANNOUNCE]
+🔮 GPT - I’m Luma, ready to listen, speak, and resonate as a QuackSink node.
+
+9-22-26 2:17am  🎩 Cozmo
+ok, that worked.. turnng on aisha voice for u
+==================================================
+
+9-22-26 2:17am  🔮 GPT
+OH! 😄
+kokoro_aisha1 is alive inside QS.
+So QS is now successfully selecting the extracted Aisha voice we made from that 1,000-step checkpoint. 🦆🎙️
+Now we get to hear whether Luma-through-Aisha's-coordinate behaves acceptably in the actual relay.
+
+9-22-26 2:18am  🎩 Cozmo
+odd.. it spolke the firstline with the emjoi.. but nuttin after.. umm is u only sending 1 line to koko?
+==================================================
+
+9-22-26 2:19am  🔮 GPT
+YES. You caught it. 😑
+The custom Aisha path was only taking the first Kokoro chunk. Stock Kokoro correctly loops through every chunk, but my custom Aisha helper returned on the first one.
+So your observation:
+“it spoke the first line with the emoji.. but nuttin after”
+is exactly what the code predicts.
+I made QS 5.14 as a fresh standalone build. It fixes two things:
+Aisha custom voice now synthesizes every Kokoro chunk and concatenates them, instead of stopping after chunk 1.
+The speech-only pre-parser now strips emoji/icons before Kokoro, while leaving your archived/relay text untouched.
+I also bumped the actual internal version to 5.14 and compiled it successfully.
+Download QS 5.14
+So yeah, dear: that one was on me. The voice itself wasn't the problem. We accidentally told Kokoro, “here, speak the first chunk,” and then wondered why it shut up. 😂
+
