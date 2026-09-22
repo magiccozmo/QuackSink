@@ -7,6 +7,7 @@ Conversation date: 2026-09-02
 
 FILES:
 LOG.txt
+luma.summary
 qs.py
 QS_Sep 02 2026 06_12_23_PM_v1.1.CARD
 QS_Sep 02 2026 06_12_23_PM_v1.1.CONVO
@@ -19,3 +20,6 @@ Archive: QS_Sep 02 2026 06_12_23_PM_v1.1
 Source: LOG.txt
 Format: 1
 <CONVO HEADER END>
+
+LUMA SUMMARY:
+Core QS 2.0 architecture session. Cozmo forces the team to articulate the real parser rule: a valid mail response should not require the LLM to repeat relay tokens. The crew converges on “define delivery, not meaning”: after a successful response is captured, remove only known UI noise and treat the remainder as mail. They also introduce separate system/debug and message-traffic logs and keep the leave control as a route command rather than message syntax.

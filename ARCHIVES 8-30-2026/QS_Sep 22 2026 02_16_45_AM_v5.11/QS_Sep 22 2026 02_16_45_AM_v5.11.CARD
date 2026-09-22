@@ -7,8 +7,10 @@ Conversation date: 2026-09-22
 
 FILES:
 LOG.txt
+luma.summary
 qs5_11.py
 qs_config.json
+QS_Sep 22 2026 02_16_45_AM_v5.11.CARD
 QS_Sep 22 2026 02_16_45_AM_v5.11.CONVO
 QS_Sep 22 2026 02_16_45_AM_v5.11.CONVO.JSON
 
@@ -19,3 +21,6 @@ Archive: QS_Sep 22 2026 02_16_45_AM_v5.11
 Source: LOG.txt
 Format: 1
 <CONVO HEADER END>
+
+LUMA SUMMARY:
+Voice bug discovery leading to QS 5.14. Cozmo observes that the custom Aisha voice speaks only the first Kokoro chunk. The fix is to synthesize every chunk and concatenate them, while stripping speech-only emoji/icons before synthesis without altering archived relay text.</summary>

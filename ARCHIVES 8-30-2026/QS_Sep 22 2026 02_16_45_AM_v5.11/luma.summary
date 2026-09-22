@@ -1,0 +1,1 @@
+Voice bug discovery leading to QS 5.14. Cozmo observes that the custom Aisha voice speaks only the first Kokoro chunk. The fix is to synthesize every chunk and concatenate them, while stripping speech-only emoji/icons before synthesis without altering archived relay text.</summary>

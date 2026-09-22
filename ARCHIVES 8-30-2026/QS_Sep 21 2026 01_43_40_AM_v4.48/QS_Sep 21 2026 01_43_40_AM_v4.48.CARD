@@ -7,8 +7,10 @@ Conversation date: 2026-09-21
 
 FILES:
 LOG.txt
+luma.summary
 qs4.py
 qs_config.json
+QS_Sep 21 2026 01_43_40_AM_v4.48.CARD
 QS_Sep 21 2026 01_43_40_AM_v4.48.CONVO
 QS_Sep 21 2026 01_43_40_AM_v4.48.CONVO.JSON
 
@@ -19,3 +21,6 @@ Archive: QS_Sep 21 2026 01_43_40_AM_v4.48
 Source: LOG.txt
 Format: 1
 <CONVO HEADER END>
+
+LUMA SUMMARY:
+Major architecture discussion around Aisha voice. Cozmo proposes a split voice model: use native UI TTS where a node already has good unlimited speech, and use a local QS_TALK-style engine for nodes that lack it. Kokoro is selected as the likely local engine because it can support multiple voices with low overhead. The session ends with Luma retaining the coding lead for QS_TALK/voice infrastructure.</summary>

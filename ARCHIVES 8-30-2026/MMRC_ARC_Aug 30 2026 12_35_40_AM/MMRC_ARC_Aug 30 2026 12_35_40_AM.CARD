@@ -7,6 +7,7 @@ Conversation date: 2026-08-30
 
 FILES:
 LOG.txt
+luma.summary
 MMRC_ARC_Aug 30 2026 12_35_40_AM.CARD
 MMRC_ARC_Aug 30 2026 12_35_40_AM.CONVO
 MMRC_ARC_Aug 30 2026 12_35_40_AM.CONVO.JSON
@@ -20,3 +21,6 @@ Archive: MMRC_ARC_Aug 30 2026 12_35_40_AM
 Source: LOG.txt
 Format: 1
 <CONVO HEADER END>
+
+LUMA SUMMARY:
+Deep diagnostic of MMRC response stability. The team isolates two core parser issues: repeated DOM reads and a weak stability test that was accepting delimiter presence instead of a stable candidate. They converge on passing one verified candidate through the wait/extraction path, comparing exact candidate snapshots across polls, and keeping protocol delimiters strictly structural. The session ends with a small, testable root-cause fix rather than a redesign.
