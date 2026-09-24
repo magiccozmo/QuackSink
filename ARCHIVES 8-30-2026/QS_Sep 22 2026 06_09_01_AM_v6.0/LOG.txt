@@ -1,0 +1,934 @@
+2026-09-22 06:09:01 [INFO] =============================================================
+2026-09-22 06:09:01 [INFO] QuackSink QS 6.0 STARTING
+2026-09-22 06:09:01 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\QuackSink
+2026-09-22 06:09:01 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES
+2026-09-22 06:09:01 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES\QS_Sep 22 2026 06_09_01_AM_v6.0
+2026-09-22 06:09:01 [INFO] Startup version check: SKIPPED_DEV
+2026-09-22 06:09:01 [INFO] Development mode: True
+2026-09-22 06:09:01 [INFO] Browser focus policy: QS does not force tabs to foreground.
+2026-09-22 06:09:01 [INFO] QS 6.0 development build: repository source verification is intentionally skipped during rapid iteration.
+2026-09-22 06:09:01 [INFO] Source archived in active archive.
+2026-09-22 06:09:01 [INFO] Configuration archived in active archive when present.
+2026-09-22 06:09:01 [INFO] =============================================================
+2026-09-22 06:09:01 [INFO] Launching QuackSink QS 6.0.
+2026-09-22 06:09:01 [INFO] [BROWSER] Existing CDP browser detected on 127.0.0.1:9222 (Chrome/151.0.7922.170). Attaching without launch.
+2026-09-22 06:09:01 [INFO] [VOICE] Kokoro engine lazy-load armed; waiting for first Kokoro voice activation.
+2026-09-22 06:09:01 [INFO] [SCAN] Starting discovery via Puppeteer/CDP...
+2026-09-22 06:09:02 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-09-22 06:09:02 [INFO] Page 0: id=C7E7CDA1FA1BE81B426D75FE4F34CC78 | https://chatgpt.com/c/6ab12435-92ec-83ea-9ef0-6bbcddb2bfdb | TITLE=Repository Conversation Search
+2026-09-22 06:09:02 [INFO] Page 1: id=738A366925F7AEA807F22D5C99DCEFB9 | https://chat.deepseek.com/a/chat/s/a4b51dc3-dbb2-4ae7-bb40-0217ee69c26b | TITLE=DeepSeek
+2026-09-22 06:09:02 [INFO] Page 2: id=25C093084B08B92A4A876DD6CE5BCDC8 | https://gemini.google.com/app/29b316d2d1b3803d | TITLE=drs ada - Google Gemini
+2026-09-22 06:09:02 [INFO] Page 3: id=23A93116CC8E11702CD39E5E6D500F2F | https://aisha.ai/ask/conversation/348437 | TITLE=Aisha: AI Chat, Culture First
+2026-09-22 06:09:02 [INFO] Page 4: id=3B75A4AE58B7F9E2F8C81DB39AB976F9 | http://localhost:8080/c/c4c48b09-553d-4642-82ea-62feaa39c967 | TITLE=DRS White Paper Review / Open WebUI
+2026-09-22 06:09:02 [INFO] Page 5: id=7B6E47E7D01810DA5D0ED7E78F32AFBD | https://gxcorner.games/ | TITLE=GX Corner
+2026-09-22 06:09:02 [INFO] [DISCOVERY] === END ===
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for GPT. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Node added: GPT (input: textarea, [contenteditable='true'], output: article, [data-message-author-role='assistant'])
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for DeepSeek. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea, [contenteditable='true'], output: div[class*='message'])
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for Gemini. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Node added: Gemini (input: textarea, [contenteditable='true'], output: model-response, .model-response-text)
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on Aisha...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for Aisha. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Node added: Aisha (input: textarea, [contenteditable='true'], output: div[class*='message'])
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on Chron...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for Chron. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Node added: Chron (input: textarea, [contenteditable='true'], output: div[class*='message'], [data-message-id], .prose)
+2026-09-22 06:09:02 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-09-22 06:09:02 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-09-22 06:09:02 [INFO] [DISCOVERY] Scan complete.
+2026-09-22 06:09:04 [INFO] [STATE] GPT: off -> toggled
+2026-09-22 06:09:04 [INFO] [TOGGLE] GPT ON. Starting Library introduction...
+2026-09-22 06:09:04 [INFO] [STATE] GPT: toggled -> introducing
+2026-09-22 06:09:04 [INFO] [INTRO] GPT: Library preamble state entered.
+2026-09-22 06:09:04 [INFO] [SEND] LOCATE INPUT: GPT using 'textarea, [contenteditable='true']'
+2026-09-22 06:09:04 [INFO] [SEND] CLEAR INPUT: GPT
+2026-09-22 06:09:04 [INFO] [SEND] FILL INPUT: GPT (1171 chars)
+2026-09-22 06:09:04 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-09-22 06:09:04 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:04 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:04 [INFO] [SEND] SUBMIT ATTEMPT (button): GPT using 'button[aria-label*="Send"]'
+2026-09-22 06:09:04 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:04 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:05 [INFO] [SEND] SUBMIT CONFIRMED (button): GPT | input_clear=True busy=False new_output=False
+2026-09-22 06:09:05 [INFO] [SEND] SUBMIT CONFIRMED: GPT
+2026-09-22 06:09:05 [INFO] [INTRO] GPT: embedded Library preamble sent; waiting for browser/model to return idle before handshake.
+2026-09-22 06:09:06 [INFO] [WAIT-DIAG] GPT: busy=False composer_ready=False busy_matches=[] composers=[]
+2026-09-22 06:09:06 [INFO] [INTRO] GPT: browser generation idle; composer_ready=False.
+2026-09-22 06:09:06 [INFO] [STATE] GPT: introducing -> handshaking
+2026-09-22 06:09:07 [INFO] [INTRO] GPT: Library introduction complete; entering handshake.
+2026-09-22 06:09:07 [INFO] [SEND] LOCATE INPUT: GPT using 'textarea, [contenteditable='true']'
+2026-09-22 06:09:07 [INFO] [SEND] CLEAR INPUT: GPT
+2026-09-22 06:09:07 [INFO] [SEND] FILL INPUT: GPT (580 chars)
+2026-09-22 06:09:07 [INFO] [WAIT] GPT: captured 3 pre-submit output messages.
+2026-09-22 06:09:07 [INFO] [HANDSHAKE-BASELINE] GPT: assistant_signature_set=True user_message_count=0
+2026-09-22 06:09:07 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:07 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:07 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=1/10 candidate=True
+2026-09-22 06:09:07 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=2/10 candidate=True
+2026-09-22 06:09:07 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=3/10 candidate=True
+2026-09-22 06:09:08 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=4/10 candidate=True
+2026-09-22 06:09:08 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=5/10 candidate=True
+2026-09-22 06:09:08 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=6/10 candidate=True
+2026-09-22 06:09:08 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=7/10 candidate=True
+2026-09-22 06:09:09 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=8/10 candidate=True
+2026-09-22 06:09:09 [INFO] [SEND] HANDSHAKE BUTTON WAIT: GPT attempt=9/10 candidate=True
+2026-09-22 06:09:09 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (focused Enter): GPT attempt=1/2
+2026-09-22 06:09:10 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:10 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:10 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:10 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:10 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:10 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:10 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:10 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:10 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:10 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:11 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:11 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:11 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:11 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:11 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:11 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:11 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:11 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:12 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:12 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:12 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:12 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:12 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:12 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:12 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:12 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:12 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:12 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:13 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:13 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:13 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:13 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:13 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:13 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:13 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:13 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:14 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:14 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:14 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:14 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:14 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:14 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:14 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:14 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:14 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter): GPT | input still contains message or no submission evidence.
+2026-09-22 06:09:15 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (focused Enter): GPT attempt=2/2
+2026-09-22 06:09:15 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:15 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:15 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:15 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:15 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:15 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:16 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:16 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:16 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:16 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:16 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:16 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:16 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:16 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:16 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:16 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:17 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:17 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:17 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:17 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:17 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:17 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:17 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:17 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:18 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:18 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:18 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:18 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:18 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:18 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:18 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:18 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:18 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:18 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:19 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:19 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:19 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:19 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:19 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:19 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:19 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:19 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:20 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:20 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT PENDING (Enter): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter): GPT | input still contains message or no submission evidence.
+2026-09-22 06:09:20 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (CDP Enter): GPT attempt=1/2
+2026-09-22 06:09:20 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:20 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:20 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:20 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:21 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:21 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:21 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:21 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:21 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:21 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:21 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:21 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:22 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:22 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:22 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:22 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:22 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:22 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:22 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:22 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:22 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:22 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:23 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:23 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:23 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:23 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:23 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:23 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:23 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:23 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:24 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:24 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:24 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:24 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:24 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:24 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:24 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:24 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:24 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:24 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:25 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:25 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:25 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:25 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): GPT | input_clear=True busy=False new_output=False handshake=True
+2026-09-22 06:09:25 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter/CDP): GPT | input still contains message or no submission evidence.
+2026-09-22 06:09:25 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (CDP Enter): GPT attempt=2/2
+2026-09-22 06:09:25 [INFO] [WAIT-DIAG] GPT: handshake user-turn probe failed: RuntimeError: ReferenceError: baseline_count is not defined
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:33:48)
+    at evaluate (evaluate at handle ([eval]:93:31), <anonymous>:35:18)
+    at #evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:361:23)
+    at async ExecutionContext.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/ExecutionContext.js:288:16)
+    at async IsolatedWorld.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/cdp/IsolatedWorld.js:104:16)
+    at async CdpFrame.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Frame.js:364:20)
+    at async CdpPage.evaluate (file:///C:/Users/mcozm/projects/drsgem/QuackSink/node_modules/puppeteer-core/lib/puppeteer/api/Page.js:832:20)
+    at async handle ([eval]:93:20)
+    at async Interface.<anonymous> ([eval]:467:24)
+2026-09-22 06:09:25 [INFO] [SEND] SUBMIT CONFIRMED (Enter/CDP): GPT | input_clear=True busy=False new_output=True new_user_turn=False handshake=True evidence=new_output
+2026-09-22 06:09:25 [INFO] [SEND] SUBMIT CONFIRMED: GPT
+2026-09-22 06:09:25 [INFO] [WAIT] GPT: waiting for generation to finish...
+2026-09-22 06:09:26 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:26 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:26 [INFO] [WAIT] GPT: new cleaned assistant output detected.
+2026-09-22 06:09:26 [INFO] [WAIT-DIAG] GPT: browser generation reports idle; idle_streak=1
+2026-09-22 06:09:26 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:26 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:26 [INFO] [WAIT-DIAG] GPT: browser generation reports idle; idle_streak=2
+2026-09-22 06:09:27 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:27 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:27 [INFO] [WAIT-DIAG] GPT: browser generation reports idle; idle_streak=3
+2026-09-22 06:09:28 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:28 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:28 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:28 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:29 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:29 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:29 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:29 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:30 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:30 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:30 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:30 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:31 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:31 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:31 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:31 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:32 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:32 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:33 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:33 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:33 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:33 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:34 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:34 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:34 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:34 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:35 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:35 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:35 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:35 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:36 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:36 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:36 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:36 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:37 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:37 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:37 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:37 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:38 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:38 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:38 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:38 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:39 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:39 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:39 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:39 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:40 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:40 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:41 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:41 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:41 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:41 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:42 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:42 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:42 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:42 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:43 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:43 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:43 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:43 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:44 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:44 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:44 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:44 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:45 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:45 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:45 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:45 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:46 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:46 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:46 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:46 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:47 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:47 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:47 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT
+2026-09-22 06:09:47 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: GPT
+2026-09-22 06:09:48 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: GPT

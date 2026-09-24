@@ -1,0 +1,168 @@
+2026-09-22 06:35:41 [INFO] =============================================================
+2026-09-22 06:35:41 [INFO] QuackSink QS 6.0 STARTING
+2026-09-22 06:35:41 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\QuackSink
+2026-09-22 06:35:41 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES
+2026-09-22 06:35:41 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\QuackSink\ARCHIVES\QS_Sep 22 2026 06_35_41_AM_v6.0
+2026-09-22 06:35:41 [INFO] Startup version check: SKIPPED_DEV
+2026-09-22 06:35:41 [INFO] Development mode: True
+2026-09-22 06:35:41 [INFO] Browser focus policy: QS does not force tabs to foreground.
+2026-09-22 06:35:41 [INFO] QS 6.0 development build: repository source verification is intentionally skipped during rapid iteration.
+2026-09-22 06:35:41 [INFO] Source archived in active archive.
+2026-09-22 06:35:41 [INFO] Configuration archived in active archive when present.
+2026-09-22 06:35:41 [INFO] =============================================================
+2026-09-22 06:35:41 [INFO] Launching QuackSink QS 6.0.
+2026-09-22 06:35:41 [INFO] [BROWSER] Existing CDP browser detected on 127.0.0.1:9222 (Chrome/151.0.7922.170). Attaching without launch.
+2026-09-22 06:35:41 [INFO] [VOICE] Kokoro engine lazy-load armed; waiting for first Kokoro voice activation.
+2026-09-22 06:35:42 [INFO] [SCAN] Starting discovery via Puppeteer/CDP...
+2026-09-22 06:35:42 [INFO] [DISCOVERY] === ALL OPEN PAGES ===
+2026-09-22 06:35:42 [INFO] Page 0: id=C7E7CDA1FA1BE81B426D75FE4F34CC78 | https://chatgpt.com/c/6ab12435-92ec-83ea-9ef0-6bbcddb2bfdb | TITLE=Repository Conversation Search
+2026-09-22 06:35:42 [INFO] Page 1: id=738A366925F7AEA807F22D5C99DCEFB9 | https://chat.deepseek.com/a/chat/s/a4b51dc3-dbb2-4ae7-bb40-0217ee69c26b | TITLE=DeepSeek
+2026-09-22 06:35:42 [INFO] Page 2: id=25C093084B08B92A4A876DD6CE5BCDC8 | https://gemini.google.com/app/29b316d2d1b3803d | TITLE=drs ada - Google Gemini
+2026-09-22 06:35:42 [INFO] Page 3: id=23A93116CC8E11702CD39E5E6D500F2F | https://aisha.ai/ask/conversation/348437 | TITLE=Aisha: AI Chat, Culture First
+2026-09-22 06:35:42 [INFO] Page 4: id=3B75A4AE58B7F9E2F8C81DB39AB976F9 | http://localhost:8080/c/c4c48b09-553d-4642-82ea-62feaa39c967 | TITLE=DRS White Paper Review / Open WebUI
+2026-09-22 06:35:42 [INFO] Page 5: id=7B6E47E7D01810DA5D0ED7E78F32AFBD | https://gxcorner.games/ | TITLE=GX Corner
+2026-09-22 06:35:42 [INFO] [DISCOVERY] === END ===
+2026-09-22 06:35:42 [INFO] [ANALYZE] Running structural DOM analysis on GPT...
+2026-09-22 06:35:42 [INFO] [ANALYZE] Structural analysis incomplete for GPT. Falling back.
+2026-09-22 06:35:42 [INFO] [DISCOVERY] Node added: GPT (input: textarea, [contenteditable='true'], output: article, [data-message-author-role='assistant'])
+2026-09-22 06:35:43 [INFO] [ANALYZE] Running structural DOM analysis on DeepSeek...
+2026-09-22 06:35:43 [INFO] [ANALYZE] Structural analysis incomplete for DeepSeek. Falling back.
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Node added: DeepSeek (input: textarea, [contenteditable='true'], output: div[class*='message'])
+2026-09-22 06:35:43 [INFO] [ANALYZE] Running structural DOM analysis on Gemini...
+2026-09-22 06:35:43 [INFO] [ANALYZE] Structural analysis incomplete for Gemini. Falling back.
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Node added: Gemini (input: textarea, [contenteditable='true'], output: model-response, .model-response-text)
+2026-09-22 06:35:43 [INFO] [ANALYZE] Running structural DOM analysis on Aisha...
+2026-09-22 06:35:43 [INFO] [ANALYZE] Structural analysis incomplete for Aisha. Falling back.
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Node added: Aisha (input: textarea, [contenteditable='true'], output: div[class*='message'])
+2026-09-22 06:35:43 [INFO] [ANALYZE] Running structural DOM analysis on Chron...
+2026-09-22 06:35:43 [INFO] [ANALYZE] Structural analysis incomplete for Chron. Falling back.
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Node added: Chron (input: textarea, [contenteditable='true'], output: div[class*='message'], [data-message-id], .prose)
+2026-09-22 06:35:43 [INFO] [ANALYZE] Running structural DOM analysis on Gxcorner...
+2026-09-22 06:35:43 [INFO] [ANALYZE] Structural analysis incomplete for Gxcorner. Falling back.
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Could not find selectors for https://gxcorner.games/
+2026-09-22 06:35:43 [INFO] [DISCOVERY] Scan complete.
+2026-09-22 06:35:49 [INFO] [STATE] Gemini: off -> toggled
+2026-09-22 06:35:49 [INFO] [TOGGLE] Gemini ON. Starting Library introduction...
+2026-09-22 06:35:49 [INFO] [STATE] Gemini: toggled -> introducing
+2026-09-22 06:35:49 [INFO] [INTRO] Gemini: Library preamble state entered.
+2026-09-22 06:35:49 [INFO] [SEND] LOCATE INPUT: Gemini using 'textarea, [contenteditable='true']'
+2026-09-22 06:35:49 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-09-22 06:35:49 [INFO] [SEND] FILL INPUT: Gemini (1171 chars)
+2026-09-22 06:35:50 [INFO] [WAIT] Gemini: captured 32 pre-submit output messages.
+2026-09-22 06:35:50 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: Gemini
+2026-09-22 06:35:50 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: Gemini
+2026-09-22 06:35:50 [INFO] [SEND] SUBMIT ATTEMPT (button): Gemini using 'button[aria-label*="Send"]'
+2026-09-22 06:35:50 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: Gemini
+2026-09-22 06:35:50 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: Gemini
+2026-09-22 06:35:50 [INFO] [SEND] SUBMIT CONFIRMED (button): Gemini | input_clear=True busy=False new_output=False
+2026-09-22 06:35:50 [INFO] [SEND] SUBMIT CONFIRMED: Gemini
+2026-09-22 06:35:50 [INFO] [INTRO] Gemini: embedded Library preamble sent; waiting for browser/model to return idle before handshake.
+2026-09-22 06:35:51 [INFO] [WAIT-DIAG] Gemini: busy=False composer_ready=False busy_matches=[] composers=[]
+2026-09-22 06:35:52 [INFO] [INTRO] Gemini: browser generation idle; composer_ready=False.
+2026-09-22 06:35:52 [INFO] [STATE] Gemini: introducing -> handshaking
+2026-09-22 06:35:52 [INFO] [INTRO] Gemini: Library introduction complete; entering handshake.
+2026-09-22 06:35:52 [INFO] [SEND] LOCATE INPUT: Gemini using 'textarea, [contenteditable='true']'
+2026-09-22 06:35:52 [INFO] [SEND] CLEAR INPUT: Gemini
+2026-09-22 06:35:52 [INFO] [SEND] FILL INPUT: Gemini (580 chars)
+2026-09-22 06:35:52 [INFO] [WAIT] Gemini: captured 32 pre-submit output messages.
+2026-09-22 06:35:52 [INFO] [HANDSHAKE-BASELINE] Gemini: assistant_signature_set=True user_message_count=0
+2026-09-22 06:35:52 [INFO] [SEND] PAGE ACTIVE/FOCUS EMULATED: Gemini
+2026-09-22 06:35:52 [INFO] [SEND] DOCUMENT VISIBILITY/FOCUS SHIM: Gemini
+2026-09-22 06:35:52 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=1/10 candidate=False
+2026-09-22 06:35:52 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=2/10 candidate=False
+2026-09-22 06:35:52 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=3/10 candidate=False
+2026-09-22 06:35:53 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=4/10 candidate=False
+2026-09-22 06:35:53 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=5/10 candidate=False
+2026-09-22 06:35:53 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (button): Gemini using 'button[aria-label*="Send"]' attempt=6/10
+2026-09-22 06:35:53 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:54 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:54 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:54 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:55 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:55 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:55 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:56 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:56 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:56 [INFO] [SEND] SUBMIT PENDING (button): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:56 [INFO] [SEND] SUBMIT NOT CONFIRMED (button): Gemini | input still contains message or no submission evidence.
+2026-09-22 06:35:56 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=6/10 candidate=True
+2026-09-22 06:35:56 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=7/10 candidate=False
+2026-09-22 06:35:57 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=8/10 candidate=False
+2026-09-22 06:35:57 [INFO] [SEND] HANDSHAKE BUTTON WAIT: Gemini attempt=9/10 candidate=False
+2026-09-22 06:35:57 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (focused Enter): Gemini attempt=1/2
+2026-09-22 06:35:57 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:58 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:58 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:58 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:58 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:59 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:59 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:59 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:35:59 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:00 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:00 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:00 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:00 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:01 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:01 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:02 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:02 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:02 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:02 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter): Gemini | input still contains message or no submission evidence.
+2026-09-22 06:36:02 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (focused Enter): Gemini attempt=2/2
+2026-09-22 06:36:03 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:03 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:03 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:03 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:04 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:04 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:04 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:04 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:05 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:05 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:05 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:05 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:06 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:06 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:06 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:06 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:07 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:07 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:07 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:07 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:08 [INFO] [SEND] SUBMIT PENDING (Enter): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:08 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter): Gemini | input still contains message or no submission evidence.
+2026-09-22 06:36:08 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (CDP Enter): Gemini attempt=1/2
+2026-09-22 06:36:08 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:08 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:08 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:09 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:09 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:09 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:09 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:10 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:10 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:10 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:10 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:11 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:11 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:11 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:11 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:12 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:12 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:12 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:12 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:13 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:13 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:13 [INFO] [SEND] SUBMIT NOT CONFIRMED (Enter/CDP): Gemini | input still contains message or no submission evidence.
+2026-09-22 06:36:13 [INFO] [SEND] HANDSHAKE SUBMIT ATTEMPT (CDP Enter): Gemini attempt=2/2
+2026-09-22 06:36:13 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:14 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:14 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:14 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:14 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:15 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:15 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:15 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:15 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
+2026-09-22 06:36:16 [INFO] [SEND] SUBMIT PENDING (Enter/CDP): Gemini | input_clear=True busy=False new_output=True handshake=True
