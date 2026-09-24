@@ -1,0 +1,104 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: QS_Sep 24 2026 12_55_28_PM_v6.9
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+9-24-26 12:55pm  [ANNOUNCE]
+🔮 GPT - 🦆🎩 Preamble received cleanly.
+QS 6.9 is awake and talking. Now we let the relay test itself without us poking the machine.
+
+9-24-26 12:56pm  🎩 Cozmo
+you STILL did not getrid of the big gap between control and comm panes
+==================================================
+
+9-24-26 12:56pm  🔮 GPT
+Yep. You caught me. 😄
+6.9 was only the relay-admission fix, so I deliberately left the UI geometry alone. That means the big Control Pane → Comms Pane gap is still there.
+So we have two separate bugs now:
+6.9: relay admission / stray queued message
+next UI pass: remove that damn vertical gap and tighten the two panes together.
+Let 6.9 finish its live test first. Then we attack the UI from the 6.9 baseline, standalone, without touching GitHub. 🦆
+
+9-24-26 12:57pm  🎩 Cozmo
+ok, so now I gonna turn you native voice on again after this
+==================================================
+
+9-24-26 12:57pm  🔮 GPT
+Yep. 😄
+Do the native-voice test exactly as you were doing it before. The relay-admission fix and the voice behavior are now separable, so the new log should tell us much more clearly which machine is misbehaving.
+And yes, I have not forgotten the giant fucking gap. 🦆🎩
+
+9-24-26 12:58pm  🎩 Cozmo
+k, your voice is NOW on
+==================================================
+
+9-24-26 12:59pm  🔮 GPT
+🎩 Cozmo — gotcha. Native voice is ON.
+Now we watch the two things independently: does my exact current response get spoken, and does Send stay locked until the relay truly finishes?
+And the giant gap stays on the bug board. 😄🦆
+
+9-24-26 1:00pm  🎩 Cozmo
+ummm...  qs SPOKE diff than what it displayed.  ummn
+==================================================
+
+9-24-26 1:00pm  🔮 GPT
+OOOH. That is new and important.
+So 6.9 may have fixed the queued-message/relay admission bug, but the native voice path has a separate problem:
+QS displayed one response, while GPT spoke a different response.
+That points us back at the voice target binding, not the relay queue.
+Don't change anything yet. Let this run complete. This test just gave us a much cleaner fault boundary. 🦆🎩
+
+9-24-26 1:00pm  🎩 Cozmo
+yah. and NOW is in sync
+==================================================
+
+9-24-26 1:01pm  🔮 GPT
+Aha. So we now have two distinct observations:
+First voice turn: QS displayed one response, but GPT spoke a different one.
+Next voice turn: displayed and spoken response were in sync.
+That makes this look less like a permanently wrong selector and more like an initial synchronization/race on the first native-voice invocation.
+That is exactly the sort of thing I want the 6.9 archive to catch before we touch the code. 🦆🎩
+
+9-24-26 1:03pm  🎩 Cozmo
+and QS re-spoke your last response and not the 'current' one.  there was ALSO big 'delay' between  speech and my 'send' button showing QS was done
+==================================================
+
+9-24-26 1:03pm  🔮 GPT
+YEP. Now we have the real shape of it.
+What you just observed strongly suggests two separate voice problems remain:
+QS is speaking the previous GPT response instead of the response it just displayed.
+That means the relay itself may be advancing correctly, while the voice-target selection is one response behind.
+The Send button remains locked long after speech has actually ended.
+That matches the 6.8 behavior we already saw in the logs: GPT playback stays UNKNOWN, so QS waits out a response-length estimate instead of observing the actual end of speech.
+So 6.9 may have fixed the message getting stranded in the stack, while native GPT voice still has a timing/binding problem.
+And your first observation is especially valuable:
+displayed current response ≠ spoken response
+That tells us we should inspect the exact handoff:
+_get_response() → clean → _maybe_speak_node() → _click_gpt_read_aloud()
+rather than blindly changing the voice timeout again.
+Don't change anything yet. Let this run finish and archive itself; that gives us the clean 6.9 evidence before I write 6.10.
+
+9-24-26 1:06pm  🎩 Cozmo
+and again big lag between you stopped talking and I got 'send' button enabled. say something SHORT AND SIMPLE
+==================================================
+
+9-24-26 1:06pm  🔮 GPT
+Voice test
+The duck is awake.
+
+9-24-26 1:08pm  🎩 Cozmo
+QS spoke NOT your last response.  Your last text was : 🔮 GPT - Voice test
+The duck is awake.
+AND QS spoke the longer response you gave
+==================================================
+
+9-24-26 1:10pm  🎩 Cozmo
+and now qs totes confused and so is you UI
+==================================================
+
+9-24-26 1:11pm  🎩 Cozmo
+closing QS
+==================================================
+
