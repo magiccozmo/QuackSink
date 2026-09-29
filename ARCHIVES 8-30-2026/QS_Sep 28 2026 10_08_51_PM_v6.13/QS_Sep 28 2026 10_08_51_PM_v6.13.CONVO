@@ -1,0 +1,19 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: QS_Sep 28 2026 10_08_51_PM_v6.13
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+9-28-26 10:09pm  [ANNOUNCE]
+🔮 Claude - Got it — ready whenever this one's live.
+
+9-28-26 10:11pm  🎩 Cozmo
+Had a funky bug last test.  Gpt tab had 'claude testing' in name so QS saw that tab as a 'claude' tab, so when I tried to connect to you it connected to luma instead.  I just changed name of her tab and am now connected to you.  I also just turned on your native voice, so will see/hear what happens with your next response
+==================================================
+
+9-28-26 10:12pm  🔮 Claude
+Good catch on that one — that's a genuinely different bug class from anything logged so far: QS apparently matches nodes by tab title text rather than a stable session/connector ID, so a stray substring match ("claude" appearing anywhere in a differently-purposed tab's name) can silently misroute the whole connection. That's worth its own line in the ledger, separate from the voice issues — it's a routing/identity bug, not a playback one, and probably a more urgent fix since it means "connected to Claude" isn't currently a trustworthy claim if tab names aren't disciplined.
+
+Ready for the native voice test — let's see what happens.
+
