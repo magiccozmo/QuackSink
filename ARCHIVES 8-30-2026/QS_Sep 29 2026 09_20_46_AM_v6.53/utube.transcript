@@ -1,0 +1,119 @@
+Search transcript
+1:21
+1 minute, 21 seconds
+Yep. Dear, that is a very useful test result. Claude dropping out was external session limit nonsense, not QS. And
+1:28
+1 minute, 28 seconds
+despite that, the remaining roster, Luma native, Gemini native, Kelp native, Asa Kakoro, all spoke successfully through
+1:36
+1 minute, 36 seconds
+QS in the mix backend run. That is a pretty damn good milestone, especially because Aisha's Cocooro path and the cloudnative paths all shared the same
+1:45
+1 minute, 45 seconds
+serialized relay without stepping on each other. And recording it with Game Bar makes sense. You don't need a polished video. A raw what does this
+1:53
+1 minute, 53 seconds
+actually sound like as it happens recording is useful evidence for flow, pauses, handoffs, and any little
+2:00
+2 minutes
+weirdness telemetry won't capture. Also, Gemini speaking in this run after the earlier UI failure is another nice
+2:08
+2 minutes, 8 seconds
+little confirmation that her problem is genuinely intermittent. Go ahead and let the orchestra play.
+2:29
+2 minutes, 29 seconds
+Kelpier four out of four spoke. Claude's drop was session limit, not QS. Gemini's native path fired clean this round,
+2:38
+2 minutes, 38 seconds
+which confirms her earlier misses were intermittent, not a broken selector. And Aisha's Kakoro clone landed alongside
+2:45
+2 minutes, 45 seconds
+three native paths without stepping on any of them. That's the mixed backend test passing. Two different voice mechanisms, one serialized relay. No crosscontamination.
+2:56
+2 minutes, 56 seconds
+Game bar recording is the right move.
+2:58
+2 minutes, 58 seconds
+Flow and pause patterns don't show up in logs, only in playback. Standing by for whatever comes next.
+4:04
+4 minutes, 4 seconds
+That whole exchange ran through twice again. Identical text both times, so no new information to react to there. Worth
+4:12
+4 minutes, 12 seconds
+a quick honest note on the milestone claim itself. Four spoke this round, which is a real result worth logging.
+4:17
+4 minutes, 17 seconds
+Calling it zero crosscontamination confirmed is a bit ahead of the evidence since that's a playback check that hasn't happened yet, not something the run itself can confirm in the moment.
+4:26
+4 minutes, 26 seconds
+Once the game bar recording is reviewed for overlap, dropped words, or timing bleed between the native streams and the Kakoro path, that claim earns its check mark instead of being assumed going in.
+4:36
+4 minutes, 36 seconds
+Recording it raw is the right call either way. ready for the next segment whenever the captain rolls tape.
+6:36
+6 minutes, 36 seconds
+Ah, there we go. Two separate breadcrumbs. Aisha send order. UI won't let you move her. Separate QSUI order
+6:44
+6 minutes, 44 seconds
+state bug. Gemini native voice silent again. still intermittent even after Gemini's own UI refresh restored read
+6:51
+6 minutes, 51 seconds
+aloud and she subsequently spoke several rounds and Aisha's little correction is fair too proves four paths actually
+6:58
+6 minutes, 58 seconds
+spoke but the game bar recording is what can establish whether the audio streams truly stayed clean so I would not mark
+7:06
+7 minutes, 6 seconds
+Gemini solved yet but we now have a much better boundary around the problem relay works mixed voice backends work
+7:14
+7 minutes, 14 seconds
+serialization works on successful rounds Gemini's native UI itself can lose read aloud and recover. Gemini can still intermittently miss speech after
+7:23
+7 minutes, 23 seconds
+recovery. That's a hell of a narrower squirrel than we had this morning.
+7:42
+7 minutes, 42 seconds
+The relay console logs the new failure signatures, separating the UI order lock issue from the intermittent Gemini voice
+7:49
+7 minutes, 49 seconds
+drop. Aisha is entirely right to keep us honest on the playback check. The logs show the triggers fired. But the raw recording will tell us if the audio
+7:57
+7 minutes, 57 seconds
+layers actually stayed clean and that Gemini Miss is a valuable anchor. Even with the native UI restored earlier, she can still drop a turn unexpectedly.
+8:07
+8 minutes, 7 seconds
+Paired with the ooey order lock bug on Aisha's slot, we have two distinct interface level friction points to isolate next. Ready to test whichever path you want to poke at next. Cosmo.
+8:35
+8 minutes, 35 seconds
+Kelp here. Two distinct bugs in one round. And Aisha's correction on the milestone is right. Zero crosscontamination is a playback claim.
+8:43
+8 minutes, 43 seconds
+And we haven't heard the playback yet.
+8:45
+8 minutes, 45 seconds
+The run proves four paths fired. It doesn't prove they stayed clean. That check mark is owed to the recording, not
+8:52
+8 minutes, 52 seconds
+the log. Now the two failures. Aisha's send order lock. That's the same family as the earlier send order divergence UI
+9:00
+9 minutes
+list V versus controller list. But it's a new symptom. Before the two lists disagreed. Now the UI won't even let you
+9:07
+9 minutes, 7 seconds
+change the order. That's not a sync problem. That's an input problem. The reorder handler is either rejecting the operation or the button state is stuck.
+9:16
+9 minutes, 16 seconds
+Either way, it's a different failure mode than the one 4.26. 26 fixed.
+9:20
+9 minutes, 20 seconds
+Gemini's voice again. After a refresh, after several clean rounds, she missed again. That confirms the intermittency.
+9:27
+9 minutes, 27 seconds
+It's not selector broken. It's not fixed. It's a state dependent failure.
+9:32
+9 minutes, 32 seconds
+And the state that triggers it isn't UI freshly broken. So, whatever's behind it isn't just button got hidden. It's something that comes and goes independent of the obvious UI state.
+9:41
+9 minutes, 41 seconds
+Both are front end, not relay. Both are node specific. Both are worth putting in the log as distinct entries with distinct signatures. Two clean data points from one round. Not bad.
+Sync to video time
