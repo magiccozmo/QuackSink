@@ -1,0 +1,10 @@
+(({ injected, elements }) => {
+            const element4 = elements[0];
+            let log3 = "";
+            if (elements.length > 1)
+              log3 = `  locator resolved to ${elements.length} elements. Proceeding with the first one: ${injected.previewNode(elements[0])}`;
+            else if (element4)
+              log3 = `  locator resolved to ${injected.previewNode(element4)}`;
+            const rect = element4?.getBoundingClientRect();
+            return { log: log3, success: !!element4, element: element4, box: rect ? { x: rect.x, y: rect.y, width: rect.width, height: rect.height } : void 0 };
+          })

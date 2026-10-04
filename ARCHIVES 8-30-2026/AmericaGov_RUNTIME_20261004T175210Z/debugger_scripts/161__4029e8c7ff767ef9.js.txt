@@ -1,0 +1,44 @@
+(injected, { expression: expression3, isFunction: isFunction3, polling, arg: arg2 }) => {
+            let evaledExpression;
+            const predicate = () => {
+              let result3 = evaledExpression ?? globalThis.eval(expression3);
+              if (isFunction3 === true) {
+                evaledExpression = result3;
+                result3 = result3(arg2);
+              } else if (isFunction3 === false) {
+                result3 = result3;
+              } else {
+                if (typeof result3 === "function") {
+                  evaledExpression = result3;
+                  result3 = result3(arg2);
+                }
+              }
+              return result3;
+            };
+            let fulfill;
+            let reject;
+            let aborted = false;
+            const result2 = new Promise((f, r) => {
+              fulfill = f;
+              reject = r;
+            });
+            const next = () => {
+              if (aborted)
+                return;
+              try {
+                const success = predicate();
+                if (success) {
+                  fulfill(success);
+                  return;
+                }
+                if (typeof polling !== "number")
+                  injected.utils.builtins.requestAnimationFrame(next);
+                else
+                  injected.utils.builtins.setTimeout(next, polling);
+              } catch (e) {
+                reject(e);
+              }
+            };
+            next();
+            return { result: result2, abort: () => aborted = true };
+          }

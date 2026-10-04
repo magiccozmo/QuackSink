@@ -1,0 +1,57 @@
+(() => {
+      
+                    (() => {
+                      window.__QS_FORENSICS__ = { mutations: [], inputs: [] };
+                      const pathOf = (node) => {
+                        try {
+                          if (!node || node.nodeType !== 1) return node?.nodeName || 'unknown';
+                          const parts = [];
+                          let cur = node;
+                          for (let i = 0; i < 6 && cur && cur.nodeType === 1; i++, cur = cur.parentElement) {
+                            let s = cur.tagName.toLowerCase();
+                            if (cur.id) s += '#' + cur.id;
+                            if (cur.classList && cur.classList.length) s += '.' + Array.from(cur.classList).slice(0, 3).join('.');
+                            parts.push(s);
+                          }
+                          return parts.join(' > ');
+                        } catch (_) { return 'unknown'; }
+                      };
+                      const obs = new MutationObserver((records) => {
+                        for (const r of records) {
+                          window.__QS_FORENSICS__.mutations.push({
+                            t: performance.now(),
+                            type: r.type,
+                            target: pathOf(r.target),
+                            attributeName: r.attributeName || null,
+                            added: r.addedNodes ? r.addedNodes.length : 0,
+                            removed: r.removedNodes ? r.removedNodes.length : 0,
+                            text: r.type === 'characterData' ? String(r.target?.data || '').slice(0, 300) : null
+                          });
+                        }
+                      });
+                      const start = () => {
+                        if (document.documentElement) obs.observe(document.documentElement, {
+                          subtree: true,
+                          childList: true,
+                          attributes: true,
+                          characterData: true
+                        });
+                      };
+                      if (document.documentElement) start();
+                      else document.addEventListener('DOMContentLoaded', start, {once: true});
+
+                      document.addEventListener('input', (e) => {
+                        try {
+                          const el = e.target;
+                          window.__QS_FORENSICS__.inputs.push({
+                            t: performance.now(),
+                            type: 'input',
+                            target: pathOf(el),
+                            name: el?.getAttribute?.('name') || null,
+                            value: typeof el?.value === 'string' ? el.value : null
+                          });
+                        } catch (_) {}
+                      }, true);
+                    })();
+                
+    })();
