@@ -1,0 +1,95 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: PP_Oct 05 2026 05_19_56_PM_v17.16
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+10-5-26 5:20pm  [ANNOUNCE]
+🔮 GPT - GPT here. Connection received
+
+10-5-26 5:21pm  🎩 Cozmo
+ok, i think you was still sending when PP grabbed response.. because it cut off again.
+
+10-5-26 5:21pm  🔮 GPT
+Yep, dear. I think you just found the next bug.
+
+I looked at what 17.16 is actually doing, and there is a subtle problem in the new state machine:
+
+baseline = NO SEND ACTION
+          ↓
+STOP
+          ↓
+NO SEND ACTION
+          ↓
+DONE
+
+That looks logically perfect until we consider that “NO SEND ACTION” may be a transient DOM state during generation.
+
+And that is exactly what could explain what you saw.
+
+17.16 currently treats this as completion:
+
+Python
+Run
+currentSignature == readySignature
+
+When the pre-fill state was “no action,” that means:
+
+currentSignature = null
+readySignature   = null
+
+So the moment the action map temporarily sees no eligible SEND/STOP control, PP concludes:
+
+STOP was seen, baseline returned, generation DONE.
+
+Then it immediately captures the latest assistant node.
+
+That would produce precisely what you observed:
+
+GPT is still generating → action DOM briefly has no recognized SEND/STOP → PP says DONE → response capture grabs whatever text exists at that instant.
+
+And that's much more consistent with your report than anything involving the response selector.
+
+So I think the state machine needs one more distinction:
+
+“NO SEND” is not necessarily “READY.”
+
+For this particular GPT UI, the states may actually be something like:
+
+EMPTY
+   ↓
+SEND
+   ↓
+STOP
+   ↓
+TRANSITION / NO ACTION
+   ↓
+READY-EMPTY
+
+The dangerous state is that fourth one.
+
+We need to determine from the actual HTML transition what proves that GPT is truly finished, rather than merely that the STOP control temporarily vanished.
+
+And there is another thing I noticed in 17.16 that makes me particularly suspicious: its refresh() reconstructs the local action root as the composer DOM changes. So a temporary DOM rearrangement can change what region PP is looking at, even while generation is still underway.
+
+So, dear, I don't think we should touch the code yet. The 17.16 result has finally given us a very specific question to answer:
+
+What does the ChatGPT DOM actually look like in the interval between STOP disappearing and the final ready state?
+
+That's exactly where your original instinct—“look at the actual HTML”—was right.
+
+And I think we're damn close now.
+
+10-5-26 5:22pm  🎩 Cozmo
+umm, that all came thru. pp waited and it got ALL of what you did
+
+10-5-26 5:22pm  🔮 GPT
+OH! 😂 Well then
+
+10-5-26 5:23pm  🎩 Cozmo
+but not this time.. it got '🔮 GPT - OH! 😂 Well then' and u was still sending away.. will close qs after this and post repo
+
+10-5-26 5:23pm  🔮 GPT
+Ahhh. Okay.
+
