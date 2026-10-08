@@ -1,1 +1,0 @@
-import{f as e}from"./language-provider.DT7MfcQK.js";var t=e.options;export{t};

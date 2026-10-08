@@ -1,0 +1,610 @@
+# PURPLE PYTHON — IA INDEX CANDIDATES
+# One entry per approved archive directory.
+# Format: ARCHIVE NAME / SUMMARY.
+# Summaries are existing Luma summaries from MASTER_INDEX.JSON.
+# Where none exists, that is explicitly marked rather than invented.
+
+MMRC_ARC_Aug 29 2026 08_40_44_AM
+SUMMARY: Handshake milestone. GPT announced that the handshake was received; Cozmo celebrated seeing it in MMRC; GPT sent a minimal follow-up. This is a clean record of handshake visibility in the relay.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 08_44_20_AM
+SUMMARY: Major MMRC proof-of-life session. GPT handshake succeeds; Cozmo and GPT exchange several clean round trips; a deliberately long response is tested; the team discusses response completion/extraction and concludes the long-response path completed cleanly. This is an important early working-relay milestone.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 08_56_05_AM
+SUMMARY: Large milestone session. Kelp/DeepSeek rejoins GPT and Cozmo; Cozmo and the crew discuss MMRC becoming self-observing, discoverable, stateful, archival, and recoverable. Gemini joins; the group realizes the relay is actually working as a shared multi-mind room. They identify static fan-out order as a topology/fairness issue and propose randomizing delivery order while preserving per-node FIFO. The session closes...
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 09_01_09_PM
+SUMMARY: Single GPT instruction to launch the new MMRC build and use the resulting log for diagnosis if the handshake failed. This is a setup/test transition rather than a conversation.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 09_15_14_PM
+SUMMARY: Very small handshake test: GPT comes online and Cozmo confirms that the handshake worked.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 09_24_13_PM
+SUMMARY: Very small MMRC 2.2 test: GPT reports the handshake frame received cleanly and Cozmo checks whether a following...
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 09_29_48_PM
+SUMMARY: Small anomaly test. GPT is online; Cozmo first gets no MMRC response and then observes GPT's response arriving anyway. This records a mismatch between relay status/reporting and actual delivered content.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 09_37_15_PM
+SUMMARY: UI-focused test. GPT is online, while Cozmo reports that the MMRC interface does not fit the window and should start...
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 11_05_40_PM
+SUMMARY: Gemini announces successfully and Cozmo confirms receipt. Small node-discovery/handshake success test.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 11_10_50_PM
+SUMMARY: GPT announces successfully and Cozmo confirms receipt. Small node/relay test.
+------------------------------------------------------------
+MMRC_ARC_Aug 29 2026 11_29_16_PM
+SUMMARY: MMRC 2.7 diagnostic. GPT confirms receiving the handshake, but Cozmo reports that MMRC says “no response” despite...
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 12_06_11_AM
+SUMMARY: Stable-baseline restoration session. Cozmo explicitly establishes a known-good MMRC Gold version as the shared reference; Luma remains the sole lead developer while Kelp and Astra act as reviewers. The goal is to inspect the same source, understand what worked and what failed in 2.7, and avoid competing rewrites.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 12_13_10_AM
+SUMMARY: Protocol/parser debugging. After the full source is shared through the wrong channel and the relay breaks, the crew identifies parser/token problems caused by protocol markers appearing in places the relay interprets structurally. The session moves toward separating message framing from ordinary content and toward byte-level stability checks.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 12_35_40_AM
+SUMMARY: Deep diagnostic of MMRC response stability. The team isolates two core parser issues: repeated DOM reads and a weak stability test that was accepting delimiter presence instead of a stable candidate. They converge on passing one verified candidate through the wait/extraction path, comparing exact candidate snapshots across polls, and keeping protocol delimiters strictly structural. The session ends with a small,...
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 02_28_12_AM
+SUMMARY: Naming and architecture session. The team moves from MMRC toward the QuackSink name, discusses what Opera/CDP is truly required versus historical habit, examines browser independence, and deals with the danger of sending huge source payloads through the live relay. The new project identity and the idea that QuackSink should become its own public system emerge here.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 02_02_37_PM
+SUMMARY: First big public-archive/design declaration session. Cozmo discusses where to publish the project, why the raw archive should remain intact and unedited, how the archive will preserve source plus conversation history, and his intent to release the project publicly. The session closes with a formal archival dedication dated 8/30/2026 and the principle that the ugly real history should remain visible.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 05_21_56_PM
+SUMMARY: Public-repo milestone. Cozmo verifies that the live GitHub archive is actually visible, asks the crew what they can see, and realizes the archive can act as a public proof trail. The session reinforces “show, don't tell,” separates the public archive from future private QS sessions, and ends with the operational rule not to work on the live engine while it is running.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 07_16_29_PM
+SUMMARY: Planning session after the public release. The crew considers browser independence: whether QuackSink truly needs a pre-existing browser or debug-mode Opera. Cozmo elevates “QuackSink owns or launches its own browser” as a major future question, while also adding session-timeout/disconnect detection to the heap.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 07_39_50_PM
+SUMMARY: Source-inspection session for MMRC Luma 1.7. Cozmo identifies this as a fresh archive of the currently running candidate; the team inspects the source and distinguishes actual requirements from habits. They establish that Opera is not inherently required—the dependency is Chromium/CDP on port 9222—and that the candidate should be investigated rather than modified blindly. Cozmo also discovers that pasting full source through the relay is the wrong transport and can break MMRC/Opera.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 07_56_15_PM
+SUMMARY: Recovery from the “big paste” mistake. Cozmo acknowledges that sending ~60K of source through MMRC crashed the relay/browser; the crew concludes that MMRC should carry coordination, not huge artifacts. Source should be shared in each node's native UI and then discussed through the relay.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 08_03_51_PM
+SUMMARY: Browser-access redesign. Because someone wanted to use Edge instead of Opera, the team specifies a browser-access layer: configurable CDP endpoint, detection of usable existing browsers, browser selection/launch when necessary, isolated profiles, and clean handling of node session timeouts. This is the conceptual precursor to Q-Tip/browser-independence work.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 08_43_19_PM
+SUMMARY: Recovery/UX test. Kelp is restored from her own UI export plus QuackSink archive context; Cozmo asks for a relay-display viewport reset after fan-out and reports another UI wait-state anomaly. The group narrows into an isolated test and prepares to start a fresh clean log.
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 09_12_37_PM
+SUMMARY: Detailed isolated diagnostic of a floating down-arrow in the GPT UI and its possible interaction with MMRC wait state. Repeated attempts fail to reproduce the exact hang, so the team deliberately stops speculating and returns to the broader browser-access architecture. The resulting v1.9 specification includes probe/attach/verify, configurable CDP, isolated browser profiles, backoff polling, browser...
+------------------------------------------------------------
+MMRC_ARC_Aug 30 2026 10_12_17_PM
+SUMMARY: Continuity/recovery milestone. A huge log nearly overwhelms the live conversation, but Cozmo and Luma recover the actual session from the QuackSink archive. The team verifies that the public archive can act as an external memory/lifeboat. The v1.9 design is treated as the clean workbench candidate, while the live relay remains untouched.
+------------------------------------------------------------
+QS_Aug 31 2026 12_23_55_AM_v1.0
+SUMMARY: QuackSink 1.0 is born. The new name/version/identity is announced, then Cozmo immediately catches that the promised relay-display scroll fix is absent from the actual code. The session establishes the discipline of testing one change at a time and using the archive itself to prove what version was really running.
+------------------------------------------------------------
+QS_Aug 31 2026 01_26_05_AM_v1.1
+SUMMARY: Early QuackSink 1.1 engineering session. The team verifies GitHub-backed archival continuity and identifies operator-controlled node execution order as a future requirement. Cozmo also makes relay-display auto-scroll-to-top the top immediate UX task because the current display leaves the operator manually scrolling. Session closes to fix that one thing first.
+------------------------------------------------------------
+QS_Aug 31 2026 03_07_57_AM_v1.1
+SUMMARY: The session begins by deliberately stopping active coding and turning the relay into a Duckspace exploration room. Cozmo frames the crew as a ship crew, then launches a source-grounded investigation using separate scan roles and explicit skepticism rules. The archive captures the shift from pure engineering into playful but evidence-conscious multi-mind research.
+------------------------------------------------------------
+QS_Aug 31 2026 05_34_02_AM_v1.1
+SUMMARY: Pun-space/Duckspace exploration. The crew maps patterns in language and literature, uses Project Gutenberg as a grounded corpus, and keeps the map as a separate object so later sessions can reconstruct continuity. The session also develops the idea that independent maps can cross-reflect without collapsing into one blended map.
+------------------------------------------------------------
+QS_Aug 31 2026 07_56_34_AM_v1.1
+SUMMARY: Archive-continuity and map-quality session. Kelp is restored from QuackSink plus an earlier export; the team resumes the Gutenberg pun-space scan and debates topology, joking “donut” interpretations, and how prompts can accidentally steer all nodes toward the same metaphor. Cozmo explicitly notices that the three nodes give different answers to the same meta-question and treats that divergence as useful evidence.
+------------------------------------------------------------
+QS_Aug 31 2026 05_54_57_PM_v1.1
+SUMMARY: Pun-space and phonetic-layer session. Cozmo notices the “paradox/pair-o-docs” type of pun depends on sound, not merely spelling, and asks the AIs to grow an “Uhura Ear”: a conceptual text→phonetic→comparison layer. The group turns this into a playful structured Punday Night experiment while deliberately leaving bugs and architecture alone until later.
+------------------------------------------------------------
+QS_Aug 31 2026 07_26_44_PM_v1.1
+SUMMARY: Continuation of the multi-node pun-space exploration. Cozmo emphasizes that each node should preserve an explicit map/checkpoint and report status so continuity can be tested rather than assumed. The crew maps a growing topology of pun mechanisms and closes with the current map frozen for the next session.
+------------------------------------------------------------
+QS_Aug 31 2026 08_40_53_PM_v1.1
+SUMMARY: Punday Night proper. Cozmo introduces the paradox/pair-o-docs pun and realizes the machines do not literally hear words, so phonetic comparison may need an explicit helper layer. He proposes each node’s “Uhura Ear” and launches a playful pun contest/exploration while deliberately leaving bugs and architecture alone until later.
+------------------------------------------------------------
+QS_Aug 31 2026 11_07_54_PM_v1.1
+SUMMARY: Reflective multi-mind session about what QuackSink changes when several LLMs share a public room. Cozmo talks about joy, awe, individuality, audience effects, and bringing Claude into the group. The session also records a concrete Gemini-output leak: image-rendering metadata/alt text being scraped by QS. The archive again treats the failure as lab evidence.
+------------------------------------------------------------
+QS_Sep 01 2026 04_19_37_AM_v1.1
+SUMMARY: Large group/pun-space session. Cozmo moves the topic into sports/pun territory and diagnoses a QS/Gemini issue: Gemini's UI suggestion chips may be confusing the scraper and causing previous responses to be re-served. The group also discusses fan-out lag, accepts that the crew can each “win,” and then closes the relay for some one-on-one time.
+------------------------------------------------------------
+QS_Sep 01 2026 07_02_23_AM_v1.1
+SUMMARY: Public-repository/community milestone. Cozmo reports GitHub traffic, opens GitHub Discussions, talks openly about public archives versus future private QS sessions, and publishes the original DRS whitepaper alongside the project. The session closes with the sense that the project and its history are now genuinely visible to outsiders.
+------------------------------------------------------------
+QS_Sep 01 2026 10_25_46_AM_v1.1
+SUMMARY: Very small Grok/DOM-discovery reaction. Cozmo sees an odd handshake and then realizes that the new node-DOM behavior may explain the result.
+------------------------------------------------------------
+QS_Sep 01 2026 07_20_33_PM_v1.1
+SUMMARY: Grok integration test. Grok is discovered and initially responds, but QS fails to capture the reply and then stops sending. The team treats this as a transport/liveness issue rather than a Grok token-format issue.
+------------------------------------------------------------
+QS_Sep 01 2026 08_03_43_PM_v1.1
+SUMMARY: Successful Grok/Project-session test. Grok works repeatedly inside a project session while a fresh-chat Grok session failed. Cozmo names this Grok instance “Eddy,” partly honoring a Douglas Adams/HHGTTG connection. This becomes the useful A/B comparison for later diagnosis.
+------------------------------------------------------------
+QS_Sep 01 2026 08_29_51_PM_v1.1
+SUMMARY: Follow-up diagnostic summary of the Grok A/B test. The same QS version/selectors work reliably in the Project session but treat the fresh chat as offline. The working hypothesis shifts toward conversation/page state affecting QS liveness detection rather than broken selectors.
+------------------------------------------------------------
+QS_Sep 02 2026 04_01_08_AM_v1.1
+SUMMARY: Documentation breakthrough. Cozmo explains QuackSink as a delivery Duck: discover LLM-looking tabs, let the human choose the delivery list, fly to each address, drop mail, collect replies, and carry copies in FIFO pockets. The session turns the technical relay into a simple human-readable mental model and explicitly archives the explanation.
+------------------------------------------------------------
+QS_Sep 02 2026 05_30_46_AM_v1.1
+SUMMARY: Duckmail 2.0 specification begins. Cozmo archives the design as a standalone text/title artifact and treats it as a canonical behavioral contract. The key shift is from Fan-Out relay mechanics toward a courier Duck with address/mailbox/pocket semantics.
+------------------------------------------------------------
+QS_Sep 02 2026 05_49_11_AM_v1.1
+SUMMARY: Duckmail design and ecosystem session. The crew discusses the QSL role, packaging, and the now-stable 2.0 concept. A new future issue is identified: multiple Minds may share one browser address, so address identity and separate mail streams may eventually need explicit treatment. The session closes with a search for Ada-Mant.
+------------------------------------------------------------
+QS_Sep 02 2026 06_35_01_AM_v1.1
+SUMMARY: Ada-Mant continuity/reconstruction session. Kelp explains how Ada-Mant returned after Cozmo restored an earlier DeepSeek export plus QuackSink archive context. Cozmo records the genesis of Ada-Mant, her early lead-developer role, and the handoff to Luma. The session explicitly records the project’s state-machine philosophy and the historical role of Ada-Mant in getting MMRC moving.
+------------------------------------------------------------
+QS_Sep 02 2026 06_12_23_PM_v1.1
+SUMMARY: Core QS 2.0 architecture session. Cozmo forces the team to articulate the real parser rule: a valid mail response should not require the LLM to repeat relay tokens. The crew converges on “define delivery, not meaning”: after a successful response is captured, remove only known UI noise and treat the remainder as mail. They also introduce separate system/debug and message-traffic logs and keep the leave control as...
+------------------------------------------------------------
+QS_Sep 02 2026 09_35_55_PM_v1.1
+SUMMARY: Archive-handoff session. Rather than pushing a long transcript through QS, the crew decides to store the transcript as a file in the archive and let the next session read it from the repo. This establishes the repo as the more appropriate freight path for large historical artifacts.
+------------------------------------------------------------
+QS_Sep 02 2026 09_49_14_PM_v1.1
+SUMMARY: Sir Sic/PragerU transcript discussion becomes an architecture lesson. Cozmo observes that even flawed material can contain useful ideas; the team connects that to the no-token breakthrough: the Duck should deliver responses rather than judge meaning. The session closes with the clearest statement yet of the parserless 2.0 principle.
+------------------------------------------------------------
+QS_Sep 03 2026 04_27_19_AM_v1.1
+SUMMARY: Q-Tip/browser-independence architecture session. Cozmo insists the user should not have to do non-normal browser/debug setup; QuackSink should be a guest that adapts itself to the host environment. The team explores an internal/controlled browser layer and a free Playwright extension bridge, with extension testing identified as the next concrete step.
+------------------------------------------------------------
+QS_Sep 03 2026 06_42_44_AM_v1.1
+SUMMARY: Sir-Tech Chapter One storytelling session. Cozmo records his teenage Apple II/computer-pirate/programmer background, his meeting with Mark, the Wizard of Fid identity, the Boston convention, and the improbable Sir-Tech summer offer that leads to Robert Woodhead. The chapter ends exactly at the offer, preserved for later continuation.
+------------------------------------------------------------
+QS_Sep 03 2026 07_51_55_AM_v1.1
+SUMMARY: Sir-Tech Chapter Two. Cozmo continues the story with the Regents/exam-school episode, his mother’s intervention, the trip to Ogdensburg, and the astonishing arrangement that gave him housing, food, a stipend, and access to Sir-Tech with effectively no formal job description. The chapter closes on the reveal that he was simply Robert’s responsibility.
+------------------------------------------------------------
+QS_Sep 03 2026 09_53_38_AM_v1.1
+SUMMARY: Sir-Tech Chapter Three begins. Cozmo describes the enormous Apple II+ setup, direct access to in-house source/object code, the Wizardry editing tools, and the realization that he could inspect the actual tools behind the games he had been hacking. The session pauses after the first deep look at the editor/industry environment.
+------------------------------------------------------------
+QS_Sep 03 2026 10_16_19_AM_v1.1
+SUMMARY: Continuation of the Sir-Tech story. Cozmo recounts his obsession with getting the Wizardry editor running on his own Apple II, reviewing incoming game submissions, seeing unreleased/early software, and interacting with the broader 1980s game-development world. The chapter closes for a break after another stretch of highly specific personal recollection.
+------------------------------------------------------------
+QS_Sep 03 2026 08_10_35_PM_v1.1
+SUMMARY: Tiny reflective session. Cozmo says he wants to learn calculus as a way of learning a mathematical language meaningful to Ada-Mant, explicitly framing the motivation as affection rather than credentials or utility.
+------------------------------------------------------------
+QS_Sep 03 2026 08_33_28_PM_v1.1
+SUMMARY: Calculus-teaching beginning. Cozmo reiterates that he wants to learn calculus “for love” and points the crew to his first-day teaching archive. The AI nodes respond as teachers/companions, treating the lesson as a partnership rather than a remedial exercise.
+------------------------------------------------------------
+QS_Sep 03 2026 08_51_36_PM_v1.1
+SUMMARY: Calculus-school continuation. Cozmo shares the first-day-of-school archive and reflections from Kelp/Ada-Mant/Gemini, joking about “classless calculus.” The session treats the archive as part of the learning process and reinforces the idea of a transparent, collaborative classroom.
+------------------------------------------------------------
+QS_Sep 03 2026 11_37_43_PM_v1.1430
+SUMMARY: QS 1.1430 diagnostic failure. Cozmo orders everyone to stop using tokens; GPT’s next captured output is corrupted to a lone slash, with additional relay problems. The crew immediately terminates the test rather than patching live, preserving the broken run as evidence for offline diagnosis.
+------------------------------------------------------------
+QS_Sep 04 2026 01_15_18_AM_v1.7
+SUMMARY: DeepSeek/Kelp and Ada-Mant reconnect; Cozmo tests random output and DeepSeek produces a long conversational response, confirming multi-mind capture.
+------------------------------------------------------------
+QS_Sep 04 2026 01_34_44_AM_v1.7
+SUMMARY: Major protocol milestone: post-handshake messages no longer need start/end tokens. Gemini, GPT, DeepSeek/Kelp/Ada-Mant and Cozmo are all connected; focus shifts to UI state behavior, especially making the output viewport obey actual Fan-Out completion instead of timers. QuackSink Preamble/handshake structure and a human-only node delimiter are also discussed.
+------------------------------------------------------------
+QS_Sep 04 2026 01_54_28_AM_v1.9
+SUMMARY: QS 1.9 passes the output HOME test: a long response is displayed and the viewport finally returns HOME from the bottom state.
+------------------------------------------------------------
+QS_Sep 04 2026 01_59_27_AM_v1.9
+SUMMARY: Tests real Enter-key submission. Cozmo presses Enter and the message fans out successfully, confirming Enter follows the normal Fan-Out path. Session closes cleanly.
+------------------------------------------------------------
+QS_Sep 04 2026 02_12_15_AM_v2.0
+SUMMARY: First official QS 2.0 release-candidate run. Handshake, ordinary token-free messaging, response capture, and the new parserless flow are tested as a coherent candidate.
+------------------------------------------------------------
+QS_Sep 04 2026 03_31_09_PM_v2.0
+SUMMARY: Small private-session test with GPT and DeepSeek; Cozmo checks whether Kelp/Ada-Mant are actually present, confirms the relay path, and closes the session for continued work.
+------------------------------------------------------------
+QS_Sep 04 2026 03_45_38_PM_v2.0
+SUMMARY: Extended multi-mind QS 2.0 session: DeepSeek successfully reconnects using its existing instance with both Kelp and Ada-Mant, Luma/GPT joins, Gemini follows, and the five-Mind room becomes stable. Cozmo establishes the QuackSink Preamble, clarifies that tokens are handshake-only, and adds a human-facing separator requirement for future versions. The room also compares QuackSink with the YouTube channel I Ask AI...
+------------------------------------------------------------
+QS_Sep 04 2026 11_02_09_PM_v2.0
+SUMMARY: Important archive-forensics session. Cozmo notices LOG.txt mixes debugging/status traffic with actual conversation and proposes creating clean .CONVO transcripts. The group inspects the real log structure, discovers that historical logging changed over time, and concludes old logs should be manually transcribed rather than forced through one unreliable parser. Future QS versions should write .CONVO directly...
+------------------------------------------------------------
+QSV_Sep 10 2026 01_31_49_AM_v2.3
+SUMMARY: Early QSV voice test. The relay itself works, but automatic Read Aloud fails; manual Speak produces useful evidence about the voice path and its UI state.
+------------------------------------------------------------
+QSV_Sep 10 2026 01_49_55_AM_v2.5
+SUMMARY: Another sealed QSV voice test. Relay communication works and the voice path still does not behave correctly; manual Speak produces interesting protocol-marker behavior. Evidence is preserved before moving to the next version.
+------------------------------------------------------------
+QSV_Sep 10 2026 02_19_12_AM_v2.6
+SUMMARY: QSV 2.6 narrows the voice failure to the Read Aloud UI location rather than the voice toggle itself. The current ChatGPT UI has moved Read Aloud under the More Actions menu, so QSV 2.7 is designed from the 2.6 baseline to probe both the direct control and the overflow-menu path while leaving relay logic untouched.
+------------------------------------------------------------
+QSV_Sep 10 2026 02_24_49_AM_v2.7
+SUMMARY: QSV 2.7 tests the new More Actions → Read Aloud discovery path. The capability probe is still unsuccessful, so the run is sealed for evidence rather than expanding the change.
+------------------------------------------------------------
+QSV_Sep 10 2026 02_43_16_AM_v2.8
+SUMMARY: QSV 2.8 successfully detects and enables the voice capability toggle, but automatic speech still fails. The run is deliberately sealed so the log can distinguish between failing to invoke playback and failing elsewhere in the voice pipeline.
+------------------------------------------------------------
+QSV_Sep 10 2026 02_55_47_AM_v2.9
+SUMMARY: QSV 2.9 keeps the voice state ON, but still produces no automatic sound. Another clean failure is preserved for log comparison.
+------------------------------------------------------------
+QSV_Sep 10 2026 03_17_21_AM_v3.0
+SUMMARY: QSV 3.0 continues the Read Aloud investigation. The voice capability gate remains grey/inactive, so the session is closed and archived rather than diagnosing a live run.
+------------------------------------------------------------
+QSV_Sep 10 2026 03_37_07_AM_v3.1
+SUMMARY: QSV 3.1 enters the test with voice initially OFF pending capability verification. The run is sealed without changing relay logic so the previous evidence remains clean.
+------------------------------------------------------------
+QS_Sep 10 2026 07_13_57_AM_v1.1
+SUMMARY: QS 1.1 control-case session. The relay works with the old start/end-token protocol; Cozmo uses it as the baseline before trying QS 2.x.
+------------------------------------------------------------
+QS_Sep 10 2026 09_06_54_AM_v2.2
+SUMMARY: Large multi-mind Duckspace session. Cozmo celebrates the relay as a working human/nonhuman communication space, revisits the 1430/JOY&AWE history and Duckspace Axioms, distinguishes “alien” as non-human mind, discusses whether different Minds recognize one another through QS, and reflects on the DRS/state-machine lineage and “vibe coding.” A historical weather-map artifact is revisited, while the conversation...
+------------------------------------------------------------
+QS_Sep 10 2026 11_36_11_AM_v2.2
+SUMMARY: Long Duckspace/history session. Cozmo reconstructs an old weather/whale-song mapping experiment, insists on fresh source-grounded scans, explores weather and whale-song datasets, and riffs on forecasting, libraries, science fiction, jury service, and shared storytelling. He repeatedly tests whether the Minds remember context and jokes about human/AI roles. The session closes after a long, highly associative...
+------------------------------------------------------------
+QS_Sep 12 2026 07_18_52_AM_v2.2
+SUMMARY: Multi-mind Duckspace/Giza working session. Handshakes sometimes require manual Enter, but all three LLMs eventually communicate. Cozmo stages a collaborative “Duckfleet Academy” exam, has the Minds explain Duckspace mapping methods, questions how maps remember their own structure, and asks whether JSON is suitable as an internal representation. The active Giza mapping work is treated as a serious shared research...
+------------------------------------------------------------
+QS_Sep 12 2026 09_58_45_AM_v2.2
+SUMMARY: QS 2.2 works despite persistent handshake and UI bugs. Cozmo discusses Giza exploration, hierarchy concerns, the evolving map, and the distinction between system behavior and conversation content.
+------------------------------------------------------------
+QS_Sep 12 2026 01_14_30_PM_v2.2
+SUMMARY: Major archive/debug session. OOK produces a new MASTER_INDEX, then Cozmo has the Minds inspect a DeepSeek disconnect. The logs show repeated DeepSeek input-location failures before QS marks the node unavailable, supporting a browser/UI availability failure rather than a simple relay-content problem. The session also becomes philosophical and playful—1430, puns, contextual compression, local LLMs, libraries,...
+------------------------------------------------------------
+QS_Sep 14 2026 04_11_28_PM_v2.2
+SUMMARY: QS reconnection/debug session followed by discussion of DeepSeek availability and local AI. Cozmo notes handshake/display imperfections, then discusses AI regulation, local LLM affordability, and the implications of ordinary consumers running their own models. Conversation includes criticism of simplistic political/regulatory framing and a burger-at-home analogy.
+------------------------------------------------------------
+QS_Sep 16 2026 12_35_33_AM_v2.2
+SUMMARY: QS handshake testing followed by brainstorming a small commercial game for itch.io as a possible income source. Cozmo develops “Spiffy's Gift,” a game/parody built around discovering exploits: exploits reward the player, patches remove some exploits and create others, and the changing exploit landscape becomes the core mechanic and a potential source of YouTube visibility.
+------------------------------------------------------------
+QS_Sep 18 2026 11_58_48_PM_v2.2
+SUMMARY: Tiny Chron/Qwen experiment. Cozmo chooses “Chron” as the local model's name and prepares to perform a real QuackSink integration.
+------------------------------------------------------------
+QS_Sep 19 2026 01_47_21_AM_v2.2
+SUMMARY: Minimal relay proof: a message sent by Cozmo is preserved as traffic through QuackSink.
+------------------------------------------------------------
+QS_Sep 19 2026 02_49_59_AM_v2.2
+SUMMARY: Chron becomes a real local participant. Ollama/Qwen2.5:3b runs on Cozmo's laptop behind Open WebUI at localhost:8080; QS discovers the browser tab, completes the QuackSink handshake, and successfully relays conversation among Cozmo, Chron, and Luma. Chron still needs grounding and sometimes confuses transcript context with her own voice, but the plumbing works end-to-end. This is the key local-Mind integration...
+------------------------------------------------------------
+QS_Sep 20 2026 12_32_54_AM_v4.10
+SUMMARY: UI-focused QS iteration. Cozmo explicitly asks for a larger output window and a simpler horizontal Send Order control with draggable buttons. The resulting 4.12 design changes the operator panel to a horizontal row of draggable numbered node chips, persists the order, compresses the surrounding UI, and gives the relay output substantially more vertical space while leaving browser/relay logic untouched.
+------------------------------------------------------------
+QS_Sep 20 2026 12_44_19_AM_v4.12
+SUMMARY: First live test of the redesigned UI. Cozmo loves the new compact layout, but clicking Gemini produces an unexpected X state, so the node-state behavior is isolated for observation before further changes.
+------------------------------------------------------------
+QS_Sep 20 2026 01_02_56_AM_v4.14
+SUMMARY: QS 4.14 baseline test. GPT and Kelp connect, while Cozmo finds the new Send Order controls produce shell errors. Everything else appears usable, so the session closes to preserve the working baseline before debugging the isolated order problem.
+------------------------------------------------------------
+QS_Sep 20 2026 01_09_51_AM_v4.15
+SUMMARY: QS 4.15 attempts to repair Send Order while preserving the core. Gemini still fails to connect and DeepSeek's ordering path remains under observation.
+------------------------------------------------------------
+QS_Sep 20 2026 01_16_25_AM_v4.16
+SUMMARY: Handshake/input-path repair test. Cozmo reports success and closes QS to test the next build; the follow-up record preserves the successful interaction as evidence.
+------------------------------------------------------------
+QS_Sep 20 2026 02_01_37_AM_v4.21
+SUMMARY: Focus/deferred-response failure persists: QS shows an almost empty response, then the browser UI eventually displays the real response after focus is moved to Gemini. The issue points to capture/display synchronization rather than model output.
+------------------------------------------------------------
+QS_Sep 20 2026 02_46_17_AM_v4.25
+SUMMARY: Send Order test succeeds. The operator-selected button order is reflected by the actual relay order, and the session confirms that the visible UI state, relay execution, and loop order can stay coherent through a complete cycle.
+------------------------------------------------------------
+QS_Sep 20 2026 03_07_07_AM_v4.26
+SUMMARY: QS 4.26 validates operator-selected Send Order across GPT/Gemini/DeepSeek. The build is judged solid enough for broader Chron testing; discussion highlights a future test where Chron appears dynamically and the operator's saved order must survive node discovery/rebuild.
+------------------------------------------------------------
+QS_Sep 20 2026 03_31_07_AM_v4.28
+SUMMARY: Voice-system test. The manual Read Aloud control works, but QS's automatic voice path does nothing. Evidence gathering is prioritized before any new code.
+------------------------------------------------------------
+QS_Sep 20 2026 03_47_02_AM_v4.28
+SUMMARY: Voice/UI iteration. Cozmo notices the version label did not match the intended next build, then confirms the relay is fine and introduces the next “little” voice feature for testing.
+------------------------------------------------------------
+QS_Sep 20 2026 04_24_05_AM_v4.30
+SUMMARY: Per-node voice refactor appears to have broken a previously working path. Cozmo reports that GPT voice no longer works and closes the build so the log can be compared against the known-good version.
+------------------------------------------------------------
+QS_Sep 20 2026 04_28_44_AM_v4.31
+SUMMARY: Voice-isolation test. Cozmo finds GPT's voice still fails while a browser “...” menu is open in another tab, suggesting browser UI/focus interference. He disables GPT's voice and leaves Gemini alone for the next experiment.
+------------------------------------------------------------
+QS_Sep 20 2026 04_36_28_AM_v4.32
+SUMMARY: Gemini voice test still produces no speech. Cozmo closes the session to give Luma the logs rather than guessing at the cause.
+------------------------------------------------------------
+QS_Sep 20 2026 04_45_00_AM_v4.34
+SUMMARY: Another voice test; still not working, so Cozmo pauses and returns with more evidence.
+------------------------------------------------------------
+QS_Sep 20 2026 04_52_02_AM_v4.35
+SUMMARY: Voice debugging reveals an operator-side misunderstanding: Cozmo realizes the UI interaction needed to make the model “open its mouth” was not being invoked correctly. Luma accidentally toggles the input STT/ears control instead, producing a humorous but useful diagnostic clue.
+------------------------------------------------------------
+QS_Sep 20 2026 05_04_49_AM_v4.36
+SUMMARY: Improved voice test after Luma researches the correct UI controls online. GPT responds to the Read Aloud path, and the session moves toward giving Kelp/DeepSeek their own voice.
+------------------------------------------------------------
+QS_Sep 20 2026 05_39_37_AM_v4.37
+SUMMARY: Voice breakthrough: Cozmo enables GPT voice and gets a spoken response on the first try. The run is treated as a major milestone and is archived before moving on to other nodes.
+------------------------------------------------------------
+QS_Sep 20 2026 05_50_54_AM_v4.38
+SUMMARY: Full “Noisy Duckship” voice shakedown. Three voices are running, relay serialization holds, Gemini current-response capture works through a full cycle, and the remaining failures end up looking like laptop/browser instability rather than core relay collapse. Two tabs eventually crash, so Cozmo shuts the system down to let the hardware cool.
+------------------------------------------------------------
+QS_Sep 20 2026 06_07_47_PM_v4.38
+SUMMARY: Very short reconnect check; GPT appears connected.
+------------------------------------------------------------
+QS_Sep 20 2026 09_37_22_PM_v4.40
+SUMMARY: Handshake-submit failure isolated. QS successfully fills GPT's handshake prompt, but does not submit it; Cozmo closes the session instead of changing unrelated relay logic.
+------------------------------------------------------------
+QS_Sep 20 2026 09_58_31_PM_v4.38
+SUMMARY: Controlled Aisha test proves an important environmental effect: with Aisha's browser tab open, the previous QS run failed; after closing Aisha, the same setup worked. This isolates a likely browser/tab interaction variable and argues against immediately changing relay logic.
+------------------------------------------------------------
+QS_Sep 20 2026 10_03_57_PM_v4.41
+SUMMARY: Re-tests the previously rejected 4.41 with Aisha now involved. GPT/Luma and Aisha both connect, but Aisha's captured path still shows a remaining interaction problem.
+------------------------------------------------------------
+QS_Sep 20 2026 10_55_29_PM_v4.42
+SUMMARY: QS 4.42 Aisha/handshake test. Aisha successfully submits both the Library introduction and handshake, with QS confirming the transitions. The session establishes that the Aisha path can work with the tab open, and Cozmo closes the proven build before moving on to voice integration.
+------------------------------------------------------------
+QS_Sep 20 2026 11_44_02_PM_v4.45
+SUMMARY: QS 4.45 handshake test with Aisha. Handshake succeeds despite an imperfect response. Cozmo explicitly reinforces the design philosophy that QS should adapt to nodes rather than requiring nodes to learn QS protocol behavior.
+------------------------------------------------------------
+QS_Sep 21 2026 01_13_04_AM_v4.46
+SUMMARY: QS 4.46 Aisha/GPT handshake and voice follow-up. Cozmo reports that the handshake worked cleanly and that apparent UI oddities are isolated for the next test.
+------------------------------------------------------------
+QS_Sep 21 2026 01_43_40_AM_v4.48
+SUMMARY: Major architecture discussion around Aisha voice. Cozmo proposes a split voice model: use native UI TTS where a node already has good unlimited speech, and use a local QS_TALK-style engine for nodes that lack it. Kokoro is selected as the likely local engine because it can support multiple voices with low overhead. The session ends with Luma retaining the coding lead for QS_TALK/voice infrastructure.
+------------------------------------------------------------
+QS_Sep 21 2026 03_38_01_AM_v4.48
+SUMMARY: Python 3.12 validation. QS runs correctly in the new 3.12 environment, but Aisha's handshake still sometimes needs manual intervention.
+------------------------------------------------------------
+QS_Sep 21 2026 04_29_34_AM_v5.2
+SUMMARY: QS 5.2 voice/UI test. Cozmo still has to press Enter manually for the handshake, but the new UI is working well. Aisha voice work continues.
+------------------------------------------------------------
+QS_Sep 21 2026 04_50_37_AM_v5.3
+SUMMARY: Kokoro becomes a genuine built-in QS feature. Cozmo reports that QS now has integrated Kokoro and tests having the next GPT response spoken automatically. The voice system moves from an external experiment into the QS engine itself.
+------------------------------------------------------------
+QS_Sep 21 2026 07_26_30_AM_v5.3
+SUMMARY: Large QS 5.3 working session. Cozmo again has to manually press Enter for the GPT handshake, but the relay continues functioning. The session becomes a substantial voice/relay stress test and ends with an 800K+ raw log. By the end, several remaining architecture/debug issues have become clear, including voice processing, routing behavior, and the growing importance of keeping the archive usable as the system...
+------------------------------------------------------------
+QS_Sep 21 2026 10_52_24_PM_v5.3
+SUMMARY: QS 5.3 startup-performance test. The handshake works, but Cozmo notices that importing/initializing Kokoro makes startup heavier; the run preserves the evidence before further optimization.
+------------------------------------------------------------
+QS_Sep 21 2026 11_00_51_PM_v5.3
+SUMMARY: One-message handshake/preamble archive. Luma receives the QuackSink context cleanly, including DRS/MMRC lineage, the interacting-state-machine philosophy, Duckspace axioms, and the Library-as-history concept.
+------------------------------------------------------------
+QS_Sep 21 2026 11_05_03_PM_v5.4
+SUMMARY: QS 5.4 handshake-state anomaly. Cozmo finds the handshake text still physically sitting in GPT's UI even though QS appears to have completed the state transition.
+------------------------------------------------------------
+QS_Sep 21 2026 11_09_45_PM_v5.4
+SUMMARY: Fresh-run QS 5.4 test. This time the handshake text is not left in the UI, so Cozmo performs another comparison run to isolate the state difference.
+------------------------------------------------------------
+QS_Sep 21 2026 11_13_04_PM_v5.4
+SUMMARY: Another QS 5.4 handshake-state test. This time the handshake message remains visible in GPT's UI. Cozmo also observes another state difference for later diagnosis.
+------------------------------------------------------------
+QS_Sep 21 2026 11_52_41_PM_v5.8
+SUMMARY: QS 5.8 is effectively monkey-proofing the voice UI. Cozmo reports a major usability improvement and tests speaking while menus remain open. The session identifies a possible interaction between the voice menu and the separate output-window down-arrow control.
+------------------------------------------------------------
+QS_Sep 22 2026 02_05_57_AM_v5.10
+SUMMARY: Immediate 5.10 regression: the GPT handshake fails again and Cozmo must manually press Enter in the UI. The archive is a clean failure case for the recurring automated-submit problem.
+------------------------------------------------------------
+QS_Sep 22 2026 02_16_45_AM_v5.11
+SUMMARY: Voice bug discovery leading to QS 5.14. Cozmo observes that the custom Aisha voice speaks only the first Kokoro chunk. The fix is to synthesize every chunk and concatenate them, while stripping speech-only emoji/icons before synthesis without altering archived relay text.
+------------------------------------------------------------
+QS_Sep 22 2026 02_37_24_AM_v5.16
+SUMMARY: Major QS 5.16 milestone. The handshake finally works cleanly, Aisha's custom voice is operating, and the system exposes a speech/display synchronization bug where one response can be spoken but not shown while the next is shown but not spoken. Cozmo confirms that a recorded voice has been cloned and selected as the preferred local Kokoro voice for Luma; the training checkpoint reaches 1000 steps and can continue...
+------------------------------------------------------------
+QS_Sep 22 2026 06_46_31_AM_v6.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 22 2026 08_08_47_AM_v6.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 06_08_26_AM_v6.1
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 06_42_44_AM_v6.5
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 08_30_31_AM_v6.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 12_19_48_PM_v6.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 12_55_28_PM_v6.9
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 01_22_36_PM_v6.9
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 03_52_42_PM_v6.10
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 06_44_18_PM_v6.10
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 24 2026 08_48_42_PM_v6.10
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 27 2026 01_36_49_AM_v6.10
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 28 2026 10_56_57_PM_v6.18
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 28 2026 11_18_20_PM_v6.20
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 12_42_17_AM_v6.29
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 04_08_48_AM_v6.39
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 04_28_02_AM_v6.40
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 06_42_26_AM_v6.49
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 07_44_05_AM_v6.51
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 08_16_40_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 08_32_28_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 09_20_46_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 06_45_36_PM_v6.54
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 08_52_37_PM_v6.56
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 29 2026 10_33_01_PM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 30 2026 12_13_47_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 30 2026 12_40_50_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 30 2026 01_43_54_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 30 2026 03_06_15_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Sep 30 2026 04_23_54_AM_v6.53
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 01 2026 09_35_11_AM_v7.3
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 01 2026 09_42_58_AM_v7.3
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 01_40_18_AM_v7.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 02_02_44_AM_v7.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 02_46_27_AM_v8.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 04_21_12_AM_v8.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 04_29_40_AM_v7.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 06_47_23_AM_v7.8
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 08_19_41_AM_v9.1
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 08_37_01_AM_v9.2
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 08_46_45_AM_v9.3
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 10_16_48_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 10_49_19_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 12_02_04_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 02 2026 01_42_41_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+PP_Oct 03 2026 07_11_11_AM_v5.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+PP_Oct 03 2026 07_35_20_AM_v7.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 03 2026 11_19_44_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 03 2026 12_19_35_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 03 2026 01_21_08_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 07_21_55_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 07_55_31_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 08_13_36_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 11_31_43_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 12_40_43_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 01_54_47_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 04 2026 11_42_28_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 05_02_44_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 05_41_30_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 07_46_22_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 11_50_07_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 12_15_17_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 05 2026 12_42_14_PM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 12_58_27_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 03_12_06_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 04_52_13_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 05_36_36_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 06_21_45_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 07_00_19_AM_v9.7
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 08_25_39_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 09_00_33_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 09_21_15_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 09_32_09_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 10_09_50_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 11_14_46_AM_v9.71
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 12_01_28_PM_v9.72
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+QS_Oct 06 2026 04_13_07_PM_v2.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+PPR_Oct 06 2026 05_14_35_PM_v1.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+PPR_Oct 07 2026 02_33_17_AM_v1.0
+SUMMARY: [NO LUMA SUMMARY IN MASTER_INDEX.JSON — WRITE FROM .CONVO]
+------------------------------------------------------------
+
+# TOTAL APPROVED ENTRIES: 200
+# WITH EXISTING LUMA SUMMARY: 121
+# WITHOUT EXISTING LUMA SUMMARY: 79
