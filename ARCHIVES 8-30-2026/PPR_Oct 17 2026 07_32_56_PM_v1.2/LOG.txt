@@ -1,0 +1,25 @@
+2026-10-17 19:32:56 [INFO] =============================================================
+2026-10-17 19:32:56 [INFO] Purple Python 1.2 STARTING
+2026-10-17 19:32:56 [INFO] Startup directory: C:\Users\mcozm\projects\drsgem\quacksink
+2026-10-17 19:32:56 [INFO] Archive root: C:\Users\mcozm\projects\drsgem\quacksink\ARCHIVES
+2026-10-17 19:32:56 [INFO] Active archive: C:\Users\mcozm\projects\drsgem\quacksink\ARCHIVES\PPR_Oct 17 2026 07_32_56_PM_v1.2
+2026-10-17 19:32:56 [INFO] Startup version check: SKIPPED_DEV
+2026-10-17 19:32:56 [INFO] Development mode: True
+2026-10-17 19:32:56 [INFO] Browser focus policy: QS does not force tabs to foreground.
+2026-10-17 19:32:56 [INFO] QS 1.2 development build: repository source verification is intentionally skipped during rapid iteration.
+2026-10-17 19:32:56 [INFO] Source archived in active archive.
+2026-10-17 19:32:56 [INFO] Configuration archived in active archive when present.
+2026-10-17 19:32:56 [INFO] =============================================================
+2026-10-17 19:32:56 [INFO] Launching Purple Python 1.2.
+2026-10-17 19:32:57 [INFO] [BROWSER] No usable CDP endpoint found on 127.0.0.1:9222.
+2026-10-17 19:32:57 [INFO] [BROWSER] Chromium-family browsers detected: Microsoft Edge, Opera GX
+2026-10-17 19:33:38 [INFO] [BROWSER] Using EXISTING profile for Opera GX: C:\Users\mcozm\AppData\Roaming\Opera Software\Opera GX Stable
+2026-10-17 19:33:38 [INFO] [BROWSER] Launching Opera GX: C:\Users\mcozm\AppData\Local\Programs\Opera GX\opera.exe
+2026-10-17 19:33:38 [INFO] [BROWSER] User-data directory: C:\Users\mcozm\AppData\Roaming\Opera Software\Opera GX Stable
+2026-10-17 19:33:38 [INFO] [BROWSER] Remote debugging port: 9222
+2026-10-17 19:33:38 [INFO] [BROWSER] Opera GX launched (PID 20256). Waiting for CDP...
+2026-10-17 19:34:08 [ERROR] [BROWSER] Startup failed: Opera GX launched with its existing profile, but CDP did not become available on 127.0.0.1:9222 within 30 seconds.
+
+This can happen with modern Chromium-family browsers that intentionally refuse remote debugging on their normal/default profile. QS did NOT replace or clone your profile.
+
+For a browser that enforces that restriction, select a dedicated QS profile or use a browser build that permits the existing-profile route.
