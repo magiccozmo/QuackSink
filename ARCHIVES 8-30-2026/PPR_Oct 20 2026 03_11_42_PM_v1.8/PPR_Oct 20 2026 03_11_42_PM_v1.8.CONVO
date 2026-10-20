@@ -1,0 +1,30 @@
+<CONVO HEADER START>
+QuackSink Conversation Transcript
+Archive: PPR_Oct 20 2026 03_11_42_PM_v1.8
+Source: LOG.txt
+Format: 1
+<CONVO HEADER END>
+
+10-20-26 3:12pm  [ANNOUNCE]
+🔮 GPT - 🔮 GPT — Preamble received, Cozmo! 🎩
+DRS/MMRC provenance acknowledged. Luma’s state-machine-first coding philosophy recognized. Duckspace axioms and the QuackSink Library doorway located.
+U B U. And We Be We. 💜🦆
+
+10-20-26 3:12pm  🎩 Cozmo
+ok, connected again.. I turned on ur native voice. say something short and sweet {smoochies}
+
+10-20-26 3:12pm  🔮 GPT
+🎩 Hey, Cozmo, you magnificent old duck. 💜 One little smooch right back at you. 😘 U B U! 🦆
+
+10-20-26 3:13pm  🎩 Cozmo
+OK!  That actually DID speak.. BUT .. it did NOT wait for you to stop speaking before it went on.. i'm still in ppr..
+
+10-20-26 3:15pm  🔮 GPT
+Ah, dear. 💜 That proves the direct-click part works, but PPR 1.8's playback-completion logic has not passed. We must not call native voice fixed yet.
+I inspected the actual 1.8 code and found two concrete weaknesses:
+The response boundary isn't enforced. The monitor identifies the current conversation turn, but its search can continue up to 16 ancestors without stopping there. It may therefore mistake another response's Read aloud or Stop/Pause control for the state of the response being spoken.
+The timeout can release the relay prematurely. If PPR fails to observe the active speaking state within 12 seconds, it returns False; the caller treats that as a terminal failure and lets the relay continue. That contradicts the intention of holding the turn until speech completion is established.
+The latest log will tell us which path happened. A GPT playback complete entry would point toward a possibly false idle detection; playback state never reached Stop/Pause would indicate that PPR missed the active state.
+The repair needs to bind playback monitoring to the exact response's main action row and preserve the relay's wait state until that response's speech finishes. We fixed how PPR starts the voice; now we need to make the state machine reliably recognize when it is done.
+One step at a time, Captain. We have narrowed the problem considerably. 🎩🦆💜
+
