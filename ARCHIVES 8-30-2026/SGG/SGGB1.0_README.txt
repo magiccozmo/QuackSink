@@ -1,0 +1,70 @@
+SPIFFY'S GIFT — SGGB1.0
+Luma Draw Engine / JSON-driven world prototype
+
+FILES REQUIRED
+  sggb1.0.py
+  luma_assets.json
+
+Place BOTH files in your existing SGG project folder, beside your existing
+sgg.config. Do not replace or delete sgg.config; SGGB1.0 continues to use it.
+The program writes each run's source, config snapshot, log, screenshots, and
+luma_assets.json snapshot under the project's archives folder.
+
+LAUNCH
+  Activate the same Python virtual environment used for SGG, then run:
+    python .\sggb1.0.py
+
+DEPENDENCY
+  pygame-ce==2.5.8
+  All other imports are from the Python standard library.
+
+PLAY CONTROLS
+  WASD or arrow keys  Move
+  Click a nearby world item  Pick it up and carry it
+  Click the carried item  Attempt to put it into inventory
+  Click the player  Attempt to put the carried item into inventory
+  Click nearby ground / another nearby object / a vendor  Place the carried item
+  Click a vendor's head while carrying a bucket  Bucket-on-head exploit
+  Click the bucket on the vendor's head when nearby  Retrieve the bucket
+  I  Open or close inventory
+  Inventory -> select an item -> Drop Item  Drop from inventory near the player
+  Click a door when nearby  Change between Market and Alchemy Shop
+  Ctrl+S or F12 while playing  Save a screenshot in the current run archive
+
+STEAL / TAKE
+  Hover labels show STEAL in red when a vendor can see a stealable carried item,
+  or TAKE in green when the line of sight is blocked. Trying to put a stealable
+  item into inventory while watched fails; carrying it behind cover can make it
+  safe to take. Non-stealable sample goods can be collected without stealing.
+
+NOTES CLIPBOARD
+  Focus the Title or Notes field, then use Ctrl+C, Ctrl+X, Ctrl+V, or Ctrl+A.
+  The Notes field supports multi-line paste so notes copied from PPR can be saved
+  as .NOTES in the SGG run archive as well. PPR's conversation archive remains
+  its own independent record.
+
+LUMA DRAW STUDIO
+  Open Menu -> Luma Draw Studio to browse named JSON recipes, preview them,
+  and reload luma_assets.json after editing it externally. Reloading resets the
+  next game to use the new world data and copies the successfully loaded JSON
+  into the current run archive. The current Studio is a recipe browser/preview/
+  reload tool, not yet a point-and-click drawing-command editor.
+
+JSON ARCHITECTURE
+  luma_assets.json contains reusable drawing recipes for the scene backgrounds,
+  props, player, vendor, bucket variants, and shadows. It also holds the active
+  areas, object placements, vendor positions, collision rectangles, sight
+  blockers, conceal zones, player start, render roles, and connection graph.
+  The Python interpreter paints these instructions; the art/world definitions
+  live outside Python. The current areas are BritRun Market and Alchemy Shop.
+  The shop's storeroom is a connected side room on the Alchemy Shop screen.
+
+VALIDATION NOTE
+  The delivered Python file passed syntax/AST compilation. The JSON parsed as an
+  object and its 3,571 drawing commands and references validated. Automated model
+  checks passed for Market<->Shop transitions, proximity checks, cover-aware
+  inventory taking, multiline note-buffer insertion, bucket placement/retrieval
+  on a Market vendor, and the rule that potions do not trigger the bucket gag.
+  The full graphical window was not launched in the build environment because
+  pygame-ce is not installed there; the local Windows launch remains the visual
+  field test.
