@@ -1,45 +1,48 @@
 {
   "schema": "spiffys-gift-save-v1",
-  "source_version": "C1.2.1",
-  "saved_at": "2026-10-28T17:55:55.695291-04:00",
+  "source_version": "C1.3",
+  "saved_at": "2026-10-28T19:31:14.110120-04:00",
   "state": {
-    "current_area_id": "britrun_market",
-    "player_x": 864.8033967954343,
-    "player_y": 445.84901586977736,
+    "current_area_id": "troll_cave",
+    "player_x": 695.362611101191,
+    "player_y": 252.5973888988095,
     "player_width": 26,
     "player_height": 36,
     "inventory": [
-      "shop_spell_scroll",
-      "shop_redroot",
-      "shop_healing_potion",
-      "shop_moonflower"
+      "market_moonflower",
+      "c1_generated_1"
     ],
     "inventory_open": false,
-    "inventory_selected_id": "shop_spell_scroll",
-    "carried_object_id": "market_gold_pouch",
-    "bucket_on_head_vendor_id": "kart_lotta",
-    "selected_object_id": "market_gold_pouch",
+    "inventory_selected_id": "c1_generated_1",
+    "carried_object_id": null,
+    "bucket_on_head_vendor_id": null,
+    "selected_object_id": null,
     "c1_day": 1,
     "c1_gold": 0,
     "c1_flags": {
       "heard_kart": true,
-      "lout_warned": false,
+      "lout_warned": true,
       "quest_started": false,
       "quest_done": false,
-      "book_read": true,
+      "book_read": false,
       "pineapple_taken": false,
-      "lout_challenged": true,
-      "lout_resolved": null,
-      "lout_demand": false
+      "lout_challenged": false,
+      "lout_resolved": "bribed",
+      "lout_demand": true
     },
-    "c1_respawn_due": {},
+    "c1_respawn_due": {
+      "market_cabbage_2": 2,
+      "market_tomato_2": 2,
+      "market_cabbage_1": 2,
+      "market_tomato": 2
+    },
     "c1_npcs": {
       "naz": {
         "npc_id": "naz",
         "name": "Naz the Jerk",
         "asset": "naz",
         "area_id": "britrun_market",
-        "x": 842.4129570932913,
+        "x": 772.374246314173,
         "y": 447,
         "width": 58,
         "height": 82,
@@ -48,27 +51,26 @@
           "Peasants like you do not belong in my neighborhood.",
           "That vegetable stall smells positively common."
         ],
-        "alive": false,
-        "holding": "Gold Pouch"
+        "alive": true
       },
       "inn_lout": {
         "npc_id": "inn_lout",
         "name": "Boorish Inn Patron",
         "asset": "lout",
-        "area_id": "britrun_market",
-        "x": 718.4375124212446,
-        "y": 368.08899954491824,
+        "area_id": "inn_interior",
+        "x": 850,
+        "y": 402,
         "width": 64,
         "height": 88,
         "alive": true,
-        "follow_player": true
+        "follow_player": false
       },
       "innkeeper": {
         "npc_id": "innkeeper",
         "name": "The Innkeeper",
         "asset": "vendor",
         "area_id": "inn_interior",
-        "x": 343,
+        "x": 510,
         "y": 257,
         "width": 56,
         "height": 77,
@@ -87,11 +89,11 @@
       },
       "troll": {
         "npc_id": "troll",
-        "name": "Frosty the Trollman",
+        "name": "Frosty the Ice Troll",
         "asset": "troll",
         "area_id": "troll_cave",
-        "x": 750,
-        "y": 303,
+        "x": 560,
+        "y": 180,
         "width": 109,
         "height": 144,
         "alive": true
@@ -132,8 +134,8 @@
     },
     "c1_guard": {
       "area_id": "britrun_market",
-      "x": 877.5047917883953,
-      "y": 469.4148527488673,
+      "x": 914.0,
+      "y": 492.0,
       "name": "BritRun Guard",
       "asset": "guard",
       "width": 62,
@@ -154,37 +156,27 @@
     "c1_soup_total": 0,
     "c1_dead": null,
     "c1_launch_seconds": 0.0,
-    "c1_elapsed": 232.01099999996163,
-    "c1_naz_lines_at": 174.6829999999847,
+    "c1_elapsed": 192.7569999999771,
+    "c1_naz_lines_at": 136.18099999999995,
     "c1_chest_next_day": 1,
-    "c1_item_counter": 0,
+    "c1_item_counter": 1,
     "c1_vault_entered": false,
     "c1_quest_log": [],
     "c1_wait_banner": ""
   },
   "sets": {
-    "c1_permissions": [],
-    "c1_stolen": [
-      "shop_gold_pouch",
-      "shop_healing_potion",
-      "shop_moonflower",
-      "shop_redroot",
-      "shop_spell_scroll"
+    "c1_permissions": [
+      "kart_lotta"
     ],
-    "c1_owned_taken": [
-      "shop_gold_pouch",
-      "shop_healing_potion",
-      "shop_moonflower",
-      "shop_redroot",
-      "shop_spell_scroll"
-    ]
+    "c1_stolen": [],
+    "c1_owned_taken": []
   },
   "objects": [
     {
       "object_id": "market_tomato",
       "name": "Tomato",
       "kind": "tomato",
-      "area_id": "britrun_market",
+      "area_id": "__consumed__",
       "x": 151.0,
       "y": 246.0,
       "width": 30,
@@ -206,7 +198,7 @@
       "height": 33,
       "takeable": true,
       "stealable": false,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": false
     },
@@ -215,8 +207,8 @@
       "name": "Gold Pouch",
       "kind": "gold",
       "area_id": "britrun_market",
-      "x": 860.0,
-      "y": 408.0,
+      "x": 282.0,
+      "y": 247.0,
       "width": 28,
       "height": 24,
       "takeable": true,
@@ -296,7 +288,7 @@
       "height": 33,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -311,7 +303,7 @@
       "height": 31,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -326,7 +318,7 @@
       "height": 24,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -334,15 +326,15 @@
       "object_id": "shop_gold_pouch",
       "name": "Gold Pouch",
       "kind": "gold",
-      "area_id": "__consumed__",
-      "x": 855.5943809256579,
-      "y": 513.521968260447,
+      "area_id": "alchemy_shop",
+      "x": 936.0,
+      "y": 110.0,
       "width": 28,
       "height": 24,
       "takeable": true,
       "stealable": true,
       "in_inventory": false,
-      "moved": true,
+      "moved": false,
       "on_shelf": true
     },
     {
@@ -379,15 +371,15 @@
       "object_id": "shop_bucket",
       "name": "Bucket",
       "kind": "bucket",
-      "area_id": "britrun_market",
-      "x": 244.0,
-      "y": 181.0,
+      "area_id": "alchemy_shop",
+      "x": 157.0,
+      "y": 451.0,
       "width": 36,
       "height": 30,
       "takeable": true,
       "stealable": false,
       "in_inventory": false,
-      "moved": true,
+      "moved": false,
       "on_shelf": false
     },
     {
@@ -409,7 +401,7 @@
       "object_id": "market_cabbage_1",
       "name": "Kart-lotta Cabbage",
       "kind": "cabbage",
-      "area_id": "britrun_market",
+      "area_id": "__consumed__",
       "x": 168.0,
       "y": 247.0,
       "width": 32,
@@ -424,7 +416,7 @@
       "object_id": "market_cabbage_2",
       "name": "Kart-lotta Cabbage",
       "kind": "cabbage",
-      "area_id": "britrun_market",
+      "area_id": "__consumed__",
       "x": 196.0,
       "y": 247.0,
       "width": 32,
@@ -439,7 +431,7 @@
       "object_id": "market_tomato_2",
       "name": "Kart-lotta Tomato",
       "kind": "tomato",
-      "area_id": "britrun_market",
+      "area_id": "__consumed__",
       "x": 238.0,
       "y": 247.0,
       "width": 29,
@@ -474,6 +466,21 @@
       "y": 504.0,
       "width": 99,
       "height": 87,
+      "takeable": false,
+      "stealable": false,
+      "in_inventory": false,
+      "moved": false,
+      "on_shelf": false
+    },
+    {
+      "object_id": "inn_hearth_c13",
+      "name": "Inn Hearth",
+      "kind": "hearth",
+      "area_id": "inn_interior",
+      "x": 247.0,
+      "y": 203.0,
+      "width": 175,
+      "height": 165,
       "takeable": false,
       "stealable": false,
       "in_inventory": false,
@@ -731,7 +738,7 @@
       "height": 32,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -919,7 +926,7 @@
       "object_id": "inn_mead_bottle",
       "name": "Black-Briar Mead",
       "kind": "mead",
-      "area_id": "inn_interior",
+      "area_id": "__consumed__",
       "x": 445.0,
       "y": 320.0,
       "width": 28,
@@ -927,6 +934,36 @@
       "takeable": true,
       "stealable": false,
       "in_inventory": false,
+      "moved": false,
+      "on_shelf": false
+    },
+    {
+      "object_id": "mountain_cave_entrance",
+      "name": "Frosty’s Cave Entrance",
+      "kind": "door",
+      "area_id": "side_of_mountain",
+      "x": 590.0,
+      "y": 278.0,
+      "width": 110,
+      "height": 111,
+      "takeable": false,
+      "stealable": false,
+      "in_inventory": false,
+      "moved": false,
+      "on_shelf": false
+    },
+    {
+      "object_id": "c1_generated_1",
+      "name": "Not-So-Tasty Soup",
+      "kind": "soup",
+      "area_id": "inn_interior",
+      "x": 316.88000000000056,
+      "y": 380.6600000000001,
+      "width": 39,
+      "height": 26,
+      "takeable": true,
+      "stealable": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": false
     }
@@ -1201,6 +1238,20 @@
       "takeable": false,
       "stealable": false,
       "on_shelf": false
+    },
+    "inn_hearth_c13": {
+      "object_id": "inn_hearth_c13",
+      "name": "Inn Hearth",
+      "kind": "hearth",
+      "area_id": "inn_interior",
+      "x": 247,
+      "y": 203,
+      "width": 175,
+      "height": 165,
+      "takeable": false,
+      "stealable": false,
+      "on_shelf": false,
+      "activity": "cook"
     },
     "inn_cookpot": {
       "object_id": "inn_cookpot",
@@ -1609,6 +1660,26 @@
       "stealable": false,
       "on_shelf": false,
       "value": 30
+    },
+    "mountain_cave_entrance": {
+      "object_id": "mountain_cave_entrance",
+      "name": "Frosty’s Cave Entrance",
+      "kind": "door",
+      "area_id": "side_of_mountain",
+      "x": 590,
+      "y": 278,
+      "width": 110,
+      "height": 111,
+      "takeable": false,
+      "stealable": false,
+      "on_shelf": false
+    },
+    "c1_generated_1": {
+      "object_id": "c1_generated_1",
+      "name": "Not-So-Tasty Soup",
+      "kind": "soup",
+      "value": 55,
+      "stealable": false
     }
   }
 }
