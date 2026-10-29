@@ -1,21 +1,29 @@
 {
   "schema": "spiffys-gift-save-v1",
   "source_version": "D1.1",
-  "saved_at": "2026-10-29T14:15:55.711146-04:00",
+  "saved_at": "2026-10-29T14:28:42.038282-04:00",
   "state": {
-    "current_area_id": "castle_hall",
-    "player_x": 908.1163491861041,
-    "player_y": 463.66365081389597,
+    "current_area_id": "britrun_market",
+    "player_x": 849.8026111011906,
+    "player_y": 509.8026111011906,
     "player_width": 26,
     "player_height": 36,
-    "inventory": [],
+    "inventory": [
+      "inn_plate",
+      "c1_generated_1",
+      "shop_spell_scroll",
+      "shop_redroot",
+      "shop_healing_potion",
+      "shop_bucket",
+      "shop_gold_pouch"
+    ],
     "inventory_open": false,
-    "inventory_selected_id": null,
+    "inventory_selected_id": "shop_gold_pouch",
     "carried_object_id": null,
     "bucket_on_head_vendor_id": null,
-    "selected_object_id": "inn_plate",
+    "selected_object_id": null,
     "c1_day": 1,
-    "c1_gold": 0,
+    "c1_gold": 7000,
     "c1_flags": {
       "heard_kart": false,
       "lout_warned": false,
@@ -26,7 +34,9 @@
       "lout_challenged": false,
       "lout_resolved": null,
       "lout_demand": false,
-      "d11_cameo_events": [],
+      "d11_cameo_events": [
+        "bucket"
+      ],
       "d11_cameo_queue": [],
       "d11_cameo_active": null
     },
@@ -37,7 +47,7 @@
         "name": "Naz the Jerk",
         "asset": "naz",
         "area_id": "britrun_market",
-        "x": 694.9561057209219,
+        "x": 765.0249872996417,
         "y": 447,
         "width": 58,
         "height": 82,
@@ -150,18 +160,28 @@
     "c1_soup_total": 0,
     "c1_dead": null,
     "c1_launch_seconds": 0.0,
-    "c1_elapsed": 149.31799999999566,
-    "c1_naz_lines_at": 127.14900000000456,
+    "c1_elapsed": 466.2490000000742,
+    "c1_naz_lines_at": 460.4660000000705,
     "c1_chest_next_day": 1,
-    "c1_item_counter": 0,
-    "c1_vault_entered": false,
+    "c1_item_counter": 1,
+    "c1_vault_entered": true,
     "c1_quest_log": [],
     "c1_wait_banner": ""
   },
   "sets": {
     "c1_permissions": [],
-    "c1_stolen": [],
-    "c1_owned_taken": []
+    "c1_stolen": [
+      "shop_gold_pouch",
+      "shop_healing_potion",
+      "shop_redroot",
+      "shop_spell_scroll"
+    ],
+    "c1_owned_taken": [
+      "shop_gold_pouch",
+      "shop_healing_potion",
+      "shop_redroot",
+      "shop_spell_scroll"
+    ]
   },
   "objects": [
     {
@@ -295,7 +315,7 @@
       "height": 31,
       "takeable": true,
       "stealable": true,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": true
     },
@@ -310,7 +330,7 @@
       "height": 24,
       "takeable": true,
       "stealable": true,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": true
     },
@@ -319,13 +339,13 @@
       "name": "Gold Pouch",
       "kind": "gold",
       "area_id": "alchemy_shop",
-      "x": 936.0,
-      "y": 110.0,
+      "x": 951.0,
+      "y": 232.0,
       "width": 28,
       "height": 24,
       "takeable": true,
       "stealable": true,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": true
     },
@@ -364,14 +384,14 @@
       "name": "Bucket",
       "kind": "bucket",
       "area_id": "alchemy_shop",
-      "x": 157.0,
-      "y": 451.0,
+      "x": 663.0,
+      "y": 175.0,
       "width": 36,
       "height": 30,
       "takeable": true,
       "stealable": false,
-      "in_inventory": false,
-      "moved": false,
+      "in_inventory": true,
+      "moved": true,
       "on_shelf": false
     },
     {
@@ -603,7 +623,7 @@
       "object_id": "vault_gold_1",
       "name": "Castle Treasure",
       "kind": "gold_pile",
-      "area_id": "castle_vault",
+      "area_id": "__consumed__",
       "x": 250.0,
       "y": 374.0,
       "width": 80,
@@ -618,7 +638,7 @@
       "object_id": "vault_gold_2",
       "name": "Castle Treasure",
       "kind": "gold_pile",
-      "area_id": "castle_vault",
+      "area_id": "__consumed__",
       "x": 524.0,
       "y": 368.0,
       "width": 80,
@@ -633,7 +653,7 @@
       "object_id": "vault_gold_3",
       "name": "Castle Treasure",
       "kind": "gold_pile",
-      "area_id": "castle_vault",
+      "area_id": "__consumed__",
       "x": 819.0,
       "y": 363.0,
       "width": 80,
@@ -648,7 +668,7 @@
       "object_id": "vault_gold_4",
       "name": "Castle Treasure",
       "kind": "gold_pile",
-      "area_id": "castle_vault",
+      "area_id": "__consumed__",
       "x": 1005.0,
       "y": 377.0,
       "width": 80,
@@ -663,14 +683,14 @@
       "object_id": "inn_plate",
       "name": "Wooden Serving Platter",
       "kind": "plate",
-      "area_id": "castle_hall",
-      "x": 908.1163491861041,
-      "y": 475.66365081389597,
+      "area_id": "castle_vault",
+      "x": 602.0,
+      "y": 536.0,
       "width": 48,
       "height": 26,
       "takeable": true,
       "stealable": false,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": true,
       "on_shelf": false
     },
@@ -730,7 +750,7 @@
       "height": 32,
       "takeable": true,
       "stealable": true,
-      "in_inventory": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": false
     },
@@ -941,6 +961,21 @@
       "takeable": false,
       "stealable": false,
       "in_inventory": false,
+      "moved": false,
+      "on_shelf": false
+    },
+    {
+      "object_id": "c1_generated_1",
+      "name": "Potion of Increased Physical Enhancement",
+      "kind": "potion",
+      "area_id": "alchemy_shop",
+      "x": 497.22000000000054,
+      "y": 244.72561907434311,
+      "width": 25,
+      "height": 31,
+      "takeable": true,
+      "stealable": false,
+      "in_inventory": true,
       "moved": false,
       "on_shelf": false
     }
@@ -1650,6 +1685,13 @@
       "takeable": false,
       "stealable": false,
       "on_shelf": false
+    },
+    "c1_generated_1": {
+      "object_id": "c1_generated_1",
+      "name": "Potion of Increased Physical Enhancement",
+      "kind": "potion",
+      "value": 69000,
+      "stealable": false
     }
   }
 }
