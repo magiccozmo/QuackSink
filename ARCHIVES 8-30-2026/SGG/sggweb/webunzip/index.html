@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#20162c">
+  <meta name="description" content="Play Spiffy's Gift in your browser. Browse available versions and revisit earlier releases.">
+  <link rel="icon" type="image/png" href="SGGE2.0/favicon.png">
+  <title>Spiffy's Gift — Browser Edition Archive</title>
+  <style>
+    :root { color-scheme: dark; --background:#171020; --paper:#281d34; --border:#73577c; --gold:#efca8b; --text:#f5e9dc; --muted:#c7b8c9; }
+    * { box-sizing:border-box; }
+    html { min-height:100%; background:var(--background); }
+    body { margin:0; min-height:100vh; font-family:Georgia, 'Times New Roman', serif; color:var(--text); background:radial-gradient(ellipse at 50% 0, #39244d, var(--background) 70%); }
+    .wrap { max-width:880px; margin:auto; padding:clamp(26px,6vw,78px) 24px 65px; }
+    .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.22em; font:700 12px/1.5 Arial,sans-serif; }
+    h1 { margin:14px 0 5px; color:#f8dca4; font-size:clamp(43px,7vw,72px); font-weight:normal; line-height:1.08; }
+    .subtitle { color:#e0cee9; font-size:clamp(18px,3vw,23px); margin:10px 0 30px; }
+    .intro { max-width:680px; font:17px/1.7 Arial,sans-serif; color:var(--muted); }
+    h2 { margin:50px 0 18px; font-size:23px; font-weight:normal; color:var(--gold); }
+    .version { background:linear-gradient(130deg,#33223e,#251b31); border:1px solid var(--border); border-radius:16px; padding:clamp(22px,4vw,32px); box-shadow:0 14px 36px #0a061453; }
+    .version-top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+    .version h3 { margin:0; font-size:29px; color:#fff2dc; }
+    .tag { color:#f0d2a0; font:700 12px Arial,sans-serif; letter-spacing:.04em; border:1px solid #886f84; border-radius:999px; padding:7px 11px; }
+    .version p { font:16px/1.6 Arial,sans-serif; color:var(--muted); }
+    .play { display:inline-block; margin-top:12px; padding:14px 23px; border-radius:9px; color:#221325; background:var(--gold); font:700 16px Arial,sans-serif; text-decoration:none; }
+    .play:hover,.play:focus-visible { background:#ffe1ac; outline:2px solid #fff3d2; outline-offset:3px; }
+    footer { border-top:1px solid #5b4964; margin-top:48px; padding-top:20px; color:#ab9bb2; font:13px/1.6 Arial,sans-serif; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="eyebrow">The browser edition collection</div>
+    <h1>Spiffy's Gift</h1>
+    <p class="subtitle">A little magic. A little mischief. A growing history.</p>
+    <p class="intro">Welcome to the browser editions of <em>Spiffy's Gift</em>. Each release has its own home here, so you can play the current edition and revisit earlier ones as the game grows. No installation or account required.</p>
+    <h2>Available editions</h2>
+    <section class="version" aria-labelledby="edition-20">
+      <div class="version-top">
+        <h3 id="edition-20">SGGE 2.0</h3>
+        <span class="tag">First browser archive release</span>
+      </div>
+      <p>The first edition in this online archive. Open the game in your browser; allow a moment for the game engine to load, then follow its on-screen prompt to begin.</p>
+      <a class="play" href="SGGE2.0/index.html">Play SGGE 2.0</a>
+    </section>
+    <footer>More editions will appear here as they're released. Earlier editions will remain available.</footer>
+  </main>
+</body>
+</html>

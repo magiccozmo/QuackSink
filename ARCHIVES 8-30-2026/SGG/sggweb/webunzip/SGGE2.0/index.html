@@ -1,0 +1,151 @@
+<html lang="en"><script src="https://pygame-web.github.io/cdn/0.9.3/pythons.js" type="module" id="site" data-python="python3.13" data-LINES="42" data-COLUMNS="132" data-os="vtx,snd,gui" async defer>#<!--
+print("""\nSPIFFY'S GIFT - SGGE2.0\nLoading game bundle: sgge2.tar.gz\nPygbag-compatible static website / Python 3.13 WebAssembly\n""")
+
+import sys
+import asyncio
+import platform
+from pathlib import Path
+
+async def custom_site():
+    import embed
+    platform.document.body.style.background = "#171321"
+    platform.window.transfer.hidden = true
+    platform.window.canvas.style.visibility = "visible"
+    bundle = "sgge2"
+    appdir = Path(f"/data/data/{bundle}")
+    appdir.mkdir()
+
+    # Mirror the upstream Pygbag default template for static web hosting.
+    # The compressed tarball is used on Cloudflare and localhost, not extracted by a server.
+    if platform.window.location.host.find('.itch.zone') > 0:
+        import zipfile
+        async with platform.fopen("sgge2.apk", "rb") as archive:
+            with zipfile.ZipFile(archive) as z:
+                z.extractall(appdir.as_posix())
+    else:
+        import tarfile
+        async with platform.fopen("sgge2.tar.gz", "rb") as archive:
+            t = tarfile.open(fileobj=archive, mode="r:gz")
+            t.extractall(path=appdir.as_posix(), filter='tar')
+            t.close()
+
+    platform.run_main(PyConfig, loaderhome=appdir / "assets", loadermain=None)
+    while embed.counter() < 0:
+        await asyncio.sleep(.1)
+    main = appdir / "assets" / "main.py"
+
+    if not platform.window.MM.UME:
+        __import__(__name__).__file__ = main
+        msg = "Ready to play! Click or tap anywhere to begin."
+        platform.window.infobox.innerText = msg
+        print(msg)
+        while not platform.window.MM.UME:
+            await asyncio.sleep(.1)
+
+    await TopLevel_async_handler.start_toplevel(platform.shell, console=window.python.config.debug)
+    __import__(__name__).__file__ = main
+
+    def ui_callback(pkg):
+        platform.window.infobox.innerText = f"Installing {pkg}"
+
+    await shell.source(main, callback=ui_callback)
+    platform.window.infobox.style.display = "none"
+    platform.window.config.gui_divider = 1
+    platform.window.window_resize()
+    print("SGGE2.0 loaded")
+    shell.interactive()
+
+asyncio.run(custom_site())
+
+# BEGIN BLOCK
+# The parser separates the script's Python text from the surrounding HTML.
+# =============================================================================
+# --></script>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171321">
+<meta name="description" content="Play Spiffy's Gift directly in your browser — no download, installation, login or account required.">
+<link rel="icon" type="image/png" href="favicon.png">
+<title>Spiffy's Gift | Play Now</title>
+<style>
+  html,body{height:100%;margin:0;overflow:hidden;background:#171321;color:#f2e6ca;font-family:Arial,sans-serif}
+  #canvas,#canvas3d{display:block;border:0;padding:0;margin:0;position:absolute;left:0;top:0;width:100%;height:100%;z-index:5;background:transparent}
+  #canvas3d[hidden]{display:none}
+  #transfer{position:fixed;z-index:9;left:50%;top:48%;transform:translate(-50%,-50%);width:min(370px,88vw);text-align:center}
+  #status{color:#e7d3b4;font-size:17px;margin-bottom:15px}
+  #progress{width:100%;height:14px;accent-color:#ba8dce}
+  #infobox{position:fixed;z-index:11;left:50%;top:57%;transform:translate(-50%,-50%);max-width:min(460px,90vw);background:rgba(28,22,40,.95);color:#f6e9d0;border:2px solid #c9a67e;padding:15px 20px;border-radius:12px;text-align:center;box-shadow:0 10px 35px rgba(0,0,0,.45);font-weight:bold}
+  #crt{position:absolute;right:0;top:40%;z-index:12}
+  #box{background:#282138;border:1px solid #b1946c}
+  #pyconsole{position:fixed;z-index:20;left:0;bottom:0}
+  #terminal{font-family:monospace}
+  #html{position:absolute;z-index:4}
+  #dlg{position:fixed;z-index:50}
+</style>
+<script type="application/javascript">
+// END BLOCK
+// Preserve Pygbag's expected global loader configuration.
+config = {
+  xtermjs:"1", _sdl2:"canvas", user_canvas:0, user_canvas_managed:0,
+  gui_divider:2, ume_block:1, can_close:0,
+  archive:"sgge2", gui_debug:2, cdn:"https://pygame-web.github.io/cdn/0.9.3/", autorun:0,
+  PYBUILD:"3.13", fb_ar:1.77, fb_width:"1280", fb_height:"720"
+};
+function show_infobox(){
+  const e=document.getElementById('infobox');
+  if(!e)return;
+  // #infobox is naturally centered by CSS.
+  e.style.display='block';
+}
+</script>
+</head>
+<body>
+<div id="transfer" align="center">
+  <div id="status">Loading Spiffy's Gift…</div>
+  <progress id="progress" value="0" max="100"></progress>
+</div>
+<canvas class="emscripten" id="canvas" width="1" height="1" tabindex="1" oncontextmenu="event.preventDefault()"></canvas>
+<canvas class="emscripten" id="canvas3d" width="1280" height="720" hidden tabindex="1" oncontextmenu="event.preventDefault()"></canvas>
+<div id="infobox">Loading Spiffy's Gift…</div>
+<div id="html"></div>
+<div id="crt">
+ <div id="system" hidden>
+  <div class="button-container">
+   <button id="aiostop" disabled>AIO ⏏</button><button id="aiopaused_true" disabled>AIO ■</button><button id="aiopaused_false" disabled>AIO ▶</button><button id="pygame_mixer_music_pause" disabled>Music ■</button>
+  </div>
+  <div class="button-container"><div id="load_min">min</div><div id="load_avg">avg</div><div id="load_max">max</div><button id="load_rst" disabled>RESET</button></div>
+  <div id="level">(battery level unknown)</div><div id="stateBattery">(charging state unknown)</div>
+ </div>
+ <div id="box" hidden>
+  <div id="info"></div>
+  <iframe id="iframe" name="iframe" width="470" height="350" frameborder="1" allowtransparency="true"
+    allowfullscreen webkitallowfullscreen mozallowfullscreen
+    sandbox="allow-same-origin allow-top-navigation allow-scripts allow-pointer-lock"
+    allow="autoplay; fullscreen *; geolocation; microphone; camera; midi; xr-spatial-tracking; gamepad; gyroscope"
+    src="https://pygame-web.github.io/cdn/0.9.3/empty.html"></iframe>
+ </div>
+</div>
+<div id="dlg" hidden>
+  <input type="file" id="dlg_multifile" multiple accept="image/*"><label for="dlg_multifile">Select files</label>
+</div>
+<div id="pyconsole"><div id="terminal" tabindex="1" align="left"></div></div>
+<script type="application/javascript">
+globalThis.__canvas_resized=(self,ecw,ech)=>{console.debug('canvas resize',ecw,ech)};
+async function custom_onload(debug_hidden){
+  const ids=['pyconsole','system','transfer','info','box'];
+  for (const id of ids){const el=document.getElementById(id);if(el)el.hidden=debug_hidden;}
+  show_infobox();
+}
+function custom_prerun(){}
+function custom_postrun(){}
+function debug(){
+  python.config.debug=true;custom_onload(false);
+  Module.PyRun_SimpleString('shell.uptime()');window_resize();
+}
+function info_inline(data){document.getElementById('info').innerHTML=data}
+function info_online(url){fetch(url).then(x=>x.text()).then(info_inline).catch(console.warn)}
+function frame_online(url){window.frames['iframe'].location=url}
+</script>
+</body></html>
