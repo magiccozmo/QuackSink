@@ -1,63 +1,43 @@
 {
   "schema": "spiffys-gift-save-v1",
-  "source_version": "D1.0",
-  "saved_at": "2026-10-29T13:05:29.210843-04:00",
+  "source_version": "D1.1",
+  "saved_at": "2026-10-29T14:15:55.711146-04:00",
   "state": {
     "current_area_id": "castle_hall",
-    "player_x": 987.5800000000002,
-    "player_y": 490.51999999999987,
+    "player_x": 908.1163491861041,
+    "player_y": 463.66365081389597,
     "player_width": 26,
     "player_height": 36,
-    "inventory": [
-      "shop_redroot",
-      "shop_spell_scroll",
-      "shop_healing_potion",
-      "shop_miracle_potion",
-      "shop_counter_sample",
-      "shop_blue_vial",
-      "market_tomato_2",
-      "market_cabbage_2",
-      "market_moonflower",
-      "market_cabbage_1",
-      "market_tomato",
-      "market_gold_pouch",
-      "shop_bucket",
-      "c1_generated_1",
-      "c1_generated_2",
-      "c1_generated_3",
-      "mountain_herb"
-    ],
+    "inventory": [],
     "inventory_open": false,
-    "inventory_selected_id": "shop_redroot",
-    "carried_object_id": "inn_plate",
+    "inventory_selected_id": null,
+    "carried_object_id": null,
     "bucket_on_head_vendor_id": null,
     "selected_object_id": "inn_plate",
     "c1_day": 1,
-    "c1_gold": 2000,
+    "c1_gold": 0,
     "c1_flags": {
-      "heard_kart": true,
-      "lout_warned": true,
+      "heard_kart": false,
+      "lout_warned": false,
       "quest_started": false,
       "quest_done": false,
-      "book_read": true,
+      "book_read": false,
       "pineapple_taken": false,
-      "lout_challenged": true,
-      "lout_resolved": "bribed",
-      "lout_demand": true
+      "lout_challenged": false,
+      "lout_resolved": null,
+      "lout_demand": false,
+      "d11_cameo_events": [],
+      "d11_cameo_queue": [],
+      "d11_cameo_active": null
     },
-    "c1_respawn_due": {
-      "market_tomato_2": 2,
-      "market_cabbage_2": 2,
-      "market_cabbage_1": 2,
-      "market_tomato": 2
-    },
+    "c1_respawn_due": {},
     "c1_npcs": {
       "naz": {
         "npc_id": "naz",
         "name": "Naz the Jerk",
         "asset": "naz",
         "area_id": "britrun_market",
-        "x": 859.9446901331509,
+        "x": 694.9561057209219,
         "y": 447,
         "width": 58,
         "height": 82,
@@ -66,8 +46,7 @@
           "Peasants like you do not belong in my neighborhood.",
           "That vegetable stall smells positively common."
         ],
-        "alive": false,
-        "holding": "Gold Pouch"
+        "alive": true
       },
       "inn_lout": {
         "npc_id": "inn_lout",
@@ -78,8 +57,7 @@
         "y": 402,
         "width": 64,
         "height": 88,
-        "alive": true,
-        "follow_player": false
+        "alive": true
       },
       "innkeeper": {
         "npc_id": "innkeeper",
@@ -150,8 +128,8 @@
     },
     "c1_guard": {
       "area_id": "britrun_market",
-      "x": 890.606853907219,
-      "y": 472.68016032257356,
+      "x": 914.0,
+      "y": 492.0,
       "name": "BritRun Guard",
       "asset": "guard",
       "width": 62,
@@ -172,36 +150,18 @@
     "c1_soup_total": 0,
     "c1_dead": null,
     "c1_launch_seconds": 0.0,
-    "c1_elapsed": 3586.8350000018786,
-    "c1_naz_lines_at": 303.8279999999783,
-    "c1_chest_next_day": 3,
-    "c1_item_counter": 3,
-    "c1_vault_entered": true,
+    "c1_elapsed": 149.31799999999566,
+    "c1_naz_lines_at": 127.14900000000456,
+    "c1_chest_next_day": 1,
+    "c1_item_counter": 0,
+    "c1_vault_entered": false,
     "c1_quest_log": [],
     "c1_wait_banner": ""
   },
   "sets": {
-    "c1_permissions": [
-      "kart_lotta"
-    ],
-    "c1_stolen": [
-      "market_gold_pouch",
-      "shop_blue_vial",
-      "shop_gold_pouch",
-      "shop_healing_potion",
-      "shop_miracle_potion",
-      "shop_redroot",
-      "shop_spell_scroll"
-    ],
-    "c1_owned_taken": [
-      "market_gold_pouch",
-      "shop_blue_vial",
-      "shop_gold_pouch",
-      "shop_healing_potion",
-      "shop_miracle_potion",
-      "shop_redroot",
-      "shop_spell_scroll"
-    ]
+    "c1_permissions": [],
+    "c1_stolen": [],
+    "c1_owned_taken": []
   },
   "objects": [
     {
@@ -215,7 +175,7 @@
       "height": 30,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -230,7 +190,7 @@
       "height": 33,
       "takeable": true,
       "stealable": false,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -245,7 +205,7 @@
       "height": 24,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -335,7 +295,7 @@
       "height": 31,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -350,7 +310,7 @@
       "height": 24,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -358,15 +318,15 @@
       "object_id": "shop_gold_pouch",
       "name": "Gold Pouch",
       "kind": "gold",
-      "area_id": "__consumed__",
-      "x": 875.4241824896767,
-      "y": 472.2114841174687,
+      "area_id": "alchemy_shop",
+      "x": 936.0,
+      "y": 110.0,
       "width": 28,
       "height": 24,
       "takeable": true,
       "stealable": true,
       "in_inventory": false,
-      "moved": true,
+      "moved": false,
       "on_shelf": true
     },
     {
@@ -380,7 +340,7 @@
       "height": 31,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": true
     },
@@ -395,7 +355,7 @@
       "height": 31,
       "takeable": true,
       "stealable": false,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -403,15 +363,15 @@
       "object_id": "shop_bucket",
       "name": "Bucket",
       "kind": "bucket",
-      "area_id": "britrun_market",
-      "x": 211.0,
-      "y": 198.0,
+      "area_id": "alchemy_shop",
+      "x": 157.0,
+      "y": 451.0,
       "width": 36,
       "height": 30,
       "takeable": true,
       "stealable": false,
-      "in_inventory": true,
-      "moved": true,
+      "in_inventory": false,
+      "moved": false,
       "on_shelf": false
     },
     {
@@ -440,7 +400,7 @@
       "height": 30,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -455,7 +415,7 @@
       "height": 30,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -470,7 +430,7 @@
       "height": 29,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -555,9 +515,9 @@
       "kind": "door",
       "area_id": "castle_hall",
       "x": 601.0,
-      "y": 516.0,
+      "y": 279.0,
       "width": 88,
-      "height": 73,
+      "height": 123,
       "takeable": false,
       "stealable": false,
       "in_inventory": false,
@@ -704,8 +664,8 @@
       "name": "Wooden Serving Platter",
       "kind": "plate",
       "area_id": "castle_hall",
-      "x": 973.0,
-      "y": 451.0,
+      "x": 908.1163491861041,
+      "y": 475.66365081389597,
       "width": 48,
       "height": 26,
       "takeable": true,
@@ -770,7 +730,7 @@
       "height": 32,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -785,7 +745,7 @@
       "height": 31,
       "takeable": true,
       "stealable": true,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -860,7 +820,7 @@
       "height": 33,
       "takeable": true,
       "stealable": false,
-      "in_inventory": true,
+      "in_inventory": false,
       "moved": false,
       "on_shelf": false
     },
@@ -958,7 +918,7 @@
       "object_id": "inn_mead_bottle",
       "name": "Black-Briar Mead",
       "kind": "mead",
-      "area_id": "__consumed__",
+      "area_id": "inn_interior",
       "x": 445.0,
       "y": 320.0,
       "width": 28,
@@ -981,51 +941,6 @@
       "takeable": false,
       "stealable": false,
       "in_inventory": false,
-      "moved": false,
-      "on_shelf": false
-    },
-    {
-      "object_id": "c1_generated_1",
-      "name": "Khajiit Trinket",
-      "kind": "gold",
-      "area_id": "stables",
-      "x": 1110.265079348882,
-      "y": 429.0050793488834,
-      "width": 28,
-      "height": 24,
-      "takeable": true,
-      "stealable": false,
-      "in_inventory": true,
-      "moved": false,
-      "on_shelf": false
-    },
-    {
-      "object_id": "c1_generated_2",
-      "name": "Exotic Spice",
-      "kind": "herb",
-      "area_id": "stables",
-      "x": 1110.265079348882,
-      "y": 429.0050793488834,
-      "width": 28,
-      "height": 33,
-      "takeable": true,
-      "stealable": false,
-      "in_inventory": true,
-      "moved": false,
-      "on_shelf": false
-    },
-    {
-      "object_id": "c1_generated_3",
-      "name": "Caravan Bauble",
-      "kind": "gold",
-      "area_id": "stables",
-      "x": 1110.265079348882,
-      "y": 429.0050793488834,
-      "width": 28,
-      "height": 24,
-      "takeable": true,
-      "stealable": false,
-      "in_inventory": true,
       "moved": false,
       "on_shelf": false
     }
@@ -1348,9 +1263,9 @@
       "kind": "door",
       "area_id": "castle_hall",
       "x": 601,
-      "y": 516,
+      "y": 279,
       "width": 88,
-      "height": 73,
+      "height": 123,
       "takeable": false,
       "stealable": false,
       "on_shelf": false
@@ -1735,27 +1650,6 @@
       "takeable": false,
       "stealable": false,
       "on_shelf": false
-    },
-    "c1_generated_1": {
-      "object_id": "c1_generated_1",
-      "name": "Khajiit Trinket",
-      "kind": "gold",
-      "value": 450,
-      "stealable": false
-    },
-    "c1_generated_2": {
-      "object_id": "c1_generated_2",
-      "name": "Exotic Spice",
-      "kind": "herb",
-      "value": 190,
-      "stealable": false
-    },
-    "c1_generated_3": {
-      "object_id": "c1_generated_3",
-      "name": "Caravan Bauble",
-      "kind": "gold",
-      "value": 320,
-      "stealable": false
     }
   }
 }
