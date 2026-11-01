@@ -1,0 +1,57 @@
+{
+  "version": "SGGF1.1",
+  "based_on": "SGGF1.0",
+  "scope": "Extracted original carriage artwork into its own fixed JSON world object; replaced the baked-in horse with an independently editable dark-bay draft-horse recipe; extracted the right-side paddock rails/posts as a separate foreground object. No intended gameplay changes.",
+  "preserved": [
+    "F1.0 player progress/save schema",
+    "Kitty animation recipes and patrol",
+    "Stables background commands outside the extracted coach/horse/fence regions",
+    "Stables solid geometry/navigation/vendor location",
+    "Fearmonger reward and Egg McGuffin Sammich",
+    "driver breakfast handoff and carriage unlock",
+    "Cozmo four-page Part One finale",
+    "visitor comments feature",
+    "all historical site releases"
+  ],
+  "source_main_sha256": "355422c6414a8db235267dc1b8e067511225032328be625cd8ea65e75301ae49",
+  "assets_json_sha256": "098b0ff9ea722a9c3d1928f422b9cbeaf6fb6209d196976287ddfdaa1586fa1c",
+  "previous_deploy_sha256": "9d30d641f94f1b8031076b643fe2893701d73f5fb77812837f7f067005e8e115",
+  "deploy_sha256": "6a72dc5b54d1ad478a0e06e153ce3a7e03578191c9c2a80661b0901a0b14ba27",
+  "deploy_bytes": 14909043,
+  "historical_site_entry_count_preserved": 140,
+  "new_deployment_files": [
+    "SGGF1.1/play.html",
+    "SGGF1.1/favicon.png",
+    "SGGF1.1/sggf11.apk",
+    "SGGF1.1/sggf11.tar.gz",
+    "SGGF1.1/README_SGGF11.txt"
+  ],
+  "release_catalog_versions": 28,
+  "independent_assets": {
+    "stable_carriage": {
+      "size": [
+        373,
+        248
+      ],
+      "commands": 56
+    },
+    "stable_draft_horse": {
+      "size": [
+        200,
+        200
+      ],
+      "commands": 65,
+      "coat": "dark bay / chestnut with black mane and lower legs"
+    },
+    "stables_foreground_fence": {
+      "size": [
+        137,
+        62
+      ],
+      "commands": 5
+    }
+  },
+  "stable_background_command_count": 648,
+  "static_regression": "PASS: Python AST/py_compile, Luma engine load, all recipe commands supported, exact coach/fence extraction, Kitty artwork equality, Stable geometry/remaining background command equality, F1.0 save migration, original quest/driver/finale regression harness, mobile gate and catalog checks, deployment ZIP CRC, all original 140 site entries preserved apart from version catalog, F1.1 APK/tar payload equality.",
+  "runtime_note": "The game was not launched in a live browser during this build; please field-test the deployed release before treating browser runtime behavior as verified."
+}

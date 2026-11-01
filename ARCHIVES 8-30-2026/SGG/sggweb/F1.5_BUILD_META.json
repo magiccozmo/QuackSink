@@ -1,0 +1,74 @@
+{
+  "version": "SGGF1.5",
+  "based_on": "SGGF1.4",
+  "repository": "magiccozmo/QuackSink",
+  "source_folder": "ARCHIVES 8-30-2026/SGG/sggweb",
+  "scope": "Castle Hall art redesign, permanently locked interactive Bank Vault Door dialogue, and configurable off-centre platter clip hitbox. Existing Mage Room and Castle Exterior transitions, original seam connection and all other F1.4 gameplay/world data are preserved.",
+  "art": {
+    "castle_hall_commands": 634,
+    "vault_door_commands": 71,
+    "preview": "F1.5_CASTLE_HALL_PREVIEW.png"
+  },
+  "preserved": [
+    "F1.4 Castle Exterior and Castle Path artwork, all other art assets and scenes.",
+    "All F1.4 world geometry, navigation regions, collision definitions, left Mage Room door/trigger/connection/arrival, middle Castle Exterior door/trigger/connection/arrival, existing vault seam object, and vault clip connection.",
+    "All F1.4 gameplay/save/quest/inventory/Kitty/Stables/carriage/comments/Part One code apart from the explicitly listed F1.5 additions and release/hint labels.",
+    "Every previously deployed site member byte-for-byte except versions.json; five F1.5 versioned browser files are appended."
+  ],
+  "vault": {
+    "object_id": "vault_locked_door",
+    "dialogue": "Pick lock; Force open; Leave the vault alone",
+    "pick_lock_response": "Are you kidding? Even the Skeleton Key ain't gonna pick this.",
+    "plate_response": "Oddly the plate ALMOST squeezes in a gap.",
+    "can_open": false,
+    "inventory_items_consumed": false
+  },
+  "special_hard_hitbox": {
+    "config_key": "special_hard_hitbox",
+    "label": "Special Hard Hitbox",
+    "range": [
+      1.0,
+      5.0
+    ],
+    "default": 3.0,
+    "1.0": "larger and more forgiving",
+    "5.0": "smaller and more precise",
+    "target_center": [
+      1046,
+      333
+    ],
+    "relative_to_vault_center_px": [
+      63,
+      0
+    ]
+  },
+  "tests": [
+    "PASS Python AST and py_compile.",
+    "PASS F1.5 regression checks: JSON scope lock, all Luma commands supported, F1.4 door/connection preservation, walkmesh approach reachability, vault hit-test, plate-only directional clip, off-centre scaling, held-plate inventory selection, pick-lock and item-specific force dialogue, vault remains closed, config persistence, and F1.5 browser page identifiers.",
+    "PASS runtime APK/TAR content equality to the exact F1.5 source files.",
+    "PASS deploy ZIP CRC, no duplicate paths, 32-entry version manifest, and byte-for-byte preservation of 160 prior deployment entries other than versions.json.",
+    "PASS rendered Castle Hall preview from the F1.5 Luma JSON recipe."
+  ],
+  "runtime_note": "The build and static regressions passed. The game was not launched in a live browser during this build; Cozmo must field-test pointer/E interaction, movement, inventory UI and saved settings before runtime behavior is considered confirmed.",
+  "hashes": {
+    "main_sha256": "3062e492a230223d0c6beb25bbecc4fb08d915f38b15e351577f1ba26e48a3b8",
+    "assets_sha256": "e96fa7d3196fdf5778bf62ff7eff164d69677b4d41bda3eeed21555c5fa5e4d6",
+    "base_deploy_sha256": "05b97cb5efb87f154dac85736583942c81da16e3594cfdee67a6ef01b0df9ba0",
+    "deploy_sha256": "9a9c6ea7821b16dc8d08b56ab0b243023d13014616d9f36cca633252c1a4c0ae"
+  },
+  "bytes": {
+    "deploy": 17671589
+  },
+  "source_archive_digest_note": "Not embedded: the source archive contains this metadata file, so embedding the archive SHA-256 would be self-referential. Calculate the source ZIP SHA-256 externally after packaging.",
+  "deploy_entries": {
+    "previous_entries_preserved": 160,
+    "catalog_versions": 32,
+    "new_files": [
+      "SGGF1.5/play.html",
+      "SGGF1.5/favicon.png",
+      "SGGF1.5/sggf15.apk",
+      "SGGF1.5/sggf15.tar.gz",
+      "SGGF1.5/README_SGGF15.txt"
+    ]
+  }
+}

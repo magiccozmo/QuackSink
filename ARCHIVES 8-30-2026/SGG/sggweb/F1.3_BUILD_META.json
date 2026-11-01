@@ -1,0 +1,33 @@
+{
+  "version": "SGGF1.3",
+  "based_on": "SGGF1.2",
+  "repository": "magiccozmo/QuackSink",
+  "source_folder": "ARCHIVES 8-30-2026/SGG/sggweb",
+  "base_source_blob_sha": "7cd25fd875ee2b7102888488992f6e9ffadf1836",
+  "base_deploy_blob_sha": "a51abb9aeb5d4cbab6ffd535635859b4b4ed19a5",
+  "scope": "Remove the temporary Castle Path threshold guide stroke; add a castle-ward directional Castle Exterior arrow/label; move the reverse landing to (834, 400). No other art, world, gameplay or threshold logic changes.",
+  "preserved": [
+    "E5.6 crossing threshold coordinates, vectors, crossing direction and lateral tolerance (byte-for-byte class preservation)",
+    "All F1.2 asset recipes except the three-pass Castle Path marker line",
+    "All F1.2 world definitions except reverse arrival_x/arrival_y (834, 400)",
+    "Stables horse, carriage, fence, background, Kitty art/behavior and Stables geometry",
+    "F1.2 save behavior, inventory, driver/sammich handoff, Fearmonger quest, comments, Cozmo finale and Part One gameplay",
+    "All F1.2 and earlier deployment files; only versions.json advances and five F1.3 files are added"
+  ],
+  "main_sha256": "ba444ff6004ee86d999d20dd753acac83eee14cad2be1ae77f9ea849f174dc90",
+  "assets_sha256": "75dce600ceb105fe24f0daff597479e098da6487c5579be0d56a6292f57b9b15",
+  "previous_deploy_sha256": "b6f8b5cc5e7e25af3125046ad34066240b86c4e95ea1ab4d7680ce2a00745547",
+  "deploy_sha256": "bb0d6a8354c93f0e49ddbf9ed734cbd92cb068e7fc7d20ba44ae65c6067848ee",
+  "deploy_bytes": 16220065,
+  "historical_site_entries_preserved": 150,
+  "release_catalog_versions": 30,
+  "new_deployment_files": [
+    "SGGF1.3/play.html",
+    "SGGF1.3/favicon.png",
+    "SGGF1.3/sggf13.apk",
+    "SGGF1.3/sggf13.tar.gz",
+    "SGGF1.3/README_SGGF13.txt"
+  ],
+  "static_regression": "PASS: Python AST/py_compile; full adapted F1.2 tests; strict full-JSON F1.2-to-F1.3 diff; exact E5.6 state-machine/model preservation; Castle Exterior arrow orientation; real F1.3 model return to (834,400); authored navigation corridor; threshold-lookup tolerance; deployment CRC and byte-for-byte historical file preservation.",
+  "runtime_note": "Build-time tests and renderer-generated preview passed. The game was not launched in a live browser during this build; please field-test deployed F1.3 before treating browser runtime behavior as verified."
+}

@@ -1,0 +1,31 @@
+{
+  "version": "SGGF1.4",
+  "based_on": "SGGF1.3",
+  "repository": "magiccozmo/QuackSink",
+  "source_folder": "ARCHIVES 8-30-2026/SGG/sggweb",
+  "scope": "Rebuild only the Castle Exterior background to visually match the F1.3 Castle Path fortress. Preserve the Castle Path artwork, all world/transition/collision/navigation definitions, door trigger, all other scene recipes, gameplay and save behavior.",
+  "castle_exterior_recipe": "903 Luma primitive commands; 1280x640.",
+  "preserved": [
+    "F1.3 Castle Path background recipe and all other background/character/object recipes, except only the Castle Exterior background recipe is replaced.",
+    "All F1.3 world definitions byte-for-byte: area geometry, solid rectangles, sight blockers, navigation regions, objects, door location/walk trigger, and connection arrival positions.",
+    "F1.3 model/state-machine classes and gameplay logic; only VERSION/status/header release text changes.",
+    "Stables, Kitty, horse, carriage, fence, inventory, quest, save migration, dialogue and Part One gameplay.",
+    "All F1.3 and earlier deployed site files byte-for-byte; only versions.json advances and five new F1.4 version files are appended."
+  ],
+  "main_sha256": "941e87dfa6ab24cda80aaf7813358efa156b9b9d07456eefec2baeff2aad2765",
+  "assets_sha256": "96359250fb7fda6f4be135135a2fbbe429062614d649ff57214dbe2a356a59fa",
+  "base_deploy_sha256": "bb0d6a8354c93f0e49ddbf9ed734cbd92cb068e7fc7d20ba44ae65c6067848ee",
+  "deploy_sha256": "05b97cb5efb87f154dac85736583942c81da16e3594cfdee67a6ef01b0df9ba0",
+  "deploy_bytes": 16880684,
+  "historical_site_entries_preserved": 155,
+  "release_catalog_versions": 31,
+  "new_deployment_files": [
+    "SGGF1.4/play.html",
+    "SGGF1.4/favicon.png",
+    "SGGF1.4/sggf14.apk",
+    "SGGF1.4/sggf14.tar.gz",
+    "SGGF1.4/README_SGGF14.txt"
+  ],
+  "static_regression": "PASS: Python AST/py_compile; F1.4 regression suite; exact F1.3-to-F1.4 JSON diff scope lock; Castle Path exact preservation; exact world/door/collision/navigation/transition preservation; old class logic preservation apart from release status string; runtime APK/TAR payload hashes; deployment ZIP CRC and byte-for-byte preservation of all previous site files except versions.json.",
+  "runtime_note": "Build-time tests and renderer-generated preview passed. The game was not launched in a live browser during this build; field-test F1.4 in the browser before treating browser runtime behavior as verified."
+}
