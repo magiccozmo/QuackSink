@@ -1,0 +1,41 @@
+name: Export F1o cave baseline
+on:
+  push:
+    branches:
+      - transfer/f1o-cave-baseline-export-20261102
+    paths:
+      - .github/workflows/export-f1o-cave-baseline.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact F1o baseline
+        uses: actions/checkout@v4
+      - name: Stage and verify original F1o packages and cave reference
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p transfer
+          cp "$ROOT/SGGF1.666f1o_SOURCE.zip" transfer/
+          cp "$ROOT/SGGF1.666f1o_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "$ROOT/pics/side_of_mtnf1n.png" transfer/
+          test -s transfer/SGGF1.666f1o_SOURCE.zip
+          test -s transfer/SGGF1.666f1o_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s transfer/side_of_mtnf1n.png
+          unzip -t transfer/SGGF1.666f1o_SOURCE.zip
+          unzip -t transfer/SGGF1.666f1o_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/* > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/* > transfer/SIZES.txt
+          file transfer/*
+      - name: Upload exact originals and reference image
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1o-cave-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
