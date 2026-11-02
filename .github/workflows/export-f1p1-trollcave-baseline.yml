@@ -1,0 +1,43 @@
+name: Export F1p.1 Troll Cave baseline
+on:
+  push:
+    branches:
+      - transfer/f1p1-trollcave-baseline-20261102
+    paths:
+      - .github/workflows/export-f1p1-trollcave-baseline.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact current main baseline
+        uses: actions/checkout@v4
+      - name: Stage original release packages and PNG gallery assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p transfer/pics
+          cp "$ROOT/SGGF1.666f1p.1_SOURCE.zip" transfer/
+          cp "$ROOT/SGGF1.666f1p.1_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "$ROOT/workflow.txt" transfer/
+          cp "$ROOT/todo heap.txt" transfer/
+          cp "$ROOT/pics/"*.png transfer/pics/
+          test -s transfer/SGGF1.666f1p.1_SOURCE.zip
+          test -s transfer/SGGF1.666f1p.1_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s "transfer/pics/troll cave f1p.png"
+          unzip -t transfer/SGGF1.666f1p.1_SOURCE.zip
+          unzip -t transfer/SGGF1.666f1p.1_COMPLETE_CLOUDFLARE_SITE.zip
+          printf 'PNG count: '; find transfer/pics -maxdepth 1 -type f -iname '*.png' | wc -l
+          sha256sum transfer/SGGF1.666f1p.1_*.zip transfer/pics/*.png > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/SGGF1.666f1p.1_*.zip transfer/pics/*.png > transfer/SIZES.txt
+      - name: Upload exact baseline and current art references
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1p1-trollcave-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
