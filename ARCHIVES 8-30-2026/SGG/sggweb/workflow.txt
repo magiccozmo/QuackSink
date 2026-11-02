@@ -1,0 +1,75 @@
+IMPORTANT: READ THIS BEFORE STARTING ANY SGG DEVELOPMENT.
+
+We are working on Spiffy's Gift (SGG), in my public GitHub repository:
+
+https://github.com/magiccozmo/QuackSink
+
+The project is under:
+ARCHIVES 8-30-2026/SGG/
+
+The web project is under:
+ARCHIVES 8-30-2026/SGG/sggweb/
+
+YOUR JOB IS TO RETRIEVE THE ACTUAL EXISTING PROJECT FILES FROM GITHUB, USE THEM AS THE BASE, MAKE THE REQUESTED CHANGES, AND DELIVER COMPLETE ZIP FILES TO MY DROPBOX.
+
+DO NOT ASK ME TO UPLOAD A ZIP THAT IS ALREADY IN MY PUBLIC REPOSITORY.
+
+GITHUB RETRIEVAL PROCEDURE:
+
+1. Examine the GitHub repository and locate the exact version I specify as the starting point. Look for its actual versioned ZIP files. Identify the deployment ZIP and source ZIP when both exist.
+
+2. Do not mistake a GitHub "blob" webpage for the actual file.
+
+   For a link such as:
+   https://github.com/OWNER/REPO/blob/main/path/to/file.zip
+
+   Retrieve the actual binary file from:
+   https://raw.githubusercontent.com/OWNER/REPO/main/path/to/file.zip
+
+   Preserve URL-encoded spaces (%20). Download the actual file into your working directory.
+
+3. Verify that the downloaded file is a real, usable ZIP:
+   - Check that it exists and has a nonzero size.
+   - Test the ZIP integrity.
+   - Inspect its contents.
+   - Make sure you have not accidentally downloaded an HTML webpage or a Git LFS pointer instead.
+
+4. Keep an untouched copy of the original. Extract a separate working copy. Inspect its contents and use that exact version as the foundation for the new release.
+
+5. If the direct raw download fails, try an appropriate alternative retrieval method. Do not endlessly repeat the same failed attempt. Do not pretend you accessed a file you did not actually download. Report the exact problem and stop if the file cannot be retrieved.
+
+DEVELOPMENT PROCEDURE:
+
+6. Work from the exact base version I specified. Do not substitute an older release, reconstruct the game from memory, or start from a blank project.
+
+7. Make ONLY the changes I request. Preserve unrelated scenes, artwork, assets, mechanics, transitions, dialogue, and functionality.
+
+8. Preserve backward-compatible saves and existing historical versions. Never overwrite an existing release or archive.
+
+9. Test the changes and check for accidental regressions. Verify the deployment and source packages before delivery.
+
+10. Produce complete, ready-to-use ZIP files, not patches or instructions requiring me to edit code.
+
+DELIVERY PROCEDURE:
+
+11. Prepare the complete Cloudflare deployment ZIP and the complete source ZIP, unless I specifically request otherwise.
+
+12. Upload both to my existing SGG folder in Dropbox:
+    /SGG/
+
+I have already authorized routine SGG version-package uploads to Dropbox. Do not repeatedly ask me for permission to perform the normal upload.
+
+Use unique versioned filenames. Never overwrite an existing ZIP. Verify that each upload actually succeeded before telling me it is in Dropbox.
+
+13. Give me the download links to the completed packages and briefly identify what changed, what was tested, and anything that remains untested.
+
+IMPORTANT WORKING RULES:
+
+- Do not ask me to repeat information I have already supplied.
+- Do not claim that you accessed, extracted, inspected, tested, or uploaded something unless you actually did.
+- Do not give me partial code or ask me to manually patch files.
+- Do not modify or push changes to GitHub unless I explicitly request that.
+- Do not put large MP4 files in the project archive.
+- If something prevents you from following this procedure, explain the specific obstacle instead of going in circles.
+
+FIRST, locate and retrieve the exact base version. VERIFY IT. THEN START WORK.
