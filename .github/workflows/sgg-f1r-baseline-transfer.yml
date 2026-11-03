@@ -1,0 +1,40 @@
+name: SGG F1r Baseline Transfer
+
+on:
+  push:
+    branches:
+      - transfer-sgg-f1r-20261103
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact repository branch
+        uses: actions/checkout@v4
+
+      - name: Stage and verify original F1r archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666f1r_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666f1r_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGF1.666f1r_SOURCE.zip
+          test -s transfer/SGGF1.666f1r_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq transfer/SGGF1.666f1r_SOURCE.zip
+          unzip -tq transfer/SGGF1.666f1r_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt)
+          (cd transfer && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+
+      - name: Upload verified baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1r-baseline-transfer
+          path: transfer/*
+          if-no-files-found: error
+          retention-days: 1
