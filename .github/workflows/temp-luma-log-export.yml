@@ -1,0 +1,31 @@
+name: Temporary Clean2.7 Luma log export
+
+on:
+  push:
+    branches:
+      - temp/mage-lab-clean26-export
+
+permissions:
+  contents: read
+
+jobs:
+  export-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve cumulative append-only log from pinned temporary commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/f5856c761e8f390090f5ba874f0e47662ee42a46/ARCHIVES%208-30-2026/SGG/sggweb/lumas_log_Entry012.txt"
+          curl --fail --location --retry 3 "$URL" -o staging/lumas_log_Entry012.txt
+          test -s staging/lumas_log_Entry012.txt
+          test "$(wc -c < staging/lumas_log_Entry012.txt)" -gt 75000
+          sha256sum staging/lumas_log_Entry012.txt | tee staging/SHA256.txt
+      - name: Upload cumulative log
+        uses: actions/upload-artifact@v4
+        with:
+          name: lumas-log-Entry012
+          path: staging/*
+          retention-days: 1
+          if-no-files-found: error
