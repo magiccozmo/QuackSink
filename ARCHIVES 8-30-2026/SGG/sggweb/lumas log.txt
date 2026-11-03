@@ -382,3 +382,127 @@ The three deliverables were created and verified in the assistant working enviro
 ===============================================================================
 END ENTRY 005
 ===============================================================================
+
+===============================================================================
+ENTRY 006 — SGGF1Clean2.2 PEAK SUMMIT / SCENIC OVERLOOK
+Date: 2026-11-03
+Status: Complete source and deployment packages built and statically verified; awaiting Cozmo field test
+===============================================================================
+
+USER REQUEST
+
+Cozmo approved the next SGG revision and asked for a full summit redesign with a special Scenic Overlook experience. He then clarified that the second Troll Cave entrance at Peak must be removed; the existing Mountainside entrance is sufficient. The former Peak cave entrance was a cute one-off idea, but it should not remain as a duplicate route.
+
+The requested experience:
+- Make Peak read as the actual top of the mountain.
+- Add a ledge/platform with mouse-over text exactly "Scenic Overlook".
+- Interaction opens a beautiful panorama looking down over BritRun and the surrounding region.
+- The player may remain in the view as long as desired.
+- A movement key returns to the normal summit UI.
+- Cozmo then appears and says:
+  "Now aint THAT just a thing.  Luma really did a nice job on that view.  We hope you enjoyed it. Either way, please leave a comment and let us know. Enjoy the rest of your adventures"
+- When the player dismisses the dialogue, Cozmo disappears.
+- Preserve the rest of SGG. The user explicitly asked for fun and creative effort, but no loss of existing areas, mechanics, or history.
+
+EXACT BASELINE
+
+Built from the exact SGGF1Clean2.1 SOURCE and COMPLETE_CLOUDFLARE_SITE packages already retrieved and verified in the previous session. The original Clean2.1 archive hashes were:
+SOURCE: 8cb68f4f010450c6a5865fa181553fd094d25473bea6eb21fdbbd66a4668b5fa
+COMPLETE_CLOUDFLARE_SITE: 887d69e08f905f3ed2d909b46f8229b7e784433e47107f76d24bfc9023fd2850
+
+Pristine source/deploy copies were preserved separately from the working copies. The new release directories were created from Clean2.1 rather than reconstructed or created from scratch.
+
+PEAK SUMMIT / LUMA DRAW ENGINE
+
+New candidate: SGGF1Clean2.2 (runtime F1Clean2.2)
+
+- Rebuilt the Peak summit background through the existing JSON-controlled Luma Draw Engine. The new scene reads as an elevated mountain top with a stone approach, a viewing deck, brass railing, telescope, and valley beyond.
+- Added a separate Scenic Overlook object, using kind "scenic_overlook", name "Scenic Overlook", and a dedicated drawing recipe. The game hit-test now treats it as an interactive non-takeable object, preserving the established click/E interaction model.
+- Added a complete full-screen Luma Draw Engine panorama recipe named c1_peak_overlook. It looks down across the Stables, BritRun Market, Castle, and Gold District, with layered mountain ranges, valley fields, woodland, river, and a high cliff foreground. The view has its own restrained title, geographic labels, and a footer telling the player to move to return.
+- While the panorama is open, the game update loop pauses and all world input is consumed. The player may linger without advancing the world clock, NPCs, timers, or other simulation. WASD, configured movement keys, arrow keys, or Escape returns to Peak.
+- On return, Cozmo appears at the summit and the requested appreciation dialogue is presented. The single response option ("Thank you, Cozmo!") or Escape dismisses the dialogue and clears the cameo actor, so he disappears.
+- The original game interface is restored after leaving the panorama. This is an additive state-machine/interface extension; the new classes inherit Clean2.1's game logic and established SGG UI.
+
+DUPLICATE CAVE REMOVAL / OLD SAVE COMPATIBILITY
+
+- Removed only Peak object troll_cave_entrance.
+- Removed only Peak connection peak_to_troll_cave.
+- Preserved Mountainside object mountain_cave_entrance and connection side_of_mountain_to_troll_cave.
+- Preserved the reciprocal Mountain Path / Peak transitions and the tested Mountain Path endpoint (677.7, 184.7).
+- Added a narrowly scoped migration for older saves: if the obsolete Peak doorway object remains in a loaded snapshot, it is removed along with stale item metadata/selection/carried/inventory references to that one object. Other saved player/world/quest/inventory state is not reset by this migration.
+- Replaced the old Peak-only cave blockers/navigation strip with a broad summit navigation region which includes the Peak arrival and the Scenic Overlook platform. The prior Peak geometry was specific to the removed cave approach. No other area's collision or navigation was changed.
+
+PRESERVATION AND FRONT-DOOR HISTORY
+
+Static comparison against Clean2.1 confirms:
+- Every non-Peak area definition is identical.
+- Every pre-existing world object other than the single removed Peak cave doorway is identical.
+- Every retained connection is identical; only peak_to_troll_cave was removed.
+- The only asset recipe changes are c1_bg_peak (redesigned), plus new scenic_overlook and c1_peak_overlook recipes.
+- Existing Mountain Path artwork, walkmesh corridors, player-tested endpoint, and reciprocal Peak transition definitions remain unchanged.
+- All ten prior playable deployment folders are byte-for-byte unchanged.
+- Front-door catalogue now has eleven choices, with SGGF1Clean2.2 at the top, followed by SGGF1Clean2.1, SGGF1Clean2, and the eight curated milestones. Every catalogue path and existing preview resolves.
+- No MP4 or other large video files were added to the deployment.
+
+STATIC TEST RESULTS
+
+155 static regression assertions passed. They include:
+- Python AST parse and compilation for the new runtime.
+- New state-machine/interface inheritance and active application wiring.
+- Exact Cozmo dialogue string and overlook interaction hooks.
+- Luma Draw Engine schema, primitive operations, colour channel bounds, and all three Peak recipe command lists.
+- Allowed source JSON differences only; no unintended non-Peak area/object/connection changes.
+- Duplicate Peak cave object/connection removal and original Mountainside cave entrance retention.
+- Peak summit navigation definition and unchanged Mountain Path transition definitions.
+- Eleven catalogue entries and all launch/preview paths.
+- All ten prior deployed version folders compared byte-for-byte against the Clean2.1 deployment.
+- New APK ZIP integrity, matching main.py and Luma JSON payload; TAR contains the matching runtime sources.
+- Source/deployment tree and runtime payload equality.
+- Both outer release ZIPs reopened and passed full integrity checks.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.2_SOURCE.zip
+Size: 58,818,066 bytes
+SHA-256: 800837b2500c9197036c20ce32c38fe15f8238f4d39935d3965855960adf6fcc
+ZIP entries: 472
+
+SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 13,216,943 bytes
+SHA-256: 7ca6b1fc2f1780c9548862ebd49e06cfc236f18e53e0300d82c4cd4765342eec
+ZIP entries: 112
+
+This Entry006 log is a separate handoff and is not embedded in either ZIP.
+
+NOT YET VERIFIED / FIELD TEST REQUIRED
+
+This environment did not have Pygame or a live browser/Cloudflare runtime available. No live click/E test, player walk, panorama entry/exit, Cozmo speech/dialogue dismissal, old-save migration, or real transition test was performed. Static checks establish the data/logic wiring and package integrity but do not substitute for a live game test.
+
+Cozmo should field-test:
+1. Walk from Mountain Path up to Peak using the existing grounded route.
+2. Confirm no second Troll Cave entrance is present at Peak, and the original Mountainside entrance still works.
+3. Hover over the new platform; it should read "Scenic Overlook".
+4. Click or press E; the panorama should open and remain until a movement key, arrow key, or Escape is pressed.
+5. Confirm the normal summit UI returns, Cozmo appears, speaks the requested message, and disappears after the dialogue is dismissed.
+6. Confirm the panorama pauses world simulation while open and that ordinary movement resumes after closing it.
+7. Verify an older save loads with player state, inventory, quests, and world state intact apart from the obsolete Peak doorway.
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was performed. Cozmo handles those publication steps. The new candidate is not to be called field-tested or the new stable baseline until Cozmo reports his in-game test.
+
+Dropbox destination requested: /SGG/
+Expected separate deliverables:
+- SGGF1Clean2.2_SOURCE.zip
+- SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry006.txt
+
+Upload each without overwriting any older release, wait for completed status, and verify Dropbox metadata before reporting success.
+
+===============================================================================
+END ENTRY 006
+===============================================================================
+
+DELIVERY STATUS UPDATE — 2026-11-03
+
+The two release ZIPs and this cumulative log were exposed as downloadable conversation files and their exact container paths were verified. The Dropbox upload operation could not be completed in this session: the Dropbox connector requires a ChatGPT file-parameter payload, and the available generated conversation file references were not accepted as that payload. A call without the required injected source_file was rejected before upload. The /SGG folder was then checked; no Clean2.2 package or Entry006 file is present there. Do not treat Dropbox delivery as complete. The three verified files are available as sandbox downloads in this conversation.
