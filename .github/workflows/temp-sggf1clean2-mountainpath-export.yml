@@ -1,0 +1,40 @@
+name: Temporary SGG Clean2 Mountain Path Baseline Export
+
+on:
+  push:
+    branches:
+      - temp/sggf1clean2-mountainpath-baseline
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline
+        uses: actions/checkout@v4
+
+      - name: Stage and verify original SGG packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-baseline
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2_MILESTONEFIX_SOURCE.zip" /tmp/sgg-baseline/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2_MILESTONEFIX_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-baseline/
+          cd /tmp/sgg-baseline
+          test -s SGGF1Clean2_MILESTONEFIX_SOURCE.zip
+          test -s SGGF1Clean2_MILESTONEFIX_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq SGGF1Clean2_MILESTONEFIX_SOURCE.zip
+          unzip -tq SGGF1Clean2_MILESTONEFIX_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum *.zip | tee SHA256SUMS.txt
+          stat -c '%n %s bytes' *.zip | tee FILESIZES.txt
+
+      - name: Upload verified original packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1Clean2-MILESTONEFIX-baseline
+          path: /tmp/sgg-baseline/*
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
