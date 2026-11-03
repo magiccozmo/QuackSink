@@ -1,0 +1,44 @@
+name: Temporary SGG F1s Baseline Export
+
+on:
+  push:
+    branches:
+      - temp/sggf1s-cleanup-baseline-export
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact repository baseline
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sggf1s-cleanup-baseline-export
+
+      - name: Stage and verify original F1s archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666f1s_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666f1s_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGF1.666f1s_SOURCE.zip
+          test -s transfer/SGGF1.666f1s_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq transfer/SGGF1.666f1s_SOURCE.zip
+          unzip -tq transfer/SGGF1.666f1s_COMPLETE_CLOUDFLARE_SITE.zip
+          {
+            sha256sum transfer/*.zip
+            wc -c transfer/*.zip
+            git rev-parse HEAD
+          } > transfer/BASELINE_MANIFEST.txt
+          cat transfer/BASELINE_MANIFEST.txt
+
+      - name: Upload verified original archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1s-baseline-transfer
+          path: transfer/*
+          if-no-files-found: error
+          retention-days: 1
