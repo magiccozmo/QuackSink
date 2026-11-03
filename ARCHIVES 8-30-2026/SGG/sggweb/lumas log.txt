@@ -219,3 +219,166 @@ DELIVERY STATUS
 Cozmo asked for all three files in Dropbox /SGG/. This session produced and verified all three local deliverables, but the Dropbox upload action could not be completed: the connector's upload function requires a ChatGPT file-parameter attachment, while the generated ZIPs and text log in this session were available only as local container files and were not exposed to that uploader. Do not report these files as present in Dropbox unless a later session verifies their Dropbox metadata. Direct sandbox download links were provided to Cozmo as a fallback.
 
 Neither GitHub main nor Cloudflare was modified. The candidate remains untested in a live browser. Await Cozmo's field report before calling F1Clean2 the new working baseline. If corrections are requested, use the exact F1Clean2 package as the candidate base only after confirming what Cozmo tested, and keep all prior ZIPs/log entries intact.
+
+===============================================================================
+ENTRY 004 — CLEAN2 CURATED MILESTONE HISTORY RESTORATION
+Date: 2026-11-03
+Status: Corrected package rebuilt and statically verified; awaiting republish and field test
+===============================================================================
+
+WHAT WENT WRONG
+
+Cozmo caught a front-door regression immediately after the first SGGF1Clean2 package was pushed for testing: the version chooser showed only the current Clean2 release. The previous Clean2 packaging pass mistakenly interpreted “keep the clean history lean” as “retain only the immediately previous clean version plus the current one.” That was too aggressive and contradicted the actual Cleanup1.0 curated distribution.
+
+The error was in the packaging script, not in Cloudflare or the front-door UI. The script copied the eight-entry Cleanup1.0 deployment, then deleted every version directory except Cleanup1.0 and rebuilt versions.json with only two entries. The source ZIP still held broader historical source material, but the complete static site ZIP no longer contained the curated playable milestone folders. A source archive alone does not make a historical edition selectable on the live front door; both its folder and catalogue entry must be in the deployment.
+
+COZMO'S CORRECTION — THE RULE TO PRESERVE
+
+The special/clean archive milestone editions MUST remain selectable in every later clean deployment. The intended distribution is not “only the newest and its immediate predecessor,” and it is also not “every version ever made.” It is the curated milestone set established by SGGF1.666Cleanup1.0, carried forward as a stable foundation, plus the current release.
+
+The eight versions retained by the known-good Cleanup1.0 deployment are:
+1. SGGE2.0
+2. SGGE3.1
+3. SGGE3.2
+4. SGGF1.0
+5. SGGF1.6
+6. SGGF1.666
+7. SGGF1.666f1s
+8. SGGF1.666Cleanup1.0
+
+For SGGF1Clean2 the complete front-door catalogue must therefore contain nine choices:
+- SGGF1Clean2 — current.
+- SGGF1.666Cleanup1.0 — previous clean release/rollback.
+- SGGF1.666f1s.
+- SGGF1.666.
+- SGGF1.6.
+- SGGF1.0.
+- SGGE3.2.
+- SGGE3.1.
+- SGGE2.0.
+
+The seven historical milestone folders and the Cleanup1.0 folder are copied directly from the verified Cleanup1.0 deployment and must remain byte-for-byte unchanged. Their existing descriptions, art links, and launch paths should be retained. Only the newest current entry is added and the former Cleanup1.0 current flag is changed to false.
+
+The ordinary intermediate releases (for example F1.666a/b/c/d/e/f and the many daily F1.666f1 iterations) remain excluded from this lean deploy. They continue to live in the source history, GitHub and Cozmo's local archives. Do not confuse the special milestone archive versions with ordinary intermediate test versions.
+
+CORRECTED BUILD
+
+The corrected Clean2 deployment now contains nine playable folders and nine front-door catalogue entries. The static site still carries forward the root index.html, versions.html, headers, and other site files from Cleanup1.0. The source handoff's embedded deploy/ directory was also refreshed to mirror the corrected complete Cloudflare site rather than an older incomplete deploy snapshot.
+
+Verification of the corrected package:
+- All nine catalogue entries point to a real launch HTML file (the SGGE2.0 edition uses its legacy index.html path; the others use play.html).
+- Each catalogue preview image path resolves to an existing image.
+- The seven selected historical milestone folders plus Cleanup1.0 are byte-for-byte identical to the verified Cleanup1.0 deployment folders.
+- The uncurated intermediate releases remain absent from the deployment.
+- The current Clean2 runtime code and Luma asset JSON remain the same as the first Clean2 candidate; this correction is packaging/history only.
+- The runtime APK and TAR payloads still match the current Clean2 source and pass integrity checks.
+- Both complete source and Cloudflare deployment ZIPs pass integrity checks.
+
+RELEASE IDENTITY AND STATUS
+
+The in-game/current release identity remains SGGF1Clean2. This is a corrective repackaging of the same candidate, not a new gameplay release and not a Mountain Path redesign revision. Use a distinct corrected package filename so the first candidate archive is not overwritten. Cozmo handles the repository update and Cloudflare deployment. The corrected package has not yet been live-tested after deployment, and the Mountain Path gameplay itself still awaits Cozmo's field report.
+
+IMPORTANT FUTURE PACKAGING RULE
+
+For every later clean release:
+1. Start from the exact current clean deployment ZIP.
+2. Read its versions.json and preserve the curated milestone set and all of its corresponding release folders.
+3. Add the new release as the current first entry.
+4. Change the previous current flag to false; do not delete old curated entries or folders.
+5. Keep ordinary intermediate test builds out of the deployment unless Cozmo explicitly asks to promote one to milestone status.
+6. Check every catalogue launch path and preview path, verify the previous selected folders byte-for-byte unchanged, and test the final ZIP.
+
+This entry supersedes the narrower two-version deployment interpretation recorded in Entry 002 and Entry 003. Those earlier entries remain intact as historical notes; this correction records the intended rule going forward.
+
+===============================================================================
+ENTRY 005 — MOUNTAIN PATH GROUNDED PEAK ENDPOINT
+Date: 2026-11-03
+Status: SGGF1Clean2.1 candidate built and statically verified; awaiting Cozmo's field test
+===============================================================================
+
+USER FIELD REPORT AND INTENT
+
+Cozmo tested SGGF1Clean2 and supplied:
+SGG_02NOV26_10-23-58pmVF1Clean2.LOG
+
+The Flight Recorder ends at Mountain Path player position (677.7, 184.7). The log showed the player negotiating the upper walkmesh through repeated zigzags and blocked vertical movement. Cozmo reported that this route was effectively correct except for the final visible stretch. His specific direction was to end the visible path about where the player stood in the supplied Mountain Path screenshot and put the Peak transition at that position.
+
+The screenshot defect was at the TOP of the path, not the Plains junction. The final beige trail segment continued away from the mountain and floated through open sky toward the Peak arrow. Do not revisit or redesign the lower Plains junction as part of this correction.
+
+RELEASE AND BASELINE
+
+New candidate: SGGF1Clean2.1
+
+Built from the exact Clean2 milestone-fix source and deployment archives retrieved from the current GitHub main commit:
+7623de91e98d9572821715f95dd081f030493086
+
+Original baseline packages:
+SGGF1Clean2_MILESTONEFIX_SOURCE.zip
+SGGF1Clean2_MILESTONEFIX_COMPLETE_CLOUDFLARE_SITE.zip
+
+The packages were retrieved through the temporary GitHub Actions binary-transfer bridge, not reconstructed from loose files. Their original ZIP integrity was checked before extraction. GitHub main and Cloudflare were not modified.
+
+MOUNTAIN PATH CORRECTION
+
+Only the Mountain Path area definition, its Luma Draw Engine asset recipe, and the small runtime transition/arrow integration needed for the new endpoint were changed.
+
+- The established lower and middle switchbacks remain in place.
+- The first two Mountain Path navigation corridors are exactly equal to the Clean2 baseline.
+- The last corridor now terminates at (677.7, 184.7), the player's logged final test position.
+- The final artwork segment was trimmed with the original curve's tangent retained, so the cut does not warp the earlier route. The endpoint has a small rounded visual cap.
+- The Peak arrow and label are now positioned over the grounded end of the path rather than at the top screen edge in the sky.
+- A narrowly scoped F1Clean2.1 state-machine extension detects the player within 22 pixels of the recorded endpoint and activates the existing mountain_path_top_peak edge connection. It then uses the established area-entry handler. The existing Peak destination, reciprocal return connection, world connection definitions, and arrival coordinates were not changed.
+- No other area definition or world connection changed. Plains and the lower route were left alone.
+
+CURATED FRONT-DOOR HISTORY
+
+The deployment keeps the prior Clean2 playable folder and all eight curated milestone editions, plus the new current edition: ten choices total.
+
+1. SGGF1Clean2.1 — current
+2. SGGF1Clean2 — previous Clean2 build
+3. SGGF1.666Cleanup1.0
+4. SGGF1.666f1s
+5. SGGF1.666
+6. SGGF1.6
+7. SGGF1.0
+8. SGGE3.2
+9. SGGE3.1
+10. SGGE2.0
+
+The eight curated milestone editions remain byte-for-byte preserved. The previous Clean2 folder is also preserved. The front-door version identifier validator was broadened to accept the established alpha-suffix plus numeric patch format (for example SGGF1Clean2.1 and SGGF1.666Cleanup1.0); static checks accept all ten IDs and each launch/preview path resolves.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.1_SOURCE.zip
+Size: 49,423,142 bytes
+SHA-256: 8cb68f4f010450c6a5865fa181553fd094d25473bea6eb21fdbbd66a4668b5fa
+
+SGGF1Clean2.1_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 10,259,894 bytes
+SHA-256: 887d69e08f905f3ed2d909b46f8229b7e784433e47107f76d24bfc9023fd2850
+
+Static validation:
+- Both final ZIPs reopened and passed full ZIP integrity checks (source: 374 entries; deployment: 85 entries).
+- Runtime APK and TAR payloads match the candidate main.py and Luma asset JSON.
+- Python source compiles.
+- Mountain Path endpoint and state-machine wiring assertions pass.
+- First two path corridors equal the Clean2 baseline.
+- World connection definitions equal the Clean2 baseline.
+- The eight curated milestone folders and previous Clean2 deploy folder remain present; catalogue has ten valid selectable entries.
+- The deployment package remains a complete site, not a partial folder patch.
+
+NOT YET VERIFIED
+
+This build environment did not launch the game in a live browser or Cloudflare. No real player walk, endpoint auto-transition, Peak arrival/return, save/load, or gameplay regression test has been performed by Luma. The state is a candidate, not an accepted stable baseline. Cozmo must field-test SGGF1Clean2.1 and report whether the player can reach the end of the visible trail, trigger the Peak transition naturally, and return correctly. Preserve this exact candidate until that report; do not silently call it field-tested.
+
+DELIVERY / PUBLICATION
+
+Do not push GitHub main or deploy Cloudflare. Cozmo handles those steps. Routine Dropbox delivery destination is /SGG/; upload the two versioned ZIPs and this updated cumulative log as separate files, then verify each Dropbox upload has completed and confirm exact metadata. Do not overwrite any prior package or Luma Log entry.
+
+DELIVERY STATUS FOR THIS HANDOFF
+
+The three deliverables were created and verified in the assistant working environment. Dropbox upload was not completed in this session: the available Dropbox upload action accepts a conversation attachment/file reference, but these generated container files were not exposed to it as valid upload attachments. Do not claim that SGGF1Clean2.1 or Entry005 is present in Dropbox until its metadata is independently confirmed. The verified local deliverables are provided as sandbox downloads in the conversation.
+
+===============================================================================
+END ENTRY 005
+===============================================================================
