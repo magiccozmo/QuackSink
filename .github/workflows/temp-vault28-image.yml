@@ -1,0 +1,26 @@
+name: Temporary vault28 image inspection
+on:
+  push:
+    branches:
+      - temp/export-clean27-baseline-20261103
+permissions:
+  contents: read
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact vault28 artwork from pinned main
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p image
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/664b2a68d83fb45268c9881f1fc36079a7639dad/ARCHIVES%208-30-2026/SGG/sggweb/pics/vault28.png"
+          curl -fL --retry 3 "$URL" -o image/vault28.png
+          file image/vault28.png
+          sha256sum image/vault28.png
+      - name: Upload image for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: vault28-image-inspection
+          path: image/vault28.png
+          retention-days: 1
