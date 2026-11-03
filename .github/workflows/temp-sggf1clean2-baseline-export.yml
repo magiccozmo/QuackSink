@@ -1,0 +1,40 @@
+name: Temporary SGGF1Clean2 baseline export
+
+on:
+  push:
+    branches:
+      - temp/sggf1clean2-baseline-export
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sggf1clean2-baseline-export
+      - name: Stage and verify exact Cleanup1.0 packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666Cleanup1.0_SOURCE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666Cleanup1.0_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          test -s /tmp/sgg-transfer/SGGF1.666Cleanup1.0_SOURCE.zip
+          test -s /tmp/sgg-transfer/SGGF1.666Cleanup1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq /tmp/sgg-transfer/SGGF1.666Cleanup1.0_SOURCE.zip
+          unzip -tq /tmp/sgg-transfer/SGGF1.666Cleanup1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd /tmp/sgg-transfer && sha256sum *.zip | tee SHA256SUMS.txt)
+          (cd /tmp/sgg-transfer && wc -c *.zip | tee FILE_SIZES.txt)
+      - name: Upload original project ZIPs
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1.666Cleanup1.0-exact-baseline
+          path: /tmp/sgg-transfer/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
