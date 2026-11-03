@@ -1,0 +1,32 @@
+name: Temporary Clean2.5 Baseline Export
+on:
+  push:
+    branches:
+      - temp/export-clean25-peak-baseline
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact Clean2.5 packages from pinned main commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          BASE="64324a4da16300390af72972b24c1eae54fbf4d1"
+          ROOT="https://raw.githubusercontent.com/magiccozmo/QuackSink/${BASE}/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL "${ROOT}/SGGF1Clean2.5_SOURCE.zip" -o transfer/SGGF1Clean2.5_SOURCE.zip
+          curl -fL "${ROOT}/SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s transfer/SGGF1Clean2.5_SOURCE.zip
+          test -s transfer/SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq transfer/SGGF1Clean2.5_SOURCE.zip
+          unzip -tq transfer/SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip > transfer/FILE_SIZES.txt
+      - name: Transfer original archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean25-baseline-transfer
+          path: transfer/
+          retention-days: 1
