@@ -21,8 +21,11 @@ jobs:
           BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/b2a98a0d3c3b1b7a6566699f70667eae817355d8/ARCHIVES%208-30-2026/SGG/sggweb"
           curl -fL --retry 3 "$BASE/SGGF1Clean2.11_SOURCE.zip" -o transfer/SGGF1Clean2.11_SOURCE.zip
           curl -fL --retry 3 "$BASE/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
+          LOGBASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/e257b408e4700aa2a15a65d6f85042fa2ae38976/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$LOGBASE/lumas_log_Entry017.txt" -o transfer/lumas_log_Entry017.txt
           test "$(stat -c%s transfer/SGGF1Clean2.11_SOURCE.zip)" = "97267886"
           test "$(stat -c%s transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip)" = "26426295"
+          test -s transfer/lumas_log_Entry017.txt
           echo "34c1f9e86cf097a45b0c2a26488cd8c1c711ddec71f8b98dc83e94fb0b739c50  transfer/SGGF1Clean2.11_SOURCE.zip" | sha256sum -c -
           echo "84031fb2a8e452a3ccbe617cb55c19885ab16977e0c7bcb66cebc122b7d99a6b  transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" | sha256sum -c -
           unzip -tq transfer/SGGF1Clean2.11_SOURCE.zip
