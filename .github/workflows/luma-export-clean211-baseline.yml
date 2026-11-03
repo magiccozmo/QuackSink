@@ -13,26 +13,28 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out pinned baseline branch
-        uses: actions/checkout@v4
-      - name: Stage exact release archives
+      - name: Fetch exact baseline archives at pinned main commit
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p transfer
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.11_SOURCE.zip" transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
-          test -s transfer/SGGF1Clean2.11_SOURCE.zip
-          test -s transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
-          unzip -t transfer/SGGF1Clean2.11_SOURCE.zip
-          unzip -t transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
+          BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/b2a98a0d3c3b1b7a6566699f70667eae817355d8/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.11_SOURCE.zip" -o transfer/SGGF1Clean2.11_SOURCE.zip
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
+          test "$(stat -c%s transfer/SGGF1Clean2.11_SOURCE.zip)" = "97267886"
+          test "$(stat -c%s transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip)" = "26426295"
+          echo "34c1f9e86cf097a45b0c2a26488cd8c1c711ddec71f8b98dc83e94fb0b739c50  transfer/SGGF1Clean2.11_SOURCE.zip" | sha256sum -c -
+          echo "84031fb2a8e452a3ccbe617cb55c19885ab16977e0c7bcb66cebc122b7d99a6b  transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" | sha256sum -c -
+          unzip -tq transfer/SGGF1Clean2.11_SOURCE.zip
+          unzip -tq transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
           (cd transfer && sha256sum *.zip > SHA256SUMS.txt && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
           cat transfer/SHA256SUMS.txt
           cat transfer/FILE_SIZES.txt
-      - name: Upload untouched baseline archives
+      - name: Transfer exact original archives
         uses: actions/upload-artifact@v4
         with:
           name: SGGF1Clean2.11-baseline-transfer
           path: transfer/
           retention-days: 1
+          compression-level: 0
           if-no-files-found: error
