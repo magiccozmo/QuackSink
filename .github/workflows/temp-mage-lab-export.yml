@@ -1,0 +1,38 @@
+name: Temporary Clean2.6 baseline export
+
+on:
+  push:
+    branches:
+      - temp/mage-lab-clean26-export
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve exact Clean2.6 release files from pinned main commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging
+          BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/265b63aaf3f8015bc03f47a28fbb374cdeede6e3/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl --fail --location --retry 3 --retry-delay 2 "$BASE/SGGF1Clean2.6_SOURCE.zip" -o staging/SGGF1Clean2.6_SOURCE.zip
+          curl --fail --location --retry 3 --retry-delay 2 "$BASE/SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip" -o staging/SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s staging/SGGF1Clean2.6_SOURCE.zip
+          test -s staging/SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq staging/SGGF1Clean2.6_SOURCE.zip
+          unzip -tq staging/SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+          {
+            stat -c '%n %s bytes' staging/*.zip
+            sha256sum staging/*.zip
+          } | tee staging/BASELINE_VERIFICATION.txt
+      - name: Upload verified original project archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1Clean2.6-baseline-transfer
+          path: staging/*
+          retention-days: 1
+          if-no-files-found: error
