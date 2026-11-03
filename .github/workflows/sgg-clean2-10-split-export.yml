@@ -1,0 +1,52 @@
+name: Temporary Clean2.9 split export
+on:
+  push:
+    branches:
+      - luma-clean2-10-split-export-20261103
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve and verify pinned Clean2.9 files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/f74d1a79f3cade5ccafe90bd226e651a5e94ff97/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.9_SOURCE.zip" -o transfer/SGGF1Clean2.9_SOURCE.zip
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip
+          curl -fL --retry 3 "$BASE/lumas_log_Entry014.txt" -o transfer/lumas_log_Entry014.txt
+          curl -fL --retry 3 "$BASE/pics/alchj%20fix.png" -o "transfer/alchj fix.png"
+          test "$(stat -c%s transfer/SGGF1Clean2.9_SOURCE.zip)" = "86395299"
+          test "$(stat -c%s transfer/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip)" = "22283463"
+          echo "8009d45c3c6daa714b8fd75294c9ca063d5d7a738d227e1b3d9ad652e7710bda  transfer/SGGF1Clean2.9_SOURCE.zip" | sha256sum -c -
+          echo "240969a00a5357bde12623ed7aeedd61ec14ad9051d6625f8d2babcf266a7c08  transfer/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip" | sha256sum -c -
+          unzip -tq transfer/SGGF1Clean2.9_SOURCE.zip
+          unzip -tq transfer/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/* > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/* > transfer/FILE_SIZES.txt
+      - name: Upload source archive (separate small artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean2.9-source
+          path: transfer/SGGF1Clean2.9_SOURCE.zip
+          retention-days: 1
+      - name: Upload deployment archive (separate small artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean2.9-deployment
+          path: transfer/SGGF1Clean2.9_COMPLETE_CLOUDFLARE_SITE.zip
+          retention-days: 1
+      - name: Upload log and screenshot (separate small artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean2.9-context
+          path: |
+            transfer/lumas_log_Entry014.txt
+            transfer/alchj fix.png
+            transfer/SHA256SUMS.txt
+            transfer/FILE_SIZES.txt
+          retention-days: 1
