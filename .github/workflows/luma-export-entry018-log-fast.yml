@@ -1,0 +1,34 @@
+name: Export cumulative SGG Luma log Entry018
+
+on:
+  push:
+    branches:
+      - luma-log-export-entry018-fast-20261103
+
+permissions:
+  contents: read
+
+jobs:
+  export-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch exact cumulative log from pinned temporary-branch commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/9d4892136f2a632b6b47fe1aee71a0d5c925c398/ARCHIVES%208-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          curl -fL --retry 3 "$URL" -o transfer/lumas_log_Entry018.txt
+          test -s transfer/lumas_log_Entry018.txt
+          grep -q "END ENTRY 018" transfer/lumas_log_Entry018.txt
+          grep -q "END ENTRY 017" transfer/lumas_log_Entry018.txt
+          wc -c transfer/lumas_log_Entry018.txt
+          sha256sum transfer/lumas_log_Entry018.txt
+      - name: Upload cumulative log transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: luma-log-entry018-transfer
+          path: transfer/lumas_log_Entry018.txt
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
