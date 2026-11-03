@@ -1,0 +1,26 @@
+name: Temporary Mage Lab image inspection
+on:
+  push:
+    branches:
+      - temp/view-magef1c27-20261103
+permissions:
+  contents: read
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download pinned Mage Lab screenshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p image
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/664b2a68d83fb45268c9881f1fc36079a7639dad/ARCHIVES%208-30-2026/SGG/sggweb/pics/magef1c2.7.png"
+          curl -fL --retry 3 "$URL" -o image/magef1c2.7.png
+          file image/magef1c2.7.png
+          sha256sum image/magef1c2.7.png
+      - name: Upload image for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: magef1c2.7-inspection
+          path: image/magef1c2.7.png
+          retention-days: 1
