@@ -1,0 +1,48 @@
+name: Temporary SGG Milestone Source Export
+
+on:
+  push:
+    branches:
+      - temp/sggf1s-cleanup-baseline-export
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact temporary export branch
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sggf1s-cleanup-baseline-export
+
+      - name: Stage selected historical milestone packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer/milestones
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGE2.0_COMPLETE.zip" transfer/milestones/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/sgge3.1.zip" transfer/milestones/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/sgge3.2.zip" transfer/milestones/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.0_SOURCE.zip" transfer/milestones/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.6_SOURCE.zip" transfer/milestones/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666_SOURCE.zip" transfer/milestones/
+          for f in transfer/milestones/*; do
+            test -s "$f"
+            unzip -tq "$f"
+          done
+          {
+            sha256sum transfer/milestones/*.zip
+            wc -c transfer/milestones/*.zip
+            git rev-parse HEAD
+          } > transfer/MILESTONE_MANIFEST.txt
+          cat transfer/MILESTONE_MANIFEST.txt
+
+      - name: Upload selected milestone packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGG-selected-milestone-source
+          path: transfer/*
+          if-no-files-found: error
+          retention-days: 1
