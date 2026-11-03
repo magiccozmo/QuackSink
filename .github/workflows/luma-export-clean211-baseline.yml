@@ -1,0 +1,38 @@
+name: Luma Clean2.11 baseline export
+
+on:
+  push:
+    branches:
+      - luma-export-clean211-baseline-20261103
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pinned baseline branch
+        uses: actions/checkout@v4
+      - name: Stage exact release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.11_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGF1Clean2.11_SOURCE.zip
+          test -s transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGF1Clean2.11_SOURCE.zip
+          unzip -t transfer/SGGF1Clean2.11_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+      - name: Upload untouched baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1Clean2.11-baseline-transfer
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
