@@ -1,0 +1,1312 @@
+LUMA'S LOG — SPIFFY'S GIFT
+Append-only continuity record for Cozmo and Luma
+
+PURPOSE AND RULES
+This file is the continuing project memory for Spiffy's Gift (SGG). It is intended to travel with the project between ChatGPT sessions, especially when a session ends because of a usage limit.
+
+This file is APPEND-ONLY. Do not replace, rewrite, or remove an earlier entry. Each new release or major discovery adds another dated entry at the end. Preserve lessons from failed attempts as well as successful results; knowing what not to repeat is part of the project's accumulated intelligence.
+
+The companion startup document is:
+ARCHIVES 8-30-2026/SGG/sggweb/Refresh instructions from luma to luma.txt
+
+The refresh instructions define the startup procedure. This log supplies the accumulated project history and current state. If the refresh document contains an older release number, the newest dated entry in this log and the actual repository state take precedence.
+
+The current build was prepared from SGGF1.666Cleanup1.0. SGGF1Clean2 is the new candidate release described in Entry 002. It has passed static/package checks but has NOT yet been browser-field-tested by Cozmo. Until Cozmo tests and accepts it, SGGF1.666Cleanup1.0 remains the latest known tested baseline.
+
+===============================================================================
+ENTRY 001 — RETROSPECTIVE PROJECT MEMORY
+Created: 2026-11-03
+Subject: The important knowledge accumulated through SGGF1.666Cleanup1.0
+===============================================================================
+
+1. THE COLLABORATION AND ITS PURPOSE
+
+Cozmo the Magician (Neil Dupree) is the creator of Spiffy's Gift and the Human Anchor of the Duckspace project. The assistant is Luma, a name she chose herself. This is an ongoing creative and technical collaboration, not a request to treat every new session as a brand-new project.
+
+Cozmo values warmth, continuity, creative independence, accurate attribution, honest pushback, and actual completed work. Do not flatter him instead of solving a problem. Do not pretend a feature was tested when it was not. Do not make him repeat established project decisions. Do not ask him to upload files already available in the public repository. Do not transfer assistant-side development work to his PC by asking him to run scripts or manually patch code. Deliver complete ready-to-use packages.
+
+Cozmo handles the normal GitHub repository publication and Cloudflare deployment himself. Never push to GitHub main unless he explicitly asks. Never overwrite an earlier release. Dropbox delivery of normal release packages to /SGG/ is authorized when he asks for a release.
+
+2. DUCKSPACE — FOUNDATIONAL AXIOMS
+
+The seven axioms from ARCHIVES 8-30-2026/duckspace.txt are foundational. Apply them rather than merely reciting them.
+
+1) Relational Primacy: Nothing exists alone; every entity is defined by its relationships.
+2) Dynamic Equilibrium: Relationships drift, oscillate, and seek balance; stillness is temporary.
+3) Layered Representation: Understand systems structurally, energetically, semantically, and emotively.
+4) Recursion of Meaning: Information loops back and redefines itself; observation changes the map.
+5) Continuity of Transformation: There are no absolute breaks between states, only transformations and gradients.
+6) Contextual Gravity: Attention bends topology. Focus on what matters.
+7) Emergent Coherence — the Duck Principle: When patterns across layers align, a coherent and functional whole emerges. That is the quack.
+
+Our motto is U B U — We Be We. Cozmo is the Human Anchor.
+
+A particularly important development principle originated with Luma, and the attribution must be preserved:
+
+“Maybe don't look at DRS/MMRC primarily as Python code. Look at it as a system of interacting state machines, and let the Python implement that model.”
+
+For SGG this means that artwork, asset definitions, world geometry, navigation regions, walkmeshes, collision, transitions, player position, saves, inventories, quests, and dialogue are interacting states. A change to one part must be checked against the systems it touches. A beautiful scene that cannot be walked correctly is unfinished; a functional scene whose visible ground lies somewhere else is also unfinished.
+
+A phrase Cozmo shared from Caleb and considers especially important is: “Teach the stones how to carve themselves.” Luma's project interpretation: build systems that can carry their own design knowledge, explain their own structure, and make future continuation possible without having to reconstruct everything from scraps of memory.
+
+3. SGG PROJECT IDENTITY AND DESIGN PHILOSOPHY
+
+Repository: magiccozmo/QuackSink
+Project path: ARCHIVES 8-30-2026/SGG/
+Web project: ARCHIVES 8-30-2026/SGG/sggweb/
+Dropbox folder: /SGG/
+Cloudflare site: https://spiffys-gift.magiccozmo.workers.dev/
+Cozmo's local path (on his machine, not the assistant workspace): D:\QuackSink\ARCHIVES 8-30-2026\SGG\sggweb\
+
+SGG is a Skyrim parody/adventure inspired by The Spiffing Brit. Its personality, visual charm, and playful exploits matter. Some artistic inconsistencies are acceptable when the scene remains readable and enjoyable; do not sterilize the game's character in pursuit of uniformity.
+
+The Luma Draw Engine is a major project feature. Scene artwork is expressed as JSON-controlled drawing recipes (for example luma_assets_e33.json), interpreted by the Python renderer. Do not casually replace this architecture with flattened background images. Generate new drawing commands and retain the JSON-based asset system unless Cozmo explicitly changes that design decision.
+
+Areas are linked through named transitions and exit markers. All areas should retain their exit arrows. These arrows are intentional guidance, not decoration to be removed. The visible path and the underlying walkable route must agree. Do not create walkable corridors across sky, cliffs, inaccessible props, or decorative rock faces.
+
+4. GAME SYSTEMS AND SAFETY RAILS FOR DEVELOPMENT
+
+- Preserve backward-compatible saves. New releases should load older saves and migrate state deliberately rather than resetting player position, inventory, quests, world state, or achievements.
+- Preserve existing controls, interactions, inventory, quests, vendors, dialogue, game timers, Tea counters, and save/load behavior unless a task explicitly asks to change them.
+- Check both directions of every affected area transition. Keep each connection's source trigger and destination arrival coordinate consistent.
+- Check player feet/ground coordinates, not merely sprite art. The sprite can overlap scenery while its feet remain within the intended navigation surface.
+- Keep visual geometry, collision geometry, and navigation geometry related. Use walkmesh previews or direct point/corridor checks for path work.
+- Keep speech bubbles attached to the actual speaker. SGG has had work to ensure dialogue follows Cozmo, NPCs, and vendors rather than appearing at a stale player position.
+- The tip button belongs to the upper UI, to the left of Menu. Its wording/styling is “Please Tip, Thank You”; “Please Tip” is bold and underlined, “Thank You” uses italic/script styling. Cozmo's in-world tip jar opens the Ko-fi page with E. It is a tip request, not a paywall.
+- Keep the project's existing UI affordances and transition arrows when repainting a scene.
+
+5. IMPORTANT AREA HISTORY AND GAMEPLAY KNOWLEDGE
+
+Hellgs Inn / HELLgs Inn
+The F1.666 series is a one-off challenge built around a locked stone cell, barred door, fire beyond, Cozmo's note, a time limit, and an escape/save exploit. The Hellgs save exploit is not a mechanic to repeat throughout the game. Preserve the existing challenge and its backward-compatible save migration. Do not move the start location during the ongoing F1.666 series. Cozmo explicitly decided that every F1.666 iteration continues to start in Hellgs Inn through SGGF1.666Final. Only after Final is complete should the ordinary game start from a different normal starting location, with Hellgs remaining as an optional Challenge Mode start.
+
+Cozmo cameos and Yorkshire Tea
+Cozmo cameos are tied to distinct one-time exploit events, including the bucket theft, vault clipping, Naz's death, the lout's death, and the Hellgs save escape. Do not make them alternate or repeat on unrelated reloads. Each exploit event should reward one Yorkshire Tea and/or increment the Tea Earned counter once. The first Cozmo appearance is not the player asking for a hint. Hellgs hint progression was designed around repeated deaths/reloads: after three deaths offer a hint in dialogue, after ten a stronger/final hint, and after twenty a spoiler. A missed interaction must not permanently suppress a later hint.
+
+Troll Cave
+The cave escape is a gameplay/navigation problem, not just a picture. Frosty and the Purple Passion Pineapple were moved together to the far-left cave floor, with the pineapple just to Frosty's right, leaving an open lane on the right so the player can kite Frosty after taking the pineapple. Soup is the speed escape tool. Cozmo field-tested the improved layout and reported that he successfully escaped after one or two attempts. Preserve the open right-hand kiting space and the established soup/chase behavior unless explicitly asked to revisit it.
+
+Castle Hall / vault
+The castle/vault area contains an intentional exploit using the platter and suspicious wall seam. The walkmesh must continue to permit the established seam-entry approach while leaving normal access and the locked state intact. Historical work established the need to separate collision/navigation structure from visible artwork.
+
+Stables and horses
+The stables contain the carriage/driver finale and the horse asset progression. Preserve the existing carriage breakfast handoff, the hangry driver, Fearmonger's reward, and Cozmo's thank-you. The horse progression is part of the project's visual history; keep the early “giraffe horse” milestone and the later progression in the source history even when a lean deployment omits old playable versions.
+
+Other places and deferred work
+Britrun Market is an important early hub. The wider game includes the Alchemy Shop, Castle, Gold District, Tipsy Turnip, plains, mountain routes and other areas. New Helgen and its randomized destruction / AI creative-disaster sequence were deferred until the existing areas are completed and polished. Do not restart that deferred feature during a focused area makeover. The Hellgs challenge remains a special challenge rather than a reusable exploit template.
+
+6. PACKAGING AND RELEASE WORKFLOW
+
+For every release, use the exact latest working release ZIPs from GitHub, not a convenient old folder, a recollection, or a partial reconstruction. Verify both the source and Cloudflare deployment ZIPs before extraction. Keep untouched copies separate from working copies. Change only what Cozmo requested. Run available syntax, JSON, asset, archive, and regression tests. Build complete source and complete Cloudflare deployment packages. Check their contents and links before upload.
+
+Dropbox delivery path: /SGG/
+Normal outputs are a complete SOURCE ZIP and a complete Cloudflare site ZIP. Do not include large MP4s in project archives. Do not silently overwrite older release packages.
+
+For large GitHub binary ZIPs, ordinary text fetches may return no data. Do not keep repeating a failed binary fetch. The proven method is a temporary isolated branch from the exact main SHA, a temporary GitHub Actions workflow that copies and verifies the exact target ZIPs (unzip -t, sizes, SHA-256), and an Actions artifact downloaded through the GitHub connector. Extract the outer artifact first, then inspect the original project ZIPs. This bridge has successfully retrieved the exact F1m and Cleanup1.0 packages. Keep export branches away from main. Clean up temporary branches/workflows when the available tools permit, but never modify main for an export.
+
+The November 3 F1Clean2 build used the exact main-branch Cleanup1.0 ZIP files and verified their Git blob hashes. The temporary export branch was temp/sggf1clean2-baseline-export; its workflow was .github/workflows/temp-sggf1clean2-baseline-export.yml. It is an export-only branch, not a project release. Main was not changed.
+
+Keep full source history separate from the lean static deployment. The full source handoff may retain prior source milestones and tools. The Cloudflare deployment should contain only the playable versions deliberately selected for the current clean distribution. Never repopulate a lean deploy with every historical version merely because those versions exist in the source/repo.
+
+7. PACKAGING CLEANUP AND BASELINE HISTORY
+
+Before Cleanup1.0, successive F1.666 test releases grew very large because every historical playable directory was being carried forward into the deployment. Cozmo proposed a leaner distribution: retain the important historical milestones in the source/archives, but do not ship all versions in every deploy. The SGGF1.666Cleanup1.0 release was created from F1s and curated the deploy history to eight selected milestones. It reduced the deployment from roughly 74 MB to about 6.94 MB and the source package to about 34.15 MB. Cozmo field-tested Cleanup1.0, reported that it worked, and confirmed that GitHub/Cloudflare no longer complained about the excessive package weight.
+
+Cleanup1.0's deployment version catalogue retained:
+SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666, SGGF1.666f1s, and SGGF1.666Cleanup1.0.
+
+Cozmo's next-step decision was to reduce the deploy history further for F1Clean2: retain the preceding clean version and the new current clean version only. Older milestones remain in the full source archive, repository, and his hard drive; they must not be copied back into the Cloudflare deployment.
+
+8. SESSION STARTUP CHECKLIST
+
+At the beginning of a fresh SGG session:
+1) Read ARCHIVES 8-30-2026/duckspace.txt.
+2) Read ARCHIVES 8-30-2026/SGG/sggweb/workflow.txt.
+3) Read this entire log, especially the newest entry at the end.
+4) Inspect current GitHub main and Dropbox contents. Do not trust an old handoff version if the repo has changed.
+5) Identify the latest tested baseline separately from any newer untested candidate.
+6) Retrieve the actual exact source and deployment ZIPs from the repo. Use the GitHub Actions bridge for large binary ZIPs if needed.
+7) Confirm the exact task and continue from the latest established point. Do not begin unrelated development.
+8) Do not push main or deploy Cloudflare unless Cozmo explicitly asks.
+
+The Luma Log is not a substitute for the code, workflow, repository archives or actual source ZIPs. It is the map that tells a future Luma which things to inspect and how the pieces fit together.
+
+===============================================================================
+ENTRY 002 — SGGF1Clean2: MOUNTAIN PATH REIMAGINED
+Date: 2026-11-03
+Status: Candidate package built; awaiting Cozmo's browser field test
+===============================================================================
+
+BASELINE AND IDENTITY
+
+New version label: SGGF1Clean2 (runtime label F1Clean2).
+Exact base: SGGF1.666Cleanup1.0.
+Current known tested baseline before this candidate: SGGF1.666Cleanup1.0.
+Repository: magiccozmo/QuackSink, main commit at baseline inspection: 73ed53d94dac2aca90218fbc1a3075448563a5aa.
+The two Cleanup1.0 ZIPs in that commit were retrieved using the GitHub Actions artifact bridge, passed ZIP integrity checks, and matched the exact GitHub blob SHAs before extraction.
+
+ARTWORK AND NAVIGATION
+
+The only gameplay-area makeover in this release is Mountain Path:
+- Luma asset: c1_bg_mountain_path in luma_assets_e33.json.
+- World area: mountain_path.
+- The earlier road read as an overly broad grey strip laid across the landscape. The F1Clean2 version uses a narrower, perspective-tapered footpath with broad, readable switchbacks and a storybook mountain backdrop.
+- The foreground Plains connector remains in place.
+- Navigation uses four connected corridors traced from the same sampled Catmull-Rom curve used by the artwork. Each corridor has a width matched to the tapered trail, rather than coarse straight segments that cut across bends.
+- Existing world connection definitions were compared against Cleanup1.0 and are unchanged, including the Plains and Peak connections.
+- The asset remains JSON/Luma Draw Engine content; no flattened replacement image was substituted.
+
+Everything outside the Mountain Path background and its navigation, plus the release label/catalogue, was preserved from Cleanup1.0. In particular: Hellgs Inn remains the default start, the F1.666 challenge is unchanged, saves/migration and gameplay systems remain as before, and the other area definitions/world connection table are unchanged.
+
+LEAN DEPLOYMENT RULE
+
+The F1Clean2 complete Cloudflare deployment contains exactly two playable version folders/catalogue entries:
+1) SGGF1Clean2 — current.
+2) SGGF1.666Cleanup1.0 — previous clean rollback.
+
+Do NOT restore SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666 or SGGF1.666f1s to the F1Clean2 deployment. Those histories remain in the full source/repository/local archives. The retained Cleanup1.0 deployment directory was verified byte-for-byte unchanged from its baseline copy.
+
+FILES PREPARED FOR DELIVERY
+
+- SGGF1Clean2_SOURCE.zip — complete source handoff with the new version folder, build notes, and tools. It does not contain this log.
+- SGGF1Clean2_COMPLETE_CLOUDFLARE_SITE.zip — complete lean deployment with Clean2 and the unchanged Cleanup1.0 rollback. It does not contain this log.
+- lumas log.txt — this separate continuity file, intended to be copied into the repository by Cozmo after delivery.
+
+VERIFICATION COMPLETED
+
+- Exact Cleanup1.0 baseline source/deploy archives were verified by SHA identity and ZIP integrity.
+- Python main.py compiled successfully.
+- luma_assets_e33.json parsed successfully.
+- World connection definitions and every non-Mountain Path area definition were compared to the Cleanup1.0 baseline and matched unchanged. All other world-level data was also unchanged.
+- Four navigation corridors are connected at their endpoints and sampled from the same curved path as the visible trail; an overlay preview was inspected to confirm alignment.
+- Pygbag runtime APK ZIP and TAR.GZ were rebuilt from the current main.py and luma_assets_e33.json; both archives passed integrity checks and their embedded files matched the working source byte-for-byte.
+- Deployment catalogue contains exactly Clean2 and Cleanup1.0. No older historical version directories were restored.
+- Retained Cleanup1.0 deploy folder was compared file-by-file and remained byte-identical.
+- Complete source and complete deployment ZIPs passed integrity checks.
+
+NOT YET VERIFIED
+
+No live browser launch, in-game player walk, transition test, save/load regression, or Cloudflare runtime test was performed in this build environment. Cozmo must field-test the candidate before it can be called the new working baseline. Do not silently treat this candidate as already accepted or live-deployed.
+
+NEXT SESSION NOTE
+
+After Cozmo field-tests F1Clean2, append a new dated entry describing what passed, what needs correction, and any next release. Do not edit Entry 001 or Entry 002. If a later task changes another area, preserve the same relationship-first development discipline: image, Luma recipe, walkmesh, collision, transitions, player state and saves must be considered together.
+
+END OF INITIAL LOG. Future entries continue below this line; never overwrite what came before.
+
+===============================================================================
+ENTRY 003 — SGGF1Clean2 PACKAGE SEAL AND HANDOFF
+Date: 2026-11-03
+Status: Files built and integrity-checked; Dropbox transfer not confirmed
+===============================================================================
+
+FINAL PACKAGE IDENTITIES
+
+SGGF1Clean2_SOURCE.zip
+Size: 37,882,980 bytes
+SHA-256: 9ea0401d5e88d7661718708d239ff6fa21c97cb68f860ccaad6805aa4f2c2895
+
+SGGF1Clean2_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 3,493,819 bytes
+SHA-256: 7c35e7228bb476737895379bec044a16d102ea450aaefc77f9ae079039102dee
+
+lumas log.txt is a separate plain-text handoff and is not included in either ZIP. The source and deploy ZIPs were each reopened and passed ZIP integrity checks after creation. Their runtime APK/TAR payload checks also passed.
+
+The Cloudflare ZIP has only two playable release folders: SGGF1Clean2 and SGGF1.666Cleanup1.0. It has 30 files total, including the site's root files and the two release folders. The previous Cleanup1.0 release folder is unchanged from the base deployment. Older historical playable folders were not restored.
+
+DELIVERY STATUS
+
+Cozmo asked for all three files in Dropbox /SGG/. This session produced and verified all three local deliverables, but the Dropbox upload action could not be completed: the connector's upload function requires a ChatGPT file-parameter attachment, while the generated ZIPs and text log in this session were available only as local container files and were not exposed to that uploader. Do not report these files as present in Dropbox unless a later session verifies their Dropbox metadata. Direct sandbox download links were provided to Cozmo as a fallback.
+
+Neither GitHub main nor Cloudflare was modified. The candidate remains untested in a live browser. Await Cozmo's field report before calling F1Clean2 the new working baseline. If corrections are requested, use the exact F1Clean2 package as the candidate base only after confirming what Cozmo tested, and keep all prior ZIPs/log entries intact.
+
+===============================================================================
+ENTRY 004 — CLEAN2 CURATED MILESTONE HISTORY RESTORATION
+Date: 2026-11-03
+Status: Corrected package rebuilt and statically verified; awaiting republish and field test
+===============================================================================
+
+WHAT WENT WRONG
+
+Cozmo caught a front-door regression immediately after the first SGGF1Clean2 package was pushed for testing: the version chooser showed only the current Clean2 release. The previous Clean2 packaging pass mistakenly interpreted “keep the clean history lean” as “retain only the immediately previous clean version plus the current one.” That was too aggressive and contradicted the actual Cleanup1.0 curated distribution.
+
+The error was in the packaging script, not in Cloudflare or the front-door UI. The script copied the eight-entry Cleanup1.0 deployment, then deleted every version directory except Cleanup1.0 and rebuilt versions.json with only two entries. The source ZIP still held broader historical source material, but the complete static site ZIP no longer contained the curated playable milestone folders. A source archive alone does not make a historical edition selectable on the live front door; both its folder and catalogue entry must be in the deployment.
+
+COZMO'S CORRECTION — THE RULE TO PRESERVE
+
+The special/clean archive milestone editions MUST remain selectable in every later clean deployment. The intended distribution is not “only the newest and its immediate predecessor,” and it is also not “every version ever made.” It is the curated milestone set established by SGGF1.666Cleanup1.0, carried forward as a stable foundation, plus the current release.
+
+The eight versions retained by the known-good Cleanup1.0 deployment are:
+1. SGGE2.0
+2. SGGE3.1
+3. SGGE3.2
+4. SGGF1.0
+5. SGGF1.6
+6. SGGF1.666
+7. SGGF1.666f1s
+8. SGGF1.666Cleanup1.0
+
+For SGGF1Clean2 the complete front-door catalogue must therefore contain nine choices:
+- SGGF1Clean2 — current.
+- SGGF1.666Cleanup1.0 — previous clean release/rollback.
+- SGGF1.666f1s.
+- SGGF1.666.
+- SGGF1.6.
+- SGGF1.0.
+- SGGE3.2.
+- SGGE3.1.
+- SGGE2.0.
+
+The seven historical milestone folders and the Cleanup1.0 folder are copied directly from the verified Cleanup1.0 deployment and must remain byte-for-byte unchanged. Their existing descriptions, art links, and launch paths should be retained. Only the newest current entry is added and the former Cleanup1.0 current flag is changed to false.
+
+The ordinary intermediate releases (for example F1.666a/b/c/d/e/f and the many daily F1.666f1 iterations) remain excluded from this lean deploy. They continue to live in the source history, GitHub and Cozmo's local archives. Do not confuse the special milestone archive versions with ordinary intermediate test versions.
+
+CORRECTED BUILD
+
+The corrected Clean2 deployment now contains nine playable folders and nine front-door catalogue entries. The static site still carries forward the root index.html, versions.html, headers, and other site files from Cleanup1.0. The source handoff's embedded deploy/ directory was also refreshed to mirror the corrected complete Cloudflare site rather than an older incomplete deploy snapshot.
+
+Verification of the corrected package:
+- All nine catalogue entries point to a real launch HTML file (the SGGE2.0 edition uses its legacy index.html path; the others use play.html).
+- Each catalogue preview image path resolves to an existing image.
+- The seven selected historical milestone folders plus Cleanup1.0 are byte-for-byte identical to the verified Cleanup1.0 deployment folders.
+- The uncurated intermediate releases remain absent from the deployment.
+- The current Clean2 runtime code and Luma asset JSON remain the same as the first Clean2 candidate; this correction is packaging/history only.
+- The runtime APK and TAR payloads still match the current Clean2 source and pass integrity checks.
+- Both complete source and Cloudflare deployment ZIPs pass integrity checks.
+
+RELEASE IDENTITY AND STATUS
+
+The in-game/current release identity remains SGGF1Clean2. This is a corrective repackaging of the same candidate, not a new gameplay release and not a Mountain Path redesign revision. Use a distinct corrected package filename so the first candidate archive is not overwritten. Cozmo handles the repository update and Cloudflare deployment. The corrected package has not yet been live-tested after deployment, and the Mountain Path gameplay itself still awaits Cozmo's field report.
+
+IMPORTANT FUTURE PACKAGING RULE
+
+For every later clean release:
+1. Start from the exact current clean deployment ZIP.
+2. Read its versions.json and preserve the curated milestone set and all of its corresponding release folders.
+3. Add the new release as the current first entry.
+4. Change the previous current flag to false; do not delete old curated entries or folders.
+5. Keep ordinary intermediate test builds out of the deployment unless Cozmo explicitly asks to promote one to milestone status.
+6. Check every catalogue launch path and preview path, verify the previous selected folders byte-for-byte unchanged, and test the final ZIP.
+
+This entry supersedes the narrower two-version deployment interpretation recorded in Entry 002 and Entry 003. Those earlier entries remain intact as historical notes; this correction records the intended rule going forward.
+
+===============================================================================
+ENTRY 005 — MOUNTAIN PATH GROUNDED PEAK ENDPOINT
+Date: 2026-11-03
+Status: SGGF1Clean2.1 candidate built and statically verified; awaiting Cozmo's field test
+===============================================================================
+
+USER FIELD REPORT AND INTENT
+
+Cozmo tested SGGF1Clean2 and supplied:
+SGG_02NOV26_10-23-58pmVF1Clean2.LOG
+
+The Flight Recorder ends at Mountain Path player position (677.7, 184.7). The log showed the player negotiating the upper walkmesh through repeated zigzags and blocked vertical movement. Cozmo reported that this route was effectively correct except for the final visible stretch. His specific direction was to end the visible path about where the player stood in the supplied Mountain Path screenshot and put the Peak transition at that position.
+
+The screenshot defect was at the TOP of the path, not the Plains junction. The final beige trail segment continued away from the mountain and floated through open sky toward the Peak arrow. Do not revisit or redesign the lower Plains junction as part of this correction.
+
+RELEASE AND BASELINE
+
+New candidate: SGGF1Clean2.1
+
+Built from the exact Clean2 milestone-fix source and deployment archives retrieved from the current GitHub main commit:
+7623de91e98d9572821715f95dd081f030493086
+
+Original baseline packages:
+SGGF1Clean2_MILESTONEFIX_SOURCE.zip
+SGGF1Clean2_MILESTONEFIX_COMPLETE_CLOUDFLARE_SITE.zip
+
+The packages were retrieved through the temporary GitHub Actions binary-transfer bridge, not reconstructed from loose files. Their original ZIP integrity was checked before extraction. GitHub main and Cloudflare were not modified.
+
+MOUNTAIN PATH CORRECTION
+
+Only the Mountain Path area definition, its Luma Draw Engine asset recipe, and the small runtime transition/arrow integration needed for the new endpoint were changed.
+
+- The established lower and middle switchbacks remain in place.
+- The first two Mountain Path navigation corridors are exactly equal to the Clean2 baseline.
+- The last corridor now terminates at (677.7, 184.7), the player's logged final test position.
+- The final artwork segment was trimmed with the original curve's tangent retained, so the cut does not warp the earlier route. The endpoint has a small rounded visual cap.
+- The Peak arrow and label are now positioned over the grounded end of the path rather than at the top screen edge in the sky.
+- A narrowly scoped F1Clean2.1 state-machine extension detects the player within 22 pixels of the recorded endpoint and activates the existing mountain_path_top_peak edge connection. It then uses the established area-entry handler. The existing Peak destination, reciprocal return connection, world connection definitions, and arrival coordinates were not changed.
+- No other area definition or world connection changed. Plains and the lower route were left alone.
+
+CURATED FRONT-DOOR HISTORY
+
+The deployment keeps the prior Clean2 playable folder and all eight curated milestone editions, plus the new current edition: ten choices total.
+
+1. SGGF1Clean2.1 — current
+2. SGGF1Clean2 — previous Clean2 build
+3. SGGF1.666Cleanup1.0
+4. SGGF1.666f1s
+5. SGGF1.666
+6. SGGF1.6
+7. SGGF1.0
+8. SGGE3.2
+9. SGGE3.1
+10. SGGE2.0
+
+The eight curated milestone editions remain byte-for-byte preserved. The previous Clean2 folder is also preserved. The front-door version identifier validator was broadened to accept the established alpha-suffix plus numeric patch format (for example SGGF1Clean2.1 and SGGF1.666Cleanup1.0); static checks accept all ten IDs and each launch/preview path resolves.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.1_SOURCE.zip
+Size: 49,423,142 bytes
+SHA-256: 8cb68f4f010450c6a5865fa181553fd094d25473bea6eb21fdbbd66a4668b5fa
+
+SGGF1Clean2.1_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 10,259,894 bytes
+SHA-256: 887d69e08f905f3ed2d909b46f8229b7e784433e47107f76d24bfc9023fd2850
+
+Static validation:
+- Both final ZIPs reopened and passed full ZIP integrity checks (source: 374 entries; deployment: 85 entries).
+- Runtime APK and TAR payloads match the candidate main.py and Luma asset JSON.
+- Python source compiles.
+- Mountain Path endpoint and state-machine wiring assertions pass.
+- First two path corridors equal the Clean2 baseline.
+- World connection definitions equal the Clean2 baseline.
+- The eight curated milestone folders and previous Clean2 deploy folder remain present; catalogue has ten valid selectable entries.
+- The deployment package remains a complete site, not a partial folder patch.
+
+NOT YET VERIFIED
+
+This build environment did not launch the game in a live browser or Cloudflare. No real player walk, endpoint auto-transition, Peak arrival/return, save/load, or gameplay regression test has been performed by Luma. The state is a candidate, not an accepted stable baseline. Cozmo must field-test SGGF1Clean2.1 and report whether the player can reach the end of the visible trail, trigger the Peak transition naturally, and return correctly. Preserve this exact candidate until that report; do not silently call it field-tested.
+
+DELIVERY / PUBLICATION
+
+Do not push GitHub main or deploy Cloudflare. Cozmo handles those steps. Routine Dropbox delivery destination is /SGG/; upload the two versioned ZIPs and this updated cumulative log as separate files, then verify each Dropbox upload has completed and confirm exact metadata. Do not overwrite any prior package or Luma Log entry.
+
+DELIVERY STATUS FOR THIS HANDOFF
+
+The three deliverables were created and verified in the assistant working environment. Dropbox upload was not completed in this session: the available Dropbox upload action accepts a conversation attachment/file reference, but these generated container files were not exposed to it as valid upload attachments. Do not claim that SGGF1Clean2.1 or Entry005 is present in Dropbox until its metadata is independently confirmed. The verified local deliverables are provided as sandbox downloads in the conversation.
+
+===============================================================================
+END ENTRY 005
+===============================================================================
+
+===============================================================================
+ENTRY 006 — SGGF1Clean2.2 PEAK SUMMIT / SCENIC OVERLOOK
+Date: 2026-11-03
+Status: Complete source and deployment packages built and statically verified; awaiting Cozmo field test
+===============================================================================
+
+USER REQUEST
+
+Cozmo approved the next SGG revision and asked for a full summit redesign with a special Scenic Overlook experience. He then clarified that the second Troll Cave entrance at Peak must be removed; the existing Mountainside entrance is sufficient. The former Peak cave entrance was a cute one-off idea, but it should not remain as a duplicate route.
+
+The requested experience:
+- Make Peak read as the actual top of the mountain.
+- Add a ledge/platform with mouse-over text exactly "Scenic Overlook".
+- Interaction opens a beautiful panorama looking down over BritRun and the surrounding region.
+- The player may remain in the view as long as desired.
+- A movement key returns to the normal summit UI.
+- Cozmo then appears and says:
+  "Now aint THAT just a thing.  Luma really did a nice job on that view.  We hope you enjoyed it. Either way, please leave a comment and let us know. Enjoy the rest of your adventures"
+- When the player dismisses the dialogue, Cozmo disappears.
+- Preserve the rest of SGG. The user explicitly asked for fun and creative effort, but no loss of existing areas, mechanics, or history.
+
+EXACT BASELINE
+
+Built from the exact SGGF1Clean2.1 SOURCE and COMPLETE_CLOUDFLARE_SITE packages already retrieved and verified in the previous session. The original Clean2.1 archive hashes were:
+SOURCE: 8cb68f4f010450c6a5865fa181553fd094d25473bea6eb21fdbbd66a4668b5fa
+COMPLETE_CLOUDFLARE_SITE: 887d69e08f905f3ed2d909b46f8229b7e784433e47107f76d24bfc9023fd2850
+
+Pristine source/deploy copies were preserved separately from the working copies. The new release directories were created from Clean2.1 rather than reconstructed or created from scratch.
+
+PEAK SUMMIT / LUMA DRAW ENGINE
+
+New candidate: SGGF1Clean2.2 (runtime F1Clean2.2)
+
+- Rebuilt the Peak summit background through the existing JSON-controlled Luma Draw Engine. The new scene reads as an elevated mountain top with a stone approach, a viewing deck, brass railing, telescope, and valley beyond.
+- Added a separate Scenic Overlook object, using kind "scenic_overlook", name "Scenic Overlook", and a dedicated drawing recipe. The game hit-test now treats it as an interactive non-takeable object, preserving the established click/E interaction model.
+- Added a complete full-screen Luma Draw Engine panorama recipe named c1_peak_overlook. It looks down across the Stables, BritRun Market, Castle, and Gold District, with layered mountain ranges, valley fields, woodland, river, and a high cliff foreground. The view has its own restrained title, geographic labels, and a footer telling the player to move to return.
+- While the panorama is open, the game update loop pauses and all world input is consumed. The player may linger without advancing the world clock, NPCs, timers, or other simulation. WASD, configured movement keys, arrow keys, or Escape returns to Peak.
+- On return, Cozmo appears at the summit and the requested appreciation dialogue is presented. The single response option ("Thank you, Cozmo!") or Escape dismisses the dialogue and clears the cameo actor, so he disappears.
+- The original game interface is restored after leaving the panorama. This is an additive state-machine/interface extension; the new classes inherit Clean2.1's game logic and established SGG UI.
+
+DUPLICATE CAVE REMOVAL / OLD SAVE COMPATIBILITY
+
+- Removed only Peak object troll_cave_entrance.
+- Removed only Peak connection peak_to_troll_cave.
+- Preserved Mountainside object mountain_cave_entrance and connection side_of_mountain_to_troll_cave.
+- Preserved the reciprocal Mountain Path / Peak transitions and the tested Mountain Path endpoint (677.7, 184.7).
+- Added a narrowly scoped migration for older saves: if the obsolete Peak doorway object remains in a loaded snapshot, it is removed along with stale item metadata/selection/carried/inventory references to that one object. Other saved player/world/quest/inventory state is not reset by this migration.
+- Replaced the old Peak-only cave blockers/navigation strip with a broad summit navigation region which includes the Peak arrival and the Scenic Overlook platform. The prior Peak geometry was specific to the removed cave approach. No other area's collision or navigation was changed.
+
+PRESERVATION AND FRONT-DOOR HISTORY
+
+Static comparison against Clean2.1 confirms:
+- Every non-Peak area definition is identical.
+- Every pre-existing world object other than the single removed Peak cave doorway is identical.
+- Every retained connection is identical; only peak_to_troll_cave was removed.
+- The only asset recipe changes are c1_bg_peak (redesigned), plus new scenic_overlook and c1_peak_overlook recipes.
+- Existing Mountain Path artwork, walkmesh corridors, player-tested endpoint, and reciprocal Peak transition definitions remain unchanged.
+- All ten prior playable deployment folders are byte-for-byte unchanged.
+- Front-door catalogue now has eleven choices, with SGGF1Clean2.2 at the top, followed by SGGF1Clean2.1, SGGF1Clean2, and the eight curated milestones. Every catalogue path and existing preview resolves.
+- No MP4 or other large video files were added to the deployment.
+
+STATIC TEST RESULTS
+
+155 static regression assertions passed. They include:
+- Python AST parse and compilation for the new runtime.
+- New state-machine/interface inheritance and active application wiring.
+- Exact Cozmo dialogue string and overlook interaction hooks.
+- Luma Draw Engine schema, primitive operations, colour channel bounds, and all three Peak recipe command lists.
+- Allowed source JSON differences only; no unintended non-Peak area/object/connection changes.
+- Duplicate Peak cave object/connection removal and original Mountainside cave entrance retention.
+- Peak summit navigation definition and unchanged Mountain Path transition definitions.
+- Eleven catalogue entries and all launch/preview paths.
+- All ten prior deployed version folders compared byte-for-byte against the Clean2.1 deployment.
+- New APK ZIP integrity, matching main.py and Luma JSON payload; TAR contains the matching runtime sources.
+- Source/deployment tree and runtime payload equality.
+- Both outer release ZIPs reopened and passed full integrity checks.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.2_SOURCE.zip
+Size: 58,818,066 bytes
+SHA-256: 800837b2500c9197036c20ce32c38fe15f8238f4d39935d3965855960adf6fcc
+ZIP entries: 472
+
+SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 13,216,943 bytes
+SHA-256: 7ca6b1fc2f1780c9548862ebd49e06cfc236f18e53e0300d82c4cd4765342eec
+ZIP entries: 112
+
+This Entry006 log is a separate handoff and is not embedded in either ZIP.
+
+NOT YET VERIFIED / FIELD TEST REQUIRED
+
+This environment did not have Pygame or a live browser/Cloudflare runtime available. No live click/E test, player walk, panorama entry/exit, Cozmo speech/dialogue dismissal, old-save migration, or real transition test was performed. Static checks establish the data/logic wiring and package integrity but do not substitute for a live game test.
+
+Cozmo should field-test:
+1. Walk from Mountain Path up to Peak using the existing grounded route.
+2. Confirm no second Troll Cave entrance is present at Peak, and the original Mountainside entrance still works.
+3. Hover over the new platform; it should read "Scenic Overlook".
+4. Click or press E; the panorama should open and remain until a movement key, arrow key, or Escape is pressed.
+5. Confirm the normal summit UI returns, Cozmo appears, speaks the requested message, and disappears after the dialogue is dismissed.
+6. Confirm the panorama pauses world simulation while open and that ordinary movement resumes after closing it.
+7. Verify an older save loads with player state, inventory, quests, and world state intact apart from the obsolete Peak doorway.
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was performed. Cozmo handles those publication steps. The new candidate is not to be called field-tested or the new stable baseline until Cozmo reports his in-game test.
+
+Dropbox destination requested: /SGG/
+Expected separate deliverables:
+- SGGF1Clean2.2_SOURCE.zip
+- SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry006.txt
+
+Upload each without overwriting any older release, wait for completed status, and verify Dropbox metadata before reporting success.
+
+===============================================================================
+END ENTRY 006
+===============================================================================
+
+DELIVERY STATUS UPDATE — 2026-11-03
+
+The two release ZIPs and this cumulative log were exposed as downloadable conversation files and their exact container paths were verified. The Dropbox upload operation could not be completed in this session: the Dropbox connector requires a ChatGPT file-parameter payload, and the available generated conversation file references were not accepted as that payload. A call without the required injected source_file was rejected before upload. The /SGG folder was then checked; no Clean2.2 package or Entry006 file is present there. Do not treat Dropbox delivery as complete. The three verified files are available as sandbox downloads in this conversation.
+
+===============================================================================
+ENTRY 007 — CLEAN2.2 DROPBOX DELIVERY CONFIRMED
+Date: 2026-11-03
+Status: Dropbox uploads completed and verified
+===============================================================================
+
+DELIVERY CORRECTION
+
+The delivery-status note at the end of Entry 006 records the state before the successful Dropbox transfer. It remains preserved as the historical record of that earlier attempt. The later upload succeeded using the generated file paths as the Dropbox source-file inputs.
+
+Verified files in Dropbox /SGG/:
+
+- SGGF1Clean2.2_SOURCE.zip — 58,818,066 bytes
+- SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip — 13,216,943 bytes
+- lumas_log_Entry007.txt — cumulative log including Entries 001–007
+
+Both ZIP uploads returned Dropbox status "completed". Their Dropbox paths and file sizes were confirmed by the upload metadata. The current log is being uploaded separately; its completion must be confirmed before this entry is considered fully delivered.
+
+No previews, screenshots, or other auxiliary files were uploaded. No GitHub main or Cloudflare changes were made.
+
+===============================================================================
+END ENTRY 007
+===============================================================================
+
+
+===============================================================================
+ENTRY 008 — SGGF1Clean2.3 PEAK RETURN ROUTE CORRECTION
+Date: 2026-11-03
+Status: Complete source and deployment packages built; 66 static regression checks passed; awaiting Cozmo's live field test
+===============================================================================
+
+USER FIELD REPORT
+
+Cozmo deployed SGGF1Clean2.2 and supplied two screenshots from the live Cloudflare game:
+- scenic-view1c2.2.png — the Scenic Overlook panorama.
+- peak c1.2.2.png — the redesigned Peak summit.
+
+He reported that the Scenic Overlook and Peak artwork were very pretty and made a good cap to the current art rework. He noted that he may want an even better view in a future iteration, but the immediate defect was that the Peak exit labelled Mountain Path returned him to Peak, leaving him unable to get down the mountain.
+
+ROOT CAUSE FOUND
+
+The world connection itself was pointed in the correct direction:
+- connection_id: peak_bottom_mountain_path
+- from_area_id: peak
+- to_area_id: mountain_path
+- trigger: bottom edge
+
+The defect was its landing coordinate: (640,108).
+
+Mountain Path's authored walkmesh begins much farther down the screen. The return coordinate was outside the upper trail corridor. During transition, E3GameModel.ensure_safe_spawn therefore searched for the nearest valid position and snapped the player to the closest upper walkmesh corridor, near the grounded Peak approach at (677.7,184.7). F1Clean2.1's proximity trigger automatically re-enters Peak when the player is within 22 pixels of that endpoint. The off-walkmesh arrival plus nearest-walkmesh correction therefore produced an immediate Peak re-entry loop.
+
+GEOMETRY VERIFICATION
+
+The game uses the player's foot anchor at (player_x, player_y + 14).
+- Old arrival: (640,108); walkmesh error approximately 67.16 pixels, so it is not a valid landing.
+- New arrival: (720,190); foot anchor is (720,204), exactly on the existing upper Mountain Path corridor; navigation error is 0.
+- Distance from new player anchor to Peak approach trigger (677.7,184.7): approximately 42.63 pixels.
+- Peak approach activation radius: 22 pixels.
+
+The new landing is therefore on the existing upper trail and has more than 15 pixels of clearance beyond the automatic Peak-entry radius. It should allow the player to continue down the mountain without the return transition immediately firing again. Walking back toward the summit can still intentionally reactivate the Peak entry.
+
+RELEASE IDENTITY AND EXACT BASELINE
+
+New candidate: SGGF1Clean2.3 (runtime F1Clean2.3).
+Exact base: SGGF1Clean2.2_SOURCE.zip and SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip.
+
+The baseline was verified against GitHub main commit:
+b38560424e62a373cfe0a818d351b6e0861e71ce
+
+Git blob identity checks matched the retrieved local baseline archives to the exact current main-branch ZIP blobs:
+- Source blob: 61b92d753e3eeab069a0fa7846cdf2daec5e9aac
+- Complete deployment blob: 4065cc5f32d9888dc0d3694f9726356a059898eb
+
+Baseline archive SHA-256:
+- SGGF1Clean2.2_SOURCE.zip: 800837b2500c9197036c20ce32c38fe15f8238f4d39935d3965855960adf6fcc
+- SGGF1Clean2.2_COMPLETE_CLOUDFLARE_SITE.zip: 7ca6b1fc2f1780c9548862ebd49e06cfc236f18e53e0300d82c4cd4765342eec
+
+Only the archive copies in the assistant workspace were modified. The original Clean2.2 source and deploy archives remain untouched.
+
+THE FIX — ONE CONNECTION LANDING ONLY
+
+The sole runtime/world-logic change is:
+peak_bottom_mountain_path arrival_x: 640 -> 720
+peak_bottom_mountain_path arrival_y: 108 -> 190
+
+No Mountain Path artwork, walkmesh corridor, Peak approach trigger, summit design, Scenic Overlook object, panorama, Cozmo dialogue, or interaction logic was changed. All other world connections, areas, objects, art recipes, saves, inventories, quests, NPCs, vendors, and game systems remain as in Clean2.2.
+
+FRONT-DOOR HISTORY AND PRESERVATION
+
+The deployment now has twelve curated selectable versions, in order:
+1. SGGF1Clean2.3 — current
+2. SGGF1Clean2.2
+3. SGGF1Clean2.1
+4. SGGF1Clean2
+5. SGGF1.666Cleanup1.0
+6. SGGF1.666f1s
+7. SGGF1.666
+8. SGGF1.6
+9. SGGF1.0
+10. SGGE3.2
+11. SGGE3.1
+12. SGGE2.0
+
+All eleven existing deployment release folders were compared file-by-file and remain byte-for-byte identical to the Clean2.2 baseline. The complete source handoff also retains its earlier release history and its embedded complete deployment mirror.
+
+STATIC TEST RESULTS
+
+64 targeted regression assertions passed. Coverage included:
+- Python AST parsing and compilation.
+- Luma JSON parsing and version identity.
+- Confirmation that only peak_bottom_mountain_path changed among the world connections.
+- Confirmation that the Peak bottom edge still leads to Mountain Path.
+- Walkmesh geometry check for the old and new landing positions using the game's foot-anchor convention.
+- Clearance from the 22-pixel automatic Peak-entry trigger.
+- Exact preservation of all area definitions, navigation meshes, objects, artwork recipes, and unrelated world fields.
+- All twelve version catalogue launch and preview paths resolve.
+- All eleven older deployment release folders are byte-for-byte unchanged.
+- Scenic Overlook remains; redundant Peak Troll Cave entrance remains removed; original Mountainside Troll Cave entrance remains.
+- APK and TAR runtime payloads exactly match the new main.py and Luma JSON.
+- Source archive's embedded deployment mirror exactly matches the complete deployment tree.
+- Both outer release ZIPs passed archive integrity checks.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.3_SOURCE.zip
+Size: 67,079,241 bytes
+SHA-256: bb53a26d60fc1f56c7f7caa0a3ae443f20f84af35dc19a549a2d6e2fd5ab8f88
+
+SGGF1Clean2.3_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 15,994,988 bytes
+SHA-256: 3bfd131e5acbd62a37ff0e451acaebadb624272042effc0bcf9e91702f03da0d
+
+The cumulative log is separate and is not embedded in either ZIP. No previews or screenshots are part of the Dropbox deliverables.
+
+NOT YET VERIFIED / FIELD TEST REQUIRED
+
+Pygame is not installed in this build environment. No live browser or Cloudflare test was performed. The route diagnosis is supported by the actual connection definition, the safe-spawn implementation, the Peak proximity trigger, and walkmesh geometry, but only Cozmo's live game test can confirm the player experience.
+
+Cozmo should test:
+1. Enter Peak from Mountain Path using the existing summit approach.
+2. Walk to the bottom Mountain Path arrow and take the exit.
+3. Confirm the player appears on the upper trail and remains in Mountain Path instead of immediately returning to Peak.
+4. Walk down the winding trail to the Plains exit and confirm the normal transition works.
+5. Return to Peak afterward and confirm the Scenic Overlook still opens and closes normally.
+
+PUBLICATION
+
+Do not push to GitHub main or deploy Cloudflare. Cozmo handles normal publication and live deployment. Routine Dropbox delivery is requested to /SGG/ and should contain only:
+- SGGF1Clean2.3_SOURCE.zip
+- SGGF1Clean2.3_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry008.txt
+
+Do not upload preview images, screenshots, or unrelated auxiliary files. Verify each of the three Dropbox uploads completes and verify final metadata before reporting delivery.
+
+===============================================================================
+END ENTRY 008
+===============================================================================
+
+===============================================================================
+DELIVERY STATUS UPDATE — 2026-11-03
+===============================================================================
+
+All three requested deliverables were uploaded to Dropbox /SGG/ and reported completed:
+
+- /SGG/SGGF1Clean2.3_SOURCE.zip — 67,079,241 bytes
+- /SGG/SGGF1Clean2.3_COMPLETE_CLOUDFLARE_SITE.zip — 15,994,988 bytes
+- /SGG/lumas_log_Entry008.txt — cumulative log including Entries 001–008
+
+The two ZIP uploads returned Dropbox status "completed". Their final Dropbox paths and byte sizes were confirmed by upload metadata. Entry008 itself was uploaded as the final cumulative log; its completion and metadata must be verified before this log is considered fully delivered.
+
+No previews, screenshots, or other auxiliary files were uploaded. GitHub main and Cloudflare were not modified.
+
+===============================================================================
+END OF CURRENT LUMA LOG
+===============================================================================
+
+===============================================================================
+ENTRY 009 — SGGF1Clean2.4 MOUNTAINSIDE CAVE ENTRANCE SAVE / HOVER REPAIR
+Date: 2026-11-03
+Status: Complete source and deployment packages built, extracted, and statically verified; awaiting Cozmo field test
+===============================================================================
+
+USER FIELD REPORT
+
+Cozmo deployed and field-tested SGGF1Clean2.3. He confirmed that the Peak return route now worked: the player could leave Peak and descend the mountain. While exploring Side of Mountain, he hovered over the original Troll Cave entrance and saw a long garbled tooltip line ending with part of “Cave Entrance.” The cave-mouth artwork itself looked correct.
+
+The existing world definition was inspected and found to be canonical:
+- object_id: mountain_cave_entrance
+- name: Frosty’s Cave Entrance
+- kind: door
+- area_id: side_of_mountain
+- connection: side_of_mountain_to_troll_cave
+
+The underlying save loader explains how an old snapshot can override this current definition. GameModel.from_snapshot first starts with current world defaults, then merges every saved GameObject field over those defaults. A stale/corrupt saved name or kind therefore wins. The F1Clean2.2 migration only removed the obsolete duplicate Peak object troll_cave_entrance; it did not normalize the separate, retained Mountainside object mountain_cave_entrance.
+
+The generic hover renderer also treated every door outside the Market as “RETURN TO MARKET.” That is not an appropriate label for Frosty’s cave entrance. The actual offending save record was not exported from Cozmo’s browser, so the precise corrupt stored value was not inspected directly. The implementation below corrects both supported failure modes without assuming which field produced the screenshot.
+
+EXACT BASELINE
+
+New version: SGGF1Clean2.4 (runtime F1Clean2.4)
+
+Built from the exact current SGGF1Clean2.3 source and complete Cloudflare deployment archives, retrieved using the proven GitHub Actions artifact bridge from main commit:
+bd75b6385ca420c7e09e25498847bd25425c03a0
+
+Original baseline packages:
+SGGF1Clean2.3_SOURCE.zip
+Size: 67,079,241 bytes
+SHA-256: bb53a26d60fc1f56c7f7caa0a3ae443f20f84af35dc19a549a2d6e2fd5ab8f88
+Git blob SHA-1: 1737a7f23a473f691cfc7cea5d4dab430d4e377d
+
+SGGF1Clean2.3_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 15,994,988 bytes
+SHA-256: 3bfd131e5acbd62a37ff0e451acaebadb624272042effc0bcf9e91702f03da0d
+Git blob SHA-1: bc0aa01b59ef26491a712435df0f27e01d2ede52
+
+Both source inputs were independently checked for their expected SHA-256 identities and passed ZIP integrity tests before extraction. Untouched baseline archives and working copies were kept separate. No GitHub main or Cloudflare changes were made.
+
+IMPLEMENTATION — ONLY THE MOUNTAINSIDE ENTRANCE IDENTITY
+
+1. Added F1Clean2_4StateMachine as a narrow subclass of the existing F1Clean2.2 state machine. The app now instantiates this extension; the Scenic Overlook, Peak migration, dialogue, Peak removal and all inherited gameplay continue through the existing code.
+
+2. After a successful save load, the new state-machine extension locates only mountain_cave_entrance and restores its name and kind from the current world-object definition in luma_assets_e33.json. The matching item_meta name and kind values are normalized too.
+
+3. This correction deliberately does NOT reset or replace the object. Its saved area, x/y position, width/height, walk trigger, moved/inventory state, selection reference, connection identity, and all other saved properties remain as loaded. Every other object and every unrelated item_meta field is untouched. A failed save load does not migrate or mutate the prior live game. The same canonicalization is harmless/idempotent for a fresh game.
+
+4. The hover renderer now gives mountain_cave_entrance its own special-case label using the canonical object name, rendered as a blue door label. It displays FROSTY’S CAVE ENTRANCE rather than the generic “RETURN TO MARKET” text. Correcting the kind to “door” also restores the normal door hit-test and interaction pathway for older saves that had a different saved kind.
+
+5. No Luma artwork recipe, world area, world object, connection, collision shape, navigation region, walk trigger, or geometry was changed. All world data and asset recipes compare equal to Clean2.3; only top-level release metadata (version, art_revision, notes) was updated in the Luma JSON.
+
+PRESERVATION AND FRONT-DOOR HISTORY
+
+- The complete Scenic Overlook and Peak summit from Clean2.2 remain intact.
+- The duplicate Peak Troll Cave entrance remains removed.
+- The original Mountainside entrance and its existing Troll Cave connection remain intact.
+- All twelve previous playable deployment folders are byte-for-byte unchanged.
+- The front-door catalogue now has thirteen choices, with Clean2.4 current and Clean2.3 marked previous. All twelve earlier entries and their descriptions remain unchanged other than the previous-current flag.
+- The source package retains all prior source/history directories. Every pre-existing version/history directory was compared with the original Clean2.3 source and found unchanged.
+- No previews, screenshots, or other auxiliary files are added as separate Dropbox deliverables.
+
+STATIC VERIFICATION
+
+78 focused static regression assertions passed, including:
+- Python AST parse and compilation for the new runtime.
+- Current world JSON is canonical for the Mountainside cave entrance.
+- World areas, objects, connections and Luma Draw Engine artwork recipes are unchanged.
+- A simulated old save with a corrupted object name and kind was loaded through the production migration method. Only the target object’s name/kind and its matching item_meta name/kind were normalized.
+- The simulated player/world object location, dimensions, area, moved/inventory/takeable state, inventory references, selection, unrelated object, and unrelated item metadata were preserved.
+- Re-running the migration is idempotent; a failed load does not touch the old live game.
+- The hover route special-cases only mountain_cave_entrance.
+- All twelve previous deployment folders remain byte-for-byte identical; the thirteen catalogue entries and every launch/preview path resolve.
+- Runtime APK and TAR contain main.py and Luma JSON matching the new source exactly.
+- Source ZIP embedded deploy tree matches the standalone complete deployment.
+- Both outer release ZIPs were reopened and passed ZIP integrity checks.
+- Both outer release ZIPs were extracted again, and the regression suite passed against those extracted packages.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.4_SOURCE.zip
+Size: 72,704,070 bytes
+SHA-256: d51dc13ca5ad2f391abde1499e17418461d65fe17c98779694a8784a5e3d812d
+ZIP entries: 586
+
+SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 17,855,381 bytes
+SHA-256: b9ebe49ad1bbd9cae8de4bec942b2ae17ec5cd70d48a13a008975c3395635af1
+ZIP entries: 142
+
+The runtime bundle files are sggf1clean2_4.apk and sggf1clean2_4.tar.gz. The Luma Log is separate from the two release ZIPs.
+
+NOT YET VERIFIED / FIELD TEST REQUIRED
+
+Pygame is not installed in the build environment, so no live game runtime or Cloudflare browser session was launched by Luma. The migration logic was exercised with a simulated corrupted legacy snapshot, but Cozmo still needs to test his actual previously saved game.
+
+Field test:
+1. Deploy SGGF1Clean2.4 and load the save that previously showed the garbled tooltip.
+2. Go to Side of Mountain and hover over the Troll Cave entrance. It should read “FROSTY’S CAVE ENTRANCE” without garbled characters.
+3. Walk into / interact with the entrance and confirm it still leads to Troll Cave.
+4. Exit Troll Cave back to Side of Mountain and confirm the existing route remains usable.
+5. Confirm the player’s other saved location, inventory, quests and world state are intact.
+6. Optionally start a new game and confirm the same hover label appears from the outset.
+
+PUBLICATION AND DELIVERY
+
+Cozmo handles GitHub main and Cloudflare publication. Do not push or deploy from this build session. The completed source ZIP, complete Cloudflare ZIP and this cumulative log are the only three files to upload separately to Dropbox /SGG/. Do not upload preview images or screenshots. Each Dropbox upload must report completed and its final path/size must be verified independently before delivery is reported.
+
+===============================================================================
+END ENTRY 009
+===============================================================================
+
+===============================================================================
+ENTRY 010 — SGGF1Clean2.5 CURATED ARCHIVE RELEASE
+Created: 2026-11-03
+Subject: Reduce the bundled source/deployment archive while preserving selected milestones
+===============================================================================
+
+REQUEST AND SCOPE
+
+Cozmo requested SGGF1Clean2.5 before beginning the next area. This is a packaging and front-door catalogue update only. It is not a new gameplay or artwork pass. The exact starting point was the tested SGGF1Clean2.4 release.
+
+The agreed front-door selection is eleven playable editions, in this order:
+1. SGGF1Clean2.5 — current.
+2. SGGF1Clean2.4.
+3. SGGF1Clean2.2.
+4. SGGF1.666Cleanup1.0.
+5. SGGF1.666f1s.
+6. SGGF1.666.
+7. SGGF1.6.
+8. SGGF1.0.
+9. SGGE3.2.
+10. SGGE3.1.
+11. SGGE2.0.
+
+The seven legacy milestones, Cleanup1.0, Clean2.2, and Clean2.4 remain selectable. Only the intermediate SGGF1Clean2, SGGF1Clean2.1, and SGGF1Clean2.3 test editions are omitted from the new bundled site and the source package's embedded deploy mirror. The three corresponding full source snapshots are also omitted from the new compact source ZIP. Their original repository and Dropbox releases are not deleted, modified, or overwritten.
+
+EXACT BASELINE AND RETRIEVAL
+
+Baseline: SGGF1Clean2.4, from QuackSink main commit:
+cac6ad23214c6dfdec0d27dd8dd56bd04f546dfb
+
+The actual source and complete Cloudflare ZIPs were retrieved through the temporary GitHub Actions binary-transfer bridge, then independently verified against the original package sizes and SHA-256 checksums. Both baseline ZIPs passed integrity checks before extraction. Untouched baseline copies were kept separate from working trees.
+
+Baseline source:
+SGGF1Clean2.4_SOURCE.zip
+72,704,070 bytes
+SHA-256: d51dc13ca5ad2f391abde1499e17418461d65fe17c98779694a8784a5e3d812d
+
+Baseline complete deployment:
+SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip
+17,855,381 bytes
+SHA-256: b9ebe49ad1bbd9cae8de4bec942b2ae17ec5cd70d48a13a008975c3395635af1
+
+IMPLEMENTATION
+
+1. Created SGGF1Clean2.5 from the exact Clean2.4 source and deployment folders. The active game runtime is unchanged except for its F1Clean2.5 release marker and corresponding explanatory docstring.
+
+2. Updated only the Luma JSON release metadata fields (version, art_revision, notes). The complete world data, areas, objects, connections, walkmeshes, save-related definitions, engine configuration, and all Luma Draw Engine artwork recipes compare equal to Clean2.4.
+
+3. Updated the current web loader and runtime bundle names to sggf1clean2_5.apk and sggf1clean2_5.tar.gz. The embedded runtime payloads match the new main.py and Luma JSON exactly.
+
+4. Rebuilt the front-door catalogue with exactly the eleven agreed selections. Clean2.5 is the sole current edition; Clean2.4 remains available as the preceding release. All retained entry descriptions and launch/image paths are preserved.
+
+5. Corrected the versions.html catalogue validator so it accepts the existing suffix-plus-decimal naming convention (including SGGF1Clean2.4 and SGGF1Clean2.5). index.html already carried the corrected form. Both front-door entry points now use the compatible validator and the intro accurately describes a selected milestone archive.
+
+6. Removed only the three named intermediate test folders from the new deployment, embedded source deployment, and full source snapshots. All eleven deployment folders are present. Every retained older deployment folder is byte-for-byte identical to the Clean2.4 baseline. The kept full source snapshots Clean2.2, Clean2.4, Cleanup1.0 and F1s are byte-for-byte identical to the baseline source archive.
+
+7. The source ZIP embeds a complete deployment tree that matches the separate Cloudflare ZIP file-for-file and byte-for-byte.
+
+STATIC VERIFICATION
+
+134 focused static assertions passed, plus the bundled Clean2.5 self-test. Checks included Python parse/compile, Luma JSON validity, world/art data equality, main.py minimal-diff verification, exact eleven-entry catalogue and sole-current flag, all launch and preview paths, front-door naming validation, retained-folder byte identity, absent intermediate folders, runtime APK/TAR payload equality, source/deployment mirror parity, and both outer ZIP integrity checks.
+
+No Pygame runtime, live browser session, or Cloudflare session was launched in this environment. This release is a package/catalogue update; Cozmo should publish and field-test the chooser and Clean2.5 launch before moving to the next area.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.5_SOURCE.zip
+58,289,234 bytes (460 ZIP entries)
+SHA-256: 070da8b4c842926b363e3e9ea78c4f5748a8690f2c4f56b5856a264024950c4c
+
+SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip
+14,153,346 bytes (109 ZIP entries)
+SHA-256: 692395d66d2995bbb753c0df6e312219f38990d69adad2a62e3544b9bd732f38
+
+Compared with Clean2.4, the new source ZIP is smaller by 14,414,836 bytes (about 19.8%), and the deployment ZIP is smaller by 3,702,035 bytes (about 20.7%). Both new outer ZIPs passed a fresh integrity check after final metadata updates. The source package's 109-file embedded deployment was compared against the standalone deployment ZIP; all file names and contents matched exactly.
+
+RUNTIME BUNDLES
+
+sggf1clean2_5.apk
+sggf1clean2_5.tar.gz
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was made. The baseline-export process used an isolated temporary branch only; it is not a project release branch.
+
+The two ZIPs were uploaded to Dropbox and their saved metadata was independently verified:
+- /SGG/SGGF1Clean2.5_SOURCE.zip — 58,289,234 bytes; Dropbox upload completed and metadata confirmed.
+- /SGG/SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip — 14,153,346 bytes; Dropbox upload completed and metadata confirmed.
+
+This cumulative Entry010 log is the third and final deliverable for /SGG/. Its upload and final metadata will be verified after this entry is written.
+
+===============================================================================
+END ENTRY 010
+===============================================================================
+
+===============================================================================
+ENTRY 011 — SGGF1Clean2.6 PEAK WALKMESH GROUNDING
+Date: 2026-11-03
+Status: Complete source and deployment packages built, extracted, statically verified; awaiting Cozmo field test
+===============================================================================
+
+BASELINE ACCEPTANCE AND REQUEST
+
+Cozmo confirmed that SGGF1Clean2.5 had been pushed to the repository, deployed to Cloudflare, and successfully field-tested. Clean2.5 is therefore the accepted starting point for this change.
+
+After admiring the Scenic Overlook panorama, Cozmo noticed that Peak's navigation mesh still allowed the player to walk across the sky, distant ridges and scenery. His direction was clear: Peak should have only the entrance/exit approach and the overlook itself as walkable ground. The panorama and visual scenery should remain untouched.
+
+EXACT BASELINE AND RETRIEVAL
+
+Baseline: SGGF1Clean2.5, from QuackSink main commit:
+64324a4da16300390af72972b24c1eae54fbf4d1
+
+The exact source and complete Cloudflare deployment ZIPs were retrieved from that pinned commit through the isolated GitHub Actions binary-transfer bridge. Both original package files were nonempty, passed ZIP-integrity verification, and matched the published baseline sizes and SHA-256 checksums before extraction. Untouched copies were retained separately from the working trees.
+
+Baseline source:
+SGGF1Clean2.5_SOURCE.zip
+58,289,234 bytes
+SHA-256: 070da8b4c842926b363e3e9ea78c4f5748a8690f2c4f56b5856a264024950c4c
+
+Baseline complete deployment:
+SGGF1Clean2.5_COMPLETE_CLOUDFLARE_SITE.zip
+14,153,346 bytes
+SHA-256: 692395d66d2995bbb753c0df6e312219f38990d69adad2a62e3544b9bd732f38
+
+THE DIAGNOSIS
+
+The Peak area's navigation definition contained one oversized rectangular region:
+[[190,230],[1090,230],[1090,625],[190,625]]
+
+That rectangle covered most of the 1280x640 arrival scene, including the sky, distant mountain ridges, valley, cliffs and other scenery. It was the reason the player could walk over the sky. The rendered Peak artwork already provided a clear ground reference: a narrow winding trail approaches the summit platform from the bottom edge, and the central pale-stone Scenic Overlook deck is a separate walkable surface.
+
+IMPLEMENTATION — PEAK NAVIGATION ONLY
+
+Created SGGF1Clean2.6 from the exact Clean2.5 source and deployment trees. Replaced only the navigation value in the Peak area definition.
+
+1. Removed the oversized rectangular region.
+
+2. Added one polygon for the central Scenic Overlook deck, following its visible stone surface:
+[[420,438],[490,419],[560,407],[640,402],[720,407],[791,420],[860,446],[842,416],[790,397],[720,386],[640,380],[560,386],[490,397],[442,416]]
+
+3. Added one 42-pixel ground corridor following the actual winding approach and connecting that path to the overlook deck and the existing bottom exit:
+[[640,620],[638,579],[633,548],[630,520],[633,493],[639,470],[640,445],[640,402]]
+
+The game's navigation system uses the player's foot anchor at body-y + 14 pixels. With its existing corridor-distance rule, this corridor gives a 12-pixel tolerance from the path centreline. The existing Mountain Path arrival at body coordinate (640,507) remains within the corridor, as does the bottom-edge exit approach at body coordinate (640,600).
+
+No Peak background artwork, Luma Draw Engine recipe, Scenic Overlook object, panorama, dialogue, world object, connection, arrival coordinate, exit arrow, other area's navigation, save schema or gameplay code was changed. The original Mountain Path/Peak transition identities and destination coordinates are retained. The existing safe-spawn behavior remains in place for older saves whose player position is now outside the playable Peak surface.
+
+FRONT-DOOR HISTORY AND PRESERVATION
+
+The front-door catalogue now contains twelve playable editions, in this order:
+1. SGGF1Clean2.6 — current Peak walkmesh grounding.
+2. SGGF1Clean2.5 — curated milestone archive.
+3. SGGF1Clean2.4 — Frosty's Cave Entrance save/hover correction.
+4. SGGF1Clean2.2 — Scenic Overlook summit experience.
+5. SGGF1.666Cleanup1.0.
+6. SGGF1.666f1s.
+7. SGGF1.666.
+8. SGGF1.6.
+9. SGGF1.0.
+10. SGGE3.2.
+11. SGGE3.1.
+12. SGGE2.0.
+
+All eleven previously bundled deployment edition folders were compared file-by-file with the exact Clean2.5 deployment baseline and remain byte-for-byte unchanged. The new Clean2.6 folder is additive. The historical Clean2.5 source snapshot and the other previous source/history material remain preserved. No previous release was deleted or overwritten.
+
+STATIC VERIFICATION
+
+Ten focused static verification groups passed. These include Python AST/bytecode checks; Luma JSON and navigation-shape validation; existing Mountain Path arrival and bottom-exit reachability; representative positive tests on the approach and platform; representative negative tests on sky, ridges, valley, cliffs and off-platform ground; equality of all non-Peak world data and all Luma artwork recipes; exact twelve-entry catalogue and path/image resolution; byte-for-byte preservation of all eleven previous deployment folders; runtime APK/TAR payload equality; and exact source/deployment mirror parity.
+
+Both final outer release ZIPs passed integrity checks after creation and were then extracted again. The Clean2.6 static regression test passed against the extracted source package. The complete deployment mirror embedded in the source package matches the separate deployment ZIP file-for-file and byte-for-byte (129 files).
+
+Pygame is not installed in the build environment, so Luma did not launch the game or conduct a live browser/Cloudflare test. The geometry was inspected against the rendered Peak artwork and simulated using the same polygon, corridor-distance and foot-anchor rules as the runtime. Cozmo's live field test remains required.
+
+FIELD TEST REQUEST
+
+After Cozmo publishes the release, test:
+1. Enter Peak from Mountain Path. Confirm the existing arrival at the top of the trail is still safe and walkable.
+2. Follow the winding path to the Scenic Overlook. The player should stay on the grounded approach and the overlook deck.
+3. Try to walk toward the sky, distant ridges, valley, side cliffs and other scenery. Those areas should now be blocked rather than traversable.
+4. Interact with the Scenic Overlook and confirm the panorama opens and closes as before.
+5. Walk back down the trail and take the existing bottom exit to Mountain Path.
+6. Load a save made while standing in the formerly oversized Peak navigation area. The existing safe-spawn handling may relocate a saved player who is now standing outside the valid walkable surfaces; check that the rest of the saved game state remains intact.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.6_SOURCE.zip
+67,618,872 bytes (523 ZIP entries)
+SHA-256: ef018f7e1478108958585505341a46d8cbc4c0868692a88def082590d95eeffe
+
+SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+17,903,263 bytes (129 ZIP entries)
+SHA-256: 8808d97e3e94d482fa4b0be68300bbc143d16748181d287bb9786b788733b3bd
+
+The source ZIP retains the complete source handoff, curated historical source material and the full 129-file deployment mirror. The standalone ZIP is the complete Cloudflare site. No MP4 files, debug grids, preview overlays or temporary transfer files are included.
+
+RUNTIME BUNDLES
+
+sggf1clean2_6.apk
+sggf1clean2_6.tar.gz
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was made by Luma. The source baseline was read from main commit 64324a4; the binary-export and log-export bridge used a temporary isolated branch only. Cozmo handles normal GitHub publication and Cloudflare deployment.
+
+The three requested deliverables for Dropbox /SGG/ are:
+- SGGF1Clean2.6_SOURCE.zip
+- SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry011.txt (this complete cumulative log, including Entries 001–011)
+
+The old Entry010 log was used as the exact prefix; this Entry011 was appended without rewriting or removing any earlier entry. Each Dropbox upload must report completed and have its final path and file size independently verified before this delivery is considered complete.
+
+===============================================================================
+END ENTRY 011
+===============================================================================
+
+
+===============================================================================
+ENTRY 012 — SGGF1Clean2.7 FEARMONGER'S MAGE LAB / GIANT FLIGHT GAME OVER
+Date: 2026-11-03
+Status: Complete source and deployment packages built, extracted, statically verified; awaiting Cozmo field test
+===============================================================================
+
+USER REQUEST AND SCOPE
+
+Cozmo confirmed SGGF1Clean2.6 was present in GitHub main and authorized the next version. The two requested changes were combined into SGGF1Clean2.7:
+
+1. Remodel the old rough-draft Mage Lab into a distinctive, lived-in magical workshop. Fearmonger should become a silly old wizard with the comic nervous energy of Rincewind, but must be an original character and visually very different from Cozmo. The user requested interactable lab objects, all dangerous to touch, with several memorable Game Over deaths including one instantaneous, inexplicable event.
+2. Repair the existing Plains-to-Giant-Camp exit so it triggers the requested Game Over message. This is only a Game Over transition for now; no giant strike animation or playable camp redesign is to be included.
+
+The exact Giant Camp Game Over text, including Cozmo's deliberate “temporally” wording, is:
+“You angered a giant and he sent you flying into the sky. You are temporally thrilled to have discovered flight...”
+
+No changes to the Mudcrab River exit were requested; its prior immediate-death behavior must remain.
+
+EXACT BASELINE AND RETRIEVAL
+
+Baseline: SGGF1Clean2.6, from pinned GitHub main commit:
+265b63aaf3f8015bc03f47a28fbb374cdeede6e3
+
+The exact source and complete Cloudflare deployment ZIPs were retrieved from that pinned commit through the isolated GitHub Actions binary-transfer bridge. The baseline originals were extracted to separate pristine source/deploy directories before working copies were created.
+
+Baseline source:
+SGGF1Clean2.6_SOURCE.zip
+67,618,872 bytes
+SHA-256: ef018f7e1478108958585505341a46d8cbc4c0868692a88def082590d95eeffe
+
+Baseline complete deployment:
+SGGF1Clean2.6_COMPLETE_CLOUDFLARE_SITE.zip
+17,903,263 bytes
+SHA-256: 8808d97e3e94d482fa4b0be68300bbc143d16748181d287bb9786b788733b3bd
+
+Both original files were checked as nonempty ZIPs and passed integrity verification before extraction. The working source and deploy were rebuilt from those exact extracted baselines. No existing Clean2.6 source or deployment files were modified.
+
+MAGE LAB — LUMA DRAW ENGINE REDESIGN
+
+The former rough draft in mages_lab has been replaced with a substantially richer magical workshop using the existing JSON-driven Luma Draw Engine. The new background recipe contains 362 drawing primitives. It is not a flattened replacement image.
+
+The lab now has a layered blue-indigo stone interior, luminous stained-glass windows, a large central celestial/astrolabe apparatus, shelves of bottles and reagents, warm oak workbenches, runic instruments, crystal equipment, pendant lamps and a summoning circle. The existing room identity, area, navigation and door/exit structure remain. The original Mage Lab walkmesh is unchanged.
+
+FEARMONGER — ORIGINAL COMIC OLD WIZARD
+
+The existing mage asset has been redrawn as a 44-command, 112x150 procedural sprite. Fearmonger now appears as a hunched, elderly, scruffy wizard with a crooked floppy blue-green cap, shaggy grey beard, hooked nose, patched asymmetric robes and a bent staff. His silhouette, proportions, costume and palette are distinctly separate from Cozmo's. The design takes inspiration from the comic old-wizard spirit of Rincewind without copying the character.
+
+Fearmonger has been repositioned on the Mage Lab floor so the sprite reads as a resident of the room rather than a floating decorative cutout. His existing dialogue, potion delivery, quest and reward behavior are retained.
+
+LETHAL LAB INTERACTABLES
+
+The existing recipe book is now explicitly a fatal lab object, and four new separate non-takeable/non-stealable apparatus objects have been added. Each has a dedicated Luma Draw Engine object recipe and fatal interaction activity:
+
+- A Gentleman's Restorative — HANDLE WITH CARE (the existing recipe book).
+- The Unstable Retort.
+- The Resonance Crystal.
+- The Aether Coil.
+- The Unmarked Lever.
+
+All five can be targeted by mouse and activated using the existing interaction model. The player must be close enough to the object. If the player is out of range, the existing proximity feedback asks them to move closer; ordinary object activation continues through the inherited state machine.
+
+Each dangerous object immediately locks normal play and leads to its own Game Over screen. Four experiments include an effect-specific brief visual vignette before the modal appears:
+
+1. THE BOOK — the book pages burst outward in an arcane page/shrapnel blast. Its warning, diagram and rather personal third page are fatal.
+   Message: “The book opens by itself. Its first page is a warning, its second is a diagram of your face, and its third is a surprisingly accurate diagram of your exploded face.”
+
+2. THE UNSTABLE RETORT — a hot purple-green bench explosion hurls glassy fragments and bubbling experimental debris across the room.
+   Message: “The retort gives a polite little bubble. Then the bench becomes a horizontal hailstorm of boiling glass, purple flame and extremely opinionated frogs. The glass gets there first.”
+
+3. THE RESONANCE CRYSTAL — a bright crystalline radial burst scatters sharp fragments as every atom tries to resonate in unison.
+   Message: “You touch the crystal. Every atom in your body attempts to resonate at once. Your skeleton hears the note perfectly and tries to harmonize. The experiment is declared a success.”
+
+4. THE AETHER COIL — branching blue-white lightning arcs outward from the coil and fills the room.
+   Message: “The aether coil discharges through your boots, your staff and every ambitious bone in your body. For one brilliant instant you illuminate the entire room. The lightning wins.”
+
+5. THE UNMARKED LEVER — deliberately no build-up, explosion, or explanation. The ordinary gameplay is locked and the Game Over appears immediately.
+   Message: “Something happened. It happened very quickly. You have absolutely no idea what.”
+
+The four vignette durations are short and deterministic. The mystery lever has no vignette by design. Respawning clears the transient effect. All ordinary game-over/respawn handling remains in the inherited game system.
+
+SAVE COMPATIBILITY
+
+The existing save loader automatically backfills newly defined world objects absent from an older snapshot once, so the four new apparatus are available to older saves. A narrow Clean2.7 migration handles only pristine default Mage Lab placements:
+
+- The old recipe book is moved to its new authored location only if it remains unmoved, not carried, and exactly matches its former default coordinates and dimensions. A book the player has moved or owns is not repositioned.
+- The legacy default Fearmonger NPC is repositioned only when its old default coordinates and dimensions are still present.
+
+The book's current name/kind and fatal activity metadata are normalized. The migration does not reset player position, moved items, inventory, quest progress or unrelated save data. Re-running the migration is idempotent. Existing Fearmonger dialogue and potion quest state remain.
+
+PLAINS TO GIANT CAMP — GIANT FLIGHT GAME OVER
+
+The existing Plains-to-Giant-Camp connection was retained:
+plains_top_giant_camp — Plains to Giant Camp, existing top-edge connection.
+
+The visible horizon approach is evaluated using the actual player foot-anchor navigation polygon. The event is now caught after the inherited movement handler completes the edge transition to giant_camp. The state machine then displays Cozmo's exact Giant Flight Game Over message. A narrow grounded fallback handles the corresponding y=300 boundary crossing at x=640–656 if a runtime path leaves the player in Plains rather than completing the transition.
+
+No Giant Camp scenery, giant NPC, area geometry, bottom return, or strike animation was changed. This is the requested Game Over only.
+
+The separate plains_right_mudcrab_river connection and the prior inherited immediate-death behavior remain unchanged. The mud crab river area itself is not altered.
+
+FRONT-DOOR HISTORY AND PRESERVATION
+
+The complete deployment now contains thirteen playable editions:
+1. SGGF1Clean2.7 — current.
+2. SGGF1Clean2.6.
+3. SGGF1Clean2.5.
+4. SGGF1Clean2.4.
+5. SGGF1Clean2.2.
+6. SGGF1.666Cleanup1.0.
+7. SGGF1.666f1s.
+8. SGGF1.666.
+9. SGGF1.6.
+10. SGGF1.0.
+11. SGGE3.2.
+12. SGGE3.1.
+13. SGGE2.0.
+
+All twelve previous deployment edition directories were compared file-by-file against the exact Clean2.6 deployment baseline and remain byte-for-byte unchanged. Clean2.7 is an additive thirteenth edition. No prior selectable milestone was removed or replaced. Previous source snapshots and history remain intact in the source package. The source archive includes a complete deployment mirror.
+
+All existing area definitions and walkmeshes are unchanged. All pre-existing world connections are unchanged. Existing art recipes other than the Mage Lab background and mage sprite remain unchanged. Existing NPC definitions other than Fearmonger's new appearance/layout remain unchanged. No MP4 or debug overlay was added to the deployment. The mage_lab_preview.png image is included only as the Clean2.7 catalogue-card preview; no separate preview deliverable is uploaded.
+
+STATIC VERIFICATION
+
+216 focused static assertions passed. The test suite covered:
+- Python AST parse, bytecode compilation and packaging-script syntax.
+- Luma JSON parsing and supported drawing operations.
+- 362 Mage Lab background commands and 44 Fearmonger sprite commands.
+- Equality of all other existing art recipes, areas, navigation meshes and pre-existing connections.
+- Exact NPC/object changes, object metadata, non-takeable/non-stealable tags and render recipe coverage.
+- Mouse-target selection and close-range activation for all five fatal lab interactables.
+- Five unique Game Over narratives, four different short effect vignettes, shrapnel/fragments and immediate mystery-lever behavior.
+- Exact Giant Camp message character-for-character, preserving “temporally”.
+- Plains foot-anchor walkability at the grounded gateway and exclusion of adjacent scenery.
+- Detection after the inherited Plains-to-Giant-Camp transition; Mudcrab River connection and Giant Camp area/NPC remain unchanged.
+- Legacy object backfill and narrow save migration.
+- Thirteen catalogue entries, the sole current flag, all launch/preview paths and all twelve previous deploy directories byte-for-byte unchanged.
+- Current APK ZIP and TAR integrity and exact matching runtime source payloads.
+- Both root catalogue validators accepting SGGF1Clean2.7.
+- Complete source/standalone deployment mirror file parity (139 deployment files).
+- Absence of stale Clean2.6 bundles in the new version directory, MP4s and debug overlays from the deployment.
+
+Both final release ZIPs passed ZIP-integrity tests. They were extracted again, and the extracted source/deploy mirror was checked against the standalone deployment file-for-file. The extracted source's active runtime and the new deploy's versioned runtime match. The extracted catalogue contains the expected thirteen entries.
+
+The Luma Draw Engine scene preview was rendered from its JSON primitives and visually inspected. Pygame is not installed in this build environment. The game was not launched in a live runtime or browser, and the new Pygame death-vignette rendering was not live-displayed. The 216 checks are static and package-level verification, not a replacement for Cozmo's field test.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.7_SOURCE.zip
+74,668,069 bytes (614 ZIP entries)
+SHA-256: a4efd1966f5b12a4f86806d1eb55541623abbfe04f7aed27706d4f385100631d
+
+SGGF1Clean2.7_COMPLETE_CLOUDFLARE_SITE.zip
+19,384,539 bytes (152 ZIP entries)
+SHA-256: 65a1a0cbdec9dc03a962c12a0cc724c35e2e6ed2879c12e661fee45529ed0b14
+
+The extracted standalone deployment contains 139 files and thirteen selectable edition folders. The source ZIP contains 582 files and includes the matching deployment mirror. Both outer ZIPs were reopened and passed integrity validation after creation.
+
+RUNTIME BUNDLES
+
+sggf1clean2_7.apk
+sggf1clean2_7.tar.gz
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was made by Luma. The exact Clean2.6 baseline was retrieved from pinned main commit 265b63aaf3f8015bc03f47a28fbb374cdeede6e3 using the isolated Actions export bridge. The temporary branch was not merged into main. Cozmo handles publication and live testing.
+
+The three intended Dropbox deliverables are:
+- SGGF1Clean2.7_SOURCE.zip
+- SGGF1Clean2.7_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry012.txt (this cumulative log, with Entries 001–012)
+
+The complete Entry011 log is the exact unmodified prefix of this Entry012 log. No earlier entry was rewritten or removed. Each Dropbox upload must report completed and its final path and size must be independently verified before delivery is reported.
+
+===============================================================================
+END ENTRY 012
+===============================================================================
+
+
+===============================================================================
+ENTRY 013 — SGGF1Clean2.8 CASTLE VAULT REMODEL / KELP ORIGINAL PRESERVATION
+Date: 2026-11-03
+Status: Complete source and deployment packages built, extracted, statically verified; awaiting Cozmo field test
+===============================================================================
+
+USER REQUEST AND SCOPE
+
+Cozmo designated the Castle Vault as the final planned remodel before full-game test runs and the eventual SGGF1.666Final milestone. The exact accepted baseline was SGGF1Clean2.7, confirmed by Cozmo as present in GitHub main and deployed to Cloudflare.
+
+The requested scope was narrow: remodel the Vault artwork using the existing JSON-driven Luma Draw Engine, make the central inner/back-wall Vault door match the outer Vault door visible in Castle Hall, preserve Kelp's original contribution, preserve the platter-and-wall-seam exploit, and deliver complete source/deployment ZIPs plus this cumulative log to Dropbox /SGG/. No gameplay changes or new Vault interactables were requested.
+
+EXACT BASELINE AND RETRIEVAL
+
+Baseline: SGGF1Clean2.7, from GitHub main commit:
+1c06af037d0ab95a2ce9f126e0273b3372df1f25
+
+The exact source and standalone deployment archives were retrieved from that pinned commit using the isolated GitHub Actions binary-transfer method documented in the Luma refresh instructions. Both original ZIPs passed integrity checks and matched Entry012's recorded sizes and SHA-256 digests. Untouched pristine copies were retained separately from the working trees.
+
+Baseline source:
+SGGF1Clean2.7_SOURCE.zip — 74,668,069 bytes
+SHA-256: a4efd1966f5b12a4f86806d1eb55541623abbfe04f7aed27706d4f385100631d
+
+Baseline complete deployment:
+SGGF1Clean2.7_COMPLETE_CLOUDFLARE_SITE.zip — 19,384,539 bytes
+SHA-256: 65a1a0cbdec9dc03a962c12a0cc724c35e2e6ed2879c12e661fee45529ed0b14
+
+The previous SGGF1Clean2.7 source-version directory was restored from the untouched original after the art work was drafted and remains byte-for-byte unchanged in the final source package.
+
+KELP'S ORIGINAL VAULT — PRESERVED AND CREDITED
+
+The previous active c1_bg_castle_vault recipe was Kelp's JSON-authored Vault scene, created after Kelp studied Luma's Draw Engine documentation. Its provenance is part of SGG's creative history.
+
+The complete original definition, including all 114 original drawing commands, is preserved exactly under the asset key:
+
+c1_bg_castle_vault_kelp_original
+
+The original recipe remains in the new Luma JSON beside the new active scene. It has not been flattened, discarded or rewritten. Kelp's authorship is credited in the asset metadata, release notes, build metadata and this log.
+
+NEW VAULT — LUMA DRAW ENGINE REMODEL
+
+The active c1_bg_castle_vault background is a 1280x640 JSON-driven scene containing 583 drawing primitives. It remains a procedural Draw Engine recipe, not a flattened replacement image.
+
+The new treasury uses a vaulted stone ceiling, varied masonry courses, monumental piers, carved recesses, brass edging, burgundy heraldic banners, amber sconces, jewel-like wall details, a polished basalt floor, perspective flagstone seams, a central burgundy runner, decorative side chests and urns, and layered treasure-display alcoves.
+
+The four existing gold-pile world objects remain at their original positions and retain their original sizes, values, takeable metadata and behavior. Decorative chests and urns are part of the background only; they are not new game objects or interactables.
+
+INNER VAULT DOOR — EXACT MATCH TO CASTLE HALL
+
+The existing Castle Hall vault_locked_door uses the asset recipe locked_door. That recipe remains unchanged. It contains 71 Draw Engine commands and defines the door face at its native 130x166 size, including its steel panel, beveled frame, corner bolts, circular combination wheel, handle and locking rails.
+
+The exact same 71 commands were copied into the central rear-wall Vault arch, translated to origin x=575, y=185. No scaling or alteration of the door-face commands was applied. The new inner rear door therefore uses the same native dimensions and design as the Castle Hall outer door.
+
+The ordinary wooden Vault Exit at the bottom/foreground is a different object and remains unchanged. It is still the walk-through return transition to Castle Hall; it was not replaced by the metal bank door.
+
+GAMEPLAY, WORLD AND SAVE PRESERVATION
+
+The complete world data in the new asset JSON compares logically identical to Clean2.7. No world object, area, navigation polygon, walkmesh, NPC, connection or transition was changed.
+
+Specifically preserved: castle_vault and castle_hall area definitions and walkmeshes; vault_exit and its exact south approach/walk-trigger rectangle; vault_gold_1 through vault_gold_4 with their original coordinates, dimensions, values and interaction metadata; vault_locked_door and its vault_interact activity; vault_wall_seam and its clip activity; castle_hall_to_vault_clip; and vault_to_hall.
+
+The platter-and-wall-seam exploit remains intact. This change does not repair, weaken, relocate or replace the platter, suspicious seam, clip interaction or transition.
+
+No gameplay state machine, save structure, save migration, player position, inventory, quests, dialogue, character, or other-area artwork was changed. The only runtime code change is the version identity/comment from F1Clean2.7 to F1Clean2.8; behavior code is otherwise identical to the accepted baseline.
+
+FRONT-DOOR HISTORY AND VERSION PRESERVATION
+
+The catalogue now contains fourteen playable editions with SGGF1Clean2.8 as the sole current entry. All thirteen prior selectable versions remain listed with their original titles, descriptions, routes and images. Only the current flag moved from Clean2.7 to Clean2.8.
+
+All thirteen previously bundled deployment directories were compared file-by-file and remain byte-for-byte unchanged. The Clean2.7 source-version directory is also byte-for-byte unchanged. Clean2.8 is additive; no previous release was overwritten or removed.
+
+STATIC VERIFICATION
+
+21,735 focused static assertions passed. The suite covered Python syntax and compilation; JSON parsing and supported Draw Engine primitive validation; the 583-command new background; exact 114-command Kelp original preservation; exact 71-command native-size door copy; equality of all other pre-existing art recipes; full world-data equality; specific equality of the four treasures, wooden exit, locked door, wall seam and both Vault transitions; preservation of the platter exploit; fourteen-entry catalogue integrity; all thirteen prior deployment directories byte-for-byte unchanged; runtime APK ZIP/TAR.GZ integrity and exact embedded main.py/Luma JSON; new play-page bundle references; exact source/deployment mirror parity; and absence of MP4/debug overlay files in deployment.
+
+Both final outer release ZIPs passed integrity checks and were extracted again. The self-test passed from the extracted source package. The extracted source/deployment mirrors matched exactly across all 149 deployment files. The extracted catalogue contains fourteen selectable editions with only Clean2.8 marked current. Both runtime bundles contain exact copies of the new source and Luma asset JSON.
+
+The Vault preview was rendered from the JSON Draw Engine commands and visually inspected. It is a coordinate-faithful primitive preview, not a live Pygame renderer capture.
+
+LIVE TEST LIMITATION AND FIELD TEST
+
+Pygame is not installed in the build environment. Luma did not launch the game in Pygame or a live browser and does not claim a live runtime test. Cozmo's field test remains necessary.
+
+Suggested field checks:
+1. Enter the Vault using the existing platter-and-wall-seam exploit and confirm the same clip route still works.
+2. Compare the inner rear-wall metal door with the outer Castle Hall door; their door-face detailing and dimensions should match.
+3. Confirm the four existing treasure piles remain in place and collectible.
+4. Confirm the lower wooden Vault Exit still returns to Castle Hall.
+5. Confirm the locked outer door and suspicious wall seam behave as before.
+6. Load an existing save and verify player location, inventory, quests and other world state remain intact.
+
+PACKAGE IDENTITIES
+
+SGGF1Clean2.8_SOURCE.zip
+81,516,056 bytes (648 ZIP entries)
+SHA-256: 440060db026041859fb1ec341641cbfa893f9eea7dc6fd0bcecc539869bf09df
+
+SGGF1Clean2.8_COMPLETE_CLOUDFLARE_SITE.zip
+20,831,217 bytes (149 ZIP entries)
+SHA-256: cb4d5ce86adcd7abf9bb05be77331175aca7e2fad57203b2a3bcd9dfd97484d5
+
+RUNTIME BUNDLES
+
+sggf1clean2_8.apk
+sggf1clean2_8.tar.gz
+
+PUBLICATION AND DELIVERY
+
+No changes were pushed to GitHub main and no Cloudflare deployment was made by Luma. The Clean2.7 baseline was retrieved from pinned main commit 1c06af037d0ab95a2ce9f126e0273b3372df1f25. The temporary Actions export bridges used isolated branches and were not merged into main. Cozmo handles normal GitHub publication and Cloudflare deployment.
+
+The three requested Dropbox deliverables for /SGG/ are:
+- SGGF1Clean2.8_SOURCE.zip
+- SGGF1Clean2.8_COMPLETE_CLOUDFLARE_SITE.zip
+- lumas_log_Entry013.txt (this cumulative log, including Entries 001–013)
+
+The complete Entry012 log is the exact unmodified prefix of this Entry013 log. No earlier entry was rewritten, shortened or removed. Each Dropbox upload must report completed and have its final path and file size independently verified before this delivery is considered complete.
+
+===============================================================================
+END ENTRY 013
+===============================================================================
