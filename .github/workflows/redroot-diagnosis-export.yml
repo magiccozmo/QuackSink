@@ -1,0 +1,25 @@
+name: Temporary Redroot diagnosis export
+on:
+  push:
+    branches:
+      - luma-redroot-diagnosis-20261103
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Export exact current Luma world assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/e2c7131e9610fc262e94d9b2666087faac66daa7/ARCHIVES%208-30-2026/SGG/sggweb/luma_assets_e33.json"
+          curl -fL --retry 3 "$URL" -o transfer/luma_assets_e33.json
+          test "$(stat -c%s transfer/luma_assets_e33.json)" = "6318378"
+          python -m json.tool transfer/luma_assets_e33.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: redroot-current-world-assets
+          path: transfer/luma_assets_e33.json
+          retention-days: 1
