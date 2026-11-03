@@ -1,0 +1,28 @@
+name: Temporary Clean2.7 visual-reference export
+on:
+  push:
+    branches:
+      - temp/export-clean27-baseline-20261103
+permissions:
+  contents: read
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download pinned repository reference artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p refs
+          BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/1c06af037d0ab95a2ce9f126e0273b3372df1f25/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$BASE/pics/vault-kelp.png" -o refs/vault-kelp.png
+          curl -fL --retry 3 "$BASE/vault.png" -o refs/vault.png
+          curl -fL --retry 3 "$BASE/door_asset.png" -o refs/door_asset.png
+          file refs/*
+          sha256sum refs/*
+      - name: Upload visual references
+        uses: actions/upload-artifact@v4
+        with:
+          name: Clean2.7-visual-references
+          path: refs/
+          retention-days: 1
