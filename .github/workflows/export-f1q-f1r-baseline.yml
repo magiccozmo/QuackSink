@@ -1,0 +1,43 @@
+name: Export F1q baseline for F1r
+on:
+  push:
+    branches:
+      - transfer/f1q-f1r-baseline-20261103
+    paths:
+      - .github/workflows/export-f1q-f1r-baseline.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact main baseline
+        uses: actions/checkout@v4
+      - name: Stage and verify F1q base and all gallery artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p transfer/pics
+          cp "$ROOT/SGGF1.666f1q_SOURCE.zip" transfer/
+          cp "$ROOT/SGGF1.666f1q_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "$ROOT/workflow.txt" transfer/
+          cp "$ROOT/todo heap.txt" transfer/
+          cp "$ROOT/pics/"*.png transfer/pics/
+          test -s transfer/SGGF1.666f1q_SOURCE.zip
+          test -s transfer/SGGF1.666f1q_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s "transfer/pics/troll cave f1q.png"
+          unzip -t transfer/SGGF1.666f1q_SOURCE.zip
+          unzip -t transfer/SGGF1.666f1q_COMPLETE_CLOUDFLARE_SITE.zip
+          printf 'PNG count: '; find transfer/pics -maxdepth 1 -type f -iname '*.png' | wc -l
+          sha256sum transfer/SGGF1.666f1q_*.zip transfer/pics/*.png > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/SGGF1.666f1q_*.zip transfer/pics/*.png > transfer/SIZES.txt
+      - name: Upload exact F1q originals and all current pics
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF1q-F1r-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
