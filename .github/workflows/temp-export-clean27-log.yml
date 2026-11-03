@@ -1,0 +1,27 @@
+name: Temporary Clean2.7 cumulative log export
+on:
+  push:
+    branches:
+      - temp/export-clean27-baseline-20261103
+permissions:
+  contents: read
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact cumulative Entry012 log from pinned main
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p log
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/1c06af037d0ab95a2ce9f126e0273b3372df1f25/ARCHIVES%208-30-2026/SGG/sggweb/lumas_log_Entry012.txt"
+          curl -fL --retry 3 "$URL" -o log/lumas_log_Entry012.txt
+          test -s log/lumas_log_Entry012.txt
+          sha256sum log/lumas_log_Entry012.txt
+          wc -c log/lumas_log_Entry012.txt
+      - name: Upload cumulative log artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Clean2.7-cumulative-Entry012-log
+          path: log/lumas_log_Entry012.txt
+          retention-days: 1
