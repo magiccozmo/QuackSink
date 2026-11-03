@@ -12,17 +12,14 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact Clean2.4 baseline
-        uses: actions/checkout@v4
-        with:
-          ref: cac6ad23214c6dfdec0d27dd8dd56bd04f546dfb
-      - name: Stage and verify original ZIPs
+      - name: Download exact Clean2.4 baseline ZIPs from immutable commit
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p /tmp/sgg-transfer
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.4_SOURCE.zip" /tmp/sgg-transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          BASE="https://raw.githubusercontent.com/magiccozmo/QuackSink/cac6ad23214c6dfdec0d27dd8dd56bd04f546dfb/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.4_SOURCE.zip" -o /tmp/sgg-transfer/SGGF1Clean2.4_SOURCE.zip
+          curl -fL --retry 3 "$BASE/SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip" -o /tmp/sgg-transfer/SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip
           test -s /tmp/sgg-transfer/SGGF1Clean2.4_SOURCE.zip
           test -s /tmp/sgg-transfer/SGGF1Clean2.4_COMPLETE_CLOUDFLARE_SITE.zip
           unzip -tq /tmp/sgg-transfer/SGGF1Clean2.4_SOURCE.zip
