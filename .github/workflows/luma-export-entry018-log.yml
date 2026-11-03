@@ -1,0 +1,33 @@
+name: Export cumulative SGG Luma log Entry018
+
+on:
+  push:
+    branches:
+      - luma-export-clean211-baseline-20261103
+
+permissions:
+  contents: read
+
+jobs:
+  export-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout temporary log-export branch
+        uses: actions/checkout@v4
+      - name: Verify cumulative log
+        run: |
+          set -euo pipefail
+          test -s "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          tail -n 4 "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          wc -c "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          sha256sum "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt" transfer/
+      - name: Upload cumulative log transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: luma-log-entry018-transfer
+          path: transfer/lumas_log_Entry018.txt
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
