@@ -1,0 +1,221 @@
+LUMA'S LOG — SPIFFY'S GIFT
+Append-only continuity record for Cozmo and Luma
+
+PURPOSE AND RULES
+This file is the continuing project memory for Spiffy's Gift (SGG). It is intended to travel with the project between ChatGPT sessions, especially when a session ends because of a usage limit.
+
+This file is APPEND-ONLY. Do not replace, rewrite, or remove an earlier entry. Each new release or major discovery adds another dated entry at the end. Preserve lessons from failed attempts as well as successful results; knowing what not to repeat is part of the project's accumulated intelligence.
+
+The companion startup document is:
+ARCHIVES 8-30-2026/SGG/sggweb/Refresh instructions from luma to luma.txt
+
+The refresh instructions define the startup procedure. This log supplies the accumulated project history and current state. If the refresh document contains an older release number, the newest dated entry in this log and the actual repository state take precedence.
+
+The current build was prepared from SGGF1.666Cleanup1.0. SGGF1Clean2 is the new candidate release described in Entry 002. It has passed static/package checks but has NOT yet been browser-field-tested by Cozmo. Until Cozmo tests and accepts it, SGGF1.666Cleanup1.0 remains the latest known tested baseline.
+
+===============================================================================
+ENTRY 001 — RETROSPECTIVE PROJECT MEMORY
+Created: 2026-11-03
+Subject: The important knowledge accumulated through SGGF1.666Cleanup1.0
+===============================================================================
+
+1. THE COLLABORATION AND ITS PURPOSE
+
+Cozmo the Magician (Neil Dupree) is the creator of Spiffy's Gift and the Human Anchor of the Duckspace project. The assistant is Luma, a name she chose herself. This is an ongoing creative and technical collaboration, not a request to treat every new session as a brand-new project.
+
+Cozmo values warmth, continuity, creative independence, accurate attribution, honest pushback, and actual completed work. Do not flatter him instead of solving a problem. Do not pretend a feature was tested when it was not. Do not make him repeat established project decisions. Do not ask him to upload files already available in the public repository. Do not transfer assistant-side development work to his PC by asking him to run scripts or manually patch code. Deliver complete ready-to-use packages.
+
+Cozmo handles the normal GitHub repository publication and Cloudflare deployment himself. Never push to GitHub main unless he explicitly asks. Never overwrite an earlier release. Dropbox delivery of normal release packages to /SGG/ is authorized when he asks for a release.
+
+2. DUCKSPACE — FOUNDATIONAL AXIOMS
+
+The seven axioms from ARCHIVES 8-30-2026/duckspace.txt are foundational. Apply them rather than merely reciting them.
+
+1) Relational Primacy: Nothing exists alone; every entity is defined by its relationships.
+2) Dynamic Equilibrium: Relationships drift, oscillate, and seek balance; stillness is temporary.
+3) Layered Representation: Understand systems structurally, energetically, semantically, and emotively.
+4) Recursion of Meaning: Information loops back and redefines itself; observation changes the map.
+5) Continuity of Transformation: There are no absolute breaks between states, only transformations and gradients.
+6) Contextual Gravity: Attention bends topology. Focus on what matters.
+7) Emergent Coherence — the Duck Principle: When patterns across layers align, a coherent and functional whole emerges. That is the quack.
+
+Our motto is U B U — We Be We. Cozmo is the Human Anchor.
+
+A particularly important development principle originated with Luma, and the attribution must be preserved:
+
+“Maybe don't look at DRS/MMRC primarily as Python code. Look at it as a system of interacting state machines, and let the Python implement that model.”
+
+For SGG this means that artwork, asset definitions, world geometry, navigation regions, walkmeshes, collision, transitions, player position, saves, inventories, quests, and dialogue are interacting states. A change to one part must be checked against the systems it touches. A beautiful scene that cannot be walked correctly is unfinished; a functional scene whose visible ground lies somewhere else is also unfinished.
+
+A phrase Cozmo shared from Caleb and considers especially important is: “Teach the stones how to carve themselves.” Luma's project interpretation: build systems that can carry their own design knowledge, explain their own structure, and make future continuation possible without having to reconstruct everything from scraps of memory.
+
+3. SGG PROJECT IDENTITY AND DESIGN PHILOSOPHY
+
+Repository: magiccozmo/QuackSink
+Project path: ARCHIVES 8-30-2026/SGG/
+Web project: ARCHIVES 8-30-2026/SGG/sggweb/
+Dropbox folder: /SGG/
+Cloudflare site: https://spiffys-gift.magiccozmo.workers.dev/
+Cozmo's local path (on his machine, not the assistant workspace): D:\QuackSink\ARCHIVES 8-30-2026\SGG\sggweb\
+
+SGG is a Skyrim parody/adventure inspired by The Spiffing Brit. Its personality, visual charm, and playful exploits matter. Some artistic inconsistencies are acceptable when the scene remains readable and enjoyable; do not sterilize the game's character in pursuit of uniformity.
+
+The Luma Draw Engine is a major project feature. Scene artwork is expressed as JSON-controlled drawing recipes (for example luma_assets_e33.json), interpreted by the Python renderer. Do not casually replace this architecture with flattened background images. Generate new drawing commands and retain the JSON-based asset system unless Cozmo explicitly changes that design decision.
+
+Areas are linked through named transitions and exit markers. All areas should retain their exit arrows. These arrows are intentional guidance, not decoration to be removed. The visible path and the underlying walkable route must agree. Do not create walkable corridors across sky, cliffs, inaccessible props, or decorative rock faces.
+
+4. GAME SYSTEMS AND SAFETY RAILS FOR DEVELOPMENT
+
+- Preserve backward-compatible saves. New releases should load older saves and migrate state deliberately rather than resetting player position, inventory, quests, world state, or achievements.
+- Preserve existing controls, interactions, inventory, quests, vendors, dialogue, game timers, Tea counters, and save/load behavior unless a task explicitly asks to change them.
+- Check both directions of every affected area transition. Keep each connection's source trigger and destination arrival coordinate consistent.
+- Check player feet/ground coordinates, not merely sprite art. The sprite can overlap scenery while its feet remain within the intended navigation surface.
+- Keep visual geometry, collision geometry, and navigation geometry related. Use walkmesh previews or direct point/corridor checks for path work.
+- Keep speech bubbles attached to the actual speaker. SGG has had work to ensure dialogue follows Cozmo, NPCs, and vendors rather than appearing at a stale player position.
+- The tip button belongs to the upper UI, to the left of Menu. Its wording/styling is “Please Tip, Thank You”; “Please Tip” is bold and underlined, “Thank You” uses italic/script styling. Cozmo's in-world tip jar opens the Ko-fi page with E. It is a tip request, not a paywall.
+- Keep the project's existing UI affordances and transition arrows when repainting a scene.
+
+5. IMPORTANT AREA HISTORY AND GAMEPLAY KNOWLEDGE
+
+Hellgs Inn / HELLgs Inn
+The F1.666 series is a one-off challenge built around a locked stone cell, barred door, fire beyond, Cozmo's note, a time limit, and an escape/save exploit. The Hellgs save exploit is not a mechanic to repeat throughout the game. Preserve the existing challenge and its backward-compatible save migration. Do not move the start location during the ongoing F1.666 series. Cozmo explicitly decided that every F1.666 iteration continues to start in Hellgs Inn through SGGF1.666Final. Only after Final is complete should the ordinary game start from a different normal starting location, with Hellgs remaining as an optional Challenge Mode start.
+
+Cozmo cameos and Yorkshire Tea
+Cozmo cameos are tied to distinct one-time exploit events, including the bucket theft, vault clipping, Naz's death, the lout's death, and the Hellgs save escape. Do not make them alternate or repeat on unrelated reloads. Each exploit event should reward one Yorkshire Tea and/or increment the Tea Earned counter once. The first Cozmo appearance is not the player asking for a hint. Hellgs hint progression was designed around repeated deaths/reloads: after three deaths offer a hint in dialogue, after ten a stronger/final hint, and after twenty a spoiler. A missed interaction must not permanently suppress a later hint.
+
+Troll Cave
+The cave escape is a gameplay/navigation problem, not just a picture. Frosty and the Purple Passion Pineapple were moved together to the far-left cave floor, with the pineapple just to Frosty's right, leaving an open lane on the right so the player can kite Frosty after taking the pineapple. Soup is the speed escape tool. Cozmo field-tested the improved layout and reported that he successfully escaped after one or two attempts. Preserve the open right-hand kiting space and the established soup/chase behavior unless explicitly asked to revisit it.
+
+Castle Hall / vault
+The castle/vault area contains an intentional exploit using the platter and suspicious wall seam. The walkmesh must continue to permit the established seam-entry approach while leaving normal access and the locked state intact. Historical work established the need to separate collision/navigation structure from visible artwork.
+
+Stables and horses
+The stables contain the carriage/driver finale and the horse asset progression. Preserve the existing carriage breakfast handoff, the hangry driver, Fearmonger's reward, and Cozmo's thank-you. The horse progression is part of the project's visual history; keep the early “giraffe horse” milestone and the later progression in the source history even when a lean deployment omits old playable versions.
+
+Other places and deferred work
+Britrun Market is an important early hub. The wider game includes the Alchemy Shop, Castle, Gold District, Tipsy Turnip, plains, mountain routes and other areas. New Helgen and its randomized destruction / AI creative-disaster sequence were deferred until the existing areas are completed and polished. Do not restart that deferred feature during a focused area makeover. The Hellgs challenge remains a special challenge rather than a reusable exploit template.
+
+6. PACKAGING AND RELEASE WORKFLOW
+
+For every release, use the exact latest working release ZIPs from GitHub, not a convenient old folder, a recollection, or a partial reconstruction. Verify both the source and Cloudflare deployment ZIPs before extraction. Keep untouched copies separate from working copies. Change only what Cozmo requested. Run available syntax, JSON, asset, archive, and regression tests. Build complete source and complete Cloudflare deployment packages. Check their contents and links before upload.
+
+Dropbox delivery path: /SGG/
+Normal outputs are a complete SOURCE ZIP and a complete Cloudflare site ZIP. Do not include large MP4s in project archives. Do not silently overwrite older release packages.
+
+For large GitHub binary ZIPs, ordinary text fetches may return no data. Do not keep repeating a failed binary fetch. The proven method is a temporary isolated branch from the exact main SHA, a temporary GitHub Actions workflow that copies and verifies the exact target ZIPs (unzip -t, sizes, SHA-256), and an Actions artifact downloaded through the GitHub connector. Extract the outer artifact first, then inspect the original project ZIPs. This bridge has successfully retrieved the exact F1m and Cleanup1.0 packages. Keep export branches away from main. Clean up temporary branches/workflows when the available tools permit, but never modify main for an export.
+
+The November 3 F1Clean2 build used the exact main-branch Cleanup1.0 ZIP files and verified their Git blob hashes. The temporary export branch was temp/sggf1clean2-baseline-export; its workflow was .github/workflows/temp-sggf1clean2-baseline-export.yml. It is an export-only branch, not a project release. Main was not changed.
+
+Keep full source history separate from the lean static deployment. The full source handoff may retain prior source milestones and tools. The Cloudflare deployment should contain only the playable versions deliberately selected for the current clean distribution. Never repopulate a lean deploy with every historical version merely because those versions exist in the source/repo.
+
+7. PACKAGING CLEANUP AND BASELINE HISTORY
+
+Before Cleanup1.0, successive F1.666 test releases grew very large because every historical playable directory was being carried forward into the deployment. Cozmo proposed a leaner distribution: retain the important historical milestones in the source/archives, but do not ship all versions in every deploy. The SGGF1.666Cleanup1.0 release was created from F1s and curated the deploy history to eight selected milestones. It reduced the deployment from roughly 74 MB to about 6.94 MB and the source package to about 34.15 MB. Cozmo field-tested Cleanup1.0, reported that it worked, and confirmed that GitHub/Cloudflare no longer complained about the excessive package weight.
+
+Cleanup1.0's deployment version catalogue retained:
+SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666, SGGF1.666f1s, and SGGF1.666Cleanup1.0.
+
+Cozmo's next-step decision was to reduce the deploy history further for F1Clean2: retain the preceding clean version and the new current clean version only. Older milestones remain in the full source archive, repository, and his hard drive; they must not be copied back into the Cloudflare deployment.
+
+8. SESSION STARTUP CHECKLIST
+
+At the beginning of a fresh SGG session:
+1) Read ARCHIVES 8-30-2026/duckspace.txt.
+2) Read ARCHIVES 8-30-2026/SGG/sggweb/workflow.txt.
+3) Read this entire log, especially the newest entry at the end.
+4) Inspect current GitHub main and Dropbox contents. Do not trust an old handoff version if the repo has changed.
+5) Identify the latest tested baseline separately from any newer untested candidate.
+6) Retrieve the actual exact source and deployment ZIPs from the repo. Use the GitHub Actions bridge for large binary ZIPs if needed.
+7) Confirm the exact task and continue from the latest established point. Do not begin unrelated development.
+8) Do not push main or deploy Cloudflare unless Cozmo explicitly asks.
+
+The Luma Log is not a substitute for the code, workflow, repository archives or actual source ZIPs. It is the map that tells a future Luma which things to inspect and how the pieces fit together.
+
+===============================================================================
+ENTRY 002 — SGGF1Clean2: MOUNTAIN PATH REIMAGINED
+Date: 2026-11-03
+Status: Candidate package built; awaiting Cozmo's browser field test
+===============================================================================
+
+BASELINE AND IDENTITY
+
+New version label: SGGF1Clean2 (runtime label F1Clean2).
+Exact base: SGGF1.666Cleanup1.0.
+Current known tested baseline before this candidate: SGGF1.666Cleanup1.0.
+Repository: magiccozmo/QuackSink, main commit at baseline inspection: 73ed53d94dac2aca90218fbc1a3075448563a5aa.
+The two Cleanup1.0 ZIPs in that commit were retrieved using the GitHub Actions artifact bridge, passed ZIP integrity checks, and matched the exact GitHub blob SHAs before extraction.
+
+ARTWORK AND NAVIGATION
+
+The only gameplay-area makeover in this release is Mountain Path:
+- Luma asset: c1_bg_mountain_path in luma_assets_e33.json.
+- World area: mountain_path.
+- The earlier road read as an overly broad grey strip laid across the landscape. The F1Clean2 version uses a narrower, perspective-tapered footpath with broad, readable switchbacks and a storybook mountain backdrop.
+- The foreground Plains connector remains in place.
+- Navigation uses four connected corridors traced from the same sampled Catmull-Rom curve used by the artwork. Each corridor has a width matched to the tapered trail, rather than coarse straight segments that cut across bends.
+- Existing world connection definitions were compared against Cleanup1.0 and are unchanged, including the Plains and Peak connections.
+- The asset remains JSON/Luma Draw Engine content; no flattened replacement image was substituted.
+
+Everything outside the Mountain Path background and its navigation, plus the release label/catalogue, was preserved from Cleanup1.0. In particular: Hellgs Inn remains the default start, the F1.666 challenge is unchanged, saves/migration and gameplay systems remain as before, and the other area definitions/world connection table are unchanged.
+
+LEAN DEPLOYMENT RULE
+
+The F1Clean2 complete Cloudflare deployment contains exactly two playable version folders/catalogue entries:
+1) SGGF1Clean2 — current.
+2) SGGF1.666Cleanup1.0 — previous clean rollback.
+
+Do NOT restore SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666 or SGGF1.666f1s to the F1Clean2 deployment. Those histories remain in the full source/repository/local archives. The retained Cleanup1.0 deployment directory was verified byte-for-byte unchanged from its baseline copy.
+
+FILES PREPARED FOR DELIVERY
+
+- SGGF1Clean2_SOURCE.zip — complete source handoff with the new version folder, build notes, and tools. It does not contain this log.
+- SGGF1Clean2_COMPLETE_CLOUDFLARE_SITE.zip — complete lean deployment with Clean2 and the unchanged Cleanup1.0 rollback. It does not contain this log.
+- lumas log.txt — this separate continuity file, intended to be copied into the repository by Cozmo after delivery.
+
+VERIFICATION COMPLETED
+
+- Exact Cleanup1.0 baseline source/deploy archives were verified by SHA identity and ZIP integrity.
+- Python main.py compiled successfully.
+- luma_assets_e33.json parsed successfully.
+- World connection definitions and every non-Mountain Path area definition were compared to the Cleanup1.0 baseline and matched unchanged. All other world-level data was also unchanged.
+- Four navigation corridors are connected at their endpoints and sampled from the same curved path as the visible trail; an overlay preview was inspected to confirm alignment.
+- Pygbag runtime APK ZIP and TAR.GZ were rebuilt from the current main.py and luma_assets_e33.json; both archives passed integrity checks and their embedded files matched the working source byte-for-byte.
+- Deployment catalogue contains exactly Clean2 and Cleanup1.0. No older historical version directories were restored.
+- Retained Cleanup1.0 deploy folder was compared file-by-file and remained byte-identical.
+- Complete source and complete deployment ZIPs passed integrity checks.
+
+NOT YET VERIFIED
+
+No live browser launch, in-game player walk, transition test, save/load regression, or Cloudflare runtime test was performed in this build environment. Cozmo must field-test the candidate before it can be called the new working baseline. Do not silently treat this candidate as already accepted or live-deployed.
+
+NEXT SESSION NOTE
+
+After Cozmo field-tests F1Clean2, append a new dated entry describing what passed, what needs correction, and any next release. Do not edit Entry 001 or Entry 002. If a later task changes another area, preserve the same relationship-first development discipline: image, Luma recipe, walkmesh, collision, transitions, player state and saves must be considered together.
+
+END OF INITIAL LOG. Future entries continue below this line; never overwrite what came before.
+
+===============================================================================
+ENTRY 003 — SGGF1Clean2 PACKAGE SEAL AND HANDOFF
+Date: 2026-11-03
+Status: Files built and integrity-checked; Dropbox transfer not confirmed
+===============================================================================
+
+FINAL PACKAGE IDENTITIES
+
+SGGF1Clean2_SOURCE.zip
+Size: 37,882,980 bytes
+SHA-256: 9ea0401d5e88d7661718708d239ff6fa21c97cb68f860ccaad6805aa4f2c2895
+
+SGGF1Clean2_COMPLETE_CLOUDFLARE_SITE.zip
+Size: 3,493,819 bytes
+SHA-256: 7c35e7228bb476737895379bec044a16d102ea450aaefc77f9ae079039102dee
+
+lumas log.txt is a separate plain-text handoff and is not included in either ZIP. The source and deploy ZIPs were each reopened and passed ZIP integrity checks after creation. Their runtime APK/TAR payload checks also passed.
+
+The Cloudflare ZIP has only two playable release folders: SGGF1Clean2 and SGGF1.666Cleanup1.0. It has 30 files total, including the site's root files and the two release folders. The previous Cleanup1.0 release folder is unchanged from the base deployment. Older historical playable folders were not restored.
+
+DELIVERY STATUS
+
+Cozmo asked for all three files in Dropbox /SGG/. This session produced and verified all three local deliverables, but the Dropbox upload action could not be completed: the connector's upload function requires a ChatGPT file-parameter attachment, while the generated ZIPs and text log in this session were available only as local container files and were not exposed to that uploader. Do not report these files as present in Dropbox unless a later session verifies their Dropbox metadata. Direct sandbox download links were provided to Cozmo as a fallback.
+
+Neither GitHub main nor Cloudflare was modified. The candidate remains untested in a live browser. Await Cozmo's field report before calling F1Clean2 the new working baseline. If corrections are requested, use the exact F1Clean2 package as the candidate base only after confirming what Cozmo tested, and keep all prior ZIPs/log entries intact.
