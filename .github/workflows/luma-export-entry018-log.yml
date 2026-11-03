@@ -12,17 +12,18 @@ jobs:
   export-log:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout temporary log-export branch
-        uses: actions/checkout@v4
-      - name: Verify cumulative log
+      - name: Fetch exact cumulative log from pinned temporary-branch commit
+        shell: bash
         run: |
           set -euo pipefail
-          test -s "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
-          tail -n 4 "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
-          wc -c "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
-          sha256sum "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
           mkdir -p transfer
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry018.txt" transfer/
+          URL="https://raw.githubusercontent.com/magiccozmo/QuackSink/9d4892136f2a632b6b47fe1aee71a0d5c925c398/ARCHIVES%208-30-2026/SGG/sggweb/lumas_log_Entry018.txt"
+          curl -fL --retry 3 "$URL" -o transfer/lumas_log_Entry018.txt
+          test -s transfer/lumas_log_Entry018.txt
+          grep -q "END ENTRY 018" transfer/lumas_log_Entry018.txt
+          grep -q "END ENTRY 017" transfer/lumas_log_Entry018.txt
+          wc -c transfer/lumas_log_Entry018.txt
+          sha256sum transfer/lumas_log_Entry018.txt
       - name: Upload cumulative log transfer artifact
         uses: actions/upload-artifact@v4
         with:
