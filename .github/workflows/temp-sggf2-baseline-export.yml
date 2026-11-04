@@ -1,0 +1,32 @@
+name: Temporary SGGF2 baseline ZIP export
+on:
+  push:
+    branches:
+      - temp/sggf2-baseline-export-20261104
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy and verify exact HellFinal baseline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-baseline
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666HellFinal_SOURCE.zip" /tmp/sgg-baseline/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666HellFinal_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-baseline/
+          test -s /tmp/sgg-baseline/SGGF1.666HellFinal_SOURCE.zip
+          test -s /tmp/sgg-baseline/SGGF1.666HellFinal_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t /tmp/sgg-baseline/SGGF1.666HellFinal_SOURCE.zip
+          unzip -t /tmp/sgg-baseline/SGGF1.666HellFinal_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd /tmp/sgg-baseline && sha256sum *.zip | tee SHA256SUMS.txt)
+          (cd /tmp/sgg-baseline && stat -c '%n %s bytes' *.zip | tee FILE_SIZES.txt)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SGGF2-HellFinal-baseline
+          path: /tmp/sgg-baseline/
+          retention-days: 1
+          if-no-files-found: error
