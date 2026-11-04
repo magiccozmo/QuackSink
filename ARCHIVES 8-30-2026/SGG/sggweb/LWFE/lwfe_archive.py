@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import shutil
 
-APP_VERSION = "0.1.2"
+APP_VERSION = "0.1.3"
 EXCLUDED_ROOT_NAMES = {"archives", "__pycache__", ".git", ".venv", "venv"}
 EXCLUDED_SUFFIXES = {".pyc", ".pyo", ".tmp", ".bak"}
 
@@ -15,11 +15,11 @@ def _include_root_file(path: Path) -> bool:
 
 
 def create_archive(project_root: Path, version: str = APP_VERSION) -> Path:
-    """Snapshot the current LWFE source, folio JSON, and existing WAVs.
+    """Create and return a new immutable session workspace under archives/.
 
-    Each call creates a new directory under ``archives``. The archive directory
-    itself is never copied, so snapshots cannot contain older snapshots.
-    Existing files in older snapshots are never modified or overwritten.
+    The desktop app uses the returned directory as the active output root for
+    every render and playback during that application run. The archive itself
+    is never copied recursively, and existing archives are never overwritten.
     """
     project_root = project_root.resolve()
     if not project_root.is_dir():
@@ -44,8 +44,7 @@ def create_archive(project_root: Path, version: str = APP_VERSION) -> Path:
     try:
         (destination / "sounds").mkdir(exist_ok=True)
 
-        # Snapshot all current top-level project files: Python source, JSON,
-        # launcher, README, version marker, and any project-side notes/tests.
+        # Copy the current source, folio JSON and project-side documentation.
         for source in sorted(project_root.iterdir(), key=lambda item: item.name.casefold()):
             if source.name.casefold() in EXCLUDED_ROOT_NAMES:
                 continue
@@ -54,7 +53,8 @@ def create_archive(project_root: Path, version: str = APP_VERSION) -> Path:
                 shutil.copy2(source, target)
                 copied.append(target.relative_to(destination).as_posix())
 
-        # The live sounds folder contributes only WAV masters that exist now.
+        # Carry forward any WAV masters that were already in the legacy/live
+        # sounds folder when this session started.
         sounds_root = project_root / "sounds"
         if sounds_root.is_dir():
             for source in sorted(sounds_root.rglob("*"), key=lambda item: item.as_posix().casefold()):
@@ -67,12 +67,14 @@ def create_archive(project_root: Path, version: str = APP_VERSION) -> Path:
                 copied.append(target.relative_to(destination).as_posix())
 
         manifest = [
-            "Luma-Winslow Folio Engine (LWFE) — Startup Snapshot",
+            "Luma-Winslow Folio Engine (LWFE) — Session Workspace",
             f"Version: {version}",
             f"Created: {now.isoformat(timespec='seconds')}",
-            "Snapshot timing: application startup (or explicit Create snapshot now).",
-            "Contents: current project files and lwfe.json, plus WAV files already present in sounds/.",
-            "Archive policy: this directory is immutable history; archives/ is never copied recursively.",
+            "Snapshot timing: application startup (or explicit additional snapshot).",
+            "Contents: current project files and lwfe.json, plus WAV files present in the legacy sounds/ folder at startup.",
+            "SESSION OUTPUT: new RENDER operations in this application run write to this directory's sounds/ folder.",
+            "PLAYBACK: the application checks this directory's sounds/ folder for WAV files.",
+            "Archive policy: this directory is a session workspace and immutable history after the application closes; archives/ is never copied recursively.",
             "",
             "Files copied:",
         ]

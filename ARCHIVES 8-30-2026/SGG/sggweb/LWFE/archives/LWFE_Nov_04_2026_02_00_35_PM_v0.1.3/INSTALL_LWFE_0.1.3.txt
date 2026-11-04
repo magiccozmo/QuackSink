@@ -1,0 +1,17 @@
+LWFE 0.1.3 UPDATE
+
+Extract this ZIP into:
+D:\QuackSink\ARCHIVES 8-30-2026\SGG\sggweb
+
+Allow Windows to merge the included LWFE folder and replace the matching source files.
+This update does NOT contain or replace the archives folder or the sounds folder.
+All existing archive directories and existing WAV masters are therefore preserved.
+
+Start from a normal Windows CMD window:
+cd /d "D:\QuackSink\ARCHIVES 8-30-2026\SGG\sggweb\LWFE"
+py -3 lwfe_app.py
+
+On each launch, LWFE creates a new timestamped directory under archives.
+RENDER and PLAY use that run's archive/sounds folder. If startup archive
+creation fails, rendering is disabled rather than falling back to the
+main LWFE/sounds folder.

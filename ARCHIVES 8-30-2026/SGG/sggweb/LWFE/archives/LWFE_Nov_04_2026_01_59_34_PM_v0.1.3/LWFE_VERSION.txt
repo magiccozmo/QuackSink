@@ -1,0 +1,10 @@
+Luma-Winslow Folio Engine (LWFE)
+Version: 0.1.3 (archive session workspaces)
+Created: 2026-11-04
+Change: each app launch creates a unique timestamped archive directory and uses it as the active workspace for all RENDER and PLAY operations in that run.
+Output routing: new WAV renders are written to archives/<session>/sounds/, never to the main LWFE/sounds/ directory.
+Safety: existing archive folders are never overwritten; rendering is disabled if startup archive creation fails.
+Archive format: LWFE_Mmm_DD_YYYY_HH_MM_SS_AM_v0.1.3
+Current folios: Dog Bark, Chicken Cluck, Kitty Meow, Moo-box Kitty experiment, Cow Moo control
+Renderer: dependency-free Python standard library
+Output: 48 kHz, 16-bit mono PCM WAV

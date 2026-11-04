@@ -1,6 +1,6 @@
 """Luma-Winslow Folio Engine (LWFE)
 
-A small, dependency-free procedural audio renderer.  JSON describes sound
+A small, dependency-free procedural audio renderer. JSON describes sound
 materials, gestures, resonance, texture and pressure; the engine paints those
 instructions into PCM WAV files.
 """
@@ -14,7 +14,7 @@ import wave
 from pathlib import Path
 from typing import Any
 
-ENGINE_VERSION = "0.1"
+ENGINE_VERSION = "0.1.1"
 DEFAULT_SAMPLE_RATE = 48_000
 
 
@@ -49,14 +49,26 @@ def load_library(path: Path) -> dict[str, Any]:
     return data
 
 
-def output_path_for(sound: dict[str, Any], project_root: Path) -> Path:
+def output_path_for(
+    sound: dict[str, Any],
+    project_root: Path,
+    output_root: Path | None = None,
+) -> Path:
+    """Resolve a folio output within its assigned workspace.
+
+    output_root is the active archive for a desktop-app session. It is
+    optional for backwards compatibility with callers that intentionally
+    render directly into project_root.
+    """
+    workspace_root = (output_root if output_root is not None else project_root).resolve()
     relative = str(sound.get("output", f"sounds/{sound['id']}_LWFE.WAV"))
-    candidate = (project_root / relative).resolve()
-    root = project_root.resolve()
+    candidate = (workspace_root / relative).resolve()
     try:
-        candidate.relative_to(root)
+        candidate.relative_to(workspace_root)
     except ValueError as exc:
-        raise LWFEError(f"Output path for '{sound['id']}' must stay inside the LWFE folder.") from exc
+        raise LWFEError(
+            f"Output path for '{sound['id']}' must stay inside its LWFE workspace."
+        ) from exc
     return candidate
 
 
@@ -170,7 +182,17 @@ def _render_stroke(mix: list[float], stroke: dict[str, Any], sample_rate: int, s
         mix[index] += sample * pressure_value * float(stroke.get("gain", 1.0))
 
 
-def render_sound(sound: dict[str, Any], project_root: Path) -> Path:
+def render_sound(
+    sound: dict[str, Any],
+    project_root: Path,
+    output_root: Path | None = None,
+) -> Path:
+    """Render one sound into output_root (the active session archive).
+
+    If output_root is omitted, the legacy project-root behavior is retained
+    for non-UI callers. The LWFE desktop app always supplies its startup
+    archive explicitly.
+    """
     canvas = sound.get("canvas", {})
     sample_rate = int(canvas.get("sample_rate", DEFAULT_SAMPLE_RATE))
     sample_rate = max(22_050, min(96_000, sample_rate))
@@ -197,7 +219,7 @@ def render_sound(sound: dict[str, Any], project_root: Path) -> Path:
         sample = int(max(-1.0, min(1.0, shaped)) * 32767.0)
         output.extend(struct.pack("<h", sample))
 
-    destination = output_path_for(sound, project_root)
+    destination = output_path_for(sound, project_root, output_root=output_root)
     destination.parent.mkdir(parents=True, exist_ok=True)
     try:
         with wave.open(str(destination), "wb") as wav:
