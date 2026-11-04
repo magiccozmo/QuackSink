@@ -1,0 +1,244 @@
+{
+  "engine": "Luma-Winslow Folio Engine",
+  "schema_version": 1,
+  "library_title": "LWFE Sound Folio",
+  "notes": "These are sound-painting instructions. Strokes describe vocal material, breath, resonance, texture, movement and pressure; they are not stored waveforms.",
+  "sounds": [
+    {
+      "id": "dog_bark",
+      "name": "Dog Bark",
+      "description": "A compact double woof: two rough, downward-thrown throat bursts with a sharp airy edge.",
+      "output": "sounds/dog_bark_LWFE.WAV",
+      "canvas": {
+        "duration": 0.70,
+        "sample_rate": 48000,
+        "master_gain": 0.84,
+        "target_peak": 0.90
+      },
+      "strokes": [
+        {
+          "name": "First throat bark",
+          "brush": "voice",
+          "start": 0.00,
+          "duration": 0.25,
+          "gain": 1.00,
+          "pressure": [[0.00, 0.00], [0.07, 1.00], [0.25, 0.70], [0.72, 0.22], [1.00, 0.00]],
+          "contour": [[0.00, 178], [0.20, 158], [0.60, 108], [1.00, 76]],
+          "tone": {
+            "rolloff": 0.92,
+            "partials": [1.00, 0.78, 0.56, 0.40, 0.28, 0.19, 0.12, 0.08],
+            "formants": [
+              {"center_hz": 520, "width_hz": 250, "gain": 1.00},
+              {"center_hz": 1120, "width_hz": 410, "gain": 0.78},
+              {"center_hz": 2050, "width_hz": 620, "gain": 0.38}
+            ]
+          },
+          "grain": {"noise_mix": 0.17, "color": "gritty", "filter_alpha": 0.21, "pitch_wobble": 0.012}
+        },
+        {
+          "name": "First bark's muzzle rasp",
+          "brush": "air",
+          "start": 0.012,
+          "duration": 0.19,
+          "gain": 0.28,
+          "pressure": [[0.00, 0.00], [0.08, 0.90], [0.34, 0.62], [1.00, 0.00]],
+          "grain": {"noise_mix": 1.00, "color": "bright", "filter_alpha": 0.12}
+        },
+        {
+          "name": "Second throat bark",
+          "brush": "voice",
+          "start": 0.31,
+          "duration": 0.27,
+          "gain": 0.90,
+          "pressure": [[0.00, 0.00], [0.06, 0.92], [0.28, 0.76], [0.78, 0.18], [1.00, 0.00]],
+          "contour": [[0.00, 188], [0.18, 166], [0.56, 105], [1.00, 70]],
+          "tone": {
+            "rolloff": 0.98,
+            "partials": [1.00, 0.74, 0.52, 0.37, 0.25, 0.16, 0.10, 0.06],
+            "formants": [
+              {"center_hz": 490, "width_hz": 260, "gain": 1.00},
+              {"center_hz": 1050, "width_hz": 430, "gain": 0.82},
+              {"center_hz": 1900, "width_hz": 650, "gain": 0.36}
+            ]
+          },
+          "grain": {"noise_mix": 0.20, "color": "gritty", "filter_alpha": 0.19, "pitch_wobble": 0.016}
+        },
+        {
+          "name": "Second bark's breath edge",
+          "brush": "air",
+          "start": 0.325,
+          "duration": 0.20,
+          "gain": 0.25,
+          "pressure": [[0.00, 0.00], [0.08, 0.80], [0.42, 0.52], [1.00, 0.00]],
+          "grain": {"noise_mix": 1.00, "color": "bright", "filter_alpha": 0.11}
+        }
+      ]
+    },
+    {
+      "id": "chicken_cluck",
+      "name": "Chicken Cluck",
+      "description": "Three quick, hollow bok-clucks: pinched beak clicks over a short, nasal throat call.",
+      "output": "sounds/chicken_cluck_LWFE.WAV",
+      "canvas": {
+        "duration": 0.72,
+        "sample_rate": 48000,
+        "master_gain": 0.82,
+        "target_peak": 0.88
+      },
+      "strokes": [
+        {
+          "name": "First hollow cluck",
+          "brush": "voice",
+          "start": 0.00,
+          "duration": 0.16,
+          "gain": 0.92,
+          "pressure": [[0.00, 0.00], [0.10, 0.95], [0.37, 0.68], [1.00, 0.00]],
+          "contour": [[0.00, 285], [0.25, 210], [0.68, 172], [1.00, 205]],
+          "tone": {
+            "rolloff": 1.18,
+            "partials": [1.00, 0.62, 0.34, 0.20, 0.10, 0.05],
+            "formants": [
+              {"center_hz": 680, "width_hz": 300, "gain": 1.00},
+              {"center_hz": 1480, "width_hz": 460, "gain": 0.70},
+              {"center_hz": 2550, "width_hz": 700, "gain": 0.24}
+            ]
+          },
+          "grain": {"noise_mix": 0.13, "color": "dark", "filter_alpha": 0.22, "pitch_wobble": 0.018}
+        },
+        {
+          "name": "First beak tick",
+          "brush": "impact",
+          "start": 0.018,
+          "duration": 0.055,
+          "gain": 0.33,
+          "resonance_hz": 1750,
+          "ring_decay": 58,
+          "pressure": [[0.00, 0.00], [0.04, 1.00], [0.24, 0.42], [1.00, 0.00]],
+          "grain": {"noise_mix": 0.42, "color": "bright", "filter_alpha": 0.10}
+        },
+        {
+          "name": "Second hollow cluck",
+          "brush": "voice",
+          "start": 0.235,
+          "duration": 0.15,
+          "gain": 0.84,
+          "pressure": [[0.00, 0.00], [0.11, 0.90], [0.40, 0.61], [1.00, 0.00]],
+          "contour": [[0.00, 305], [0.24, 215], [0.72, 178], [1.00, 198]],
+          "tone": {
+            "rolloff": 1.22,
+            "partials": [1.00, 0.59, 0.31, 0.18, 0.09, 0.05],
+            "formants": [
+              {"center_hz": 700, "width_hz": 310, "gain": 1.00},
+              {"center_hz": 1520, "width_hz": 470, "gain": 0.68},
+              {"center_hz": 2520, "width_hz": 720, "gain": 0.22}
+            ]
+          },
+          "grain": {"noise_mix": 0.15, "color": "dark", "filter_alpha": 0.21, "pitch_wobble": 0.020}
+        },
+        {
+          "name": "Second beak tick",
+          "brush": "impact",
+          "start": 0.252,
+          "duration": 0.052,
+          "gain": 0.29,
+          "resonance_hz": 1620,
+          "ring_decay": 62,
+          "pressure": [[0.00, 0.00], [0.04, 0.90], [0.25, 0.36], [1.00, 0.00]],
+          "grain": {"noise_mix": 0.46, "color": "bright", "filter_alpha": 0.10}
+        },
+        {
+          "name": "Final clipped cluck",
+          "brush": "voice",
+          "start": 0.485,
+          "duration": 0.17,
+          "gain": 0.95,
+          "pressure": [[0.00, 0.00], [0.09, 1.00], [0.32, 0.72], [0.80, 0.16], [1.00, 0.00]],
+          "contour": [[0.00, 320], [0.22, 225], [0.67, 168], [1.00, 180]],
+          "tone": {
+            "rolloff": 1.15,
+            "partials": [1.00, 0.63, 0.34, 0.19, 0.10, 0.05],
+            "formants": [
+              {"center_hz": 660, "width_hz": 300, "gain": 1.00},
+              {"center_hz": 1450, "width_hz": 450, "gain": 0.72},
+              {"center_hz": 2480, "width_hz": 710, "gain": 0.25}
+            ]
+          },
+          "grain": {"noise_mix": 0.17, "color": "dark", "filter_alpha": 0.20, "pitch_wobble": 0.022}
+        },
+        {
+          "name": "Final beak snap",
+          "brush": "impact",
+          "start": 0.503,
+          "duration": 0.060,
+          "gain": 0.36,
+          "resonance_hz": 1880,
+          "ring_decay": 55,
+          "pressure": [[0.00, 0.00], [0.04, 1.00], [0.23, 0.40], [1.00, 0.00]],
+          "grain": {"noise_mix": 0.48, "color": "bright", "filter_alpha": 0.10}
+        }
+      ]
+    },
+    {
+      "id": "kitty_meow",
+      "name": "Kitty Meow",
+      "description": "A voiced, nasal meow that rises into a plaintive middle vowel and slides down into a soft breathy tail.",
+      "output": "sounds/kitty_meow_LWFE.WAV",
+      "canvas": {
+        "duration": 0.92,
+        "sample_rate": 48000,
+        "master_gain": 0.82,
+        "target_peak": 0.90
+      },
+      "strokes": [
+        {
+          "name": "Main meow voice",
+          "brush": "voice",
+          "start": 0.00,
+          "duration": 0.82,
+          "gain": 1.00,
+          "pressure": [[0.00, 0.00], [0.07, 0.72], [0.22, 1.00], [0.62, 0.82], [0.88, 0.38], [1.00, 0.00]],
+          "contour": [[0.00, 405], [0.18, 505], [0.38, 585], [0.62, 525], [0.82, 405], [1.00, 305]],
+          "tone": {
+            "rolloff": 0.88,
+            "partials": [1.00, 0.82, 0.66, 0.50, 0.37, 0.26, 0.18, 0.12, 0.08, 0.05],
+            "formants": [
+              {"center_hz": 610, "width_hz": 270, "gain": 1.00},
+              {"center_hz": 1280, "width_hz": 420, "gain": 0.86},
+              {"center_hz": 2380, "width_hz": 650, "gain": 0.56},
+              {"center_hz": 3150, "width_hz": 800, "gain": 0.18}
+            ]
+          },
+          "grain": {"noise_mix": 0.055, "color": "airy", "filter_alpha": 0.15, "pitch_wobble": 0.004},
+          "motion": {"vibrato_rate": 5.2, "vibrato_depth": 0.012}
+        },
+        {
+          "name": "Nasal cry resonance",
+          "brush": "voice",
+          "start": 0.12,
+          "duration": 0.62,
+          "gain": 0.25,
+          "pressure": [[0.00, 0.00], [0.12, 0.70], [0.45, 0.82], [0.84, 0.30], [1.00, 0.00]],
+          "contour": [[0.00, 430], [0.32, 570], [0.70, 470], [1.00, 330]],
+          "tone": {
+            "rolloff": 1.03,
+            "partials": [1.00, 0.55, 0.30, 0.16, 0.08, 0.04],
+            "formants": [
+              {"center_hz": 900, "width_hz": 300, "gain": 0.90},
+              {"center_hz": 1880, "width_hz": 520, "gain": 0.52}
+            ]
+          },
+          "grain": {"noise_mix": 0.035, "color": "airy", "filter_alpha": 0.17}
+        },
+        {
+          "name": "Breathy ending",
+          "brush": "air",
+          "start": 0.56,
+          "duration": 0.34,
+          "gain": 0.15,
+          "pressure": [[0.00, 0.00], [0.20, 0.30], [0.58, 0.24], [1.00, 0.00]],
+          "grain": {"noise_mix": 1.00, "color": "airy", "filter_alpha": 0.16}
+        }
+      ]
+    }
+  ]
+}
