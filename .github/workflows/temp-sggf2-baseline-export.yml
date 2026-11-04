@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666HellFinal_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGF1.666HellFinal_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Copy and verify exact HellFinal baseline archives
         shell: bash
         run: |
@@ -26,7 +32,7 @@ jobs:
           (cd /tmp/sgg-baseline && stat -c '%n %s bytes' *.zip | tee FILE_SIZES.txt)
       - uses: actions/upload-artifact@v4
         with:
-          name: SGGF2-HellFinal-baseline
+          name: SGGF2-HellFinal-baseline-sparse
           path: /tmp/sgg-baseline/
           retention-days: 1
           if-no-files-found: error
