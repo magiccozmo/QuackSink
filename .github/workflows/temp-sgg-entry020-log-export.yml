@@ -1,0 +1,42 @@
+name: Temporary SGG Entry020 log export
+
+on:
+  push:
+    branches:
+      - temp/sgg-entry020-log-export-20261104
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the exact cumulative log
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sgg-entry020-log-export-20261104
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry020.txt
+          sparse-checkout-cone-mode: false
+      - name: Verify and stage log
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-log
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/lumas_log_Entry020.txt" /tmp/sgg-log/
+          test -s /tmp/sgg-log/lumas_log_Entry020.txt
+          tail -n 3 /tmp/sgg-log/lumas_log_Entry020.txt
+          sha256sum /tmp/sgg-log/lumas_log_Entry020.txt
+          wc -c /tmp/sgg-log/lumas_log_Entry020.txt
+      - name: Upload cumulative log artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lumas-log-entry020
+          path: /tmp/sgg-log/lumas_log_Entry020.txt
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
