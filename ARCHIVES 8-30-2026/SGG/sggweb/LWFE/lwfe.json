@@ -2,7 +2,7 @@
   "engine": "Luma-Winslow Folio Engine",
   "schema_version": 1,
   "library_title": "LWFE Sound Folio",
-  "notes": "These are sound-painting instructions. Strokes describe vocal material, breath, resonance, texture, movement and pressure; they are not stored waveforms.",
+  "notes": "These are sound-painting instructions. Strokes describe vocal material, breath, resonance, texture, movement and pressure; they are not stored waveforms. This revision keeps the original dog and chicken recipes and revises only the kitty meow recipe.",
   "sounds": [
     {
       "id": "dog_bark",
@@ -181,62 +181,101 @@
     {
       "id": "kitty_meow",
       "name": "Kitty Meow",
-      "description": "A voiced, nasal meow that rises into a plaintive middle vowel and slides down into a soft breathy tail.",
+      "description": "A short, articulated feline call: a soft nasal onset opens into a rising YOW, rounds and falls, then ends with a little roughness rather than a smooth sustained human-like vowel.",
       "output": "sounds/kitty_meow_LWFE.WAV",
       "canvas": {
-        "duration": 0.92,
+        "duration": 0.84,
         "sample_rate": 48000,
-        "master_gain": 0.82,
-        "target_peak": 0.90
+        "master_gain": 0.78,
+        "target_peak": 0.84
       },
       "strokes": [
         {
-          "name": "Main meow voice",
+          "name": "Nasal M-like opening",
           "brush": "voice",
           "start": 0.00,
-          "duration": 0.82,
-          "gain": 1.00,
-          "pressure": [[0.00, 0.00], [0.07, 0.72], [0.22, 1.00], [0.62, 0.82], [0.88, 0.38], [1.00, 0.00]],
-          "contour": [[0.00, 405], [0.18, 505], [0.38, 585], [0.62, 525], [0.82, 405], [1.00, 305]],
+          "duration": 0.17,
+          "gain": 0.62,
+          "pressure": [[0.00, 0.00], [0.10, 0.70], [0.34, 0.88], [0.72, 0.44], [1.00, 0.00]],
+          "contour": [[0.00, 430], [0.34, 465], [0.72, 510], [1.00, 500]],
           "tone": {
-            "rolloff": 0.88,
-            "partials": [1.00, 0.82, 0.66, 0.50, 0.37, 0.26, 0.18, 0.12, 0.08, 0.05],
+            "rolloff": 1.18,
+            "partials": [1.00, 0.62, 0.34, 0.18, 0.09, 0.04],
             "formants": [
-              {"center_hz": 610, "width_hz": 270, "gain": 1.00},
-              {"center_hz": 1280, "width_hz": 420, "gain": 0.86},
-              {"center_hz": 2380, "width_hz": 650, "gain": 0.56},
-              {"center_hz": 3150, "width_hz": 800, "gain": 0.18}
+              {"center_hz": 560, "width_hz": 230, "gain": 1.15},
+              {"center_hz": 1080, "width_hz": 330, "gain": 0.52},
+              {"center_hz": 2050, "width_hz": 560, "gain": 0.16}
             ]
           },
-          "grain": {"noise_mix": 0.055, "color": "airy", "filter_alpha": 0.15, "pitch_wobble": 0.004},
-          "motion": {"vibrato_rate": 5.2, "vibrato_depth": 0.012}
+          "grain": {"noise_mix": 0.025, "color": "dark", "filter_alpha": 0.20, "pitch_wobble": 0.006}
         },
         {
-          "name": "Nasal cry resonance",
+          "name": "Opening Y vowel",
           "brush": "voice",
-          "start": 0.12,
-          "duration": 0.62,
-          "gain": 0.25,
-          "pressure": [[0.00, 0.00], [0.12, 0.70], [0.45, 0.82], [0.84, 0.30], [1.00, 0.00]],
-          "contour": [[0.00, 430], [0.32, 570], [0.70, 470], [1.00, 330]],
+          "start": 0.09,
+          "duration": 0.39,
+          "gain": 0.94,
+          "pressure": [[0.00, 0.00], [0.10, 0.76], [0.30, 1.00], [0.62, 0.82], [1.00, 0.12]],
+          "contour": [[0.00, 485], [0.20, 610], [0.52, 710], [0.78, 680], [1.00, 610]],
           "tone": {
-            "rolloff": 1.03,
-            "partials": [1.00, 0.55, 0.30, 0.16, 0.08, 0.04],
+            "rolloff": 0.94,
+            "partials": [1.00, 0.78, 0.57, 0.39, 0.25, 0.16, 0.10, 0.06],
             "formants": [
-              {"center_hz": 900, "width_hz": 300, "gain": 0.90},
-              {"center_hz": 1880, "width_hz": 520, "gain": 0.52}
+              {"center_hz": 820, "width_hz": 300, "gain": 1.00},
+              {"center_hz": 1580, "width_hz": 430, "gain": 0.78},
+              {"center_hz": 2520, "width_hz": 620, "gain": 0.42}
             ]
           },
-          "grain": {"noise_mix": 0.035, "color": "airy", "filter_alpha": 0.17}
+          "grain": {"noise_mix": 0.045, "color": "airy", "filter_alpha": 0.15, "pitch_wobble": 0.009},
+          "motion": {"vibrato_rate": 6.0, "vibrato_depth": 0.009}
         },
         {
-          "name": "Breathy ending",
+          "name": "Rounded OW transition",
+          "brush": "voice",
+          "start": 0.31,
+          "duration": 0.29,
+          "gain": 0.78,
+          "pressure": [[0.00, 0.00], [0.12, 0.82], [0.40, 0.78], [0.76, 0.42], [1.00, 0.00]],
+          "contour": [[0.00, 665], [0.28, 590], [0.62, 490], [1.00, 405]],
+          "tone": {
+            "rolloff": 1.02,
+            "partials": [1.00, 0.72, 0.48, 0.30, 0.19, 0.11, 0.06],
+            "formants": [
+              {"center_hz": 640, "width_hz": 255, "gain": 1.12},
+              {"center_hz": 1180, "width_hz": 360, "gain": 0.72},
+              {"center_hz": 2140, "width_hz": 560, "gain": 0.30},
+              {"center_hz": 2920, "width_hz": 700, "gain": 0.12}
+            ]
+          },
+          "grain": {"noise_mix": 0.065, "color": "airy", "filter_alpha": 0.17, "pitch_wobble": 0.014}
+        },
+        {
+          "name": "Rough falling feline tail",
+          "brush": "voice",
+          "start": 0.52,
+          "duration": 0.23,
+          "gain": 0.48,
+          "pressure": [[0.00, 0.00], [0.10, 0.78], [0.34, 0.62], [0.72, 0.34], [1.00, 0.00]],
+          "contour": [[0.00, 430], [0.28, 390], [0.68, 335], [1.00, 285]],
+          "tone": {
+            "rolloff": 1.12,
+            "partials": [1.00, 0.66, 0.40, 0.23, 0.12, 0.06],
+            "formants": [
+              {"center_hz": 520, "width_hz": 240, "gain": 1.05},
+              {"center_hz": 980, "width_hz": 340, "gain": 0.58},
+              {"center_hz": 1810, "width_hz": 520, "gain": 0.24}
+            ]
+          },
+          "grain": {"noise_mix": 0.13, "color": "gritty", "filter_alpha": 0.22, "pitch_wobble": 0.027}
+        },
+        {
+          "name": "Soft breath at the end",
           "brush": "air",
-          "start": 0.56,
-          "duration": 0.34,
-          "gain": 0.15,
-          "pressure": [[0.00, 0.00], [0.20, 0.30], [0.58, 0.24], [1.00, 0.00]],
-          "grain": {"noise_mix": 1.00, "color": "airy", "filter_alpha": 0.16}
+          "start": 0.68,
+          "duration": 0.13,
+          "gain": 0.075,
+          "pressure": [[0.00, 0.00], [0.16, 0.36], [0.48, 0.22], [1.00, 0.00]],
+          "grain": {"noise_mix": 1.00, "color": "airy", "filter_alpha": 0.18}
         }
       ]
     }

@@ -1,0 +1,18 @@
+LWFE V0.1.2 PACKAGE CHECKS — 2026-11-04
+
+PASS: Based on the exact LWFE 0.1.1 source package from this session.
+PASS: App and archive module version identifiers set to 0.1.2.
+PASS: Startup archive output is a uniquely named directory, not a ZIP.
+PASS: Timestamp pattern is LWFE_Mmm_DD_YYYY_HH_MM_SS_AM_v0.1.2, using underscores.
+PASS: Snapshot copies current top-level project files and existing sounds/*.wav files.
+PASS: archives/, __pycache__, venv folders, and transient bytecode/temp files are excluded.
+PASS: Snapshot writes an ARCHIVE_MANIFEST.txt and cleans up an incomplete snapshot if copying fails.
+PASS: Snapshot creation does not overwrite an existing timestamp/version directory; collisions receive a numeric suffix.
+PASS: RENDER continues to write to the live sounds/ directory; startup snapshots are not modified by rendering.
+PASS: README and version metadata document the new startup snapshot behavior.
+
+NOT TESTED HERE: Running the Tkinter app in the user's Windows environment.
+NOT TESTED HERE: Live startup snapshot contents against the user's local WAV masters; those WAVs were created locally and were not present in the 0.1.1 ZIP available to this build.
+NOT TESTED HERE: Auditioning the generated animal sounds.
+
+IMPORTANT: Installing this update over the existing LWFE folder does not delete its live sounds/*.wav files or existing archives. This package contains no replacement WAV files.
