@@ -1,0 +1,40 @@
+name: Temporary SGGF2.0a source export
+
+on:
+  push:
+    branches:
+      - temp/sggf2.0a-global-log-audit
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact SGGF2.0a baseline
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sggf2.0a-global-log-audit
+      - name: Stage and verify the exact SGGF2.0a packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF2.0a_SOURCE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGF2.0a_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          test -s /tmp/sgg-transfer/SGGF2.0a_SOURCE.zip
+          test -s /tmp/sgg-transfer/SGGF2.0a_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq /tmp/sgg-transfer/SGGF2.0a_SOURCE.zip
+          unzip -tq /tmp/sgg-transfer/SGGF2.0a_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd /tmp/sgg-transfer && sha256sum *.zip | tee SHA256SUMS.txt)
+          (cd /tmp/sgg-transfer && wc -c *.zip | tee FILE_SIZES.txt)
+      - name: Upload original project ZIPs
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGF2.0a-exact-source-and-deploy
+          path: /tmp/sgg-transfer/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
