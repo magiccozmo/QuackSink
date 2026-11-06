@@ -1,0 +1,53 @@
+================================================================================
+ENTRY 025 — SGGG1.1: SAVE-BOUND TEA AND CAMEO/LOG REFINEMENTS
+Date: 2026-11-06 (America/New_York)
+Status: Candidate packages statically verified; awaiting Cozmo browser field test
+================================================================================
+
+BASELINE AND PRESERVATION
+
+- Exact G1.0 baseline repository main commit inspected: d1da2d52c4cb6e1951f4e3d2cf8fee6d3c898a0e.
+- Exact baseline packages were retrieved through an isolated GitHub Actions export branch; original ZIPs passed integrity and checksum verification before extraction.
+- All nine previously selectable site editions are retained byte-for-byte: SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666, SGGF1.666HellFinal, SGGF2.0a, and SGGG1.0.
+- SGGG1.1 is added as the tenth and current edition. The version catalogue has ten valid launch targets and exactly one current marker.
+- No main branch changes, release overwrites, or Cloudflare deployments were performed by Luma.
+
+YORKSHIRE TEA RULES
+
+- Tea remains a counter only; no physical Tea inventory item is created.
+- Tea Earned, detected reward-event IDs, and claimed reward-event IDs are stored in the current game's c1_flags. c1_flags is included in the existing forward-compatible save snapshot.
+- Saving captures the Tea total and reward ledger; loading restores them from that save. Loading an earlier snapshot returns to its earlier total, rather than stacking another point above that snapshot. A genuinely new game starts Tea Earned at zero.
+- Easy mode auto-awards exactly one Tea when a designated reward cameo appears.
+- Normal and Spiffy Challenge require the player to talk to the specific rewarding Cozmo cameo. If the player leaves the cameo's area first, it disappears and that reward is forfeited for the loaded game state.
+- Each of the six reward-bearing cameos has unique dialogue explaining its one-Tea reward: bucket theft, Naz's unexpected justice, vault clip, inn-lout resolution, HELLgs escape, and first caravan-chest loot.
+- Scenic-overlook Cozmo remains a non-rewarding appreciation cameo.
+- HELLgs escape rewards are restricted to Spiffy Challenge.
+
+CAMEO TIMING
+
+- The base D1.1 scheduler and the F1.666c exploit-cameo scheduler now queue ordinary Cozmo appearances one in-game second after detection, down from five.
+- Existing dialogue, death, active-cameo, safe-area, and event-location safeguards remain.
+
+GLOBAL LOG PRESENTATION
+
+- The public events list is inside a fixed-height independently scrolling panel.
+- Older pages append inside that panel; the page height remains bounded.
+- Manual refresh preserves the panel scroll offset. Automatic refresh only runs while the reader is at the top of the newest page.
+- Existing GET /log limit/offset pagination, Global Log Worker, D1 schema, and database are unchanged. No Worker redeployment or database migration is required for G1.1.
+
+STATIC VERIFICATION
+
+- Python syntax compilation passed for all six current-runtime mirrors; all six are byte-identical (SHA-256 0511b1e53dd4b0bdcd60651f8aaa31ca5a22ed151f5effc7460bce0ed7455df8).
+- G1.1 tar/APK bundle structure matches the previous edition's Pygbag-compatible layout; the embedded runtime matches the new source.
+- Front-door catalogue contains all ten editions, exactly one current entry, and all launch/preview paths resolve.
+- All nine prior deployment edition directories compare byte-for-byte with the untouched G1.0 deployment baseline.
+- Global Log page inline JavaScript syntax checks pass; both source/deploy mirrors contain the fixed-height scroll panel and pagination controls.
+- Source and Cloudflare site ZIP integrity checks passed after packaging.
+
+LIVE TEST LIMITATION
+
+No live Pygbag/WebAssembly browser session or gameplay interaction was executed by Luma; Pygbag and Pygame are not installed in the build environment. Cozmo's browser field test is required before this release is considered field-tested. In particular verify Easy automatic reward, Normal/Challenge talk-to-claim and leave-area forfeiture, unique dialogue, HELLgs Challenge-only reward, Tea save/load restoration, and the fixed Global Log scroll panel.
+
+================================================================================
+END ENTRY 025
+================================================================================
