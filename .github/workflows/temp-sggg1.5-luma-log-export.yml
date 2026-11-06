@@ -1,0 +1,56 @@
+name: Temporary SGGG1.5 Luma log export
+on:
+  push:
+    branches:
+      - temp/sggg1.4-g15-sparse-export-20261106
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Entry029 text handoff
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sggg1.5-log
+          cat > /tmp/sggg1.5-log/SGGG1.5_LUMA_LOG_Entry029.txt <<'SGGLOG'
+SGGG LUMA LOG — ENTRY 029
+Date: 2026-11-06
+Release: SGGG1.5
+Baseline: SGGG1.4; all earlier source and log history preserved.
+
+PURPOSE
+Correct the Kitty Caravan first-chest Cozmo cameo placement identified during Cozmo's G1.4 field test.
+
+FINDING
+Kitty is an animated, moving character drawn by the Stables interface. She is not registered in GameModel.c1_npcs, which is the NPC collection consulted by the generic collision-safe cameo search. As a result, a generic player-relative candidate could pass the normal collision checks while visually overlapping Kitty.
+
+IMPLEMENTATION
+- The caravan_chest event now requests a dedicated position at (405.0, 500.0) in Stables world coordinates: the clear road location marked by Cozmo, left of the rear of the carriage.
+- The Kitty chest event uses only that designated candidate. It does not fall back to generic player-relative candidates that could place Cozmo back in Kitty's patrol area.
+- Existing placement checks still validate walkability, solid geometry, world objects, player distance, model NPCs, guard position, and visible screen bounds.
+- If the marked tile is temporarily occupied, the existing queue retry keeps the encounter pending until that tile is clear.
+- The first-chest trigger, approximately one-in-game-second queue delay, first-time recognition, Tea reward, and interaction dialogue remain unchanged.
+- All non-Kitty cameo positions and timing remain unchanged.
+
+PRESERVATION
+- G1.4 remains an unchanged playable edition.
+- All eight legacy editions, G1.3, and G1.4 remain in the Cloudflare deployment beside G1.5.
+- Full prior source/archive history is retained in the source ZIP.
+- Save/load, difficulty integrity, privacy, Global Log, inventory, quests, artwork, and area transitions are unchanged.
+- The Global Log Worker and D1 schema are unchanged; no Worker deployment or database migration is needed.
+- No GitHub main push or Cloudflare deployment was performed by Luma.
+
+VALIDATION
+Static syntax, exact runtime mirror, Kitty spawn coordinate geometry, version catalogue, release labels, tar/APK packaging, and ZIP integrity checks are recorded in SGGG1.5_TEST_RESULTS.txt.
+Live browser gameplay was not run by Luma; Cozmo's field test remains the final validation.
+SGGLOG
+          test -s /tmp/sggg1.5-log/SGGG1.5_LUMA_LOG_Entry029.txt
+          wc -c /tmp/sggg1.5-log/SGGG1.5_LUMA_LOG_Entry029.txt
+          sha256sum /tmp/sggg1.5-log/SGGG1.5_LUMA_LOG_Entry029.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SGGG1.5-LumaLog-Entry029
+          path: /tmp/sggg1.5-log/SGGG1.5_LUMA_LOG_Entry029.txt
+          retention-days: 1
