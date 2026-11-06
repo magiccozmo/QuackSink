@@ -1,0 +1,39 @@
+name: Temporary SGGG1.0 field-test source export
+
+on:
+  push:
+    branches:
+      - temp/sggg1.0-vg1.1-field-audit-20261106
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact main snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: temp/sggg1.0-vg1.1-field-audit-20261106
+      - name: Stage and verify G1.0 packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.0_SOURCE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.0_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.0_GLOBAL_LOG_WORKER.js" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.0_LUMA_LOG_Entry024.txt" /tmp/sgg-transfer/
+          for f in /tmp/sgg-transfer/*.zip; do test -s "$f"; unzip -tq "$f"; done
+          (cd /tmp/sgg-transfer && sha256sum * | tee SHA256SUMS.txt)
+          (cd /tmp/sgg-transfer && wc -c * | tee FILE_SIZES.txt)
+      - name: Upload exact G1.0 source, site, worker and log
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGG1.0-exact-source-site-worker-log
+          path: /tmp/sgg-transfer/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
