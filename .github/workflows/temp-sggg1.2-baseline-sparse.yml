@@ -1,0 +1,33 @@
+name: Temporary SGGG1.2 sparse baseline export
+on:
+  push:
+    branches:
+      - temp/sggg1.2-baseline-sparse-20261106
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+      - name: Collect packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sggg1.1-baseline
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_SOURCE.zip" /tmp/sggg1.1-baseline/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sggg1.1-baseline/
+          unzip -t /tmp/sggg1.1-baseline/SGGG1.1_SOURCE.zip
+          unzip -t /tmp/sggg1.1-baseline/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum /tmp/sggg1.1-baseline/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sggg1.1-baseline-sparse
+          path: /tmp/sggg1.1-baseline/*
+          if-no-files-found: error
+          retention-days: 1
