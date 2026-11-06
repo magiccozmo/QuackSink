@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.3_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.3_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.3_GLOBAL_LOG_WORKER.js
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.3_LUMA_LOG_Entry027.txt
+          sparse-checkout-cone-mode: false
       - name: Verify and stage exact G1.3 baseline
         shell: bash
         run: |
@@ -26,6 +35,6 @@ jobs:
           ls -lh /tmp/sggg13
       - uses: actions/upload-artifact@v4
         with:
-          name: SGGG1.3-baseline-export
+          name: SGGG1.3-baseline-export-sparse
           path: /tmp/sggg13/*
           retention-days: 2
