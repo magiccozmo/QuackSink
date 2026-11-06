@@ -1,0 +1,55 @@
+================================================================================
+ENTRY 027 — SGGG1.3: PLAYER-CONTROLLED LOCATION AND GLOBAL LOG REFINEMENT
+Date: 2026-11-06 (America/New_York)
+Status: Candidate packages statically verified; awaiting Cozmo browser field test
+================================================================================
+
+BASELINE AND PRESERVATION
+
+- Built additively from the exact SGGG1.1 release lineage, carrying forward the field-tested SGGG1.2 gameplay layer.
+- The original SGGG1.1 and SGGG1.2 source and deployment archives remain unchanged.
+- All eleven prior selectable site editions are retained; SGGG1.3 is the twelfth and sole current edition.
+- No changes were made to GitHub main, the production Cloudflare deployment, or the existing D1 schema.
+
+PLAYER-CONTROLLED LOCATION
+
+- The front page displays read-only Country and City fields beneath GLOBAL LOG, populated through GET /location from Cloudflare request metadata. This lookup writes no session or event record.
+- The button is labelled exactly NONE OF YOUR BUSINESS. Clicking it clears both fields, hides the values, and displays LOCATION: ANONYMOUS.
+- The location choice is carried into the new game URL and sent with POST /session as an explicit boolean share_location value.
+- If true, the Worker records an approximate country/city pair in the existing sessions.region field (for example, US · Schenectady). If city is unavailable, only country is recorded.
+- If false, the Worker stores the literal ANONYMOUS and does not read or save country/city values for that session. Clients without an explicit true flag default to ANONYMOUS; this keeps older archived editions privacy-safe after the Worker update.
+- No player identity, account, email, raw IP address, postal code, street or coordinates are stored.
+
+GLOBAL LOG REFINEMENTS
+
+- Each event includes session_duration_seconds, calculated by the Worker from its stored session start timestamp to the event timestamp. The public page displays this as Session duration. This is an elapsed recorded span, not continuous-play time.
+- Public feed includes all ordinary approved events but displays only the newest Still active heartbeat for each session. Older heartbeat rows remain in D1.
+- Pagination uses event_id as a before cursor. Each request returns at most 50 rows, fetches one extra row only to determine has_more, and uses no OFFSET.
+- The fixed-height independently scrolling panel, refresh behavior, and auto-refresh pause when the reader scrolls away from the top remain.
+- Test sessions are filtered at the Worker query.
+
+GAME VERSION
+
+- Runtime and Global Log session-start payload now identify this edition as SGGG1.3. This corrects the inherited SGGG1.1 label reported during the 1.2 field test.
+- The Worker retains stable Cozmo cause labels from SGGG1.2.
+
+CARRIED-FORWARD GAMEPLAY
+
+- SGGG1.2 stable cause-based Cozmo encounter identities, collision-safe placement/retry, the Tipsy Turnip bucket-assisted STOLEN Black-Briar Mead job, one-time save-bound bucket Tea reward, Inn Lout placement/follow behavior, and separated Alchemy Shop recipe book remain unchanged.
+- SGGG1.1 save-bound Tea ledger and difficulty behavior remain.
+
+STATIC VERIFICATION
+
+- Node.js syntax checks pass for the Worker and modified front-door/log JavaScript.
+- New version catalogue has twelve selectable entries and exactly one current marker.
+- Runtime mirrors and asset mirrors are checked for byte identity.
+- Pygbag tar/APK contents and ZIP integrity checks pass.
+- Worker harness verifies /location performs no database write, opt-out sessions bind ANONYMOUS, opted-in sessions bind country/city, and /log SQL includes duration calculation, latest-heartbeat filtering, cursor pagination, and no OFFSET.
+- Previous edition directories are retained unchanged from the SGGG1.2 deployment package.
+
+LIVE TEST LIMITATION
+
+No live browser/Pygbag gameplay session or Cloudflare Worker deployment was run by Luma. Cozmo's browser field test is required. Test the front-page location display and opt-out, anonymous session recording, opt-in country/city, default-anonymous legacy clients, SGGG1.3 version label, duration values, latest heartbeat display, cursor paging, and carried-forward 1.2 gameplay.
+
+================================================================================
+END ENTRY 027
