@@ -1,0 +1,31 @@
+name: Temporary SGGG1.3 source export
+on:
+  push:
+    branches:
+      - temp/sggg1.3-to-1.4-export
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and stage exact G1.3 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p /tmp/sggg13
+          cp "$base/SGGG1.3_SOURCE.zip" /tmp/sggg13/
+          cp "$base/SGGG1.3_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sggg13/
+          cp "$base/SGGG1.3_GLOBAL_LOG_WORKER.js" /tmp/sggg13/
+          cp "$base/SGGG1.3_LUMA_LOG_Entry027.txt" /tmp/sggg13/
+          unzip -t /tmp/sggg13/SGGG1.3_SOURCE.zip
+          unzip -t /tmp/sggg13/SGGG1.3_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum /tmp/sggg13/*
+          ls -lh /tmp/sggg13
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SGGG1.3-baseline-export
+          path: /tmp/sggg13/*
+          retention-days: 2
