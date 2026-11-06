@@ -1,0 +1,38 @@
+name: Temporary SGGG1.2 release audit export
+on:
+  push:
+    branches:
+      - temp/sggg1.2-release-audit-20261106
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_GLOBAL_LOG_WORKER.js
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_LUMA_LOG_Entry026.txt
+          sparse-checkout-cone-mode: false
+      - name: Collect exact SGGG1.2 release files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sggg1.2-release-audit
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_SOURCE.zip" /tmp/sggg1.2-release-audit/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sggg1.2-release-audit/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_GLOBAL_LOG_WORKER.js" /tmp/sggg1.2-release-audit/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.2_LUMA_LOG_Entry026.txt" /tmp/sggg1.2-release-audit/
+          unzip -t /tmp/sggg1.2-release-audit/SGGG1.2_SOURCE.zip
+          unzip -t /tmp/sggg1.2-release-audit/SGGG1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum /tmp/sggg1.2-release-audit/*
+          du -h /tmp/sggg1.2-release-audit/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sggg1.2-release-audit
+          path: /tmp/sggg1.2-release-audit/*
+          if-no-files-found: error
+          retention-days: 1
