@@ -1,0 +1,58 @@
+================================================================================
+ENTRY 026 — SGGG1.2: STABLE CAMEO IDENTITIES, SAFE SPAWNS, AND THE STOLEN MEAD JOB
+Date: 2026-11-06 (America/New_York)
+Status: Candidate packages statically verified; awaiting Cozmo browser field test
+================================================================================
+
+BASELINE AND PRESERVATION
+
+- Exact SGGG1.1 source and Cloudflare site release ZIPs were retrieved from the existing release archive and passed ZIP integrity checks before extraction.
+- SGGG1.2 is an additive release layer over SGGG1.1. The G1.1 save fields, save compatibility, Tea counter, reward ledger, difficulty behavior, one-second ordinary cameo delay, and Global Log panel are retained.
+- All ten prior selectable site editions remain in the catalogue and their deployment folders are left unchanged. SGGG1.2 is added as the eleventh and sole current edition.
+- No changes were made to GitHub main, the production Cloudflare deployment, the existing Global Log D1 database, or its schema.
+
+STABLE COZMO ENCOUNTER IDENTITIES
+
+- Public Cozmo encounter numbers now identify a unique cause, rather than the count of appearances within a particular session.
+- Stable mappings: bucket theft #1; Naz #2; vault clip #3; Inn Lout guard resolution #4; HELLgs escape #5; first caravan chest loot #6; scenic-overlook appreciation #7; HELLgs save return #8; first hint #9; final hint #10; spoiler hint #11; approved fallback #12.
+- Repeated appearances from the same cause create separate event records but reuse the same public number, including after loading an earlier save.
+- The new Worker retains the prior API and D1 schema. It accepts the new cause-specific event types and maps them to the fixed public labels. The existing Global Log Worker must be updated with SGGG1.2_GLOBAL_LOG_WORKER.js before those labels will display correctly. No D1 migration is required.
+
+SAFE CAMEO PLACEMENT
+
+- Ordinary cameos retain the one-in-game-second delay.
+- Before an appearance is made visible, the new placement check searches for a walkable, visible location that does not overlap the player, solid geometry, live world objects, any NPC, a dead NPC body, or the guard.
+- If no safe position is available, the cameo is deferred and retried rather than appearing on top of a person or corpse.
+- Immediate HELLgs-related cameo triggers use the same placement check and queue for a safe retry when necessary.
+
+TIPSY TURNIP — STOLEN BLACK-BRIAR MEAD
+
+- The Inn Lout's default position is moved to (670,375), on the open floor to the right of the fireplace/cooking pot and away from the exit doorway. Existing dialogue and follow logic are preserved. Untouched legacy positions migrate; a currently following/custom-position NPC is not forcibly relocated.
+- Black-Briar Mead retains its original object ID, display name, and mead kind for compatibility with the quest. Its default location is moved to (1012,478), on the player side of the bar, and it is now marked stealable.
+- Both click-pickup and E-take attempts are blocked while the innkeeper is watching. The player must carry a bucket and place it on the innkeeper's head first.
+- A successful pickup while the innkeeper is bucketed immediately marks the bottle as stolen and schedules the bucket cameo; a direct E-take while the bucket is still placed has the same result. Merely putting the bucket on the innkeeper never schedules Tea.
+- The stolen bottle is the only Black-Briar Mead accepted by the Inn Lout. Delivery consumes the bottle and preserves the original resolve/follow behavior. A previously owned/non-stolen bottle from an older save is not accepted as the quest payment.
+- The existing G1.1 Tea ledger decides whether the bucket reward is still available in the saved game. Thus only the first successful bucket-assisted theft event can claim Tea; later bucket-assisted thefts do not award another Tea. Easy auto-claims on the rewarding cameo; Normal and Spiffy Challenge require talking to Cozmo. Saving/loading restores the same Tea count and claim ledger; a genuinely new game resets it.
+- Vendor buy/sell menus are deliberately not part of this release.
+
+ALCHEMY SHOP
+
+- The recipe book's default position is moved to (333,304), leaving it clearly separate from Moonflower at (203,292).
+- Untouched known legacy recipe-book positions migrate to the new default. A user-moved or inventory-held book is not reset.
+
+STATIC VERIFICATION
+
+- G1.2 runtime passed Python syntax compilation after the final interaction changes.
+- Luma asset JSON parses, and the three changed world records were checked: recipe book at (333,304); Inn Lout at (670,375); Black-Briar Mead at (1012,478) with stealable=true.
+- All six current runtime main.py mirrors were checked for byte identity; all six asset JSON mirrors were checked for byte identity.
+- The new Global Log Worker passes Node.js syntax validation. Cause-specific event labels are static; these event types are intentionally not achievement-deduplicated.
+- Browser loader bundle names, tar contents, APK contents, version catalogue, site paths, and prior edition preservation were checked during packaging.
+- Source ZIP and Cloudflare site ZIP integrity checks pass after packaging.
+
+LIVE TEST LIMITATION
+
+No live browser/Pygbag/WebAssembly play session or gameplay interaction was run by Luma. Cozmo's browser field test remains necessary. In particular test: bucket pickup/placement/removal on the innkeeper; blocked mead pickup while unbucketed; stolen marking and theft reward timing; mead delivery to the Lout; Lout accessibility and follow behavior; recipe book readability beside Moonflower; cameo placement in crowded scenes and around dead bodies; stable encounter numbers across repeated causes and reloads; Tea behavior in all three difficulty modes; Tea save/load; and Global Log labels after the Worker is redeployed.
+
+================================================================================
+END ENTRY 026
+================================================================================
