@@ -1,0 +1,53 @@
+================================================================================
+ENTRY 024 — SGGG1.0: THE G GENERATION
+Date: 2026-11-06 (America/New_York)
+Status: Candidate packages built and statically checked; awaiting Cozmo's browser field test
+================================================================================
+
+BASELINE AND PRESERVATION
+
+- Exact baseline source archive: SGGF2.0a_SOURCE.zip (SHA-256 76205a5a62193d78e98593a21f321b76b4e3f24f1732ddc858c1f569b183cf2b).
+- Exact baseline complete site archive: SGGF2.0a_COMPLETE_CLOUDFLARE_SITE.zip (SHA-256 fae5269e2e3bd5e51b359bc2f61bc1c72ba250a18b0154801e569d7ab391cfc8).
+- All eight pre-existing selectable site editions were preserved byte-for-byte: SGGE2.0, SGGE3.1, SGGE3.2, SGGF1.0, SGGF1.6, SGGF1.666, SGGF1.666HellFinal and SGGF2.0a.
+- SGGG1.0 is added as the ninth and current edition.
+- No prior source archive, deployment edition, or release ZIP was overwritten.
+
+GLOBAL USAGE LOG
+
+- G1.0 registers an anonymous session with the existing Worker after difficulty selection. The Worker generates a temporary session ID and supplies UTC timestamp and approximate country.
+- Selected gameplay milestones are submitted asynchronously; network failures never pause gameplay.
+- Active-minute heartbeats are emitted no more than once per minute, and only when player input or movement occurred during the preceding minute. Idle/background time is not counted.
+- The private Local Session Log opens with L; L is rebindable under Configure Keys. The latest event remains visible below the help line when contextual hints are toggled off.
+- The front page has a GLOBAL LOG link and anonymous-tracking notice. The public page reads the spoiler-safe activity feed. Test-version sessions are hidden from its display.
+- Cozmo encounter counting includes both current exploit cameo message forms, HELLgs hint cameos, and the special scenic-overlook Cozmo appearance. Public labels remain numbered and spoiler-safe.
+- Worker update script GLOBAL_LOG_WORKER_SGGG1.0.js is included in the source package. It adds approved public labels, numbered area discoveries and Cozmo encounters, one-per-session achievement guards, per-session event throttling and offset paging. It must be deployed manually to the existing Worker before public playtesting. D1 schema is unchanged.
+
+GAMEPLAY CHANGE — TROLL CAVE
+
+- Easy retains fast travel to and from all ordinary areas, including Troll Cave.
+- Normal retains fast travel TO discovered areas and FROM ordinary areas, except that fast travel FROM Troll Cave is blocked.
+- Normal-mode message: “No fast travel allowed from here... this ain't EASY mode.”
+- Spiffy Challenge retains the existing no-fast-travel behavior.
+- Pineapple Getaway is recorded only when the player leaves Troll Cave while still carrying or possessing the Purple Passion Pineapple. Walking out counts; Easy-mode fast travel out also counts. Picking up the pineapple or merely waking Frosty does not count. It is limited to once per session.
+
+OTHER SELECTED MILESTONES
+
+- Six existing Cozmo Tea exploit achievements are mapped to spoiler-safe public labels.
+- Quest, crafting, soup, carriage, scenic-overlook, area-discovery, HELLgs challenge-start and HELLgs game-over milestones are included.
+- No player names, account IDs, inventory contents, detailed coordinates, arbitrary dialogue or private detailed Player Log entries are sent to the public feed.
+
+STATIC VERIFICATION
+
+Python syntax compilation, Luma JSON parsing, version-catalogue launch-path validation, G1.0 bundle integrity, launcher references, Worker event allowlist alignment, Node.js syntax checks for the Worker and public-log page, runtime mirror hashes, and byte-for-byte preservation checks are recorded in SGGG1.0_TEST_RESULTS.txt.
+
+LIVE TEST LIMITATION
+
+No live browser/WebAssembly gameplay test was run by Luma. Cozmo must field-test mode selection, Normal/Easy cave travel behavior, both Pineapple Getaway departure routes, session creation, event recording, activity heartbeat/idle behavior, the L-key log and rebind, latest-event line visibility, and public Global Usage Log display.
+
+PUBLICATION
+
+No GitHub main push, production repository release edit, Cloudflare website deployment, or Worker deployment was performed by Luma. SGGG1.0 is a candidate package for Cozmo to review and publish.
+
+================================================================================
+END ENTRY 024
+================================================================================
