@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Collect exact SGGG1.1 release packages
         shell: bash
         run: |
