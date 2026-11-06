@@ -1,0 +1,27 @@
+name: Temporary SGGG1.2 baseline export
+on:
+  push:
+    branches:
+      - temp/sggg1.2-baseline-export-20261106
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect exact SGGG1.1 release packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sggg1.1-baseline
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_SOURCE.zip" /tmp/sggg1.1-baseline/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sggg1.1-baseline/
+          unzip -t /tmp/sggg1.1-baseline/SGGG1.1_SOURCE.zip
+          unzip -t /tmp/sggg1.1-baseline/SGGG1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum /tmp/sggg1.1-baseline/*
+          du -h /tmp/sggg1.1-baseline/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sggg1.1-baseline
+          path: /tmp/sggg1.1-baseline/*
+          if-no-files-found: error
+          retention-days: 1
