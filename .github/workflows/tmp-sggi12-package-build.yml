@@ -1,0 +1,44 @@
+name: Temporary SGGI1.2 release package build
+on:
+  push:
+    branches:
+      - tmp/sggi12-baseline-transfer-20261107
+    paths:
+      - "tmp/sggi12-package-trigger.txt"
+permissions:
+  contents: read
+  actions: write
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the verified SGGI1.1 baseline and temporary builder
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sggi12-baseline-transfer-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            tmp/build_sggi12_release.sh
+          sparse-checkout-cone-mode: false
+      - name: Apply the two visual fixes and validate both complete trees
+        shell: bash
+        run: bash tmp/build_sggi12_release.sh
+      - name: Upload complete source tree as the source ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGI1.2_SOURCE
+          path: .sggi12-work/source/**
+          include-hidden-files: true
+          compression-level: 1
+          retention-days: 1
+          if-no-files-found: error
+      - name: Upload complete Cloudflare site tree as the deployment ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGI1.2_COMPLETE_CLOUDFLARE_SITE
+          path: .sggi12-work/site/**
+          include-hidden-files: true
+          compression-level: 1
+          retention-days: 1
+          if-no-files-found: error
