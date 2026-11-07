@@ -1,0 +1,43 @@
+name: Temporary SGG I1.1 baseline transfer
+on:
+  push:
+    branches:
+      - tmp/sggi12-baseline-transfer-20261107
+permissions:
+  contents: read
+  actions: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sparse-check out exact I1.1 archive paths from latest main baseline
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sggi12-baseline-transfer-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_LUMA_LOG_Entry032.txt
+          sparse-checkout-cone-mode: false
+      - name: Stage and independently verify untouched I1.1 baseline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_SOURCE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.1_LUMA_LOG_Entry032.txt" /tmp/sgg-transfer/
+          cd /tmp/sgg-transfer
+          test -s SGGI1.1_SOURCE.zip
+          test -s SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t SGGI1.1_SOURCE.zip
+          unzip -t SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum *.zip | tee SHA256SUMS.txt
+          stat -c '%n %s bytes' *.zip | tee FILE_SIZES.txt
+      - name: Upload untouched baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGI1.1-latest-repo-baseline
+          path: /tmp/sgg-transfer/*
+          retention-days: 1
+          if-no-files-found: error
