@@ -1,0 +1,74 @@
+name: Temporary SGGH1.0 package rebuild
+
+on:
+  push:
+    branches:
+      - tmp/sgg-h1-build-artifact-20261107
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out baseline archives and rebuild script only
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip
+            tools/rebuild_sggh1.py
+          sparse-checkout-cone-mode: false
+
+      - name: Extract baseline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg_h1_work/baseline_src /tmp/sgg_h1_work/baseline_site
+          unzip -q "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_SOURCE.zip" -d /tmp/sgg_h1_work/baseline_src
+          unzip -q "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip" -d /tmp/sgg_h1_work/baseline_site
+          unzip -tq "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_SOURCE.zip"
+          unzip -tq "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip"
+
+      - name: Build H1.0 trees and validate mirror preservation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/rebuild_sggh1.py
+          cp -f /tmp/sgg_h1_work/source_work/SGGH1.0/sggh1_0.tar.gz /tmp/sgg_h1_work/source_work/deploy/SGGH1.0/sggh1_0.tar.gz
+          cp -f /tmp/sgg_h1_work/source_work/SGGH1.0/sggh1_0.tar.gz /tmp/sgg_h1_work/site_work/SGGH1.0/sggh1_0.tar.gz
+          diff -qr /tmp/sgg_h1_work/source_work/deploy /tmp/sgg_h1_work/site_work
+          diff -qr /tmp/sgg_h1_work/baseline_src/SGGG1.5 /tmp/sgg_h1_work/source_work/SGGG1.5
+          diff -qr /tmp/sgg_h1_work/baseline_site/SGGG1.5 /tmp/sgg_h1_work/site_work/SGGG1.5
+          python3 -m py_compile /tmp/sgg_h1_work/source_work/SGGH1.0/main.py
+
+      - name: Package and CRC-check deliverables
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          (cd /tmp/sgg_h1_work/source_work && zip -qr -9 "$GITHUB_WORKSPACE/dist/SGGH1.0_SOURCE.zip" .)
+          (cd /tmp/sgg_h1_work/site_work && zip -qr -9 "$GITHUB_WORKSPACE/dist/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip" .)
+          unzip -tq dist/SGGH1.0_SOURCE.zip
+          unzip -tq dist/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum dist/*.zip
+          stat -c '%n %s bytes' dist/*.zip
+
+      - name: Upload source package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGH1.0_SOURCE
+          path: dist/SGGH1.0_SOURCE.zip
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload complete Cloudflare site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGH1.0_COMPLETE_CLOUDFLARE_SITE
+          path: dist/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          retention-days: 1
+          if-no-files-found: error
