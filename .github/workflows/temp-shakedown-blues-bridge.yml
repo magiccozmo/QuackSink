@@ -1,0 +1,49 @@
+name: Temporary Shakedown Blues binary bridge
+
+on:
+  push:
+    branches:
+      - temp/bridge-shakedown-20261107
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact repository branch
+        uses: actions/checkout@v4
+
+      - name: Stage and verify the original MP3 files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/shakedown-transfer"
+          cp -- "ARCHIVES 8-30-2026/random stuff/Shakedown Blues 4min.mp3" "$RUNNER_TEMP/shakedown-transfer/"
+          cp -- "ARCHIVES 8-30-2026/random stuff/Shakedown Blues 6min.mp3" "$RUNNER_TEMP/shakedown-transfer/"
+          cd "$RUNNER_TEMP/shakedown-transfer"
+          test -s "Shakedown Blues 4min.mp3"
+          test -s "Shakedown Blues 6min.mp3"
+          {
+            echo "Temporary transfer of the two original Shakedown Blues MP3 files."
+            echo
+            stat -c '%n | %s bytes' -- *.mp3
+            echo
+            sha256sum -- *.mp3
+          } | tee TRANSFER_MANIFEST.txt
+          if command -v ffprobe >/dev/null 2>&1; then
+            for f in *.mp3; do
+              echo "===== $f =====" >> AUDIO_METADATA.txt
+              ffprobe -v error -show_entries format=duration,bit_rate:stream=codec_name,sample_rate,channels -of default=noprint_wrappers=1 "$f" >> AUDIO_METADATA.txt
+            done
+          fi
+          file -- *.mp3
+
+      - name: Upload the verified transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Shakedown-Blues-Transfer
+          path: ${{ runner.temp }}/shakedown-transfer/
+          if-no-files-found: error
+          retention-days: 1
