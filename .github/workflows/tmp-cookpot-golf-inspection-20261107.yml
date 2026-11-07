@@ -1,0 +1,36 @@
+name: Temporary cookpot golf video inspection
+on:
+  push:
+    branches:
+      - tmp/cookpot-golf-inspection-20261107
+permissions:
+  contents: read
+  actions: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sparse checkout only the requested video from current main snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/cookpot-golf-inspection-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/pics/cookpot golf.mp4
+          sparse-checkout-cone-mode: false
+      - name: Verify and stage the requested video
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/cookpot-inspect
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/pics/cookpot golf.mp4" /tmp/cookpot-inspect/
+          test -s "/tmp/cookpot-inspect/cookpot golf.mp4"
+          file "/tmp/cookpot-inspect/cookpot golf.mp4"
+          sha256sum "/tmp/cookpot-inspect/cookpot golf.mp4" | tee /tmp/cookpot-inspect/SHA256SUMS.txt
+          stat -c '%n %s bytes' "/tmp/cookpot-inspect/cookpot golf.mp4" | tee /tmp/cookpot-inspect/FILE_SIZES.txt
+      - name: Upload inspection-only artifact (one day)
+        uses: actions/upload-artifact@v4
+        with:
+          name: cookpot-golf-video-inspection
+          path: /tmp/cookpot-inspect/*
+          retention-days: 1
+          if-no-files-found: error
