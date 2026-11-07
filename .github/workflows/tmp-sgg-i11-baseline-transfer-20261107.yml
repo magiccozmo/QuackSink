@@ -1,0 +1,37 @@
+name: Temporary SGG I1.0 baseline transfer
+on:
+  push:
+    branches:
+      - tmp/sgg-i11-baseline-transfer-20261107
+permissions:
+  contents: read
+  actions: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact temporary branch
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sgg-i11-baseline-transfer-20261107
+      - name: Stage exact I1.0 release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_SOURCE.zip" /tmp/sgg-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-transfer/
+          cd /tmp/sgg-transfer
+          test -s SGGI1.0_SOURCE.zip
+          test -s SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t SGGI1.0_SOURCE.zip
+          unzip -t SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum *.zip | tee SHA256SUMS.txt
+          stat -c '%n %s bytes' *.zip | tee FILE_SIZES.txt
+      - name: Upload untouched baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGI1.0-baseline-transfer
+          path: /tmp/sgg-transfer/*
+          retention-days: 1
+          if-no-files-found: error
