@@ -12,8 +12,13 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact repository branch
+      - name: Check out only the two original MP3 files
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/random stuff/Shakedown Blues 4min.mp3
+            ARCHIVES 8-30-2026/random stuff/Shakedown Blues 6min.mp3
+          sparse-checkout-cone-mode: false
 
       - name: Stage and verify the original MP3 files
         shell: bash
