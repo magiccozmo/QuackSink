@@ -1,0 +1,57 @@
+===============================================================================
+SPIFFY'S GIFT — LUMA LOG ENTRY 031
+Release: SGGI1.0
+Date: 2026-11-07
+Baseline: SGGH1.0
+===============================================================================
+
+PURPOSE
+
+Rebuild Giant Camp to current SGG standards, turn the Plains->Giant Camp edge into a genuine transition, and implement the giant/club encounter specified by Cozmo.
+
+ART / AREA
+
+- Replaced the placeholder Giant Camp panorama with a layered Luma Draw Engine scene authored entirely as JSON drawing commands.
+- Added hide tent, lean-to, trophy bone rack, giant cookpot, supply pile and boulder recipes as separate reusable assets and world props.
+- Kept the existing giant's scale at 119 x 193 and redesigned his appearance.
+- Added a separate oversized wooden club recipe.
+- Named this version's giant Grumblegron, the Sky-Sender.
+
+BEHAVIOR
+
+- Grumblegron follows a predetermined four-point patrol loop at a steady speed.
+- He never chases or reacts to distance.
+- Hostility begins only when his collision rectangle overlaps the player, another live NPC, or the guard. No distance threshold or config slider exists.
+- He swings the oversized club, launches the victim high into the air with two turns of spin, then the victim descends. The player dies after landing; NPC targets are marked dead only after the landing.
+- Random-seed behavior is deferred exactly as requested.
+
+TRANSITIONS
+
+- The existing `plains_top_giant_camp` edge connection remains the real entrance and is now allowed to complete without the old horizon Game Over or legacy GIANT SPACE PROGRAM auto-death.
+- The existing camp-bottom return to Plains remains in place.
+- Other transitions and existing death behavior are untouched.
+
+SAVE COMPATIBILITY
+
+- Existing save schema and forward-compatible NPC merge remain unchanged.
+- Added patrol defaults are migrated in memory. Only the pristine old placeholder giant position (681,301) is moved to the new starting point (824,404); custom/saved positions remain unchanged.
+- New scene props are added by the existing generic missing-world-object save migration.
+
+KARTLOTTA AUDIO
+
+- Carried forward the real `audio_clip/kartlotta_meet.wav` from the H1.1 deploy-only experiment into the source and new complete site.
+- The missing Hero WAV remains optional and is not fabricated.
+
+VALIDATION
+
+- Python syntax, JSON syntax, supported draw operations, runtime mirror equality, patrol/collision implementation, transitions, save migration, version catalog, nested APK/TAR bundles and ZIP integrity were checked.
+- No live browser/Pygbag test, rendered in-browser walkmesh test, animation timing check, or Cloudflare deployment was performed. Cozmo has not yet deployed or field-tested I1.0.
+
+DELIVERY
+
+- Intended complete source package: SGGI1.0_SOURCE.zip
+- Intended complete site package: SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip
+- No GitHub main push and no Cloudflare deployment by Luma.
+===============================================================================
+END ENTRY 031
+===============================================================================
