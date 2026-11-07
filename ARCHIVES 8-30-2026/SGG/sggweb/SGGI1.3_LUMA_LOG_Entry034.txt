@@ -1,0 +1,75 @@
+===============================================================================
+SPIFFY'S GIFT — LUMA LOG ENTRY 034
+Release: SGGI1.3
+Date: 2026-11-07
+Baseline: SGGI1.2 (refreshed from latest repository main)
+===============================================================================
+
+PURPOSE
+
+Replace the narrow, invisible Plains-to-Giant-Camp crossing corridor with the
+visible transition marker Cozmo identified in the field screenshot. The player
+should walk into the north arrow / "Giant Camp" caption to enter the camp.
+
+VISIBLE-MARKER TRANSIT
+
+- The I1.2 drawing code already places the Giant Camp arrow at the actual gateway
+  and renders the destination caption immediately beneath it. I1.3 uses that
+  same center and same visual geometry for the collision target.
+- The hit area is the union of the arrow's bounding rectangle and the actual
+  font-rendered caption panel, with a small forgiving margin. It does not use the
+  full 210-pixel label-layout placeholder.
+- Transit occurs when the player's existing world collision rectangle overlaps
+  that visible marker group. The generic top-edge transition and old narrow
+  y=300 / x=640..656 fallback are blocked for this one connection in I1.3.
+- The authorization flag is temporary and scoped to the explicit marker-triggered
+  connection call. Other edge links and the Giant Camp-to-Plains return remain
+  on their existing paths.
+
+RETURN / RE-ARM SAFETY
+
+- The existing return destination is (640,330), close enough for the player's
+  collision rectangle to overlap the caption panel.
+- On return to Plains, the marker starts disarmed. It re-arms only after the
+  player has completely cleared the visible hit area, so the same arrival cannot
+  immediately bounce back to Giant Camp.
+- A newly started or loaded session first evaluates whether the player is already
+  overlapping the marker. A save loaded on the sign also waits for the player to
+  leave before re-arming.
+
+VERSION LABELS
+
+- The game masthead version identifier is updated to I1.3.
+- The Browser Edition Archive heading now matches the current catalog entry.
+- SGGI1.3 is first and current in the selector; SGGI1.2 and every earlier entry
+  remain selectable and are marked historical.
+
+PRESERVATION
+
+- Giant patrol, attack, articulated arm/club keyframes, collision, 260-pixel
+  flight drift, 360-pixel apex, 3.20-second duration, two-turn spin, terminal
+  landing/death, Game Over draw order, art, dialogue, NPCs, inventory, quests,
+  saves, difficulty, fast travel, global/local log systems and all unrelated
+  transitions are carried forward from I1.2.
+- The Luma asset JSON and all historical version folders are unchanged.
+- Kartlotta Meet WAV is carried forward. No MP4 recordings are included.
+
+VALIDATION
+
+- The exact SGGI1.2 source and complete Cloudflare site archives were retrieved
+  from the latest repository main commit through the isolated GitHub Actions
+  transfer bridge. Both original ZIPs passed integrity checks.
+- Updated Python syntax, source and deployment bootstrap identifiers, JSON,
+  marker/label geometry alignment, marker-only transition authorization,
+  return re-arm guard, version catalog, preserved historical directories,
+  packaged browser bundle contents and final ZIP integrity were checked.
+- No live browser/Pygbag run or Cloudflare serving test was performed. Cozmo's
+  field test is required before deployment.
+
+PUBLICATION
+
+- Complete source and complete Cloudflare site archives are provided separately.
+- No GitHub main push and no Cloudflare deployment was performed.
+===============================================================================
+END ENTRY 034
+===============================================================================
