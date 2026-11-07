@@ -57,18 +57,20 @@ jobs:
           sha256sum dist/*.zip
           stat -c '%n %s bytes' dist/*.zip
 
-      - name: Upload source package artifact
+      - name: Upload source tree as the actual ZIP package
         uses: actions/upload-artifact@v4
         with:
-          name: SGGH1.0_SOURCE
-          path: dist/SGGH1.0_SOURCE.zip
+          name: SGGH1.0_SOURCE_PACKAGE
+          path: /tmp/sgg_h1_work/source_work/
+          include-hidden-files: true
           retention-days: 1
           if-no-files-found: error
 
-      - name: Upload complete Cloudflare site artifact
+      - name: Upload complete site tree as the actual ZIP package
         uses: actions/upload-artifact@v4
         with:
-          name: SGGH1.0_COMPLETE_CLOUDFLARE_SITE
-          path: dist/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          name: SGGH1.0_COMPLETE_CLOUDFLARE_SITE_PACKAGE
+          path: /tmp/sgg_h1_work/site_work/
+          include-hidden-files: true
           retention-days: 1
           if-no-files-found: error
