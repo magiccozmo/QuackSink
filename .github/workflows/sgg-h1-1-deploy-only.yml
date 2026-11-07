@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/audio_clip/kartlotta_meet.wav
+          sparse-checkout-cone-mode: false
 
       - name: Add the repo WAV to the existing H1.0 deployment only
         shell: bash
