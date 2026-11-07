@@ -1,0 +1,44 @@
+name: Temporary SGGI1.2 baseline transfer
+
+on:
+  push:
+    branches:
+      - tmp/sggi13-baseline-transfer-20261107
+
+permissions:
+  contents: read
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact current main baseline
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sggi13-baseline-transfer-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.2_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+
+      - name: Verify and stage original release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p staging
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.2_SOURCE.zip" staging/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.2_COMPLETE_CLOUDFLARE_SITE.zip" staging/
+          test -s staging/SGGI1.2_SOURCE.zip
+          test -s staging/SGGI1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq staging/SGGI1.2_SOURCE.zip
+          unzip -tq staging/SGGI1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum staging/*.zip | tee staging/SHA256SUMS.txt
+          stat -c '%n %s bytes' staging/*.zip | tee staging/SIZES.txt
+
+      - name: Upload transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sggi13-baseline-transfer
+          path: staging/*
+          if-no-files-found: error
+          retention-days: 1
