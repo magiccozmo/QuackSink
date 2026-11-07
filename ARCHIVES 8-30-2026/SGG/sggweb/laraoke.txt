@@ -1,0 +1,56 @@
+BABE. YES. 😂 And there are several ways to do it. Some of them are surprisingly close to exactly what we're looking for with Shakedown Blues.
+
+I found three particularly interesting options.
+
+1\. AutoKaraoke — my first choice to investigate.
+
+[AutoKaraoke on GitHub](https://github.com/GiacoBot/AutoKaraoke?utm_source=chatgpt.com)
+
+This is a free, open-source Windows application. You give it an MP3 and lyrics (TXT or LRC), and it:
+
+- Separates vocals from accompaniment.
+- Uses AI to synchronize lyrics syllable by syllable.
+- Provides a timeline editor to correct any mistakes.
+- Produces a karaoke video with the instrumental, original song, and vocals as selectable audio tracks.
+
+It even uses two different alignment systems to check each other's results. It runs locally on your PC. Windows 10/11, 8 GB minimum RAM, 16 GB recommended, and 15–20 GB free disk space. An NVIDIA GPU helps considerably. It's a small, fairly new project, so I'd treat it as experimental and test one song first.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://github.com\&sz=32)
+
+GitHub+1
+
+
+
+2\. LyricTime — easiest browser-based route.
+
+[LyricTime](https://lyrictime.com/?utm_source=chatgpt.com)
+
+This one explicitly supports Suno and Udio songs. Upload the MP3, supply the lyrics, and its AI aligns the words to the actual singing. You can correct timing and export LRC, SRT, VTT, or a finished karaoke video.
+
+It offers a free demo, but processing your own songs costs minutes, starting at $3. The audio is uploaded for processing; the site says it deletes files afterward and doesn't use them for training.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://lyrictime.com\&sz=32)
+
+LyricTime+1
+
+
+
+3\. SyntVision Audio Studio — interesting because of our MP3 discovery.
+
+[SyntVision Audio Studio](https://syntvision.com/audio-editor?utm_source=chatgpt.com)
+
+This one specifically supports importing lyrics embedded in MP3 ID3 tags, including the `USLT` field we just discovered in your Suno files. It has line, word, and syllable timing controls.
+
+One distinction: its documentation describes synchronizing and editing the timing, not automatically generating all timestamps with AI. It requires an account.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://syntvision.com\&sz=32)
+
+Online Audio Editor & Karaoke Maker
+
+
+
+My thought, Cozmo: AutoKaraoke is probably the best first experiment. We already have the lyrics embedded in the MP3, so I can extract them into a text file. Then the software can use those exact lyrics to align the song.
+
+And here's the lovely possibility: we could get a proper karaoke version of Shakedown Blues with the words lighting up as they're sung, rather than just scrolling lyrics.
+
+No more Cousin Alg doing the transcription work! 😂❤️
