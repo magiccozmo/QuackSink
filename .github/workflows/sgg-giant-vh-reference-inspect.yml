@@ -1,0 +1,44 @@
+name: Temporary Giant Camp VH reference inspection
+
+on:
+  push:
+    branches:
+      - tmp/sgg-giant-vh-reference-inspect-20261107
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Retrieve exact giant camp reference files only
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp VH1.1a.png
+            ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp vh1.1b.png
+            ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp clip.mp4
+          sparse-checkout-cone-mode: false
+      - name: Prepare reference images and video contact sheet
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/frames
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp VH1.1a.png" dist/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp vh1.1b.png" dist/
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 "ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp clip.mp4" > dist/video_info.txt
+          duration=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp clip.mp4")
+          # Extract one frame every 3 seconds for visual review; preserve source video in repo.
+          ffmpeg -hide_banner -loglevel error -i "ARCHIVES 8-30-2026/SGG/sggweb/pics/giant camp clip.mp4" -vf "fps=1/3,scale=720:-1" -q:v 3 dist/frames/frame_%03d.jpg
+          ffmpeg -hide_banner -loglevel error -pattern_type glob -i "dist/frames/*.jpg" -vf "tile=3x3:padding=12:margin=12" -frames:v 1 dist/video_contact_sheet.jpg
+          find dist -maxdepth 2 -type f -printf '%p %s bytes\n' | sort > dist/FILE_SIZES.txt
+      - name: Upload reference inspection material
+        uses: actions/upload-artifact@v4
+        with:
+          name: giant-camp-vh-reference-inspection
+          path: dist/
+          retention-days: 1
+          if-no-files-found: error
