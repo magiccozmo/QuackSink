@@ -10,10 +10,14 @@ jobs:
   transfer:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact temporary branch
+      - name: Sparse-check out exact I1.0 archive paths
         uses: actions/checkout@v4
         with:
           ref: tmp/sgg-i11-baseline-transfer-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Stage exact I1.0 release archives
         shell: bash
         run: |
@@ -31,7 +35,7 @@ jobs:
       - name: Upload untouched baseline archives
         uses: actions/upload-artifact@v4
         with:
-          name: SGGI1.0-baseline-transfer
+          name: SGGI1.0-baseline-transfer-sparse
           path: /tmp/sgg-transfer/*
           retention-days: 1
           if-no-files-found: error
