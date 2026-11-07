@@ -1,0 +1,38 @@
+name: Temporary SGG H1.0 baseline transfer
+
+on:
+  push:
+    branches:
+      - tmp/sgg-h1-base-transfer-20261107
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact repository snapshot
+        uses: actions/checkout@v4
+
+      - name: Stage and verify SGGG1.5 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGG1.5_SOURCE.zip
+          test -s transfer/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGG1.5_SOURCE.zip
+          unzip -t transfer/SGGG1.5_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip | tee transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip | tee transfer/FILE_SIZES.txt
+
+      - name: Upload temporary baseline artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGG1.5-baseline-transfer
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
