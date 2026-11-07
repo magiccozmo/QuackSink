@@ -1,0 +1,63 @@
+===============================================================================
+SPIFFY'S GIFT — LUMA LOG ENTRY 033
+Release: SGGI1.2
+Date: 2026-11-07
+Baseline: SGGI1.1 (refreshed from latest repository main)
+===============================================================================
+
+PURPOSE
+
+Make only the two visual corrections Cozmo identified in the I1.1 Giant Camp
+field review: remove the airborne tether-like line and ensure the Game Over panel
+covers the articulated troll layers. Preserve the mechanical animation and all
+other gameplay exactly.
+
+FLIGHT VISUAL
+
+- Removed the explicit pale line draw that connected the victim's launch position
+to the current airborne position during the first 82% of flight.
+- No substitute line, tether, or trail is rendered.
+- Player/NPC/guard flight positions, 260-pixel drift, 360-pixel apex, 3.20-second
+duration, two-turn spin, shadow, and terminal landing/death handling are unchanged.
+
+GAME OVER COMPOSITING
+
+- The existing player GAME OVER panel was inherited-drawn before the I1.1
+subclass rendered Grumblegron's separately articulated arm and club.
+- The player GAME OVER panel is now temporarily deferred during the inherited
+scene draw, with the original death state restored immediately afterward.
+- The same panel background, text, layout, and colors are then drawn after the
+whole scene, giant, and flight layers. No giant art is disabled or altered.
+- This is a render-order correction; no gameplay state, save field, or death
+resolution is changed.
+
+PRESERVATION
+
+- Grumblegron's articulated shoulder, upper/lower arm construction, hand grip,
+club lag, swing keyframes, and recovery animation are byte-for-byte unchanged.
+- Giant Camp art, patrol, collision behavior, Plains/camp transitions, player and
+NPC flight handling, inventory, quests, saves, dialogue, and other scenes are
+preserved from I1.1.
+- The separately reported Plains-to-Camp transition concern is not addressed in
+this narrowly scoped visual release; it remains for a later field check.
+- SGGI1.1 and all older historical release folders remain untouched.
+- Kartlotta Meet WAV is carried forward. No MP4 recording is included.
+
+VALIDATION
+
+- The exact I1.1 repository source/site archives were transferred from the latest
+main commit using an isolated GitHub Actions branch. Both ZIPs passed integrity
+checks and their checksums matched the verified I1.1 Dropbox baseline.
+- Static Python syntax, JSON, overlay ordering, flight parameter preservation,
+arm/club animation preservation, bundle contents, version catalogue, historical
+folder preservation, and final ZIP integrity checks were performed.
+- No live browser/Pygbag session or rendered game test was available in this build
+environment. Cozmo's field test remains required.
+
+PUBLICATION
+
+- Complete source and complete Cloudflare site archives are provided separately.
+- No GitHub main push and no Cloudflare deployment was performed.
+===============================================================================
+END ENTRY 033
+===============================================================================
