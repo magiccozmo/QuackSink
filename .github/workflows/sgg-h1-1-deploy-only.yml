@@ -1,0 +1,83 @@
+name: SGG H1.1 Deployment Only
+
+on:
+  push:
+    branches:
+      - tmp/sgg-h1-1-deploy-only-20261107
+    paths:
+      - tmp/sgg-h1-1-deploy-trigger.txt
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add the repo WAV to the existing H1.0 deployment only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          import hashlib
+
+          base = Path("ARCHIVES 8-30-2026/SGG/sggweb/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip")
+          wav = Path("ARCHIVES 8-30-2026/SGG/sggweb/audio_clip/kartlotta_meet.wav")
+          out = Path("SGGH1.1_COMPLETE_CLOUDFLARE_SITE.zip")
+
+          if not base.is_file():
+              raise SystemExit(f"Missing H1.0 deployment baseline: {base}")
+          if not wav.is_file():
+              raise SystemExit(f"Missing repo WAV: {wav}")
+
+          with ZipFile(base, "r") as zin:
+              names = zin.namelist()
+              bad = zin.testzip()
+              if bad:
+                  raise SystemExit(f"Baseline ZIP CRC failure: {bad}")
+              if "audio_clip/.gitkeep" not in names and "audio_clip/" not in names:
+                  raise SystemExit("Baseline deployment has no root audio_clip folder.")
+              audio_path = "audio_clip/kartlotta_meet.wav"
+              if audio_path in names:
+                  print("Replacing existing placeholder WAV entry.")
+              print(f"Baseline entries: {len(names)}")
+              print("Relevant front-page HTML candidates:")
+              for name in names:
+                  if name.lower().endswith(".html"):
+                      data = zin.read(name)
+                      if b"Browser Edition Archive" in data or b"SGGH1.0" in data:
+                          text = data.decode("utf-8", "replace")
+                          marker = "Browser Edition Archive"
+                          pos = text.find(marker)
+                          if pos < 0:
+                              pos = text.find("SGGH1.0")
+                          print(f"--- {name} ---")
+                          print(text[max(0, pos-180):pos+650].replace("\\n", " ")[:850])
+
+              with ZipFile(out, "w", ZIP_DEFLATED, compresslevel=6) as zout:
+                  for info in zin.infolist():
+                      if info.filename == audio_path:
+                          continue
+                      zout.writestr(info, zin.read(info.filename))
+                  zout.write(wav, audio_path)
+
+          with ZipFile(out, "r") as check:
+              if check.testzip():
+                  raise SystemExit("New deployment ZIP failed CRC verification.")
+              info = check.getinfo(audio_path)
+              print(f"Included {audio_path}: {info.file_size} bytes")
+              print(f"Output entries: {len(check.namelist())}")
+          digest = hashlib.sha256(out.read_bytes()).hexdigest()
+          print(f"Output: {out.name} ({out.stat().st_size} bytes)")
+          print(f"SHA256: {digest}")
+          PY
+
+      - name: Publish deployment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGH1.1_COMPLETE_CLOUDFLARE_SITE_PACKAGE
+          path: SGGH1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          if-no-files-found: error
+          retention-days: 30
