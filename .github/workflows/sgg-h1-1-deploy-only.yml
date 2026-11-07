@@ -61,12 +61,23 @@ jobs:
                           print(f"--- {name} ---")
                           print(text[max(0, pos-180):pos+650].replace("\\n", " ")[:850])
 
+              page_updates = 0
               with ZipFile(out, "w", ZIP_DEFLATED, compresslevel=6) as zout:
                   for info in zin.infolist():
                       if info.filename == audio_path:
                           continue
-                      zout.writestr(info, zin.read(info.filename))
+                      data = zin.read(info.filename)
+                      if info.filename == "index.html":
+                          old_label = b'<span class="current-version">SGGH1.0</span>'
+                          new_label = b'<span class="current-version">SGGH1.1</span>'
+                          if old_label in data:
+                              data = data.replace(old_label, new_label, 1)
+                              page_updates += 1
+                      zout.writestr(info, data)
+                  if page_updates != 1:
+                      raise SystemExit(f"Expected to update one front-page H1.0 label, updated {page_updates}.")
                   zout.write(wav, audio_path)
+              print("Updated index.html Browser Edition Archive current-version label to SGGH1.1.")
 
           with ZipFile(out, "r") as check:
               if check.testzip():
