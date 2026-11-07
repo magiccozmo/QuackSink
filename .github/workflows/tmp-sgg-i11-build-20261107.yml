@@ -1,0 +1,42 @@
+name: Temporary SGGI1.1 build and package
+on:
+  push:
+    branches:
+      - tmp/sgg-i11-baseline-transfer-20261107
+permissions:
+  contents: read
+  actions: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sparse checkout exact I1.0 baseline and builder
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sgg-i11-baseline-transfer-20261107
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip
+            tools/build_sggi1_1_bootstrap.py
+          sparse-checkout-cone-mode: false
+      - name: Build I1.1 source and complete site packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/build_sggi1_1_bootstrap.py \
+            --source-zip "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_SOURCE.zip" \
+            --site-zip "ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.0_COMPLETE_CLOUDFLARE_SITE.zip" \
+            --out /tmp/sgg-i11-out
+          cat /tmp/sgg-i11-out/SHA256SUMS.txt
+          ls -l /tmp/sgg-i11-out/SGGI1.1_*.zip /tmp/sgg-i11-out/SGGI1.1_LUMA_LOG_Entry032.txt
+      - name: Upload verified release packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGI1.1-release-packages
+          path: |
+            /tmp/sgg-i11-out/SGGI1.1_SOURCE.zip
+            /tmp/sgg-i11-out/SGGI1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            /tmp/sgg-i11-out/SGGI1.1_LUMA_LOG_Entry032.txt
+            /tmp/sgg-i11-out/SHA256SUMS.txt
+          retention-days: 3
+          if-no-files-found: error
