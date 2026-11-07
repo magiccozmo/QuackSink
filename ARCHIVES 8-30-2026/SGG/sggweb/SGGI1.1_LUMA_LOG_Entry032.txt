@@ -1,0 +1,70 @@
+===============================================================================
+SPIFFY'S GIFT — LUMA LOG ENTRY 032
+Release: SGGI1.1
+Date: 2026-11-07
+Baseline: SGGI1.0
+===============================================================================
+
+PURPOSE
+
+Refine only Grumblegron's club swing, the victim's flight path, and the player
+Game Over message in response to Cozmo's I1.0 field review. Preserve the camp,
+patrol, collision trigger, transitions, saves, NPC handling, and every unrelated
+system and historical release.
+
+GIANT / CLUB ANIMATION
+
+- Replaced the club-only pivot animation with an articulated 2D Draw Engine arm.
+- Removed only the static right-arm shapes that would otherwise show through the
+  moving arm overlay; the rest of Grumblegron's body artwork is unchanged.
+- The arm now winds back, pauses briefly, drives through a broad downswing, and
+  follows through; its recovery continues naturally as the victim rises.
+- The club is anchored to the animated hand and follows with a slight lag, giving
+  the swing a heavier, rotational motion rather than the former up/down wave.
+- The giant's patrol, collision-only hostility, attack speech, and target selection
+  are unchanged.
+
+VICTIM FLIGHT
+
+- Preserved the existing airborne sprite rendering and its two full rotations.
+- Increased horizontal travel from 78 to 260 game pixels.
+- Increased the apex height from 244 to 360 game pixels.
+- Extended flight time from 1.82 to 3.20 seconds, with a shorter rising phase and
+  a longer, more deliberate descent before the existing death/kill resolution.
+- Player, NPC, and guard launch/death handling remains the same apart from the
+  revised common trajectory and longer timing.
+
+GAME OVER TEXT
+
+The player death panel now reads:
+
+"You experience the joy of flight... for a while. Then the world reminds you that even a fantasy universe has gravity."
+
+No other dialogue or death messages were changed.
+
+PRESERVATION
+
+- Giant Camp artwork, object placement, world geometry, walkmesh, patrol route,
+  collision rectangles, encounter trigger, and Plains/camp transitions are kept.
+- Save schema, save migration, inventory, quests, NPC systems, and other scenes
+  are unchanged.
+- Kartlotta Meet WAV is carried forward. No missing Hero WAV is invented.
+- SGGI1.0 and every previous release folder remain untouched and available.
+
+VALIDATION
+
+- Python syntax, JSON syntax, supported Luma Draw Engine operations, mirrored
+  runtime files, version catalogue, nested APK/TAR bundles, archive integrity,
+  and unchanged historical release folders were checked.
+- Static checks confirm the articulated arm/club relationship, extended path
+  parameters, game-over wording, and preservation of unrelated I1.0 systems.
+- No live browser/Pygbag session or real-time rendered animation test was available
+  in this build environment. Cozmo's field test is still required.
+
+PUBLICATION
+
+- Complete source and Cloudflare site archives are provided separately.
+- No GitHub main push and no Cloudflare deployment was performed.
+===============================================================================
+END ENTRY 032
+===============================================================================
