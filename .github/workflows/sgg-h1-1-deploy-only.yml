@@ -20,80 +20,79 @@ jobs:
             ARCHIVES 8-30-2026/SGG/sggweb/audio_clip/kartlotta_meet.wav
           sparse-checkout-cone-mode: false
 
-      - name: Add the repo WAV to the existing H1.0 deployment only
+      - name: Build the deployment tree from H1.0 and add the repo WAV
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile, ZIP_DEFLATED
           import hashlib
+          import shutil
 
           base = Path("ARCHIVES 8-30-2026/SGG/sggweb/SGGH1.0_COMPLETE_CLOUDFLARE_SITE.zip")
           wav = Path("ARCHIVES 8-30-2026/SGG/sggweb/audio_clip/kartlotta_meet.wav")
-          out = Path("SGGH1.1_COMPLETE_CLOUDFLARE_SITE.zip")
+          dist = Path("dist")
+          verify = Path("/tmp/SGGH1.1_DEPLOY_VERIFY.zip")
 
           if not base.is_file():
               raise SystemExit(f"Missing H1.0 deployment baseline: {base}")
           if not wav.is_file():
               raise SystemExit(f"Missing repo WAV: {wav}")
+          if dist.exists():
+              shutil.rmtree(dist)
+          dist.mkdir()
 
           with ZipFile(base, "r") as zin:
-              names = zin.namelist()
               bad = zin.testzip()
               if bad:
                   raise SystemExit(f"Baseline ZIP CRC failure: {bad}")
-              if "audio_clip/.gitkeep" not in names and "audio_clip/" not in names:
+              if "audio_clip/.gitkeep" not in zin.namelist() and "audio_clip/" not in zin.namelist():
                   raise SystemExit("Baseline deployment has no root audio_clip folder.")
-              audio_path = "audio_clip/kartlotta_meet.wav"
-              if audio_path in names:
-                  print("Replacing existing placeholder WAV entry.")
-              print(f"Baseline entries: {len(names)}")
-              print("Relevant front-page HTML candidates:")
-              for name in names:
-                  if name.lower().endswith(".html"):
-                      data = zin.read(name)
-                      if b"Browser Edition Archive" in data or b"SGGH1.0" in data:
-                          text = data.decode("utf-8", "replace")
-                          marker = "Browser Edition Archive"
-                          pos = text.find(marker)
-                          if pos < 0:
-                              pos = text.find("SGGH1.0")
-                          print(f"--- {name} ---")
-                          print(text[max(0, pos-180):pos+650].replace("\\n", " ")[:850])
+              zin.extractall(dist)
 
-              page_updates = 0
-              with ZipFile(out, "w", ZIP_DEFLATED, compresslevel=6) as zout:
-                  for info in zin.infolist():
-                      if info.filename == audio_path:
-                          continue
-                      data = zin.read(info.filename)
-                      if info.filename == "index.html":
-                          old_label = b'<span class="current-version">SGGH1.0</span>'
-                          new_label = b'<span class="current-version">SGGH1.1</span>'
-                          if old_label in data:
-                              data = data.replace(old_label, new_label, 1)
-                              page_updates += 1
-                      zout.writestr(info, data)
-                  if page_updates != 1:
-                      raise SystemExit(f"Expected to update one front-page H1.0 label, updated {page_updates}.")
-                  zout.write(wav, audio_path)
-              print("Updated index.html Browser Edition Archive current-version label to SGGH1.1.")
+          audio_path = dist / "audio_clip" / "kartlotta_meet.wav"
+          audio_path.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copyfile(wav, audio_path)
 
-          with ZipFile(out, "r") as check:
-              if check.testzip():
-                  raise SystemExit("New deployment ZIP failed CRC verification.")
-              info = check.getinfo(audio_path)
-              print(f"Included {audio_path}: {info.file_size} bytes")
-              print(f"Output entries: {len(check.namelist())}")
-          digest = hashlib.sha256(out.read_bytes()).hexdigest()
-          print(f"Output: {out.name} ({out.stat().st_size} bytes)")
-          print(f"SHA256: {digest}")
+          front_page = dist / "index.html"
+          if not front_page.is_file():
+              raise SystemExit("Deployment front page index.html is missing.")
+          page = front_page.read_bytes()
+          old_label = b'<span class="current-version">SGGH1.0</span>'
+          new_label = b'<span class="current-version">SGGH1.1</span>'
+          if page.count(old_label) != 1:
+              raise SystemExit(f"Expected exactly one H1.0 front-page label, found {page.count(old_label)}.")
+          front_page.write_bytes(page.replace(old_label, new_label, 1))
+
+          files = sorted(p for p in dist.rglob("*") if p.is_file())
+          with ZipFile(verify, "w", ZIP_DEFLATED, compresslevel=6) as zout:
+              for path in files:
+                  zout.write(path, path.relative_to(dist).as_posix())
+          with ZipFile(verify, "r") as check:
+              bad = check.testzip()
+              if bad:
+                  raise SystemExit(f"Deployment tree ZIP CRC failure: {bad}")
+              if "audio_clip/kartlotta_meet.wav" not in check.namelist():
+                  raise SystemExit("WAV missing from deployment root.")
+              info = check.getinfo("audio_clip/kartlotta_meet.wav")
+              if info.file_size != wav.stat().st_size:
+                  raise SystemExit("WAV size mismatch in deployment tree.")
+          if b'<span class="current-version">SGGH1.1</span>' not in front_page.read_bytes():
+              raise SystemExit("Front-page version label did not update.")
+          print(f"Copied H1.0 deployment tree: {len(files)-1} existing entries preserved.")
+          print(f"Added audio_clip/kartlotta_meet.wav: {audio_path.stat().st_size} bytes")
+          print("Updated index.html Browser Edition Archive current-version label to SGGH1.1.")
+          print(f"Deploy tree entries: {len(files)}")
+          print(f"Verified deploy ZIP size: {verify.stat().st_size} bytes")
+          print(f"Verified deploy ZIP SHA256: {hashlib.sha256(verify.read_bytes()).hexdigest()}")
+          print("Verified deploy root entries:", ", ".join(sorted(p.name for p in dist.iterdir())))
           PY
 
-      - name: Publish deployment artifact
+      - name: Publish the deploy tree as a deploy-ready ZIP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SGGH1.1_COMPLETE_CLOUDFLARE_SITE_PACKAGE
-          path: SGGH1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          name: SGGH1.1_COMPLETE_CLOUDFLARE_SITE_DEPLOY_READY
+          path: dist/
           if-no-files-found: error
+          include-hidden-files: true
           retention-days: 30
