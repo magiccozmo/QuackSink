@@ -91,10 +91,15 @@ jobs:
           import fs from 'node:fs';
           const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
           let s=fs.readFileSync(p,'utf8');
-          const old='if (!/^SGGG\\d+(?:\\.\\d+)?$/i.test(gameVersion) || gameVersion.length > 40)';
-          const replacement='// Accept all SGG edition families (F, G, H, I, J, K, and future letters).\nif (!/^SGG[A-Z][A-Z0-9._-]{1,36}$/i.test(gameVersion) || gameVersion.length > 40)';
-          if(!s.includes(old)) throw new Error('Expected old GGG-only Worker validator not found');
-          s=s.replace(old,replacement);
+          const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
+          let s=fs.readFileSync(p,'utf8');
+          const lines=s.split('\\n');
+          const i=lines.findIndex(line=>line.includes('test(gameVersion)')&&line.includes('gameVersion.length > 40'));
+          if(i<0) throw new Error('Game-version validator line not found');
+          lines.splice(i,1,
+            '        // Accept all SGG edition families; keep version identifiers simple and bounded.',
+            '        if (!/^SGG[A-Z][A-Z0-9._-]{1,36}$/i.test(gameVersion) || gameVersion.length > 40)');
+          s=lines.join('\\n');
           fs.writeFileSync(p,s);
           fs.writeFileSync('deploy/SGGG1.4_GLOBAL_LOG_WORKER.js',s);
           NODE
@@ -337,17 +342,17 @@ jobs:
           The shared Global Usage Worker was deployed by Cozmo and new sessions are recording. Luma did not push GitHub main or deploy the static site.
           TXT
 
-          cp deploy/SGGK1.1/SGGK1.1_LUMA_LOG_Entry037.txt out/log/
+          cp deploy/SGGK1.1/SGGK1.1_LUMA_LOG_Entry037.txt ../out/log/
           # Keep the complete source tree; the new edition is in deploy/ only to avoid an unnecessary second copy.
-          cp -a . out/source/
-          cp -a deploy/. out/site/
-          test -s out/source/main.py
-          test -s out/source/validate_luma_assets.mjs
-          test -s out/site/SGGK1.1/sggk1_1.tar.gz
-          test -s out/site/SGGK1.1/sggk1_1.apk
-          test -s out/log/SGGK1.1_LUMA_LOG_Entry037.txt
+          cp -a . ../out/source/
+          cp -a deploy/. ../out/site/
+          test -s ../out/source/main.py
+          test -s ../out/source/validate_luma_assets.mjs
+          test -s ../out/site/SGGK1.1/sggk1_1.tar.gz
+          test -s ../out/site/SGGK1.1/sggk1_1.apk
+          test -s ../out/log/SGGK1.1_LUMA_LOG_Entry037.txt
           echo "Export staging done."
-          du -sh out/source out/site out/log
+          du -sh ../out/source ../out/site ../out/log
 
       - name: Upload complete source archive contents
         uses: actions/upload-artifact@v4
