@@ -1,0 +1,48 @@
+LUMA LOG — ENTRY 036
+Release: SGGK1.0
+Date: 2026-11-08
+Baseline: SGGJ1.0, exact source and complete-site archives verified against repository main commit 0c23d1a8ed1ea01029ec1da76f328166489f9f65.
+
+PURPOSE
+
+Create the first playable foundation for The Little Lantern orphanage: an entrance at the player-marked left-hand house doorway in Front Gate, a new interior, caretaker Grella, and three children. The work is deliberately limited to this foundation; later Grella quest events remain deferred.
+
+THE LITTLE LANTERN
+
+- Added a separate world area named little_lantern_interior, displayed as The Little Lantern.
+- Added a visible brass-plaque entrance on the existing left-hand Front Gate house doorway and a walk-through trigger matched to the approach from the paved frontage.
+- Added a reciprocal interior exit returning to Front Gate.
+- Added original Luma Draw Engine background art: warm plaster and timber, windows, hearth and fire, wall art, shelves, bunks, children's belongings, toy corner, rug, shared table, and a central clear path.
+- Added custom entrance and exit door art.
+
+RESIDENTS
+
+Grella the Hearthkeeper is a genuinely kind, practical caretaker. Her dialogue welcomes the player and describes the home. The three children each have distinctive art and dialogue:
+- Miri: bookish, curious, and interested in stories and maps.
+- Tuck: exuberant, imaginative, and practicing to become a knight.
+- Wren: shy and observant, with a plush rabbit named Button.
+
+IMPLEMENTATION
+
+- Added four NPC definitions and four separate asset recipes to the JSON world.
+- Added the K1.0 dialogue/state layer and interface rendering layer while retaining the full J1.0 parent chain.
+- The new area and NPCs use the existing world-default merge on save load. Existing saved state is not reset or replaced; the save schema is unchanged.
+- Updated the front-gate special door renderer so the wide city gate retains its double-leaf art while a smaller house entrance can draw its own door.
+- Kept all previous release directories, historic versions, quest mechanics, difficulty behavior, save schema, Giant Camp logic, and Global Usage Worker source.
+- Updated fast-travel cell placement to keep all 23 areas within the existing two-column selector.
+- Updated the runtime's global session identity to SGGK1.0.
+
+EXPLICITLY NOT IMPLEMENTED
+
+Grella's later follower/escort sequence, area stops, Giant Camp flight, Mudcrab River retreat/death, Tea award, and Grella MK2 remain future work. The cookpot Hole-in-One award and giant-flight text/reward changes also remain future work.
+
+VALIDATION STATUS
+
+- Static source, world-reference, version-catalog, save-merge, and archive checks completed successfully.
+- The K1.0 Python source compiles. The world data parses with 23 areas, 44 connections, 68 objects, 12 NPCs, and 119 art assets; all referenced areas, backgrounds, object kinds, and NPC assets resolve.
+- The two door connections resolve in both directions. The fast-travel selector keeps all areas inside its panel.
+- The K1.0 TAR and APK-compatible ZIP contain the expected runtime files and pass their archive checks.
+- The complete source/deploy mirror matches the finished deployment. The prior J1.0 release and eight legacy deployment folders compare byte-for-byte unchanged with the verified J1.0 baseline. The prior J1.0 source directory is also unchanged.
+- The complete source and deployment archives, plus the delivery bundle, pass final ZIP integrity checks.
+
+No live browser/Pygbag field test, Cloudflare static deployment, Global Usage Worker deployment, or GitHub main push was performed by Luma. Field verification of the entrance alignment, artwork, and actual movement/interaction remains outstanding.
