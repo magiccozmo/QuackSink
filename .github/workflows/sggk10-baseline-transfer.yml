@@ -1,0 +1,40 @@
+name: SGGJ1.0 Baseline Binary Transfer
+
+on:
+  push:
+    branches:
+      - tmp/sggk10-baseline-transfer-20261108
+
+permissions:
+  contents: read
+
+jobs:
+  package-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact main-derived branch
+        uses: actions/checkout@v4
+
+      - name: Stage and verify the original J1.0 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGJ1.0_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGJ1.0_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGJ1.0_SOURCE.zip
+          test -s transfer/SGGJ1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGJ1.0_SOURCE.zip
+          unzip -t transfer/SGGJ1.0_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt)
+          (cd transfer && wc -c *.zip > FILE_SIZES.txt)
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+
+      - name: Upload verified baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGJ1.0-baseline-transfer
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
