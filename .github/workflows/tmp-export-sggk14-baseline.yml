@@ -1,0 +1,36 @@
+name: Temporary SGG K1.4 Baseline Export
+on:
+  push:
+    branches:
+      - tmp-luma-k15-grella-baseline-export-20261108
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline branch
+        uses: actions/checkout@v4
+      - name: Stage and verify K1.4 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sgg-k14-baseline
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.4_SOURCE.zip" /tmp/sgg-k14-baseline/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.4_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sgg-k14-baseline/
+          cd /tmp/sgg-k14-baseline
+          test -s SGGK1.4_SOURCE.zip
+          test -s SGGK1.4_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -tq SGGK1.4_SOURCE.zip
+          unzip -tq SGGK1.4_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum *.zip > SHA256SUMS.txt
+          stat -c '%n %s bytes' *.zip > FILE_SIZES.txt
+          cat SHA256SUMS.txt
+          cat FILE_SIZES.txt
+      - name: Upload baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.4-baseline-transfer
+          path: /tmp/sgg-k14-baseline/*
+          retention-days: 1
