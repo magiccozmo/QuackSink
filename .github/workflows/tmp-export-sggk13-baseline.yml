@@ -1,0 +1,40 @@
+name: Temporary SGG K1.3 Baseline Export
+
+on:
+  push:
+    branches:
+      - tmp-luma-k14-river-baseline-export-20261108
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact temporary branch
+        uses: actions/checkout@v4
+        with:
+          ref: tmp-luma-k14-river-baseline-export-20261108
+      - name: Stage and verify original archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.3_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.3_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGK1.3_SOURCE.zip
+          test -s transfer/SGGK1.3_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGK1.3_SOURCE.zip
+          unzip -t transfer/SGGK1.3_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+      - name: Upload original archives as temporary transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.3-baseline-transfer-20261108
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
