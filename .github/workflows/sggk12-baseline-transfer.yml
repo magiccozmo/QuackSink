@@ -1,0 +1,41 @@
+name: SGG K1.2 Baseline Transfer
+on:
+  push:
+    branches:
+      - tmp/sggk13-baseline-transfer-20261108
+permissions:
+  contents: read
+  actions: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact transfer branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Stage and verify original K1.2 release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.2_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.2_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          for f in transfer/*.zip; do
+            test -s "$f"
+            file "$f"
+            unzip -t "$f"
+          done
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt)
+          (cd transfer && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          (cd transfer && unzip -Z1 SGGK1.2_SOURCE.zip > SOURCE_CONTENTS.txt)
+          (cd transfer && unzip -Z1 SGGK1.2_COMPLETE_CLOUDFLARE_SITE.zip > SITE_CONTENTS.txt)
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+      - name: Upload verified baseline
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.2-baseline-20261108
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
