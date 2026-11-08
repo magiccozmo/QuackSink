@@ -13,10 +13,14 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact temporary branch
+      - name: Sparse checkout of exact baseline archives only
         uses: actions/checkout@v4
         with:
           ref: tmp-luma-k14-river-baseline-export-20261108
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.3_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.3_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Stage and verify original archives
         shell: bash
         run: |
