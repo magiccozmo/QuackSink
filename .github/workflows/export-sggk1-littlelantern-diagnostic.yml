@@ -89,8 +89,8 @@ jobs:
           cp SGGG1.4_GLOBAL_LOG_WORKER.js /tmp/SGGG1.4_GLOBAL_LOG_WORKER.original.js
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
-          const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
-          let s=fs.readFileSync(p,'utf8');
+          const workerPath='SGGG1.4_GLOBAL_LOG_WORKER.js';
+          let s=fs.readFileSync(workerPath,'utf8');
           const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
           let s=fs.readFileSync(p,'utf8');
           const lines=s.split('\\n');
@@ -100,7 +100,7 @@ jobs:
             '        // Accept all SGG edition families; keep version identifiers simple and bounded.',
             '        if (!/^SGG[A-Z][A-Z0-9._-]{1,36}$/i.test(gameVersion) || gameVersion.length > 40)');
           s=lines.join('\\n');
-          fs.writeFileSync(p,s);
+          fs.writeFileSync(workerPath,s);
           fs.writeFileSync('deploy/SGGG1.4_GLOBAL_LOG_WORKER.js',s);
           NODE
 
