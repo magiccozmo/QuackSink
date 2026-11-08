@@ -1,0 +1,47 @@
+LUMA LOG — ENTRY 037
+Release: SGGK1.1
+Date: 2026-11-07 (America/New_York)
+Baseline: SGGK1.0, exact source archive retrieved from repository main commit 4a55fbf2e75a0fcb074e555903ead3f5f9a41b3f.
+
+PURPOSE
+
+Correct the Little Lantern runtime failure reported during Cozmo's K1.0 field test. Both entering through the Front Gate door and fast-travelling to The Little Lantern produced a blank browser game window.
+
+ROOT CAUSE
+
+The two routes were not independently broken. Both routes correctly reached the same Little Lantern area renderer. Three line-drawing commands in the little_lantern_interior Luma Draw Engine recipe had malformed nested RGB values:
+
+- Command 276: [[222, 186, 123]]
+- Command 277: [[211, 155, 97]]
+- Command 278: [[204, 131, 87]]
+
+The renderer expects a flat RGB/RGBA sequence and converts each component to an integer. It instead received a list as a colour component, raising a TypeError while rendering the area. This explains why both the door and fast-travel entry paths failed at the same point.
+
+IMPLEMENTATION
+
+- Changed only those three colour values to [222, 186, 123], [211, 155, 97], and [204, 131, 87].
+- Updated the game version and global-session identity from SGGK1.0 to SGGK1.1.
+- Added validate_luma_assets.mjs to check each Luma Draw Engine recipe, supported drawing operation, and flat integer RGB/RGBA colour array before release.
+- Retrieved and included the corrected shared Global Usage Worker source. Its version validator accepts the SGG[A-Z] edition family rather than only SGGG. Cozmo had already deployed this Worker and confirmed that new sessions now record.
+- Updated the current-edition catalog and the visible Browser Edition Archive version marker to SGGK1.1.
+
+PRESERVATION
+
+The Little Lantern area geometry, background recipe apart from the three corrected colour fields, door objects, reciprocal door connections, fast-travel destination, all 23 areas, 44 connections, 68 world objects, 12 NPCs, dialogue, collision, navigation, and save schema remain unchanged. No later Grella quest content was added. K1.0 remains preserved as the previous selectable edition; all earlier release directories are retained.
+
+VALIDATION
+
+- The new validator was run against the untouched K1.0 asset JSON and failed with exactly the three expected colour-shape errors. This confirms it would have caught the original defect before release.
+- The validator passed K1.1: 119 asset recipes and 21,905 drawing commands, with supported operations and flat RGB/RGBA colour arrays.
+- The world data was compared against K1.0 and retained unchanged.
+- Python source syntax compilation passed.
+- The corrected Global Usage Worker JavaScript syntax check passed.
+- The K1.1 TAR and APK-compatible ZIP were rebuilt from the same current main.py and asset JSON; their contents and hashes were checked.
+- The catalog contains 11 selectable editions, with SGGK1.1 current and SGGK1.0 previous.
+- Source and complete deployment ZIP integrity checks passed.
+
+NOT LIVE TESTED / PUBLICATION
+
+Luma did not run a live browser/Pygbag session or deploy the static Cloudflare site. Cozmo's K1.0 field report established the failure and the source-level exception is corrected here, but the two Little Lantern entry routes still need Cozmo's field confirmation on K1.1.
+
+The shared Global Usage Worker was deployed by Cozmo and new sessions are recording. Luma did not push GitHub main or deploy the static site.
