@@ -12,8 +12,14 @@ jobs:
   package-baseline:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact main-derived branch
+      - name: Sparse-checkout the two J1.0 archives
         uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGJ1.0_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGJ1.0_COMPLETE_CLOUDFLARE_SITE.zip
 
       - name: Stage and verify the original J1.0 archives
         shell: bash
