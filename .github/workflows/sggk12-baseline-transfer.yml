@@ -1,0 +1,36 @@
+name: SGGK1.1 exact baseline transfer
+on:
+  push:
+    branches:
+      - tmp/sggk12-baseline-20261108
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage and verify exact K1.1 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.1_SOURCE.zip"
+          DEPLOY="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.1_COMPLETE_CLOUDFLARE_SITE.zip"
+          mkdir -p transfer
+          cp "$SRC" transfer/
+          cp "$DEPLOY" transfer/
+          test -s "transfer/$(basename "$SRC")"
+          test -s "transfer/$(basename "$DEPLOY")"
+          unzip -t "transfer/$(basename "$SRC")"
+          unzip -t "transfer/$(basename "$DEPLOY")"
+          (
+            cd transfer
+            sha256sum *.zip > SHA256SUMS.txt
+            stat -c '%n %s bytes' *.zip > FILE_SIZES.txt
+            cat SHA256SUMS.txt
+            cat FILE_SIZES.txt
+          )
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.1-exact-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
