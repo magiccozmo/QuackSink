@@ -14,10 +14,14 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the diagnostic branch
+      - name: Check out only the exact K1.0 source archive
         uses: actions/checkout@v4
         with:
           ref: tmp/diag-sggk1-littlelantern-20261107
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.0_SOURCE.zip
 
       - name: Verify and stage the exact K1.0 source archive
         shell: bash
