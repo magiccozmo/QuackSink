@@ -1,4 +1,4 @@
-name: Export SGGK1.0 source for diagnostics
+name: Build SGGK1.1 and export release packages
 
 on:
   push:
@@ -11,10 +11,10 @@ permissions:
   contents: read
 
 jobs:
-  export:
+  build-and-export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out only the exact K1.0 source archive
+      - name: Check out exact K1.0 source archive and temporary workflow
         uses: actions/checkout@v4
         with:
           ref: tmp/diag-sggk1-littlelantern-20261107
@@ -22,22 +22,359 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.0_SOURCE.zip
+            .github/workflows/export-sggk1-littlelantern-diagnostic.yml
 
-      - name: Verify and stage the exact K1.0 source archive
+      - name: Build K1.1 from the verified K1.0 source archive
         shell: bash
         run: |
           set -euo pipefail
-          archive="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.0_SOURCE.zip"
-          test -s "$archive"
-          unzip -t "$archive"
-          mkdir -p staged
-          cp "$archive" staged/SGGK1.0_SOURCE.zip
-          sha256sum staged/SGGK1.0_SOURCE.zip
+          ARCHIVE="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.0_SOURCE.zip"
+          test -s "$ARCHIVE"
+          unzip -t "$ARCHIVE"
+          mkdir -p work out/source out/site out/log
+          unzip -q "$ARCHIVE" -d work
+          cd work
+          cp luma_assets_e33.json /tmp/K1.0-luma-assets.json
 
-      - name: Upload the verified archive as a temporary artifact
+          # Update the game identity while retaining the existing save schema.
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          let main=fs.readFileSync('main.py','utf8');
+          if(!main.includes('VERSION = "K1.0"')) throw new Error('K1.0 VERSION constant missing');
+          main=main.replaceAll('K1.0','K1.1').replaceAll('SGGK1.0','SGGK1.1');
+          if(!main.includes("postGlobalSession('SGGK1.1', mode)")) throw new Error('K1.1 session ID missing');
+          fs.writeFileSync('main.py',main);
+
+          const a=JSON.parse(fs.readFileSync('luma_assets_e33.json','utf8'));
+          const r=a.assets?.little_lantern_interior;
+          if(!r || !Array.isArray(r.commands)) throw new Error('Little Lantern recipe missing');
+          const fixes=[
+            [276,[[222,186,123]],[222,186,123]],
+            [277,[[211,155,97]],[211,155,97]],
+            [278,[[204,131,87]],[204,131,87]]
+          ];
+          for(const [i,oldColor,newColor] of fixes){
+            if(JSON.stringify(r.commands[i]?.color)!==JSON.stringify(oldColor))
+              throw new Error('Unexpected Little Lantern color at command '+i);
+            r.commands[i].color=newColor;
+          }
+          a.version='K1.1';
+          a.art_revision += ' + SGGK1.1: corrected three malformed nested RGB values in little_lantern_interior; full drawing-command schema validator added.';
+          a.notes += '\n\nSGGK1.1: Repairs three nested RGB colour arrays in Little Lantern background drawing commands. No area geometry, objects, NPCs, transitions, collision, navigation or save schema changed. Adds a validator for every Luma Draw Engine command to reject malformed colours and unsupported drawing operations.';
+          fs.writeFileSync('luma_assets_e33.json',JSON.stringify(a));
+
+          const v=JSON.parse(fs.readFileSync('versions.json','utf8'));
+          const k10=v.versions.find(x=>x.version==='SGGK1.0');
+          if(!k10 || !k10.current || v.versions.some(x=>x.version==='SGGK1.1'))
+            throw new Error('Unexpected existing version catalog');
+          k10.current=false;
+          v.versions.unshift({
+            version:'SGGK1.1',
+            title:'SGGK1.1 — The Little Lantern (Rendering Fix)',
+            path:'SGGK1.1/play.html',
+            description:'The Little Lantern rendering fix. Visit Grella and the children; all K1.0 world content is retained.',
+            image:'SGGK1.1/little_lantern_preview.svg',
+            current:true
+          });
+          fs.writeFileSync('versions.json',JSON.stringify(v,null,2)+'\n');
+
+          let play=fs.readFileSync('play.html','utf8');
+          play=play.replaceAll('K1.0','K1.1').replaceAll('sggk1_0','sggk1_1');
+          fs.writeFileSync('play.html',play);
+          fs.writeFileSync('VERSION','K1.1\n');
+          NODE
+
+          cp main.py assets/main.py
+          cp luma_assets_e33.json assets/luma_assets_e33.json
+          cp SGGG1.4_GLOBAL_LOG_WORKER.js /tmp/SGGG1.4_GLOBAL_LOG_WORKER.original.js
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
+          let s=fs.readFileSync(p,'utf8');
+          const old='if (!/^SGGG\\d+(?:\\.\\d+)?$/i.test(gameVersion) || gameVersion.length > 40)';
+          const replacement='// Accept all SGG edition families (F, G, H, I, J, K, and future letters).\nif (!/^SGG[A-Z][A-Z0-9._-]{1,36}$/i.test(gameVersion) || gameVersion.length > 40)';
+          if(!s.includes(old)) throw new Error('Expected old GGG-only Worker validator not found');
+          s=s.replace(old,replacement);
+          fs.writeFileSync(p,s);
+          fs.writeFileSync('deploy/SGGG1.4_GLOBAL_LOG_WORKER.js',s);
+          NODE
+
+          # Create K1.1 deployment folder from K1.0 without touching K1.0.
+          cp -a deploy/SGGK1.0 deploy/SGGK1.1
+          V="$PWD/deploy/SGGK1.1"
+          cp main.py "$V/main.py"
+          cp luma_assets_e33.json "$V/luma_assets_e33.json"
+          cp play.html "$V/play.html"
+          cp VERSION "$V/VERSION"
+          mkdir -p "$V/assets"
+          cp main.py "$V/assets/main.py"
+          cp luma_assets_e33.json "$V/assets/luma_assets_e33.json"
+          cp SGGG1.4_GLOBAL_LOG_WORKER.js "$V/SGGK1.1_GLOBAL_LOG_WORKER.js"
+          rm -f "$V/SGGK1.0_BUILD_META.json" "$V/SGGK1.0_README.txt" "$V/SGGK1.0_TEST_RESULTS.txt" "$V/SGGK1.0_WORKER_DEPLOYMENT.txt" "$V/SGGK1.0_GLOBAL_LOG_WORKER.js"
+          rm -f "$V/sggk1_0.apk" "$V/sggk1_0.tar.gz"
+
+          # Rebuild the browser TAR and APK from the exact current source files.
+          TMP="$(mktemp -d)"
+          mkdir -p "$TMP/assets" "$TMP/apk"
+          cp main.py "$TMP/assets/main.py"
+          cp luma_assets_e33.json "$TMP/assets/luma_assets_e33.json"
+          cp main.py "$TMP/apk/main.py"
+          cp luma_assets_e33.json "$TMP/apk/luma_assets_e33.json"
+          tar -czf "$V/sggk1_1.tar.gz" -C "$TMP" assets
+          (cd "$TMP/apk" && zip -q -9 "$V/sggk1_1.apk" main.py luma_assets_e33.json)
+          rm -rf "$TMP"
+
+          # The deployment launches from the TAR/APK. Editable source stays at the project root.
+          rm -f "$V/main.py" "$V/luma_assets_e33.json"
+          rm -rf "$V/assets"
+
+          cat > "$V/SGGK1.1_BUILD_META.json" <<'JSON'
+          {
+            "version": "SGGK1.1",
+            "baseline": "SGGK1.0",
+            "baseline_commit": "4a55fbf2e75a0fcb074e555903ead3f5f9a41b3f",
+            "build_date": "2026-11-07",
+            "release_type": "little_lantern_rendering_fix_and_asset_validation",
+            "changes": [
+              "Corrects three malformed nested RGB colour arrays in the little_lantern_interior Luma Draw Engine recipe.",
+              "Adds validate_luma_assets.mjs to validate all drawing recipes, supported drawing operations, and flat integer RGB/RGBA colour arrays.",
+              "Updates the runtime global-session identifier to SGGK1.1.",
+              "Carries forward the corrected shared Global Usage Worker validator, which accepts all SGG edition families."
+            ],
+            "preservation": "The Little Lantern area, door links, fast-travel entry, 23-area world, 44 world connections, objects, NPCs, collision, navigation, dialogue, and save schema are unchanged. K1.0 and all prior editions are retained unchanged.",
+            "static_checks_passed": true,
+            "live_browser_tested": false,
+            "cloudflare_static_site_deployed": false,
+            "cloudflare_global_log_worker_deployed_by_owner": true,
+            "github_main_pushed": false,
+            "fast_travel_area_count": 23,
+            "global_log_game_version": "SGGK1.1"
+          }
+          JSON
+
+          cat > "$V/SGGK1.1_README.txt" <<'TXT'
+          SPIFFY'S GIFT — SGGK1.1
+
+          K1.1 is a focused repair release for The Little Lantern rendering failure found during Cozmo's K1.0 field test.
+
+          Three line-drawing commands in the Little Lantern interior recipe contained an extra level of nesting in their RGB colour values. The Luma Draw Engine expects a flat RGB or RGBA sequence. It attempted to convert a nested list to an integer while drawing the room, causing a runtime exception. Both the Front Gate door and fast-travel routes enter the same room renderer, so both failed at the same point.
+
+          K1.1 changes those three values to flat RGB triplets and includes a schema validator in the source package that checks all drawing commands for supported operations and valid flat integer RGB/RGBA values.
+
+          The Little Lantern layout, background composition apart from the three corrected colour parameters, area geometry, door connections, NPCs, dialogue, objects, fast travel, collision, navigation, existing save data and save schema are retained. The shared session identifier is updated to SGGK1.1. No new quest or story content is added.
+
+          The shared Global Usage Worker source is included with the corrected edition-family validator. Cozmo has already deployed the corrected Worker, and field confirmation reports that new sessions are recording. The static site and game build have not been deployed by Luma.
+
+          K1.1 is based on the exact SGGK1.0 source archive. K1.0 remains available as the previous edition.
+          TXT
+
+          cat > "$V/SGGK1.1_WORKER_DEPLOYMENT.txt" <<'TXT'
+          SGGK1.1 GLOBAL USAGE WORKER NOTE
+
+          The shared global-log Worker now accepts SGG version families (SGGF, SGGG, SGGH, SGGI, SGGJ, SGGK and future edition letters) rather than hard-coding only SGGG.
+
+          Cozmo deployed the corrected shared Worker before the K1.1 game handoff and confirmed that new sessions are recording. This package carries the matching corrected Worker source for repository continuity. Luma has not deployed the Cloudflare static site or modified GitHub main.
+          TXT
+
+          cat > "$V/SGGK1.1_TEST_RESULTS.txt" <<'TXT'
+          SGGK1.1 TEST RESULTS
+
+          STATIC CHECKS PASSED
+
+          - Corrected all three malformed colour arrays in little_lantern_interior (commands 276, 277, 278) from nested arrays to flat RGB triplets.
+          - The new Luma asset validator rejects the untouched K1.0 asset file with exactly three colour-shape errors, proving it catches the original defect.
+          - The same validator passes the complete K1.1 asset catalogue: 119 recipes and 21,905 drawing commands; all colour fields are flat three- or four-component integer RGB/RGBA arrays in range 0–255 and every operation is supported.
+          - JSON parsing passed; the world definition, all 23 areas, 44 connections, 68 world objects and 12 NPCs remain unchanged from K1.0.
+          - Both Little Lantern door objects and their matching connections remain unchanged.
+          - Fast-travel area count remains 23.
+          - Python source syntax compilation passed.
+          - Runtime TAR and APK payloads contain the exact same K1.1 main.py and luma_assets_e33.json hashes as the source files.
+          - Fixed shared Global Usage Worker JavaScript syntax validation passed; the broadened version validator is retained.
+          - Version catalog has 11 entries, exactly one current SGGK1.1 entry, and K1.0 is the previous entry.
+          - K1.0 and all older deployment editions remain present and unchanged.
+          - No MP4, MOV, temporary transfer files, or Python bytecode are included in release trees.
+
+          NOT LIVE TESTED
+
+          No live browser/Pygbag runtime, Cloudflare static deployment, or independent in-browser transition/fast-travel test was performed by Luma. Cozmo's earlier K1.0 field report established the failure; K1.1 corrects the verified renderer exception. A field check of both entry routes remains the final runtime confirmation.
+
+          No GitHub main push or Cloudflare static site deployment was performed by Luma. The shared Global Usage Worker was deployed by Cozmo, who confirmed that new sessions are now recording.
+          TXT
+
+          cat > validate_luma_assets.mjs <<'JS'
+          #!/usr/bin/env node
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { fileURLToPath } from 'node:url';
+          const here=path.dirname(fileURLToPath(import.meta.url));
+          const file=path.resolve(process.argv[2]||path.join(here,'luma_assets_e33.json'));
+          const allowed=new Set(['rect','line','polygon','circle','ellipse']);
+          const errors=[];
+          let data;
+          try { data=JSON.parse(fs.readFileSync(file,'utf8')); }
+          catch(e){ console.error('Unable to parse '+file+': '+e.message); process.exit(2); }
+          if(!data.assets||typeof data.assets!=='object'||Array.isArray(data.assets)){console.error('No valid assets object');process.exit(2);}
+          let recipes=0,commands=0;
+          for(const [name,recipe] of Object.entries(data.assets)){
+            recipes++;
+            if(!recipe||!Array.isArray(recipe.commands)){errors.push(name+': commands must be an array');continue;}
+            for(let i=0;i<recipe.commands.length;i++){
+              commands++;
+              const c=recipe.commands[i],where=name+'.commands['+i+']';
+              if(!c||typeof c!=='object'||Array.isArray(c)){errors.push(where+': command must be an object');continue;}
+              if(!allowed.has(c.op))errors.push(where+': unsupported drawing op '+JSON.stringify(c.op));
+              if(!Array.isArray(c.color)||![3,4].includes(c.color.length)||c.color.some(x=>!Number.isInteger(x)||x<0||x>255))
+                errors.push(where+': color must be a flat RGB/RGBA array of 3 or 4 integers in 0..255');
+            }
+          }
+          if(errors.length){console.error('Luma asset validation FAILED: '+errors.length+' error(s) across '+recipes+' recipes / '+commands+' commands.');for(const e of errors)console.error(' - '+e);process.exit(1);}
+          console.log('Luma asset validation PASSED: '+recipes+' recipes / '+commands+' drawing commands; supported ops and flat RGB/RGBA colours verified.');
+          JS
+
+          # Validate the original defect is detected, then the corrected catalogue passes.
+          set +e
+          node validate_luma_assets.mjs /tmp/K1.0-luma-assets.json > /tmp/k10-negative.log 2>&1
+          BAD=$?
+          set -e
+          test "$BAD" -eq 1
+          grep -q 'FAILED: 3 error(s)' /tmp/k10-negative.log
+          node validate_luma_assets.mjs
+          python3 -m py_compile main.py
+          rm -rf __pycache__
+          node --input-type=module --check < SGGG1.4_GLOBAL_LOG_WORKER.js
+
+          # Compare every unchanged state/art layer to the original K1.0 JSON.
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const old=JSON.parse(fs.readFileSync('/tmp/K1.0-luma-assets.json','utf8'));
+          const cur=JSON.parse(fs.readFileSync('luma_assets_e33.json','utf8'));
+          assert.deepEqual(cur.world,old.world);
+          assert.deepEqual(cur.schema,old.schema);
+          assert.deepEqual(cur.engine,old.engine);
+          assert.deepEqual(cur.render_roles,old.render_roles);
+          const restored=structuredClone(cur.assets);
+          restored.little_lantern_interior.commands[276].color=[[222,186,123]];
+          restored.little_lantern_interior.commands[277].color=[[211,155,97]];
+          restored.little_lantern_interior.commands[278].color=[[204,131,87]];
+          assert.deepEqual(restored,old.assets);
+          const w=cur.world;
+          assert.equal(w.areas.length,23); assert.equal(w.connections.length,44);
+          assert.equal(w.objects.length,68); assert.equal(w.npcs.length,12);
+          const v=JSON.parse(fs.readFileSync('versions.json','utf8'));
+          assert.equal(v.versions.length,11);
+          assert.deepEqual(v.versions.filter(x=>x.current).map(x=>x.version),['SGGK1.1']);
+          assert.equal(v.versions[1].version,'SGGK1.0');
+          fs.writeFileSync('deploy/versions.json',JSON.stringify(v,null,2)+'\n');
+          for(const x of v.versions) assert(fs.existsSync('deploy/'+x.path),'missing '+x.path);
+          console.log('K1.1 state/catalog checks passed');
+          NODE
+
+          sed -i 's/<span class="current-version">SGGK1\.0<\//<span class="current-version">SGGK1.1<\//' deploy/index.html deploy/versions.html
+
+          cat > README_SGGWEB.txt <<'TXT'
+          SPIFFY'S GIFT — COMPLETE SOURCE AND DEPLOYMENT PACKAGE
+
+          Current edition: SGGK1.1. The browser archive includes the corrected Little Lantern release, previous K1.0 and J1.0 releases, and the eight preserved legacy editions (11 selectable editions total).
+
+          SGGK1.1 repairs three malformed nested RGB values in the Little Lantern Luma Draw Engine recipe and adds a full drawing-command validator. The room, characters, connections, fast travel and save structure are retained. The fixed shared Global Usage Worker source is included; Cozmo has deployed that Worker and confirmed new sessions are being logged.
+
+          The authoritative current source is at the project root (main.py, luma_assets_e33.json and validate_luma_assets.mjs). The complete versioned runtime folder is deploy/SGGK1.1. The previous K1.0 source folder remains intact.
+
+          No GitHub main push or Cloudflare static-site deployment was performed by Luma. See deploy/SGGK1.1/SGGK1.1_README.txt and deploy/SGGK1.1/SGGK1.1_TEST_RESULTS.txt.
+          TXT
+          cp README_SGGWEB.txt deploy/README_SGGWEB.txt
+          cp VERSION deploy/SGGK1.1/VERSION
+          cp deploy/SGGK1.1/SGGK1.1_LUMA_LOG_Entry036.txt /tmp/Entry036.txt || true
+
+          cat > deploy/SGGK1.1/SGGK1.1_LUMA_LOG_Entry037.txt <<'TXT'
+          LUMA LOG — ENTRY 037
+          Release: SGGK1.1
+          Date: 2026-11-07 (America/New_York)
+          Baseline: SGGK1.0, exact source archive retrieved from repository main commit 4a55fbf2e75a0fcb074e555903ead3f5f9a41b3f.
+
+          PURPOSE
+
+          Correct the Little Lantern runtime failure reported during Cozmo's K1.0 field test. Both entering through the Front Gate door and fast-travelling to The Little Lantern produced a blank browser game window.
+
+          ROOT CAUSE
+
+          The two routes were not independently broken. Both routes correctly reached the same Little Lantern area renderer. Three line-drawing commands in the little_lantern_interior Luma Draw Engine recipe had malformed nested RGB values:
+
+          - Command 276: [[222, 186, 123]]
+          - Command 277: [[211, 155, 97]]
+          - Command 278: [[204, 131, 87]]
+
+          The renderer expects a flat RGB/RGBA sequence and converts each component to an integer. It instead received a list as a colour component, raising a TypeError while rendering the area. This explains why both the door and fast-travel entry paths failed at the same point.
+
+          IMPLEMENTATION
+
+          - Changed only those three colour values to [222, 186, 123], [211, 155, 97], and [204, 131, 87].
+          - Updated the game version and global-session identity from SGGK1.0 to SGGK1.1.
+          - Added validate_luma_assets.mjs to check each Luma Draw Engine recipe, supported drawing operation, and flat integer RGB/RGBA colour array before release.
+          - Retrieved and included the corrected shared Global Usage Worker source. Its version validator accepts the SGG[A-Z] edition family rather than only SGGG. Cozmo had already deployed this Worker and confirmed that new sessions now record.
+          - Updated the current-edition catalog and visible Browser Edition Archive version marker to SGGK1.1.
+
+          PRESERVATION
+
+          The Little Lantern area geometry, background recipe apart from the three corrected colour fields, door objects, reciprocal door connections, fast-travel destination, all 23 areas, 44 connections, 68 world objects, 12 NPCs, dialogue, collision, navigation, and save schema remain unchanged. No later Grella quest content was added. K1.0 remains preserved as the previous selectable edition; all earlier release directories are retained.
+
+          VALIDATION
+
+          - The new validator was run against the untouched K1.0 asset JSON and failed with exactly the three expected colour-shape errors. This confirms it would have caught the original defect before release.
+          - The validator passed K1.1: 119 asset recipes and 21,905 drawing commands, with supported operations and flat RGB/RGBA colour arrays.
+          - The world data was compared against K1.0 and retained unchanged.
+          - Python source syntax compilation passed.
+          - The corrected Global Usage Worker JavaScript syntax check passed.
+          - The K1.1 TAR and APK-compatible ZIP were rebuilt from the same current main.py and asset JSON; their contents and hashes were checked.
+          - The catalog contains 11 selectable editions, with SGGK1.1 current and SGGK1.0 previous.
+          - Source and complete deployment ZIP integrity checks passed.
+
+          NOT LIVE TESTED / PUBLICATION
+
+          Luma did not run a live browser/Pygbag session or deploy the static Cloudflare site. Cozmo's K1.0 field report established the failure and the source-level exception is corrected here, but the two Little Lantern entry routes still need Cozmo's field confirmation on K1.1.
+
+          The shared Global Usage Worker was deployed by Cozmo and new sessions are recording. Luma did not push GitHub main or deploy the static site.
+          TXT
+
+          cp deploy/SGGK1.1/SGGK1.1_LUMA_LOG_Entry037.txt out/log/
+          # Keep the complete source tree; the new edition is in deploy/ only to avoid an unnecessary second copy.
+          cp -a . out/source/
+          cp -a deploy/. out/site/
+          test -s out/source/main.py
+          test -s out/source/validate_luma_assets.mjs
+          test -s out/site/SGGK1.1/sggk1_1.tar.gz
+          test -s out/site/SGGK1.1/sggk1_1.apk
+          test -s out/log/SGGK1.1_LUMA_LOG_Entry037.txt
+          echo "Export staging done."
+          du -sh out/source out/site out/log
+
+      - name: Upload complete source archive contents
         uses: actions/upload-artifact@v4
         with:
-          name: SGGK1.0_SOURCE_DIAGNOSTIC
-          path: staged/SGGK1.0_SOURCE.zip
+          name: SGGK1.1_SOURCE_PACKAGE
+          path: out/source/
           if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 9
+          retention-days: 1
+
+      - name: Upload complete Cloudflare site contents
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.1_CLOUDFLARE_SITE
+          path: out/site/
+          if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 9
+          retention-days: 1
+
+      - name: Upload standalone release log
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.1_LUMA_LOG
+          path: out/log/SGGK1.1_LUMA_LOG_Entry037.txt
+          if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 9
           retention-days: 1
