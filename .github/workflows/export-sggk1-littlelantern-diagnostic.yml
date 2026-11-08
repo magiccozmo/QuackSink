@@ -1,0 +1,39 @@
+name: Export SGGK1.0 source for diagnostics
+
+on:
+  push:
+    branches:
+      - tmp/diag-sggk1-littlelantern-20261107
+    paths:
+      - .github/workflows/export-sggk1-littlelantern-diagnostic.yml
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the diagnostic branch
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/diag-sggk1-littlelantern-20261107
+
+      - name: Verify and stage the exact K1.0 source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.0_SOURCE.zip"
+          test -s "$archive"
+          unzip -t "$archive"
+          mkdir -p staged
+          cp "$archive" staged/SGGK1.0_SOURCE.zip
+          sha256sum staged/SGGK1.0_SOURCE.zip
+
+      - name: Upload the verified archive as a temporary artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.0_SOURCE_DIAGNOSTIC
+          path: staged/SGGK1.0_SOURCE.zip
+          if-no-files-found: error
+          retention-days: 1
