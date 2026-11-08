@@ -1,0 +1,61 @@
+LUMA LOG — ENTRY 038
+Release: SGGK1.2
+Date: 2026-11-08 (America/New_York)
+Baseline: SGGK1.1 exact source and complete Cloudflare site archives from repository main commit 0257a0dd207ab9156b07f1087c49c77a04066ed6.
+Baseline archive SHA-256:
+- SGGK1.1_SOURCE.zip: 7d0c50f79b724fe444644defa9c53edb061758eb7049a076c93ff401097aaef4
+- SGGK1.1_COMPLETE_CLOUDFLARE_SITE.zip: 688ba4fcf1cb6fb7f52c2d74e4328127686333edea22985c6c000d8552cef7c7
+
+PURPOSE
+
+Add the planned Grella escort sequence and its Giant Camp/Mudcrab River consequence, alongside the previously documented Cookpot Hole-in-One stunt and the final Giant flight Game Over wording. This release was built from the exact K1.1 archives; the untouched baseline ZIPs were retained separately during development.
+
+GRELLA — RECRUITMENT AND FOLLOWING
+
+- Easy: speaking with Grella opens “Yah? What?” with “Follow me.” and “Never mind.” She follows continuously through the intervening areas without stopping for additional conversations.
+- Normal and Spiffy Challenge: the special invitation is available only after the saved-game area-discovery ledger records that the player has visited Giant Camp. Grella opens with “Yah? What?” and the player's invitation reads: “There is this big toddler alone in the wilderness, I think he needs you. Follow me!” The other option is “Never mind.”
+- On Normal and Challenge, Grella follows into each intermediate area and pauses for another conversation. The stop lines are contextual to the area; “Yes, let us keep going.” resumes her following. Easy bypasses these stops.
+- Grella's trust and kindness remain intact. She believes the player is trying to help a lonely child; she is not written as suspicious of the player's motive.
+- Recruitment, stop/resume state, flight stage, River first-entrant decision, and one-time rewards are saved in the existing c1_flags ledger. Old K1.1 saves acquire defaults in place; no save schema reset or version wipe is introduced.
+
+GIANT CAMP AND MUDCRAB RIVER
+
+- On entering Giant Camp while Grella is following, she recognises the giant as a “VERY BIG toddler”, panics, and flees.
+- She exits Giant Camp through its existing bottom route, crosses Plains, and continues toward Mudcrab River.
+- On Normal/Challenge she waits in Plains until Mudcrab River has been discovered/unlocked. Easy treats the River as available.
+- The first person to enter Mudcrab River during this escort encounter determines the result. If Grella arrives first, the mudcrabs get her, her NPC is retired from the world, and one Tea is awarded once. If the player enters first, the existing mudcrab death occurs for the player; Grella later escapes after the crabs have fed. River first-entrant state also covers fast-travel arrival, so the map cannot bypass the encounter rule.
+- Re-entering the River after that encounter does not repeatedly trigger the same mudcrab death.
+- A player launched by the giant and reaching Game Over sees the additional line: “A nice trajectory, but not forth any tea.” The spelling is preserved exactly as supplied.
+
+COOKPOT HOLE-IN-ONE
+
+- Touching the inn's Cookpot triggers a short non-lethal visual launch/rotation effect.
+- Cozmo appears away from the pot. After the effect, the player appears beside him.
+- Cozmo awards an actual inventory object using the new Luma Draw Engine recipe “cookpot_hole_in_one_award”, and one Tea is added to the saved Tea total.
+- The award and Tea are protected by save-bound one-time flags. This stunt does not cause Game Over.
+
+PRESERVATION
+
+- The 23 areas, 44 connections, existing world objects, NPC definitions, walkmeshes, collision geometry, artwork apart from one new award recipe, and established dialogue/mechanics are retained.
+- No new area or NPC was added. The Cookpot award is generated only as a player's inventory item.
+- The Little Lantern's K1.1 repaired RGB recipe remains untouched.
+- Previous deploy versions (including SGGK1.0 and SGGK1.1) remain in the package unchanged. K1.1 remains available as a historical edition.
+- Shared Global Usage Worker code is carried forward; it is not modified or redeployed by this release.
+
+VALIDATION AND TESTING
+
+- The full Luma Draw Engine validator passes all recipes and drawing commands, including the new inventory award recipe.
+- Python syntax compilation passes for the updated main.py.
+- Static structural tests verify the 23-area/44-connection world, Grella and Little Lantern definitions, both existing route connections, the new inventory recipe, version catalog current marker, and preserved earlier release directories.
+- Runtime TAR and APK payloads are built from the same main.py and luma_assets_e33.json source bytes.
+- Both complete release ZIPs are tested for CRC/integrity and inspected after extraction.
+- The exact K1.1 baseline source and deployment ZIPs passed integrity checks before extraction and were preserved untouched.
+
+NOT LIVE TESTED / PUBLICATION
+
+- No live browser/Pygbag field session was run by Luma in this build. The recruitment dialogue, following path, panic movement, mudcrab first-entrant event, animation timing, inventory award interaction and save/load behavior still require Cozmo's live field test.
+- No Cloudflare static site deployment was performed.
+- No GitHub main push was performed.
+- The corrected shared Global Usage Worker was already deployed by Cozmo during the prior K1.1 session; this release carries it forward unchanged.
+
+U B U — We Be We.
