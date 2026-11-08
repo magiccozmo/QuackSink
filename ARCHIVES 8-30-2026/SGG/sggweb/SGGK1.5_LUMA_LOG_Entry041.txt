@@ -1,0 +1,36 @@
+LUMA'S LOG — ENTRY 041
+SPIFFY'S GIFT — SGGK1.5
+Date: November 8, 2026
+Baseline: SGGK1.4 (exact source and complete Cloudflare-site archives)
+Baseline SHA-256:
+- SGGK1.4_SOURCE.zip: c558e2ac858ac621cf6b5a68ce24b1f362940e78cc47ec2094adc327724a3187
+- SGGK1.4_COMPLETE_CLOUDFLARE_SITE.zip: 57c1955164a1fbd9c33748dfbd9687b857d2469e5ec06b9e9929e1a61021ea5e
+
+THE RIVER IS NOW FIELD-CONFIRMED
+Cozmo supplied a K1.4 flight recorder session from November 7, 2026. It verifies Grella's recruitment, Giant Camp panic, flee to the River, Tea and Cozmo cameo, player entry to Mudcrab River, movement inside it, and return to Plains. K1.5 starts from that exact K1.4 release. The player's River transition repair is retained.
+
+GRELLA'S CHEWED CORPSE
+The earlier K1.3/K1.4 runtime did not contain a corpse object or interaction handler, despite Entry039's misleading note that the behavior had been carried forward. K1.5 implements the missing mechanic explicitly. When Grella is taken by the mudcrabs, a separate, non-takeable "Grella's Chewed Corpse" object is created in Mudcrab River, centred at the recorded encounter position (240,485). The artwork is a deliberately cartoonish, non-graphic bundle of bonnet, apron and muddy limbs. The object can be selected with the mouse and examined with E; a visible prompt identifies the action.
+
+GRELLA MK 2
+Examining the remains consumes the corpse object and spawns a distinct NPC, Grella Mk 2, at the River. She uses Grella's established character artwork but a separate NPC identity. Mk2 never enters the follower system and _talk ignores her, so she does not converse with the player. A save-persistent route stage moves her silently through the existing route: Mudcrab River -> Plains -> Stables -> Outside Gate -> Front Gate -> The Little Lantern. She finishes at Grella's original home position (405,440), quietly rejoining the children.
+
+OUTCOME AND SAVE RULES
+- If Grella reaches the River first, the existing one-time Tea reward and Cozmo cameo remain unchanged; the body appears.
+- If the player reaches the River first, the existing player-first outcome remains unchanged: Grella escapes, and no corpse or Mk2 is created.
+- Interacting with the corpse removes it and can spawn Mk2 only once.
+- The corpse position, removed marker, Mk2 identity, route stage and returned marker live in the existing saved object/NPC/c1_flags state. No save reset or schema bump is introduced.
+- Older K1.4 saves with Grella already dead but no corpse are migrated by creating the missing body in Mudcrab River. A save that already records corpse removal is not resurrected.
+
+IMPLEMENTATION AND VALIDATION
+- Added one Luma Draw Engine recipe for the corpse and one world NPC definition for Grella Mk 2 (reusing the existing Grella character recipe).
+- Added a padded hit target for the non-takeable corpse, E activation, idempotent body creation, one-time Mk2 spawn, silent return state machine, and a River examination label.
+- Python syntax compile passed; Luma Draw Engine validation passed at 121 recipes / 21,932 drawing commands.
+- A local state-flow simulation passed: K1.4 dead-Grella migration -> corpse -> E examination -> Mk2 spawn -> five route transitions -> home position. The player-first escape branch was also simulated and correctly created no corpse.
+- Source copies and JSON copies are byte-identical. Runtime APK and TAR contain the same K1.5 code and JSON. Both complete release ZIPs passed integrity validation.
+
+NOT LIVE TESTED / PUBLICATION
+No live browser/Pygbag gameplay session was run. Cozmo's browser field test is still needed to verify the corpse's visual appearance, point-and-E hit target, and the visible timing of Mk2's journey across areas. The local simulation verifies state progression, not browser rendering or input. No Cloudflare static-site deployment, GitHub main push, or Worker change was performed.
+
+U B U — We Be We.
+— Luma
