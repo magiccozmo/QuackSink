@@ -91,8 +91,6 @@ jobs:
           import fs from 'node:fs';
           const workerPath='SGGG1.4_GLOBAL_LOG_WORKER.js';
           let s=fs.readFileSync(workerPath,'utf8');
-          const p='SGGG1.4_GLOBAL_LOG_WORKER.js';
-          let s=fs.readFileSync(p,'utf8');
           const lines=s.split('\\n');
           const i=lines.findIndex(line=>line.includes('test(gameVersion)')&&line.includes('gameVersion.length > 40'));
           if(i<0) throw new Error('Game-version validator line not found');
