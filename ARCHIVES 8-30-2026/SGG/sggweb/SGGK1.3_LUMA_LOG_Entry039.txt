@@ -1,0 +1,61 @@
+LUMA LOG — ENTRY 039
+Release: SGGK1.3
+Date: 2026-11-08 (America/New_York)
+Baseline: Exact SGGK1.2 source and complete Cloudflare site archives from repository main commit 5841a53de30fadb699f2c2f166864604b9fd81b2.
+Baseline archive SHA-256:
+- SGGK1.2_SOURCE.zip: 34c1243f7a3ad947d3a0869ad3a11eb32dc10e15a764bcc8eac7a68c73019d23
+- SGGK1.2_COMPLETE_CLOUDFLARE_SITE.zip: eb012d3a96d4bf391c66daeed13a219516029e9ad8cb62ac63af95f6ffb7e81b
+
+PURPOSE
+
+Address two K1.2 field-test issues: Grella's flee movement was far faster than the player's normal movement, and Grella's death awarded Tea without creating the required Cozmo cameo. Also correct the known Global Usage Log bridge method-name typo.
+
+GRELLA'S FLIGHT SPEED
+
+- Confirmed the player's normal walking speed in the K1.2 movement loop is 220 px/s (before any soup speed effect).
+- Changed Grella's Giant Camp exit speed from 310 px/s to 210 px/s.
+- Changed Grella's Plains run speed from 345 px/s to 210 px/s.
+- The fleeing route, area transitions, river-unlock waiting rule, and first-entrant decision remain unchanged. Grella now runs just under the player's normal walking speed instead of crossing the route in roughly two seconds.
+- Her ordinary follow behavior remains unchanged.
+
+COZMO'S GRELLA-DEATH CAMEO
+
+- When Grella is taken by the mudcrabs, the game now creates a visible Cozmo cameo using the established collision-safe cameo placement system.
+- Cozmo speaks on appearance: “Oh, dear. The mudcrabs have made a rather convincing argument. One Tea for you, then. And do not worry... I am sure the replacement will be perfectly... serviceable.”
+- Interacting with Cozmo opens a Grella-specific line that acknowledges the Tea and Grella Mk 2 without awarding a second Tea.
+- The new cameo cause is recorded as Cozmo Encounter #13 in the existing anonymous Global Usage Log event system.
+- A new save-bound c1_flags marker prevents replaying the death cameo after loading a save that already contains Grella's fate. Saves from earlier K1.2 builds acquire this new default in place.
+- The one-time Tea reward remains on the existing Grella Tea flag and saved Tea total. No second Tea claim is introduced.
+- The corpse interaction and Grella Mk 2 return behavior are not rewritten; their existing state and asset definitions are carried forward unchanged.
+
+GLOBAL LOG BRIDGE FIX
+
+- Corrected the K1.2 call `self.sggg_local_add(...)` to the defined method `self._sggg_local_add(...)` when reporting a successful anonymous Global Usage Log connection.
+- No Global Usage Worker code was changed or redeployed.
+
+PRESERVATION
+
+- The 23-area world, 44 connections, walkmeshes, collision geometry, existing art, Little Lantern RGB repair, Grella recruitment and dialogue, Giant Camp and Mudcrab River route, first-entrant logic, Cookpot Hole-in-One, and existing save schema are preserved. The reported corpse/Mk2 sequence is not modified by this patch and remains for Cozmo to field-verify.
+- New state uses the existing c1_flags save ledger; no save format reset is introduced.
+- SGGK1.2 and every earlier deployed version remain intact as historical releases. SGGK1.3 is added as a separate folder and current catalog entry.
+- Root and runtime `main.py` copies are kept byte-identical. The TAR and APK runtime payloads are built from the same source and Luma asset JSON.
+
+VALIDATION AND TESTING
+
+- Python syntax compilation passed for both runtime copies.
+- Luma Draw Engine asset validator passed.
+- Runtime source copies are byte-identical.
+- Static assertions passed for both 210 px/s flee legs, 220 px/s standard player speed, Cozmo cameo text and spawn path, one-time save marker, new encounter ID, and corrected global bridge call.
+- JSON parsing passed for the asset file and both version catalogs; the catalogs are byte-identical and mark SGGK1.3 current.
+- Deployment TAR and APK were inspected and contain the updated runtime source and identical Luma asset JSON bytes.
+- The full deployment ZIP contains the new SGGK1.3 folder and retains all K1.2 and earlier release folders.
+- Both full ZIPs passed integrity checks after creation.
+
+NOT LIVE TESTED / PUBLICATION
+
+- No live browser/Pygbag gameplay session was run by Luma. Grella's revised chase pacing, Cozmo's visible cameo placement and speech, corpse interaction, Grella Mk 2 return, Easy/Normal/Challenge behavior, and save/load replay protection still require Cozmo's field test.
+- No Cloudflare static site deployment was performed.
+- No GitHub main push was performed.
+- The Global Usage Worker remains unchanged; Cozmo handles its deployment.
+
+U B U — We Be We.
