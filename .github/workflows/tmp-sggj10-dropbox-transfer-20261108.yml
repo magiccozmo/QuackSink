@@ -1,0 +1,30 @@
+name: Temporary SGGJ1.0 Dropbox transfer
+on:
+  push:
+    branches:
+      - tmp/sggj10-dropbox-transfer-20261108
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact I1.3 release inputs
+        uses: actions/checkout@v4
+        with:
+          ref: tmp/sggj10-dropbox-transfer-20261108
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.3_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGI1.3_COMPLETE_CLOUDFLARE_SITE.zip
+            tmp/sggj10
+            .github/workflows
+          sparse-checkout-cone-mode: false
+      - name: Rebuild trimmed J1.0 packages
+        run: bash tmp/sggj10/prepare_and_package.sh
+      - name: Upload Dropbox transfer bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGJ1.0_Dropbox_Delivery
+          path: out/*
+          if-no-files-found: error
+          retention-days: 1
