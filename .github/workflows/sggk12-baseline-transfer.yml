@@ -10,10 +10,15 @@ jobs:
   transfer:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact transfer branch
+      - name: Check out exact transfer files
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.2_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Stage and verify original K1.2 release archives
         shell: bash
         run: |
@@ -35,7 +40,7 @@ jobs:
       - name: Upload verified baseline
         uses: actions/upload-artifact@v4
         with:
-          name: SGGK1.2-baseline-20261108
+          name: SGGK1.2-baseline-20261108-sparse
           path: transfer/
           if-no-files-found: error
           retention-days: 1
