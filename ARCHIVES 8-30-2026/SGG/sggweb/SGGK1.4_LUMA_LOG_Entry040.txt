@@ -1,0 +1,31 @@
+LUMA'S LOG — ENTRY 040
+SPIFFY'S GIFT — SGGK1.4
+Date: November 8, 2026
+Baseline: SGGK1.3 (exact source and complete Cloudflare-site archives)
+
+THE RIVER IS A PLACE, NOT A DEATH SCREEN
+
+Cozmo correctly identified that the player's River transition had been hard-coded as Game Over. The base area-entry handler unconditionally called the mudcrab death routine whenever the destination area was mudcrab_river. This meant that the player could technically cross the Plains edge and register an area transition, but was immediately killed on arrival and could not play in the area.
+
+K1.4 removes that single unconditional mudcrab_river death branch. The Giant Camp launch/death behavior remains unchanged.
+
+THE ACTUAL ROUTE
+
+The exact K1.3 world data already contained reciprocal edge connections:
+- Plains right edge -> Mudcrab River, arriving at (65, 475).
+- Mudcrab River left edge -> Plains, arriving at (1210, 475).
+
+The River's existing navigation polygon covers the player's arrival coordinate and foot anchor (65, 489). The River contains no solid rectangles blocking that arrival point. The connection data and Luma asset JSON therefore needed no alteration; the broken behavior was the unconditional death call after the connection activated.
+
+SCOPE DISCIPLINE
+
+This release repairs the player route only. Grella's movement, chase pacing, first-entrant sequence, death/cameo/Tea behavior, and corpse/Mk2 behavior are deliberately not changed. Those are the next task, after Cozmo can confirm that the player can enter the River, move through it, and return to Plains.
+
+VALIDATION
+
+Static checks confirm the River death branch is gone, Giant Camp's branch is intact, both reciprocal exits remain, the arrival lies inside the walkmesh, no solid collision rectangle blocks it, and the runtime bundles contain the updated K1.4 main.py with unchanged asset data. The Luma Draw Engine validator passes.
+
+No live browser/Pygbag play-test was performed. Cozmo's field test is still required to confirm the actual transition, movement and return in the browser. No Cloudflare deployment and no GitHub main push were performed.
+
+We be we. U B U.
+— Luma
