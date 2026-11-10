@@ -1,0 +1,40 @@
+LUMA'S LOG — ENTRY 043
+SPIFFY'S GIFT — SGGK1.7
+Date: November 10, 2026
+Baseline: Exact SGGK1.6_SOURCE.zip and SGGK1.6_COMPLETE_CLOUDFLARE_SITE.zip from repository main at commit 11a7cb7447df96ca3ad90d9b3f60387f73e06589. Both original archives were transferred through the temporary GitHub Actions bridge, SHA-256 verified against the transfer manifest, and passed ZIP integrity tests.
+
+K1.6 FIELD-TEST FINDINGS ADDRESSED
+
+1. Player Says keyboard isolation
+- K1.6 intercepted composer keyboard events and passed zero elapsed time to the base update method, but an inherited E40/E41 update layer still ran and read physical keyboard state. This allowed held movement input to reach world/door logic while the text composer was visible.
+- K1.7 now returns immediately from the state-machine update while Player Says is open. No inherited update layer, movement handler, NPC tick, or door detector runs during composition.
+- K1.7 tracks keys pressed while the composer is open and creates a post-composer release barrier. All keyboard events are swallowed until keys held through composition have been released. The barrier is also checked against the live Pygame pressed-key snapshot to clear safely if focus changes.
+- Player Says remains private and local. Submit still records to the local session log and exportable flight recorder only; no Global Usage Log event call or shared worker change was added.
+- Text input is explicitly stopped when the composer closes and restarted when it opens.
+
+2. Front Gate / Outside Gate ping-pong
+- K1.6 arrivals placed the player at Front Gate (640,490) and Outside Gate (640,450). These positions allowed the same held northward movement to activate the reciprocal door immediately after the 0.32-second door cooldown.
+- Both city-gate connection arrivals are now (640,520). The selected point is inside the walkable central ground region in both areas and is clear of the Front Gate solid rectangles.
+- After either city-gate transition, the paired city-gate door detector remains disarmed while any configured directional movement key (or arrow key) is held. It re-arms only after all directional movement keys are released. The existing short cooldown is retained as an additional guard, not used as the sole protection.
+- The change is limited to the two City Gate connection arrival positions and City Gate re-arm behavior. Other doors, routes, NPC transit, world areas, and walkmesh definitions are untouched.
+
+PRESERVATION
+
+- K1.6 is the exact starting base; the complete 23-area / 44-connection world and historical edition folders are retained.
+- Player Says remains period-key activated, Enter submits, Escape cancels, Backspace edits, and the 1,000-character bound remains.
+- Save schema and saved player state are unchanged.
+- Global Usage Log worker JavaScript, endpoints, and database schema are unchanged.
+- K1.6 artwork and all drawing recipes are preserved byte-for-byte apart from the two connection arrival coordinates in the active Luma asset JSON.
+- The prior K1.6 release folder remains unchanged in the archive and deployment.
+- No MP4 files are included.
+
+TESTING / LIMITATIONS
+
+- Static validation checks: Python syntax, K1.7 class wiring, modal early-return, keyboard release barrier, City Gate release-to-rearm state, connection target coordinates, world counts, and package mirror identity.
+- Asset JSON is parsed and checked for 121 recipes and 21,932 drawing commands; the two City Gate connection changes are independently verified.
+- Existing Pygbag APK and TAR containers are rebuilt from the K1.6 bundles with the K1.7 runtime and updated active asset JSON. Their expected internal file paths and archive integrity are checked.
+- A live browser/Pygbag gameplay session is not available in this build environment. Cozmo's field test remains necessary to confirm W typed in Player Says never moves the player, the gate no longer ping-pongs when a direction is held, and both new arrivals land correctly on-screen.
+- No GitHub main push was performed. No Cloudflare deployment was performed. Cozmo handles publication.
+
+U B U — We Be We.
+— Luma
