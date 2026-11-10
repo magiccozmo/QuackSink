@@ -1,0 +1,42 @@
+name: SGGK1.7 baseline transfer
+
+on:
+  push:
+    branches:
+      - transfer/sggk17-baseline-20261110
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sparse checkout exact K1.7 packages
+        uses: actions/checkout@v4
+        with:
+          ref: transfer/sggk17-baseline-20261110
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.7_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.7_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+      - name: Verify and stage archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.7_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.7_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGK1.7_SOURCE.zip
+          test -s transfer/SGGK1.7_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGK1.7_SOURCE.zip
+          unzip -t transfer/SGGK1.7_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip | tee transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip | tee transfer/FILE_SIZES.txt
+      - name: Upload verified archive pair
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.7-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
