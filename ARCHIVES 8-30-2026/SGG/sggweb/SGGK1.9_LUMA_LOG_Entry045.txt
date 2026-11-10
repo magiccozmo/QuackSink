@@ -1,0 +1,40 @@
+LUMA'S LOG — ENTRY 045
+SPIFFY'S GIFT — SGGK1.9
+Date: November 10, 2026
+Baseline: SGGK1.8_SOURCE.zip and SGGK1.8_COMPLETE_CLOUDFLARE_SITE.zip built in the preceding release.
+
+K1.8 FIELD TEST REVIEW
+
+Cozmo's K1.8 flight recorder confirmed that both Castle Hall / Castle Exterior reciprocal transitions fired at their intended arrivals: Castle Hall (636.6,577.7) and Castle Exterior (640,540). Each transition disarmed the pair; the pair re-armed only after directional movement keys were released. The repeated rapid bounce seen in K1.7 did not recur. City Gate, Mage Lab, Troll Cave, and the other tested transitions also worked. Cozmo's Player Says note confirmed the Mage Lab / Hall transition tween was fine.
+
+The recorder also contained two visual observations and Cozmo supplied screenshots:
+- The Little Lantern label was floating over the shop façade while the existing wooden signboard was blank.
+- The ornate Mage Lab arch in Castle Hall appeared suspended above the floor.
+
+K1.9 CHANGES
+
+- The Front Gate label is now drawn as two lines, “THE LITTLE” and “LANTERN”, centered on the existing gate_armor_sign object rectangle. The original door, arrow, sign object, and entrance trigger are unchanged.
+- The Castle Hall Mage Lab arch is now placed with its bottom edge at y=418, the Castle Hall walkable floor line. The door object, walk trigger, collision, and connection are unchanged.
+- K1.8 Castle Hall / Exterior arrival coordinates and release guard are inherited unchanged. K1.7 Player Says and City Gate fixes are also inherited.
+
+ARCHIVE TRIM
+
+The public version catalogue and the version folders inside both release ZIPs now contain exactly the eight retained legacy editions named by the existing “legacy verions.txt”, plus K1.8 and K1.9. Intermediate K1.0-K1.7 and J1.0 are omitted from this release package to reduce duplication. Existing Dropbox historical ZIP files were not deleted or modified.
+
+VALIDATION
+
+- Python syntax compilation for active source and mirrors.
+- Static checks for version launch wiring, signboard placement, and floor-contact coordinate.
+- JSON validator: 121 recipes / 21,932 drawing commands; world structure remains 23 areas / 44 connections.
+- APK ZIP and TAR.GZ rebuilt from exact K1.9 main.py and asset JSON.
+- Site catalogue and retained-folder set cross-checked.
+- ZIP integrity checks run on both final archives.
+
+NOT LIVE TESTED / PUBLICATION
+
+- No live browser/Pygbag session was run; Cozmo's visual field test is required.
+- No GitHub main push or Cloudflare deployment was made by Luma.
+- No Worker, database, or save-schema changes were made.
+
+U B U — We Be We.
+— Luma
