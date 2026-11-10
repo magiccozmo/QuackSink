@@ -1,0 +1,152 @@
+
+https://www.youtube.com/watch?v=vug73goPJaM
+
+Chapter 1: AI reverse engineering
+0:00
+0 seconds
+I see some spicy videos and articles saying that software is over. We'll see if that is true. They say that because
+0:08
+8 seconds
+modern AI tools are so powerful that they can just look at a video game and reproduce it. Give you a playable
+0:16
+16 seconds
+version just by looking. And yes, hundreds of such AI assisted reverse engineering projects have appeared. Some of which are playable in your browser.
+0:27
+27 seconds
+Even Photoshop and other [clears throat] Adobe tools are being reproduced. Okay, how does that happen? Well, an AI system
+0:35
+35 seconds
+can look at the program itself, not the source code, compiled code, figure out what it does, and write a new program that does the same. But it gets crazier.
+0:47
+47 seconds
+It can even just look at the behavior of the program or the game and reproduce it from that, too. Then it finds
+0:56
+56 seconds
+differences, mistakes and keeps improving until they are nearly the same. Now, is that legal? I am not a
+Chapter 2: Legal landscape
+1:03
+1 minute, 3 seconds
+lawyer, but courts have ruled that the functionality of software isn't necessarily protected by copyright. So,
+1:11
+1 minute, 11 seconds
+if you are an ambitious engineer, independent re-implementations can be legal. Now, models, textures, game
+1:19
+1 minute, 19 seconds
+characters, now those can be copyrighted. Now, as always, we are here to talk about the scientific aspect of
+Chapter 3: Scientific research
+1:27
+1 minute, 27 seconds
+this. So, let's cut through the noise and look at what the actual research works say. One piece of research tested
+1:35
+1 minute, 35 seconds
+the ability of AI systems to reconstruct entire software projects without source code. And on one particular program, it
+1:44
+1 minute, 44 seconds
+didn't start out too well. It only passed 15% of the test. But hold on to your papers, fellow scholars, because in just 9 months, it jumped to nearly 100%.
+1:56
+1 minute, 56 seconds
+And you see that even these are older models. The newer ones are way better.
+2:02
+2 minutes, 2 seconds
+And it gets crazier. Researchers took a tiny 12 million parameter AI model that could almost run on a toaster these
+2:11
+2 minutes, 11 seconds
+days. and [clears throat] it could recover mathematical equations with around 90% accuracy on specifically
+Chapter 4: Visual reconstruction
+2:18
+2 minutes, 18 seconds
+constructed test with software we don't have the source code for. But wait, so it can reconstruct the mathematical
+2:26
+2 minutes, 26 seconds
+rules based on observations. That's kind of like doing science. Now that was reproducing functionality. What about
+2:35
+2 minutes, 35 seconds
+appearance? Well, researchers also used AI to reconstruct web pages by just looking at them and got incredibly high visual similarity scores. 0.938.
+2:47
+2 minutes, 47 seconds
+That basically means nearly identical layouts and visual elements. And get this, it did that while using 95% less
+2:57
+2 minutes, 57 seconds
+code than the original website. Probably by pulling the ads and tracking out of it.
+3:04
+3 minutes, 4 seconds
+I wish I was kidding. Okay, so with these research results in mind, here is why this is working so well. One, we
+Chapter 5: How AI learns software
+3:12
+3 minutes, 12 seconds
+have near infinite training data. Clone an open-source repository and run the app. You now have a training pair of
+3:20
+3 minutes, 20 seconds
+source code and a working app and you can learn to translate between the two.
+3:26
+3 minutes, 26 seconds
+Second, now you have a new piece of software or game you wish to recreate.
+3:31
+3 minutes, 31 seconds
+Then you have a ground truth oracle right there. What does that mean? Well, the AI writes a first version and we
+3:38
+3 minutes, 38 seconds
+start playing hot or cold. Are we close or are we far? You can run and test the original software to your liking for as
+3:48
+3 minutes, 48 seconds
+long as you wish. Then the AI adjusts, tries something new, and tests until everything matches. But there is a
+Chapter 6: The problem with restrictions
+3:56
+3 minutes, 56 seconds
+problem. What is the problem? Well, Frontier Labs are pulling the brakes.
+4:00
+4 minutes
+For instance, Anthropic updated their Clawude 5.5 Opus AI to discourage recreating existing games. And some
+4:09
+4 minutes, 9 seconds
+developers reported that it also refuses legitimate reverse engineering tasks, too. That is another argument for us to
+4:18
+4 minutes, 18 seconds
+own our compute and have free and local models that nobody can take from us.
+4:24
+4 minutes, 24 seconds
+Something that we talk about here all the time. Super important. So I think flat out saying that software is over is
+Chapter 7: The future of software
+4:32
+4 minutes, 32 seconds
+a bit dramatic, but there definitely is a drastic increase in AI capabilities in this area. And that means yes, it seems
+4:41
+4 minutes, 41 seconds
+likely that you will be able to run your own Photoshop and Final Cut Pro variants that are written for you and tailored
+4:49
+4 minutes, 49 seconds
+specifically to your taste. Now there is a wider industry question on how useful that is. After all, if you wish to work
+4:57
+4 minutes, 57 seconds
+at a graphic design company, you need to have skills using standard industry tools like Adobe's apps. We don't quite
+5:04
+5 minutes, 4 seconds
+know what the value is in skills with homebrew software that no one else has heard about. But on the other side, we
+5:12
+5 minutes, 12 seconds
+could say that as long as the work is done and you can collaborate with others, well, just use what you like. So homebrew software with interchangeable
+5:20
+5 minutes, 20 seconds
+formats could get really big in the future for free or for nearly free.
+Chapter 8: Closing and resources
+5:26
+5 minutes, 26 seconds
+That's amazing. Now we mainly talk about the scientific aspect of things here. We do the papers but I just wanted to
+5:35
+5 minutes, 35 seconds
+mention this because there is some external context to this question as well that I think we should know and think about. So, I think there is so
+5:44
+5 minutes, 44 seconds
+much to be excited about. Software tailored specifically for you. That sounds amazing. What a time to be alive.
+5:52
+5 minutes, 52 seconds
+I use Lambda to reproduce AI research papers often in minutes. It's great to train your own models, fine-tune an
+6:00
+6 minutes
+existing one, run inference, text to image, or video. Easy peasy. Running a Deep Seek chatbot or agent. Super fast,
+6:09
+6 minutes, 9 seconds
+super reliable. Lambda gives you powerful Nvidia GPUs to run your own experiments. I test ideas from papers I
+6:16
+6 minutes, 16 seconds
+cover and moments later, results. Love it. Seriously, try it out now at lambda.com/papers.
