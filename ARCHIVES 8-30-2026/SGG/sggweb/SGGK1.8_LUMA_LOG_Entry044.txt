@@ -1,0 +1,43 @@
+LUMA'S LOG — ENTRY 044
+SPIFFY'S GIFT — SGGK1.8
+Date: November 10, 2026
+Baseline: Exact SGGK1.7_SOURCE.zip and SGGK1.7_COMPLETE_CLOUDFLARE_SITE.zip retrieved from repository main at commit 6c12bd0f962d9e6510e48b2af47494ab7c6d7364.
+
+K1.7 FIELD-TEST FINDING
+
+Cozmo's K1.7 flight recorder showed that the Player Says input barrier now activates and releases correctly. The City Gate pair was also disarmed/re-armed through directional-key release, eliminating the immediate continuous-input City Gate bounce seen in K1.6.
+
+The remaining repeat transition was Castle Hall <-> Castle Exterior. Both reciprocal connections used arrival (640,490). The Exterior door's walk trigger is y=453..474; the E41 north-approach near band extends to y=513. The Hall door's trigger is y=415..436; its north-approach near band extends to y=475. Thus (640,490) placed the player inside the reciprocal doorway's activation-near range, explaining the rapid back-and-forth transitions.
+
+Cozmo's private note at Castle Hall (636.6,577.7) explicitly requested that the Exterior -> Hall arrival be placed at that exact point. The following note, "not here..", at (640,448) reinforced that the old central landing was not the intended point.
+
+K1.8 CHANGES
+
+- Castle Exterior -> Castle Hall now arrives at (636.6,577.7), using Cozmo's exact marked position.
+- Castle Hall -> Castle Exterior now arrives at (640,540), on the lower central walkable approach and clear of the reciprocal door's near-trigger range.
+- Added a Castle Hall / Exterior pair release guard: after either connection fires, the pair stays disarmed until all directional movement keys are released. K1.7's City Gate guard remains inherited unchanged.
+- Player Says behavior, City Gate transitions, game areas, save schema, NPC/quest behavior, and Global Usage Worker/API/database were not altered.
+
+MAGE LAB REVIEW
+
+The K1.7 log showed a DOOR WAIT at (239.2,512.2), with the Lab trigger at y=401..422. The player then moved diagonally and horizontally away from the door; the log does not show the player reaching the north-approach activation band. This is insufficient evidence of a broken Lab transition, so K1.8 preserves that trigger unchanged rather than making a speculative geometry change.
+
+VALIDATION
+
+- Python syntax and static state-machine/transition checks.
+- Luma asset validation: 121 recipes / 21,932 drawing commands.
+- World structure: 23 areas / 44 connections.
+- Both landing coordinates checked against navigation regions, solid rectangles, and E41 reciprocal-door near ranges.
+- K1.8 APK ZIP and TAR.GZ rebuilt from the exact K1.8 runtime and active Luma JSON; payload integrity checked.
+- Complete source and Cloudflare-site ZIP integrity checked after packaging.
+- Historical K1.7 folder preserved unchanged.
+
+NOT LIVE TESTED / PUBLICATION
+
+- No live browser/Pygbag session was run by Luma; Cozmo's gameplay test is required.
+- No GitHub main push was made.
+- No Cloudflare deployment was performed.
+- No Worker or database changes were made.
+
+U B U — We Be We.
+— Luma
