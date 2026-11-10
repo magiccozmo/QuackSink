@@ -1,0 +1,44 @@
+LUMA'S LOG — ENTRY 042
+SPIFFY'S GIFT — SGGK1.6
+Date: November 10, 2026
+Baseline: SGGK1.5_SOURCE.zip and SGGK1.5_COMPLETE_CLOUDFLARE_SITE.zip retrieved from repository main at commit 8a33e76643336a1158df672aa1a9299c1c15c606.
+
+K1.5 BASELINE
+
+- Both exact K1.5 archive files were retrieved through the temporary GitHub Actions artifact-transfer bridge after a sparse checkout.
+- Original source archive: 60,307,428 bytes; SHA-256 8892df0ee0c3c81055a15ae69a43954c268a7d7bb38d087edf4c5bdff5ce5d9e.
+- Original complete Cloudflare-site archive: 24,646,018 bytes; SHA-256 b62a0f08d5d933127ba3816867b030e08751ae4af376345111f485c59ac7527c.
+- Both nested ZIP archives passed integrity tests before extraction. The K1.5 source and site were retained as the working foundation; existing K1.5 and earlier release folders are preserved.
+- Cozmo confirmed K1.5 is already in the repository, deployed to Cloudflare, and field-tested. Entry041's earlier publication status is historical, not current.
+
+PLAYER SAYS — PRIVATE FIELD NOTES
+
+- During ordinary gameplay, pressing the period key opens a compact Player Says text-entry panel.
+- Pygame TEXTINPUT handles typed text. Enter submits a non-empty note; Escape cancels; Backspace edits. Input is capped at 1,000 characters.
+- While the panel is open, gameplay is paused and game/mouse actions are swallowed so they cannot accidentally activate the world.
+- A submitted note is written to the LOCAL SESSION LOG as “Player says: [text]”.
+- The same note is written to the local flight recorder under [PLAYER SAYS]. The flight-recorder entry automatically includes timestamp, current area, and player coordinates, so it is retained in the existing EXPORT LOG file.
+- The implementation calls the local-session append and the existing local _log recorder only. It does not call the global event recorder, Global Usage Log bridge event API, or global pending-event queue. Player commentary is never sent to the Global Usage Log.
+- The current global session version label is updated to SGGK1.6. The shared Global Usage Worker file, endpoints, and database schema are unchanged.
+- No save fields or save schema are added. K1.5 game logic, artwork, world/transition data, NPCs, quests, difficulty behavior, Tea rewards, and Grella's River aftermath remain the baseline.
+
+IMPLEMENTATION AND STATIC VALIDATION
+
+- Added SGGK1_6StateMachine and SGGK1_6Interface as small K1.5-derived extensions; no prior release class or folder was replaced.
+- Root and assets runtime main.py copies are identical. K1.6 deployment and complete-site main.py copies are identical to them.
+- Luma Draw Engine asset JSON remains byte-identical to K1.5; validation passes with 121 recipes and 21,932 drawing commands.
+- Python syntax compilation passes for all K1.6 runtime copies.
+- Static AST checks pass for period-key dispatch, text input, submit/cancel, pause behavior, and local-only logging. The submit method has no call to the global event recorder or bridge.
+- The K1.6 APK and TAR payloads are built from the same K1.6 main.py and unchanged Luma asset JSON.
+- The complete source package and complete Cloudflare-site package include the full project structure, new K1.6 release folder, updated current-version catalog, and historical release folders. No MP4 files are included.
+- Both final ZIPs passed integrity verification after packaging.
+
+NOT LIVE TESTED / PUBLICATION
+
+- No live browser/Pygbag gameplay session was run by Luma. Cozmo's field test is still needed to verify the period shortcut, actual text-entry behavior, Enter submission, Escape cancellation, Local Session Log display, and presence of the location-stamped note in the downloaded EXPORT LOG.
+- No GitHub main push was performed. The main branch was not modified.
+- No Cloudflare static-site deployment was performed. Cozmo handles GitHub and Cloudflare publication.
+- The Global Usage Worker was not changed or redeployed.
+
+U B U — We Be We.
+— Luma
