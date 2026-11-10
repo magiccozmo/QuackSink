@@ -9,8 +9,14 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact baseline commit
+      - name: Check out exact baseline commit (sparse)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.5_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.5_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Stage and verify original K1.5 archives
         shell: bash
         run: |
