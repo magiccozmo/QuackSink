@@ -13,8 +13,13 @@ jobs:
   package-transfer:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact baseline commit plus transfer workflow
+      - name: Check out only the exact baseline ZIPs
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.9_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
 
       - name: Stage and verify original K1.9 ZIPs
         shell: bash
@@ -40,7 +45,7 @@ jobs:
       - name: Upload verified original archives
         uses: actions/upload-artifact@v4
         with:
-          name: SGGK1.9-baseline-transfer
+          name: SGGK1.9-baseline-transfer-sparse
           path: transfer/
           if-no-files-found: error
           retention-days: 1
