@@ -1,0 +1,46 @@
+name: SGGK1.9 baseline binary transfer
+
+on:
+  push:
+    branches:
+      - transfer/sggk19-baseline-20261110
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  package-transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline commit plus transfer workflow
+        uses: actions/checkout@v4
+
+      - name: Stage and verify original K1.9 ZIPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.9_SOURCE.zip"
+          SITE="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip"
+          mkdir -p transfer
+          test -s "$SRC"
+          test -s "$SITE"
+          cp "$SRC" transfer/
+          cp "$SITE" transfer/
+          unzip -tqq "transfer/SGGK1.9_SOURCE.zip"
+          unzip -tqq "transfer/SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip"
+          {
+            echo "Repository: magiccozmo/QuackSink"
+            echo "Baseline commit: ef8f6fb3e8e0ef0df626621ed5629d9872093b98"
+            echo "Source size: $(stat -c '%s' transfer/SGGK1.9_SOURCE.zip) bytes"
+            echo "Deployment size: $(stat -c '%s' transfer/SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip) bytes"
+            sha256sum transfer/SGGK1.9_SOURCE.zip transfer/SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip
+          } | tee transfer/SHA256_AND_SIZES.txt
+
+      - name: Upload verified original archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.9-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
