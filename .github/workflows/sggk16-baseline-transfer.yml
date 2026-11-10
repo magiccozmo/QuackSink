@@ -1,0 +1,44 @@
+name: SGGK1.6 baseline transfer
+
+on:
+  push:
+    branches:
+      - transfer/sggk16-baseline-20261110
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out only the two K1.6 baseline archives
+        uses: actions/checkout@v4
+        with:
+          ref: transfer/sggk16-baseline-20261110
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.6_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.6_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+
+      - name: Verify and stage original archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.6_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.6_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGK1.6_SOURCE.zip
+          test -s transfer/SGGK1.6_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGK1.6_SOURCE.zip
+          unzip -t transfer/SGGK1.6_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip | tee transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip | tee transfer/FILE_SIZES.txt
+
+      - name: Upload verified baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.6-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
