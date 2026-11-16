@@ -1,152 +1,1176 @@
-
-https://www.youtube.com/watch?v=vug73goPJaM
-
-Chapter 1: AI reverse engineering
-0:00
-0 seconds
-I see some spicy videos and articles saying that software is over. We'll see if that is true. They say that because
-0:08
-8 seconds
-modern AI tools are so powerful that they can just look at a video game and reproduce it. Give you a playable
-0:16
-16 seconds
-version just by looking. And yes, hundreds of such AI assisted reverse engineering projects have appeared. Some of which are playable in your browser.
-0:27
-27 seconds
-Even Photoshop and other [clears throat] Adobe tools are being reproduced. Okay, how does that happen? Well, an AI system
-0:35
-35 seconds
-can look at the program itself, not the source code, compiled code, figure out what it does, and write a new program that does the same. But it gets crazier.
+0:12
+12 seconds
+[music]
+0:20
+20 seconds
+[music]
+0:21
+21 seconds
+Heat.
+0:25
+25 seconds
+[music]
+0:34
+34 seconds
+[music]
+0:41
+41 seconds
+[music]
 0:47
 47 seconds
-It can even just look at the behavior of the program or the game and reproduce it from that, too. Then it finds
-0:56
-56 seconds
-differences, mistakes and keeps improving until they are nearly the same. Now, is that legal? I am not a
-Chapter 2: Legal landscape
-1:03
-1 minute, 3 seconds
-lawyer, but courts have ruled that the functionality of software isn't necessarily protected by copyright. So,
-1:11
-1 minute, 11 seconds
-if you are an ambitious engineer, independent re-implementations can be legal. Now, models, textures, game
+[music]
 1:19
 1 minute, 19 seconds
-characters, now those can be copyrighted. Now, as always, we are here to talk about the scientific aspect of
-Chapter 3: Scientific research
-1:27
-1 minute, 27 seconds
-this. So, let's cut through the noise and look at what the actual research works say. One piece of research tested
-1:35
-1 minute, 35 seconds
-the ability of AI systems to reconstruct entire software projects without source code. And on one particular program, it
-1:44
-1 minute, 44 seconds
-didn't start out too well. It only passed 15% of the test. But hold on to your papers, fellow scholars, because in just 9 months, it jumped to nearly 100%.
-1:56
-1 minute, 56 seconds
-And you see that even these are older models. The newer ones are way better.
-2:02
-2 minutes, 2 seconds
-And it gets crazier. Researchers took a tiny 12 million parameter AI model that could almost run on a toaster these
+Professor Professor Haywood Look,
+1:34
+1 minute, 34 seconds
+professor.
+1:45
+1 minute, 45 seconds
+professor.
+1:51
+1 minute, 51 seconds
+That was brilliant. Wasn't that brilliant? That film was made 50 years ago and it feels timeless.
+1:58
+1 minute, 58 seconds
+Yeah. Felt pretty endless, too. Oh, no. You didn't like it.
+2:03
+2 minutes, 3 seconds
+Oh, subtitles, black and white. You know, I first saw Leon Font Parody on my first date. Your first date?
 2:11
 2 minutes, 11 seconds
-days. and [clears throat] it could recover mathematical equations with around 90% accuracy on specifically
-Chapter 4: Visual reconstruction
-2:18
-2 minutes, 18 seconds
-constructed test with software we don't have the source code for. But wait, so it can reconstruct the mathematical
-2:26
-2 minutes, 26 seconds
-rules based on observations. That's kind of like doing science. Now that was reproducing functionality. What about
-2:35
-2 minutes, 35 seconds
-appearance? Well, researchers also used AI to reconstruct web pages by just looking at them and got incredibly high visual similarity scores. 0.938.
-2:47
-2 minutes, 47 seconds
-That basically means nearly identical layouts and visual elements. And get this, it did that while using 95% less
-2:57
-2 minutes, 57 seconds
-code than the original website. Probably by pulling the ads and tracking out of it.
-3:04
-3 minutes, 4 seconds
-I wish I was kidding. Okay, so with these research results in mind, here is why this is working so well. One, we
-Chapter 5: How AI learns software
-3:12
-3 minutes, 12 seconds
-have near infinite training data. Clone an open-source repository and run the app. You now have a training pair of
-3:20
-3 minutes, 20 seconds
-source code and a working app and you can learn to translate between the two.
-3:26
-3 minutes, 26 seconds
-Second, now you have a new piece of software or game you wish to recreate.
-3:31
-3 minutes, 31 seconds
-Then you have a ground truth oracle right there. What does that mean? Well, the AI writes a first version and we
-3:38
-3 minutes, 38 seconds
-start playing hot or cold. Are we close or are we far? You can run and test the original software to your liking for as
+Yeah.
+2:12
+2 minutes, 12 seconds
+Wait, don't tell me. It was an old [music] French film, so it must have been with an old French man.
+2:16
+2 minutes, 16 seconds
+No. [laughter] Uh, listen. Do you uh do you want to go for a drink?
+2:20
+2 minutes, 20 seconds
+No, I'm going to go home, have a cup of coffee. Do you want to come? Yeah, come on.
+2:29
+2 minutes, 29 seconds
+So, who was he then? Who? Your first date. It's none of your business.
+2:37
+2 minutes, 37 seconds
+Mr. Turner. Look out.
+2:51
+2 minutes, 51 seconds
+Did you get a number plate? No. That was too quick. Did you know him? No, I don't think so. Please.
+2:58
+2 minutes, 58 seconds
+Don't move. Don't move. Get an ambulance.
+3:16
+3 minutes, 16 seconds
+He's dead. You sure you don't know him? No. Well, he seemed to know you.
+3:23
+3 minutes, 23 seconds
+He was obviously waiting for you to get back and someone else was waiting for him.
+3:27
+3 minutes, 27 seconds
+He was trying to show me something. Come on. You're going back?
+3:35
+3 minutes, 35 seconds
+Yep.
+3:37
+3 minutes, 37 seconds
+That man was coming to tell me something and died right in front of me. I can't leave it like that.
+3:45
+3 minutes, 45 seconds
+You're going to try and stop it happening. You know I can't do that.
 3:48
 3 minutes, 48 seconds
-long as you wish. Then the AI adjusts, tries something new, and tests until everything matches. But there is a
-Chapter 6: The problem with restrictions
-3:56
-3 minutes, 56 seconds
-problem. What is the problem? Well, Frontier Labs are pulling the brakes.
-4:00
-4 minutes
-For instance, Anthropic updated their Clawude 5.5 Opus AI to discourage recreating existing games. And some
-4:09
-4 minutes, 9 seconds
-developers reported that it also refuses legitimate reverse engineering tasks, too. That is another argument for us to
-4:18
-4 minutes, 18 seconds
-own our compute and have free and local models that nobody can take from us.
-4:24
-4 minutes, 24 seconds
-Something that we talk about here all the time. Super important. So I think flat out saying that software is over is
-Chapter 7: The future of software
-4:32
-4 minutes, 32 seconds
-a bit dramatic, but there definitely is a drastic increase in AI capabilities in this area. And that means yes, it seems
-4:41
-4 minutes, 41 seconds
-likely that you will be able to run your own Photoshop and Final Cut Pro variants that are written for you and tailored
-4:49
-4 minutes, 49 seconds
-specifically to your taste. Now there is a wider industry question on how useful that is. After all, if you wish to work
-4:57
-4 minutes, 57 seconds
-at a graphic design company, you need to have skills using standard industry tools like Adobe's apps. We don't quite
-5:04
-5 minutes, 4 seconds
-know what the value is in skills with homebrew software that no one else has heard about. But on the other side, we
-5:12
-5 minutes, 12 seconds
-could say that as long as the work is done and you can collaborate with others, well, just use what you like. So homebrew software with interchangeable
+Well, so the first law of time says you can't cross down the pavement on the other side. Grab hold of his arm, whoever he was, and stop him crossing the road.
+3:55
+3 minutes, 55 seconds
+Can if you like. I'll settle for a car registration and a view of the driver.
+4:01
+4 minutes, 1 second
+[music] Okay. Are you ready? Let's go.
+4:06
+4 minutes, 6 seconds
+[music]
+4:28
+4 minutes, 28 seconds
+Right. Let's get down there. Slave. Wait. Wait. Why is it bleeping?
+4:33
+4 minutes, 33 seconds
+3minute warning already? Yep. Given us 3 minutes. Oh, charming. What's gone wrong?
+4:40
+4 minutes, 40 seconds
+Nothing's gone wrong. I always told you the machine is unpredictable. Sometimes it gives you a day, sometimes a few hours. This [sighs] time,
+4:48
+4 minutes, 48 seconds
+3 minutes. If I could afford the research, I could solve it. I know I could. I know it's something to do with the length of the photon rods. But when
+4:56
+4 minutes, 56 seconds
+I can't even afford to pay for anything else, how can I begin to?
+4:58
+4 minutes, 58 seconds
+It doesn't matter. When we return to the present, we can travel back again. And hopefully, we'll get a bit longer.
+5:03
+5 minutes, 3 seconds
+It's not going to let us go back any further than we are now. These 3 minutes are like a full stop. Don't tell me another law of time.
+5:11
+5 minutes, 11 seconds
+We can't exist in three time zones. Two's tricky enough.
+5:15
+5 minutes, 15 seconds
+Exactly. No, you're not going to find out anything else tonight, so you might as well forget it.
 5:20
 5 minutes, 20 seconds
-formats could get really big in the future for free or for nearly free.
-Chapter 8: Closing and resources
-5:26
-5 minutes, 26 seconds
-That's amazing. Now we mainly talk about the scientific aspect of things here. We do the papers but I just wanted to
-5:35
-5 minutes, 35 seconds
-mention this because there is some external context to this question as well that I think we should know and think about. So, I think there is so
-5:44
-5 minutes, 44 seconds
-much to be excited about. Software tailored specifically for you. That sounds amazing. What a time to be alive.
-5:52
-5 minutes, 52 seconds
-I use Lambda to reproduce AI research papers often in minutes. It's great to train your own models, fine-tune an
-6:00
-6 minutes
-existing one, run inference, text to image, or video. Easy peasy. Running a Deep Seek chatbot or agent. Super fast,
-6:09
-6 minutes, 9 seconds
-super reliable. Lambda gives you powerful Nvidia GPUs to run your own experiments. I test ideas from papers I
-6:16
-6 minutes, 16 seconds
-cover and moments later, results. Love it. Seriously, try it out now at lambda.com/papers.
+[sighs]
+5:32
+5 minutes, 32 seconds
+No, no, no, no, no. Please don't let it do that. What is it this time?
+5:38
+5 minutes, 38 seconds
+It's a crystal.
+5:42
+5 minutes, 42 seconds
+It's a type of sapphire. It's in the heart of a machine. The case is nobbium. Ouch.
+5:48
+5 minutes, 48 seconds
+Look at it. It's cracked. I'm losing the cryogenic fluid. What's it for? It calls the electrofaretic process.
+5:56
+5 minutes, 56 seconds
+Of course, my father had to sell his house to buy this. This is the single most expensive part of the machine. I can never afford to buy another one. Do you understand?
+6:06
+6 minutes, 6 seconds
+Does the machine work without it? Machine is nothing about it. What you mean?
+6:12
+6 minutes, 12 seconds
+Yes. This means we're not going anywhere ever again. His name was Chapman. Nigel Chapman.
+6:19
+6 minutes, 19 seconds
+Professor Chapman. Do you know him?
+6:22
+6 minutes, 22 seconds
+Well, oh, no, but I've read some of his articles. He worked in the same field as my father. What field was that? Quantum physics.
+6:30
+6 minutes, 30 seconds
+Do you think he was coming to see you?
+6:33
+6 minutes, 33 seconds
+Well, he called out my name. Nigel Chapman was working at a company called Web Biotech. I don't suppose that means anything to you?
+6:40
+6 minutes, 40 seconds
+No. Well, it seems he wasn't the only recent fatality that Web Biotech had suffered. Morris, this is a newspaper article.
+6:51
+6 minutes, 51 seconds
+Oh, here we go.
+6:52
+6 minutes, 52 seconds
+Uh, it was found in the inside pocket of the dead man. You want me to read it out, Chief? That's the idea, Morris.
+7:00
+7 minutes
+Scientist drowns in bath. That's the headline.
+7:07
+7 minutes, 7 seconds
+Police last night were making no comment on the mysterious death of Ron Haywood who headed up a division at the web the
+7:17
+7 minutes, 17 seconds
+web biotech corporation. [gasps] Professor Haywood who was found dead in the bath may have suffered a heart attack.
+7:25
+7 minutes, 25 seconds
+Wait a minute. Heywood. I know him too.
+7:27
+7 minutes, 27 seconds
+Maybe Chapman was coming to see Holly to tell him about Haywood and and that was what got him killed.
+7:33
+7 minutes, 33 seconds
+You know, you might have got something there, Robson. That had never occurred to me.
+7:37
+7 minutes, 37 seconds
+Oh, did Chapman say anything to you before he died?
+7:40
+7 minutes, 40 seconds
+No, he pointed to my arm and he was going to say something, but All right, Morris Robson, background on
+7:48
+7 minutes, 48 seconds
+Haywood. Start with the postmortem reports.
+7:51
+7 minutes, 51 seconds
+Slade, I want you to look into web biotech.
+7:53
+7 minutes, 53 seconds
+Have you said, Chief Turner, given your scientific background, you can go with him, right? Right.
+8:07
+8 minutes, 7 seconds
+How's the machine? I don't want to talk about it.
+8:10
+8 minutes, 10 seconds
+Look, don't worry about it. We'll get it [music] fixed.
+8:14
+8 minutes, 14 seconds
+How much would he be able to pick one of those um bits up for then?
+8:17
+8 minutes, 17 seconds
+It's called [music] an electromagnetic crystal. I could probably pick one up for about £20,000 secondhand.
+8:27
+8 minutes, 27 seconds
+You think it's all there? All right. downstairs.
+8:37
+8 minutes, 37 seconds
+Holly, Steven, how are you? I'm [laughter] all right. How are you? What are you doing here?
+8:45
+8 minutes, 45 seconds
+Well, I'm technical director here. What are you doing here? I was told it was the police. We are the police. It's a long story. This is Jeff Slade. We work together. Steven Maro.
+8:53
+8 minutes, 53 seconds
+Hi. Good to meet you. God, I can't believe it's you. I was just thinking about you.
+8:59
+8 minutes, 59 seconds
+Last night we went to see Lison on Fond Parody. No way.
+9:02
+9 minutes, 2 seconds
+Made 50 years ago, but it still feels timeless.
+9:05
+9 minutes, 5 seconds
+It was our first day. Leon Fonda Parody in that tiny cinema in Cambridge. That's [laughter] right. How can I help?
+9:11
+9 minutes, 11 seconds
+Well, we've come about Nigel Chapman. Yeah. What about him? He was run over and killed last night.
+9:18
+9 minutes, 18 seconds
+Oh my god. Hit and run.
+9:23
+9 minutes, 23 seconds
+Um Roy, you better come see Webb. Um Sebastian Webb. He runs the company. Chapman dead.
+9:30
+9 minutes, 30 seconds
+Yes, I believe he was working with Ron Haywood.
+9:34
+9 minutes, 34 seconds
+They were both a waste of time and money. Six months. Six months working on a project that's going nowhere. Then one
+9:41
+9 minutes, 41 seconds
+of them manages to drown himself. And now this. What exactly was their project?
+9:49
+9 minutes, 49 seconds
+Marlo, you tell them. You know more about it than I do.
+9:52
+9 minutes, 52 seconds
+Uh, they were working in the area of viral research. They were trying to build a new form of synretron.
+9:57
+9 minutes, 57 seconds
+What's that? Well, it's a bit difficult to explain to the lay mind. Well, why don't you have a go anyway?
+10:02
+10 minutes, 2 seconds
+It creates a form of radiation by spinning electrons around an evacuated circular tube at just under the speed of light.
+10:09
+10 minutes, 9 seconds
+The great advantage is the high frequencies. You can use them rather like X-rays to examine the viruses.
+10:13
+10 minutes, 13 seconds
+What kind of synretron were they building?
+10:15
+10 minutes, 15 seconds
+Revolutionary new design. More compact, more economic. Could have been worth millions.
+10:21
+10 minutes, 21 seconds
+If they finished it, can we take a look at it? You You take him down. I'm busy.
+10:28
+10 minutes, 28 seconds
+This way. Up to something if you ask me. What do you mean?
+10:37
+10 minutes, 37 seconds
+Ask him. He employed them. All those overheads working day and night and for what? For nothing. Nothing to show for it. Chapman and Haywood.
+10:48
+10 minutes, 48 seconds
+They were a waste of space. Yeah. Why didn't you step this way?
+10:57
+10 minutes, 57 seconds
+Look, Chapman and Haywood were slow.
+10:58
+10 minutes, 58 seconds
+It's true. But as I tried to explain it to web, it's a complicated area. You can't expect results overnight. Yes. For 6 months and nothing to show for it.
+11:05
+11 minutes, 5 seconds
+Well, it started. This is where they worked.
+11:08
+11 minutes, 8 seconds
+Look at this equipment. This is fantastic.
+11:12
+11 minutes, 12 seconds
+This intensifier, I didn't even know they're on the market.
+11:14
+11 minutes, 14 seconds
+That's web for you. Nothing but the best. You still dabbling in space time?
+11:20
+11 minutes, 20 seconds
+Oh, not really. No shame. Is this the uh uh the synretron? Yes.
+11:27
+11 minutes, 27 seconds
+Web was right. That didn't get very far. No. But look at this.
+11:32
+11 minutes, 32 seconds
+What's in here? Oh, backup generator storage.
+11:36
+11 minutes, 36 seconds
+Uh, it's locked. This was their main lab.
+11:46
+11 minutes, 46 seconds
+You said this machine they were working on was uh worth millions. Uh, yeah. Worth millions to whom?
+11:54
+11 minutes, 54 seconds
+Well, Webb Biotech, of course. You're not suggesting that Web had them killed in order to steal their designs.
+12:02
+12 minutes, 2 seconds
+Why would he do that? Anyway, there are no designs. So, you say. Did he have to be quite so antagonistic?
+12:11
+12 minutes, 11 seconds
+So, it was you and him. He was the old Frenchman. Yeah, it was a long time ago.
+12:18
+12 minutes, 18 seconds
+How did you meet?
+12:20
+12 minutes, 20 seconds
+My father tutoed him at Cambridge. Then later on, he helped him with some of his research. Did he know about the time machine?
+12:27
+12 minutes, 27 seconds
+No, no one knew.
+12:35
+12 minutes, 35 seconds
+Right, Morris, what did you get on Haywood?
+12:39
+12 minutes, 39 seconds
+He drowned in the path, Chief, but it now looks almost certain it was in suspicious circumstances.
+12:45
+12 minutes, 45 seconds
+Yes. Well, the fact that he was fully clothed at the time would seem to suggest that. Have you been to the house yet?
+12:52
+12 minutes, 52 seconds
+Not yet, Chief.
+12:54
+12 minutes, 54 seconds
+How about you, Slade? How did you get on at Web Biotech? Well, I think we may have a suspect.
+12:59
+12 minutes, 59 seconds
+In fact, I'd like you to put out a tail on it. Who?
+13:02
+13 minutes, 2 seconds
+Steven Marlo. He's the technical director.
+13:04
+13 minutes, 4 seconds
+He's got nothing to do with it. Go on, Slade.
+13:07
+13 minutes, 7 seconds
+Heywood and Chapman were working on something called a synretron, which would have made someone very, very rich if they'd finished it.
+13:15
+13 minutes, 15 seconds
+Well, we only have Marlo's word that they didn't finish it. He recruited them. He was responsible for them. Now, if they hadn't made any progress within 6 months, don't you think Marlo would have been the first to complain?
+13:23
+13 minutes, 23 seconds
+Seems a bit thin.
+13:29
+13 minutes, 29 seconds
+When I told Marlo that Chapman had been run over and killed, he said to me, "My god, a hit and run."
+13:36
+13 minutes, 36 seconds
+They were his exact words. Now, how did he know it was a hit and run? He just assumed. Why do you want to put a tail on him?
+13:44
+13 minutes, 44 seconds
+Was if Marlo's got his hands on this equipment, he could sell it outside the company. Okay. It's a long shot, but I think it's worth a try. All right.
+13:52
+13 minutes, 52 seconds
+All right. Morris, surveillance on Marlo as of now.
+13:55
+13 minutes, 55 seconds
+I was going to check out Chapman's place. Chief Slade can do that. Take Robson with you. Anything else?
+14:01
+14 minutes, 1 second
+All right, let's go. Let's go. Something wrong?
+14:08
+14 minutes, 8 seconds
+Yes. You know perfectly well Steven's got nothing to do with this. Why don't you just admit you let this become personal? Well, why don't you admit the same?
+14:15
+14 minutes, 15 seconds
+I'm not interrupting anything, am I? No. Let's go.
+14:22
+14 minutes, 22 seconds
+Yes. Oh, Steven.
+14:26
+14 minutes, 26 seconds
+He's paid until the end of the month, so I haven't touched anything. Is there anything missing?
+14:31
+14 minutes, 31 seconds
+I couldn't tell you. I never come in here. Um, what what sort of man was Mr. Hbert? He was a tall man.
+14:40
+14 minutes, 40 seconds
+What about his temperament?
+14:42
+14 minutes, 42 seconds
+He's what? How was he before he died, Mrs. uh Beas? And he was the same as usual.
+14:48
+14 minutes, 48 seconds
+So, there was nothing strange about his behavior in the week before he died.
+14:53
+14 minutes, 53 seconds
+Well, now you mention it, he did seem a little nervous about something.
+14:59
+14 minutes, 59 seconds
+And then there was that day he went out twice. What? What do you mean? Well, he always went out at 7:30. Sharp.
+15:07
+15 minutes, 7 seconds
+Well, one morning, must have been about a week before he uh it happened,
+15:15
+15 minutes, 15 seconds
+I heard him go, but when I came out, he was still there.
+15:24
+15 minutes, 24 seconds
+Did you ask him about it?
+15:26
+15 minutes, 26 seconds
+No, but that boss of his did. He was around here asking all sorts of questions of the professor. Where he was going, what he was doing?
+15:34
+15 minutes, 34 seconds
+His boss? Do you mean Sebastian Webb? No, I mean that other chap, Darkhel. Marlo?
+15:42
+15 minutes, 42 seconds
+That's his name. Steven Marlo. It's great to see you, Holly.
+15:50
+15 minutes, 50 seconds
+Thanks for agreeing to come. Thanks for inviting me.
+15:54
+15 minutes, 54 seconds
+Cheers. [music] Cheers. It's been too long.
+16:01
+16 minutes, 1 second
+5 years. [snorts] Seems longer. You know, I loved working for your dad.
+16:08
+16 minutes, 8 seconds
+I was very sorry when he was a brilliant man.
+16:15
+16 minutes, 15 seconds
+You always said you'd go far.
+16:17
+16 minutes, 17 seconds
+You know, I still can't quite believe that you ended up doing what you're doing. I mean, seems so completely unlike you.
+16:24
+16 minutes, 24 seconds
+Well, well, well. This is cozy. Hope I'm not interrupting anything. Do you know I was here?
+16:29
+16 minutes, 29 seconds
+I didn't. Morris told me he was. Do you mind if I join you, Steven? Will it make any difference?
+16:38
+16 minutes, 38 seconds
+It's pricey. What exactly do you want?
+16:43
+16 minutes, 43 seconds
+Um, I just wanted to ask you a few questions now. Yeah, why not? Far away.
+16:51
+16 minutes, 51 seconds
+I was just wondering why you were asking questions about Professor Haywood during the week before he died. His landlady mentioned it.
+16:58
+16 minutes, 58 seconds
+That's simple enough. I'd heard a rumor he was being headunted and I want to find out if there's any truth in him. And was there? I never found out.
+17:07
+17 minutes, 7 seconds
+She said he appeared nervous about something. Was he nervous about you? This isn't fair. Listen to me.
+17:15
+17 minutes, 15 seconds
+I was nowhere near here with the night he died. I've already given a statement.
+17:18
+17 minutes, 18 seconds
+I was in Nightsbridge on the other side of town. But nobody saw you.
+17:22
+17 minutes, 22 seconds
+As a matter of fact, they did. I spoke to a newspaper seller.
+17:26
+17 minutes, 26 seconds
+And on the night Chapman was killed, I was in Waybridge. I asked a policeman for directions.
+17:32
+17 minutes, 32 seconds
+If you knew where you were, Steven, why did you bother asking a policeman for directions? Because I didn't know where I was going.
+17:38
+17 minutes, 38 seconds
+That is enough. Please don't do that here. Excuse me. Whose side are you on? This isn't about sides.
+17:44
+17 minutes, 44 seconds
+Look, if you finished, we are trying to have dinner. Yeah. Fine. You enjoy it.
+18:13
+18 minutes, 13 seconds
+[music]
+18:19
+18 minutes, 19 seconds
+I'm sorry about all that. It's not your fault.
+18:24
+18 minutes, 24 seconds
+Uh, do you want to stay?
+18:28
+18 minutes, 28 seconds
+Well, seems a shame to waste the evenings.
+18:33
+18 minutes, 33 seconds
+I was about to ask what whether you ever got married.
+18:39
+18 minutes, 39 seconds
+No. No. [snorts] No. Not me.
+18:43
+18 minutes, 43 seconds
+You know, your father always used to say that.
+18:45
+18 minutes, 45 seconds
+Yes. He used to say an awful lot of things. What about you and Jeff Slate?
+18:51
+18 minutes, 51 seconds
+Slate? No, no, we're just friends.
+19:00
+19 minutes
+Hello, Mr. Slade. Yeah. Who's this?
+19:04
+19 minutes, 4 seconds
+Are you looking for the man who killed Ron?
+19:06
+19 minutes, 6 seconds
+He might be. I know where he is. Who are you?
+19:13
+19 minutes, 13 seconds
+Meet me in half an hour, 1:00 at the tobacco [music] dorks. Know them?
+19:19
+19 minutes, 19 seconds
+Yeah, I can find him. How will I recognize you?
+19:25
+19 minutes, 25 seconds
+Oh, you'll recognize me.
+19:30
+19 minutes, 30 seconds
+Why don't you come in with me, Holly, to Web Biotech?
+19:34
+19 minutes, 34 seconds
+Oh, I don't know. I'm not really interested in viruses.
+19:38
+19 minutes, 38 seconds
+We do do other things. Look, I I practically run the company. I could set you up in any line of research you wanted. I don't know.
+19:47
+19 minutes, 47 seconds
+But you were brilliant.
+19:49
+19 minutes, 49 seconds
+Was brilliant. You've never stopped, have you?
+19:53
+19 minutes, 53 seconds
+You're still working on your father's ideas, and some things never change, like the way I feel about you.
+21:45
+21 minutes, 45 seconds
+[music]
+21:48
+21 minutes, 48 seconds
+Oh.
+22:05
+22 minutes, 5 seconds
+It was Steven Marlo. I know it. You didn't see his face. No, but I know it was him. Where's Marlo now? Morris will still be tailing him.
+22:12
+22 minutes, 12 seconds
+If Morris was tailing him, he would have seen Marlo attack you last night. Well, maybe he gave Morris the slip. Are you sure you want to bring him in?
+22:21
+22 minutes, 21 seconds
+All right. But for your sake, you had better be right.
+22:29
+22 minutes, 29 seconds
+I don't understand these accounts. I didn't approve any of them. No, but as I told you, I did. Mr. Webb, I'm sorry.
+22:37
+22 minutes, 37 seconds
+What is this?
+22:38
+22 minutes, 38 seconds
+The police. We're here to see Mr. Steven Marlo. You're under arrest. This is ridiculous.
+22:45
+22 minutes, 45 seconds
+Okay.
+22:48
+22 minutes, 48 seconds
+You don't have to say anything, but it may harm your defense if you do not mention something you later rely on in court. Anything you do say may be given in evidence.
+22:56
+22 minutes, 56 seconds
+Marlo, do you mind [clears throat] telling me what the hell is going on?
+22:58
+22 minutes, 58 seconds
+Yes, they're mad. This is some sort of obsession. Where were you last night at 1:00? None of your damn business. How's your shoulder?
+23:06
+23 minutes, 6 seconds
+What? Which shoulder was it, Slade? Definitely this one. What are you talking about?
+23:12
+23 minutes, 12 seconds
+According to Slate, he wounded you last night in the right shoulder. Well, that's easy enough to disprove.
+23:19
+23 minutes, 19 seconds
+Would you mind? Satisfied?
+23:32
+23 minutes, 32 seconds
+I've already shown you what you wanted to see. Why are you bringing me here?
+23:35
+23 minutes, 35 seconds
+We like bringing you here this way. I thought I hit him, but maybe I didn't. Maybe I was wrong. It It was very dark.
+23:44
+23 minutes, 44 seconds
+He was moving. You know, he could have been wearing the protective vest.
+23:48
+23 minutes, 48 seconds
+Maybe you're wrong about more than just the bullet.
+23:51
+23 minutes, 51 seconds
+It was his voice on the phone. I know it.
+23:52
+23 minutes, 52 seconds
+He was trying to disguise it, but I know it was him. He still doesn't have an alibi. Chief, this just came in. What is it, Frank?
+23:59
+23 minutes, 59 seconds
+Routine check on Marlo. Chief, a newspaper seller called John Berford
+24:08
+24 minutes, 8 seconds
+IDed Marlo in Nightsbridge at the time of Hwood's death.
+24:12
+24 minutes, 12 seconds
+And a policeman call Muns remembers giving him directions in Waybridge at exactly the same time Chapman was killed.
+24:21
+24 minutes, 21 seconds
+Maybe he's got a twin. A what?
+24:24
+24 minutes, 24 seconds
+We still don't know where he was last night.
+24:32
+24 minutes, 32 seconds
+10:15. Brush and Slade enter the room.
+24:38
+24 minutes, 38 seconds
+How much longer are you going to keep me on?
+24:40
+24 minutes, 40 seconds
+As long as it takes. Right. Can you please tell me where you were between the hours of 12 and 2 last night?
+24:47
+24 minutes, 47 seconds
+As a matter of fact, I can. No.
+24:52
+24 minutes, 52 seconds
+Why don't you ask Holly Turner, your science officer between 12:00 and just after 2:00?
+24:59
+24 minutes, 59 seconds
+I was with her.
+25:05
+25 minutes, 5 seconds
+It's true. We left the restaurant at [music] 11:00 and then went back to Steven's house. I didn't want to tell them, Holly. Really, I didn't.
+25:12
+25 minutes, 12 seconds
+We talked for a few hours, mainly about Steven's work, and then I left about 2:30.
+25:18
+25 minutes, 18 seconds
+And he was in your sight the entire time? Yes, Chief.
+25:24
+25 minutes, 24 seconds
+Well, Mr. Marlo, it looks like I owe you an apology. Well, I'm not sure that I can accept it.
+25:29
+25 minutes, 29 seconds
+Not only do you arrest me in front of my boss, but you do so at the whim of an officer who's obviously pursuing some personal vendetta.
+25:36
+25 minutes, 36 seconds
+Steven, no. I'm sorry, Holly. I take it I'm free to go. Yes. Fine.
+25:44
+25 minutes, 44 seconds
+Then all I can say is you'll be hearing from my lawyers.
+25:56
+25 minutes, 56 seconds
+Nice work, Slate.
+25:59
+25 minutes, 59 seconds
+Chief, [music] not now.
+26:03
+26 minutes, 3 seconds
+You'd better type up a report for the commissioner. You really are a walking bloody disaster.
+26:12
+26 minutes, 12 seconds
+Steven, I don't think we should talk anymore, Holly.
+26:15
+26 minutes, 15 seconds
+Look, Slay didn't [music] mean it personally. It's just sometimes he gets ideas.
+26:18
+26 minutes, 18 seconds
+Yeah. Well, his idea is going to land him up in court. Don't do that. I have to. He publicly humiliated me.
+26:24
+26 minutes, 24 seconds
+Look, about what you were saying last night.
+26:27
+26 minutes, 27 seconds
+I want to take you up on your offer. I want to come in with you. I'm not sure that's still an option. It is an option.
+26:36
+26 minutes, 36 seconds
+Look, there's something back in my flat I've got to show you. Come on then.
+26:49
+26 minutes, 49 seconds
+This takes me back. Hi, Holly. Hi, Danny.
+26:53
+26 minutes, 53 seconds
+I know you. You're used to work with a professor. Steven Marlo.
+26:59
+26 minutes, 59 seconds
+Yeah, Steven Marlo. Yeah. Good to see you again after all this time. Good to see you. Hey
+27:12
+27 minutes, 12 seconds
+there. What is it? Wait a minute.
+27:21
+27 minutes, 21 seconds
+I don't believe it. It can't be. This is a time machine. You've done it. You've actually done it.
+27:30
+27 minutes, 30 seconds
+Did you build it?
+27:30
+27 minutes, 30 seconds
+No. My father built it. I just added on to it.
+27:34
+27 minutes, 34 seconds
+I don't know what to say. It's incredible. Does it work? Yes, it works.
+27:39
+27 minutes, 39 seconds
+Bit Heath Robinson. Some of these circuits are 20 years old.
+27:41
+27 minutes, 41 seconds
+It works. Steven, how far have you traveled?
+27:45
+27 minutes, 45 seconds
+A few hours, sometimes a day, but you can't control the timeline. No, not yet.
+27:50
+27 minutes, 50 seconds
+Have you tried lengthening the photon rods? Money.
+27:55
+27 minutes, 55 seconds
+I just can't believe you've actually done it. Attach bombardment. Creating a wormhole. Show me.
+28:01
+28 minutes, 1 second
+I can't. Look.
+28:09
+28 minutes, 9 seconds
+Sapphire crystal.
+28:11
+28 minutes, 11 seconds
+Namobium housing. Oh, cracked. It's expensive. Can you replace it? Why didn't you come to me years ago?
+28:18
+28 minutes, 18 seconds
+I couldn't.
+28:20
+28 minutes, 20 seconds
+If I can help you finish this, we can change history, you and me.
+28:26
+28 minutes, 26 seconds
+We can knock Einstein off the map. I'm not sure I want to knock Einstein off the map. Uh, where to start? Well, the crystal.
+28:33
+28 minutes, 33 seconds
+Um, yeah, we've got a facility. I can get you everything you want. What now?
+28:41
+28 minutes, 41 seconds
+Why not?
+28:43
+28 minutes, 43 seconds
+I just can't believe you've done all this without telling anyone. Holly, you're a genius.
+29:07
+29 minutes, 7 seconds
+I fired and hit him in the shoulder. Are you sure about that? Do you mind?
+29:11
+29 minutes, 11 seconds
+I thought you'd actually shot yourself in the foot. What do you think you believe?
+29:17
+29 minutes, 17 seconds
+Bad luck, Slade. I'm sure the commissioner will be more sympathetic.
+29:21
+29 minutes, 21 seconds
+Yeah, thanks. You you should at least get one month's full pay and it won't affect your pension.
+29:28
+29 minutes, 28 seconds
+I'm sure the answer to this is staring me in the face. When Chapman was run over, he was pointing to Holly's arm.
+29:34
+29 minutes, 34 seconds
+And that be woman was going on about Hwood being in two plays at the same time, but he can't have been.
+29:40
+29 minutes, 40 seconds
+Where you going out? Got to get my car checked over. Why?
+29:44
+29 minutes, 44 seconds
+This morning when I was watching Marlo and went crazy. Really?
+29:50
+29 minutes, 50 seconds
+Radio on and off, windscreen wipers, even the cigarette lighter, all the electrics.
+29:54
+29 minutes, 54 seconds
+Morris, where were you when this happened? [music] Outside web, whatever it is,
+30:03
+30 minutes, 3 seconds
+Holly, are we going to your office? Uh, no, not now. Where then?
+30:07
+30 minutes, 7 seconds
+We're going to one of my facilities. I think you might find it a bit of a surprise. We've got everything you could possibly need. This is going to be wonderful.
+30:20
+30 minutes, 20 seconds
+When Chapman was run over, he wasn't just pointing to her arm. He was pointing to a watch. What? He wanted to ask her the time.
+30:27
+30 minutes, 27 seconds
+No, Nikki. He want He wants to tell her about time. Time is what this is all about.
+30:32
+30 minutes, 32 seconds
+Of course, because he was working on a synretron.
+30:35
+30 minutes, 35 seconds
+Synretrons are something to do with time dilation.
+30:38
+30 minutes, 38 seconds
+Exactly. Oh, Frank. Um, Holly and Steven Marlo, they left about an hour ago. Do you know where they were going? Yeah. Look, I've overheard them talking.
+30:46
+30 minutes, 46 seconds
+She was going to take him back to her flat. There was something she wanted to show him. Oh, no.
+30:53
+30 minutes, 53 seconds
+That's what she said. Danny, have you seen Holly?
+31:01
+31 minutes, 1 second
+I'm afraid you're too late, mate. She left about an hour ago. Is she on her own? What should you know about it then?
+31:09
+31 minutes, 9 seconds
+Steven Marlo used to be around here all the time 5 years ago. Lovely chat. I was amazed to see them together again.
+31:15
+31 minutes, 15 seconds
+[music]
+31:15
+31 minutes, 15 seconds
+They left together.
+31:16
+31 minutes, 16 seconds
+Yeah, in his car.
+31:18
+31 minutes, 18 seconds
+Those I think I didn't see. I'm sure you don't have to worry about it, Jeff. They're just friends.
+31:28
+31 minutes, 28 seconds
+Go straight on. We're heading out of town. That's right.
+31:34
+31 minutes, 34 seconds
+What's going on? Where are we going?
+31:39
+31 minutes, 39 seconds
+[music]
+31:42
+31 minutes, 42 seconds
+What? Just keep driving. Going anywhere.
+31:50
+31 minutes, 50 seconds
+[music]
+32:15
+32 minutes, 15 seconds
+Heat. Heat.
+32:44
+32 minutes, 44 seconds
+of Auto initiation set.
+32:53
+32 minutes, 53 seconds
+Auto initiation set. System open. System open. Enter time coordinates. 30 minutes.
+33:00
+33 minutes
+30 minutes. 90 minutes. 120 minutes. Processing. Processing.
+33:09
+33 minutes, 9 seconds
+Initiate time travel.
+33:39
+33 minutes, 39 seconds
+Where's the car? Oh, of course.
+33:47
+33 minutes, 47 seconds
+Police. Sorry, sir. I need your car. Thank you very much indeed. My car. It's a company car. Please stop.
+33:55
+33 minutes, 55 seconds
+Come back. Are we going to?
+34:04
+34 minutes, 4 seconds
+Uh, no. Not now. Where?
+34:06
+34 minutes, 6 seconds
+We're going to one of my facilities. I think you might find it a bit of a surprise. We've got everything you could possibly need. This is going to be wonderful.
+34:16
+34 minutes, 16 seconds
+[music]
+34:42
+34 minutes, 42 seconds
+We're heading out of town. That's right.
+34:54
+34 minutes, 54 seconds
+[screaming]
+34:59
+34 minutes, 59 seconds
+What's going on? Where are we going?
+35:05
+35 minutes, 5 seconds
+[music]
+35:06
+35 minutes, 6 seconds
+What?
+35:26
+35 minutes, 26 seconds
+[music]
+35:28
+35 minutes, 28 seconds
+How'd you get You know, Holly, I'm genuinely sorry
+35:38
+35 minutes, 38 seconds
+about this. I'm very attracted to you, Kakis. Thank you. Why are you doing this? I would have thought that was obvious.
+35:47
+35 minutes, 47 seconds
+Time travel. It's the most astounding discovery since, well, whenever. Whoever puts their name to it is going to go down in history.
+35:56
+35 minutes, 56 seconds
+And think of the money. billions.
+36:02
+36 minutes, 2 seconds
+And why should I share that with you? In you go.
+36:11
+36 minutes, 11 seconds
+Wait here. Give me your hands. You've got a time machine, haven't you?
+36:20
+36 minutes, 20 seconds
+That's how you knew about the photon rods.
+36:22
+36 minutes, 22 seconds
+Yes. That's how it works. I can be in two places at once. two time zones. And when I finish with you here, you can travel back and give yourself
+36:30
+36 minutes, 30 seconds
+the perfect alibi, just like you did with Haywood and Chapman. Exactly. What is this place?
+36:37
+36 minutes, 37 seconds
+I told you it's one of our facilities.
+36:41
+36 minutes, 41 seconds
+Sometimes it's necessary to flash freeze samples, viruses. Here you go. You're going to leave me here.
+36:49
+36 minutes, 49 seconds
+Well, I couldn't possibly shoot you. Not the way I feel about you.
+36:55
+36 minutes, 55 seconds
+And this will be completely painless.
+37:01
+37 minutes, 1 second
+I gained a sleep. Let me take a couple of minutes. Maybe I prefer to be shot. Oh, please.
+37:15
+37 minutes, 15 seconds
+[music]
+37:22
+37 minutes, 22 seconds
+Heat. Heat.
+37:29
+37 minutes, 29 seconds
+[music]
+37:41
+37 minutes, 41 seconds
+[music]
+37:46
+37 minutes, 46 seconds
+Heat.
+37:58
+37 minutes, 58 seconds
+[music]
+38:04
+38 minutes, 4 seconds
+Heat.
+38:15
+38 minutes, 15 seconds
+[music]
+38:17
+38 minutes, 17 seconds
+Holly,
+38:23
+38 minutes, 23 seconds
+[music]
+38:26
+38 minutes, 26 seconds
+Holly.
+38:45
+38 minutes, 45 seconds
+SL help me. [music]
+38:57
+38 minutes, 57 seconds
+[music]
+39:04
+39 minutes, 4 seconds
+Heat. Heat.
+39:10
+39 minutes, 10 seconds
+[music]
+39:42
+39 minutes, 42 seconds
+Come on. There's the car.
+39:44
+39 minutes, 44 seconds
+How did you find me? You couldn't have found me. You've time traveled. Yeah. With his machine.
+39:52
+39 minutes, 52 seconds
+No, it wasn't his machine. Chapman and Haywood built it.
+39:57
+39 minutes, 57 seconds
+Now I said there's everything in the boot. Okay. They were moonlighting at Web's expense.
+40:07
+40 minutes, 7 seconds
+He was helping them.
+40:09
+40 minutes, 9 seconds
+Yeah, I'm sure. When they'd finished it, he killed them using the time machine to give himself an alibi. And then used it again, tried to kill me. Right.
+40:22
+40 minutes, 22 seconds
+[panting]
+40:25
+40 minutes, 25 seconds
+You shot him?
+40:27
+40 minutes, 27 seconds
+Yes. Whilst he was time traveling. So when he got back to the present, the wound had cleared up. Okay.
+40:34
+40 minutes, 34 seconds
+[sighs]
+40:35
+40 minutes, 35 seconds
+[panting]
+40:36
+40 minutes, 36 seconds
+How long have you got?
+40:37
+40 minutes, 37 seconds
+What do you have to be back at the machine? 12 minutes.
+40:44
+40 minutes, 44 seconds
+Why do you always leave it so?
+40:52
+40 minutes, 52 seconds
+This man slid. First of all, he has humiliated my technical director. And now I find he has come back and he has
+41:01
+41 minutes, 1 second
+stolen. No, I mean stolen [music] my senior accountant's car. I couldn't stop him.
+41:12
+41 minutes, 12 seconds
+All right. All right, Mr. Webb.
+41:16
+41 minutes, 16 seconds
+I will deal with this personally. I am coming over right now.
+41:24
+41 minutes, 24 seconds
+Slade. 3 minutes. Yep. Almost exactly the same as yours.
+41:30
+41 minutes, 30 seconds
+[music]
+41:38
+41 minutes, 38 seconds
+I had a feeling it was you at the cold store. I think your game's up, Steve. I wouldn't say that, Mr. Slade.
+41:46
+41 minutes, 46 seconds
+In fact, if either of us was in trouble, I'd say it was you, Steven. Interesting situation, don't you think?
+41:53
+41 minutes, 53 seconds
+Do you know what happens if you don't get back in the machine? Uh-huh.
+41:56
+41 minutes, 56 seconds
+You get sucked into the loop of infinity. Very convenient for me. It'll be as if you didn't exist at all. I have one and a half minutes.
+42:05
+42 minutes, 5 seconds
+Alternatively, you could take one step forward and I'll shoot you dead.
+42:09
+42 minutes, 9 seconds
+If you're time traveling now, the effect will be the same. Either way, I won't have to dispose of a body. And what about me?
+42:16
+42 minutes, 16 seconds
+You won't tell anyone.
+42:18
+42 minutes, 18 seconds
+Don't tell me you really care for this arrogant plot. Holly, you can still come with me.
+42:39
+42 minutes, 39 seconds
+See the first time machine.
+42:46
+42 minutes, 46 seconds
+We can present it to the world together. Steven. Yeah.
+43:03
+43 minutes, 3 seconds
+Warning the machine. No.
+43:07
+43 minutes, 7 seconds
+Slate,
+43:11
+43 minutes, 11 seconds
+[music]
+43:18
+43 minutes, 18 seconds
+be careful. It's burning out. Slate.
+43:21
+43 minutes, 21 seconds
+[music]
+43:22
+43 minutes, 22 seconds
+Warning. Time to power.
+43:44
+43 minutes, 44 seconds
+What about him? She can't.
+43:52
+43 minutes, 52 seconds
+There's no time.
+43:53
+43 minutes, 53 seconds
+Please, go back. Change the past. Make it all right. I did it in the first of time. Ma, you can't [music] change the past. Do you mind telling me what's going on?
+44:01
+44 minutes, 1 second
+First, I hear a shot. Now the alarm's going off. Maro's under arrest, Mr.
+44:08
+44 minutes, 8 seconds
+Maro. Now you let you pay for this.
+44:19
+44 minutes, 19 seconds
+Initiate target. Initiate target.
+44:27
+44 minutes, 27 seconds
+system.
+44:55
+44 minutes, 55 seconds
+Did you find him? Yes and no.
+45:01
+45 minutes, 1 second
+He did try and travel back and didn't work.
+45:14
+45 minutes, 14 seconds
+Thank you.
+45:26
+45 minutes, 26 seconds
+What are you going to do with it then? What?
+45:29
+45 minutes, 29 seconds
+The machine.
+45:32
+45 minutes, 32 seconds
+I mean, if it doesn't work anymore and you you can't afford to replace the electromagnetic crystal.
+45:39
+45 minutes, 39 seconds
+Yeah. I don't know. Can't believe it's all over.
+45:46
+45 minutes, 46 seconds
+All my father's work.
+45:50
+45 minutes, 50 seconds
+But the bank won't lend me any more money, so I've got nowhere else to go.
+45:55
+45 minutes, 55 seconds
+So frustrating, isn't it? When you think all those crimes we could be solving. That's not the point.
+46:04
+46 minutes, 4 seconds
+We were a good team, you and me. Yeah.
+46:11
+46 minutes, 11 seconds
+Look, if we could get it working again.
+46:13
+46 minutes, 13 seconds
+Well, we can't. So that's a completely hypothetical question. All right.
+46:19
+46 minutes, 19 seconds
+I hear completely completely.
+46:45
+46 minutes, 45 seconds
+One electromagnetic [music] crystal with nobbium casing. Where did you get that?
+46:51
+46 minutes, 51 seconds
+Well, when I went back in after Marlo, sort of the machine. You didn't? I did.
+47:03
+47 minutes, 3 seconds
+No. No. What were you saying about you, mate?
+47:26
+47 minutes, 26 seconds
+[music]
