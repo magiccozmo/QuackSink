@@ -1,0 +1,45 @@
+connection_id,from_area,to_area,trigger,edge,source_object,approach,arrival_x,arrival_y,label
+market_to_alchemy_shop,britrun_market,alchemy_shop,door,,alchemy_shop_door,north,640,500,Enter the Alchemy Shop
+alchemy_shop_to_market,alchemy_shop,britrun_market,door,,shop_exit_door,south,640,370,Return to BritRun Market
+front_gate_to_outside_gate,front_gate,outside_gate,door,,city_gate_door,south,640,170,Enter Outside Gate
+outside_gate_to_front_gate,outside_gate,front_gate,door,,city_gate_return,north,640,250,Return to Front Gate
+inn_outside_to_inn_interior,inn_outside,inn_interior,door,,inn_front_door,north,635,490,Enter Inn Interior
+inn_interior_to_inn_outside,inn_interior,inn_outside,door,,inn_exit,south,631,482,Return to Inn Outside
+castle_exterior_to_castle_hall,castle_exterior,castle_hall,door,,castle_hall_door,north,636.6,577.7,Enter Castle Hall
+castle_hall_to_castle_exterior,castle_hall,castle_exterior,door,,castle_exit,south,640,170,Return to Castle Exterior
+castle_hall_to_mages_lab,castle_hall,mages_lab,door,,lab_door,north,640,490,Enter Mages Lab
+mages_lab_to_castle_hall,mages_lab,castle_hall,door,,lab_exit,south,640,490,Return to Castle Hall
+troll_cave_to_side_of_mountain,troll_cave,side_of_mountain,door,,troll_cave_exit,south,640,438,Escape Frosty’s Cave to the Mountainside
+castle_hall_to_vault_clip,castle_hall,castle_vault,clip,,vault_wall_seam,,640,460,Clipped into treasure room
+vault_to_hall,castle_vault,castle_hall,door,,vault_exit,south,935,410,Back to castle hall
+britrun_market_right_inn_outside,britrun_market,inn_outside,edge,right,,,60,500,Enter inn_outside
+inn_outside_left_britrun_market,inn_outside,britrun_market,edge,left,,,1205,500,Return to britrun_market
+britrun_market_bottom_front_gate,britrun_market,front_gate,edge,bottom,,,640,50,Enter front_gate
+front_gate_bottom_britrun_market,front_gate,britrun_market,edge,top,,,640,600,Return to BritRun Market
+britrun_market_left_gold_district,britrun_market,gold_district,edge,left,,,1210,610,Enter gold_district
+gold_district_right_britrun_market,gold_district,britrun_market,edge,right,,,71,550,Return to britrun_market
+gold_district_top_castle_path,gold_district,castle_path,edge,top,,,640,610,Enter castle_path
+castle_path_bottom_gold_district,castle_path,gold_district,edge,bottom,,,640,430,Return to gold_district
+gold_district_right_front_gate,gold_district,front_gate,edge,right,,,67,440,Enter front_gate
+front_gate_left_gold_district,front_gate,gold_district,edge,left,,,1220,440,Return to gold_district
+castle_path_top_castle_exterior,castle_path,castle_exterior,edge,top,,,640,510,Enter castle_exterior
+castle_exterior_bottom_castle_path,castle_exterior,castle_path,edge,bottom,,,900,50,Return to castle_path
+stables_right_plains,stables,plains,edge,right,,,60,400,Enter plains
+plains_left_stables,plains,stables,edge,left,,,1215,400,Return to stables
+plains_top_giant_camp,plains,giant_camp,edge,top,,,640,610,Enter Giant Camp
+giant_camp_bottom_plains,giant_camp,plains,edge,bottom,,,640,330,Return to Plains
+plains_right_mudcrab_river,plains,mudcrab_river,edge,right,,,65,475,Enter mudcrab_river
+mudcrab_river_left_plains,mudcrab_river,plains,edge,left,,,1210,475,Return to plains
+plains_bottom_southern_wilds,plains,southern_wilds,edge,bottom,,,640,360,Enter southern_wilds
+southern_wilds_top_plains,southern_wilds,plains,edge,top,,,640,600,Return to plains
+plains_left_mountain_path,plains,mountain_path,edge,left,,,1210,570,Enter mountain_path
+mountain_path_right_plains,mountain_path,plains,edge,right,,,65,570,Return to plains
+mountain_path_top_peak,mountain_path,peak,edge,top,,,640,507,Enter peak
+peak_bottom_mountain_path,peak,mountain_path,edge,bottom,,,720,190,Return to mountain_path
+southern_wilds_right_side_of_mountain,southern_wilds,side_of_mountain,edge,right,,,65,520,Follow the southern trail to the mountainside
+side_of_mountain_left_southern_wilds,side_of_mountain,southern_wilds,edge,left,,,1215,520,Return to Southern Wilds
+side_of_mountain_to_troll_cave,side_of_mountain,troll_cave,door,,mountain_cave_entrance,north,640,480,Enter Frosty’s Cave
+outside_gate_right_stables,outside_gate,stables,edge,right,,,60,480,Enter Stables
+stables_left_outside_gate,stables,outside_gate,edge,left,,,1210,480,Return to Outside Gate
+front_gate_to_little_lantern,front_gate,little_lantern_interior,door,,little_lantern_entrance,north,820,460,Enter The Little Lantern
+little_lantern_to_front_gate,little_lantern_interior,front_gate,door,,little_lantern_exit,south,365,447,Return to Front Gate

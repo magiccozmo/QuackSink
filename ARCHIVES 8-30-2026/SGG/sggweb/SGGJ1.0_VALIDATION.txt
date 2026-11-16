@@ -1,0 +1,22 @@
+SGGJ1.0 validation summary
+
+Baseline: SGGK1.12
+World: 23 areas, 44 directed connections
+
+PASSED
+- Python syntax compilation
+- Luma asset JSON validation: 122 recipes / 21,972 drawing commands
+- Topology validation: all 44 connections reference existing areas; reciprocal edge links use opposite edges; multiple same-edge exits have non-overlapping trigger bands; City Gate and Castle Hall door pairs use opposite approach directions
+- Runtime mirrors: source root, assets mirror, deploy J1.0 and browser J1.0 main.py and luma_assets_e33.json are byte-identical
+- TAR.GZ and APK layouts contain the J1.0 runtime and asset JSON
+- Source ZIP integrity: 435 members
+- Complete Cloudflare site ZIP integrity: 294 members
+- Site catalogue selects J1.0 as current and retains K1.12 as predecessor
+
+NOT PERFORMED
+- Live browser/gameplay test
+- Fresh Pygbag compiler build
+- GitHub main push
+- Cloudflare deployment
+
+Cozmo should field-test the City Gate and Castle Gate transitions first, then the full Market -> Front Gate -> Outside Gate -> Stables -> Plains route in both directions. Subtle side exits are called out in SGGJ1.0_TRANSITION_AUDIT.txt.

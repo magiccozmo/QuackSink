@@ -1,0 +1,26 @@
+SGGJ1.0 TRANSITION AUDIT
+Baseline: SGGK1.12
+World: 23 areas / 44 directed connections
+
+CORRECTED IN J1.0
+1. City Gate: Front Gate -> Outside Gate now exits south; Outside Gate -> Front Gate exits north. Arrivals are on the far side of the gate, so continuing in the travel direction does not immediately retrigger the same doorway. Existing gate art is retained with a small matching-palette path continuation behind each arch.
+2. Castle Hall / Castle Exterior: reciprocal approaches now oppose one another. The return arrival is placed on the far side of the castle gate; the existing castle approach is extended in the same stone palette.
+3. Castle Path / Castle Exterior: Castle Path upper-right route now has a matching road extension to the top-edge exit; return arrival is aligned to that upper-right route.
+4. Peak / Mountain Path: retained existing switchback arrival at (720,190), rather than inventing a top-right spawn.
+5. Side-edge arrival bands were normalized for Stables/Plains, Plains/Mudcrab River, Plains/Mountain Path, Southern Wilds/Side of Mountain, Outside Gate/Stables, Market/Inn Outside, Market/Gold District and Front Gate/Gold District.
+6. Plains/Giant Camp and Plains/Southern Wilds arrivals were moved toward the visible continuation of their north/south routes.
+
+RETAINED AS-IS
+- All 23 area identities and all 44 directed links remain. No destination was removed.
+- Interior doors for Alchemy Shop, Inn, Mage Lab, Troll Cave and Little Lantern retain their established approach pairings.
+- Castle Vault remains a deliberate clip-through/seam connection.
+- HELLgs Inn remains the isolated Challenge start.
+
+FIELD-TEST PRIORITIES
+A. Walk the complete Market -> Front Gate -> Outside Gate -> Stables -> Plains route in both directions, especially the two gate doors.
+B. Walk Castle Path -> Castle Exterior -> Castle Hall and back; verify the vestibule and door approach feel natural.
+C. Check the subtle side exits at Inn Outside, Stables, Plains, Mudcrab River, Mountain Path and Gold District against the background art.
+D. Verify each arrival is on visible walkable ground and that continuing in the same direction does not instantly return to the previous area.
+
+LIMITATION
+Static syntax, asset-schema and archive-integrity checks do not replace live browser gameplay. J1.0 has not been deployed.
