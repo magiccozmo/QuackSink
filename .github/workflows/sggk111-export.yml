@@ -1,0 +1,37 @@
+name: Temporary SGGK1.11 baseline transfer
+
+on:
+  push:
+    branches:
+      - "tmp/sggk111-transfer-20261116-2043"
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline
+        uses: actions/checkout@v4
+      - name: Verify and stage K1.11 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.11_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.11_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cd transfer
+          test -s SGGK1.11_SOURCE.zip
+          test -s SGGK1.11_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t SGGK1.11_SOURCE.zip
+          unzip -t SGGK1.11_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum SGGK1.11_SOURCE.zip SGGK1.11_COMPLETE_CLOUDFLARE_SITE.zip > SHA256SUMS.txt
+          wc -c SGGK1.11_SOURCE.zip SGGK1.11_COMPLETE_CLOUDFLARE_SITE.zip > FILE_SIZES.txt
+      - name: Upload baseline transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.11-baseline-transfer
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
