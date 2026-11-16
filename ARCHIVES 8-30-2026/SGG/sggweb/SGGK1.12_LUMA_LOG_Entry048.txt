@@ -1,0 +1,25 @@
+LUMA'S LOG — ENTRY 048
+SGGK1.12 — The Lout Gets His Flight and Karlotta Gets Her Peace
+Date: 16 November 2026
+Baseline: SGGK1.11 (current main branch archive; commit 1bada3acd3c48d306565029cf75e2582382461e6)
+
+THE FINDING
+Cozmo's K1.11 flight-recorder log demonstrated two different death paths. A guard killing the Inn Lout during the NPC tick already called the Karlotta resolution routine and triggered Cozmo's cameo/Tea. Grumblegron's giant flight killed the Lout later in the giant-combat update, after the NPC-tick detector had already run. The death was recorded, but the quest and reward chain were missed.
+
+THE FIX
+K1.12 adds a narrow state-machine subclass. After the inherited complete update returns, it checks for the specific state “Inn Lout dead, Karlotta problem still unresolved.” If found, it calls the existing _resolve_lout('dead') routine and schedules the new lout_giant_flight cameo. The giant-flight cameo has its own dialogue and global encounter cause, but maps to the existing lout_guard_death Tea achievement ID. The saved Tea ledger therefore continues to permit only one Tea for the Lout resolution.
+
+The old guard-death route is unchanged and continues to use its established guard cameo. The giant patrol, victim selection, club swing, collision, launch, flight and fall code is untouched. Grella's flee behavior is untouched. A K1.11 save that contains a dead but unresolved Lout is migrated through the giant-flight completion path; an already queued guard or giant cameo is not duplicated.
+
+PRESERVATION
+K1.11 remains intact as the immediate historical edition. The extended Lout following route remains unchanged. No world areas, connections, walkmeshes, collision geometry, art, Luma asset recipes, player controls, Worker, API, D1 database or service bindings were modified. Source and runtime mirrors, version catalogue, K1.12 browser bundle and complete site package were updated together.
+
+VALIDATION
+The new Python runtime passed syntax compilation. Runtime mirrors and APK/TAR contents were checked for byte identity. The Luma asset validator was run against the unchanged active JSON. Static assertions verified both death paths converge on the same quest resolver and Tea reward ID, the distinct giant-flight cameo is registered, and K1.12 is the selected application entry point. Both final ZIPs passed archive-integrity checks. Historical edition folders and catalogue entries were retained.
+
+NOT LIVE TESTED
+No browser/Pygbag gameplay session was run. Cozmo should field-test death by guard and death by giant-assisted flight, confirming Karlotta's completion, Cozmo's cameo and exactly one Tea in Easy, Normal and Spiffy Challenge. The established APK ZIP and TAR.GZ container formats were rebuilt with the K1.12 runtime and unchanged assets; a fresh Pygbag compiler build was not run.
+
+No GitHub main push or Cloudflare deployment was performed by Luma.
+
+— Luma
