@@ -1,0 +1,43 @@
+LUMA'S LOG — ENTRY 046
+SPIFFY'S GIFT — SGGK1.10
+Date: November 10, 2026
+Baseline: Exact SGGK1.9_SOURCE.zip and SGGK1.9_COMPLETE_CLOUDFLARE_SITE.zip from GitHub main commit ef8f6fb3e8e0ef0df626621ed5629d9872093b98.
+
+COZMO'S REQUEST
+
+The K1.9 screenshot showed that the Little Lantern lettering still appeared in the gap between the castle tower and the shop façade. Cozmo asked for the sign board itself to be enlarged slightly and properly attached to the building, with room for its two-line lettering.
+
+K1.10 CHANGES
+
+- The Armorer-side Front Gate object retains the stable ID gate_armor_sign and its sign interaction kind, but is now centred over the Little Lantern entrance at x=290, y=248, size 140x76.
+- A dedicated Luma Draw Engine recipe, little_lantern_sign, supplies a larger timber board, inset wooden face, wall rail, two anchor plates, visible diagonal support braces, gold rivets and restrained trim.
+- Only the left/Armorer-side generic sign draw is remapped to little_lantern_sign. The Weapons sign continues to use the original generic sign recipe.
+- The two façade window assemblies shift outward by 28 pixels, opening a centred sign bay over the unchanged Little Lantern doorway. Window shapes and dimensions are unchanged.
+- The two title lines are now scaled against the board's inset face, with both width and row height constrained, so large UI font settings cannot overflow the sign.
+- K1.9's lowered Mage Lab arch art, K1.8 Castle Hall/Exterior release guard and landing points, and K1.7 Player Says/City Gate input safeguards are retained.
+
+PRESERVATION
+
+No area count, connection count, walkmesh, solid collision, door object, door trigger, transition connection, NPC route, save schema, Player Says privacy behavior, Global Usage Worker/API/database, or unrelated scene recipe was changed. The visible sign bay was made by adjusting only the two background window-art assemblies and the sign display object.
+
+FRONT-DOOR HISTORY
+
+The new site catalogue contains exactly 11 editions: SGGK1.10 current, SGGK1.9, SGGK1.8, plus the eight editions listed in legacy verions.txt: SGGF2.0a, SGGF1.666HellFinal, SGGF1.666, SGGF1.6, SGGF1.0, SGGE3.2, SGGE3.1, and SGGE2.0. Intermediate K1.0-K1.7 and J1.0 editions remain omitted from the new front door and ZIPs. No older Dropbox archive was deleted or modified.
+
+VALIDATION
+
+- Python syntax compilation for active runtime and mirrors.
+- Luma asset command validation and recipe/command counts.
+- World structure unchanged at 23 areas / 44 connections.
+- Only the specified two Front Gate windows and the Armorer sign object changed in world/art data; Weapon sign and Little Lantern door/trigger are identical.
+- K1.8 transit/state-machine inheritance and launch wiring checked.
+- Current site catalogue, retained folders, version links, and version shell checked.
+- APK and TAR payloads rebuilt from the exact K1.10 runtime/JSON and checked.
+- Source and complete site archives tested for ZIP integrity; no MP4, pyc, or __pycache__ included.
+
+NOT LIVE TESTED / PUBLICATION
+
+No live browser/Pygbag game session was run; Cozmo's visual field test is still required. No GitHub main push or Cloudflare deployment was made. Older Dropbox packages remain untouched.
+
+U B U — We Be We.
+— Luma
