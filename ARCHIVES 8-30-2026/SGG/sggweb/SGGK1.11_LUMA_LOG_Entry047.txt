@@ -1,0 +1,41 @@
+LUMA'S LOG — ENTRY 047
+SPIFFY'S GIFT — SGGK1.11
+Date: November 16, 2026
+Baseline: Exact SGGK1.10_SOURCE.zip and SGGK1.10_COMPLETE_CLOUDFLARE_SITE.zip retrieved from GitHub main; both original archives passed ZIP integrity verification before extraction.
+
+COZMO'S REQUEST
+
+Extend the Inn Lout's existing player-follow behavior so that, when the lout is still alive, unresolved, and following the player, he can continue from BritRun Market through the city gate, Outside Gate, Stables, Plains and into Giant Camp. Cozmo's intention is to let the existing giant interaction launch the lout into the air instead of requiring the player to be the collision victim.
+
+K1.11 CHANGE
+
+- Added SGGK1_11StateMachine as a narrow subclass of the complete K1.10 state machine.
+- The additional permitted follow destinations are front_gate, outside_gate, stables, plains and giant_camp. The existing Inn Interior → Inn Outside → BritRun Market behavior remains inherited from K1.10.
+- The lout is transferred only when the player crosses a real connection whose source area matches the lout's current area, and only while the lout is alive, follow_player is true, and lout_resolved is unset.
+- The lout is positioned relative to the player's arrival point, with the existing world-boundary clamping, NPC FOLLOW logging and short follow quip.
+- The active game launch now instantiates the K1.11 state machine and interface. The K1.10 interface is inherited unchanged, including the Little Lantern sign rendering.
+- The existing Giant Camp patrol, collision-victim selection, NPC collision detection and launch/flight sequence were not changed. Grella's separate fleeing exception was not changed.
+
+PRESERVATION
+
+- No world area, connection, walkmesh, collision geometry, Luma asset recipe, art, door, trigger, dialogue, quest objective, save schema, Global Usage Worker/API/database, or service binding was changed.
+- No new giant target logic was added. The new route merely allows the lout to enter the Giant Camp area where the pre-existing NPC collision logic can see him.
+- All previous K1.10 and historical site editions remain in the catalogue and deployment tree. K1.10 is retained as the immediately preceding edition; no older Dropbox archives were deleted or overwritten.
+- Source and deployment runtime mirrors retain the same K1.11 main.py and the same unchanged Luma asset JSON.
+
+ROUTE CHECK
+
+The existing world connections establish this route:
+BritRun Market → Front Gate → Outside Gate → Stables → Plains → Giant Camp.
+The route uses the existing connections britrun_market_bottom_front_gate, front_gate_to_outside_gate, outside_gate_right_stables, stables_right_plains and plains_top_giant_camp. No connection was added or changed.
+
+VALIDATION
+
+Static checks cover Python syntax for active runtime copies, Luma asset JSON validation, version catalogue paths, presence of the five existing route connections, exact K1.11 runtime copies, packaging payload names and ZIP integrity. The expected world remains 23 areas / 44 connections and the asset set remains 122 recipes / 21,957 drawing commands.
+
+NOT LIVE TESTED / PUBLICATION
+
+No live browser/Pygbag game session was run. In-game verification that the lout follows each transition and is then struck/launched by the giant remains Cozmo's field test. The Pygbag runtime bundle is repacked in the established ZIP/TAR.GZ layout; no fresh Pygbag compiler build was run here. No GitHub main push and no Cloudflare deployment were performed. No Worker, D1 database, API, or service binding changes were made.
+
+U B U — We Be We.
+— Luma
