@@ -12,10 +12,14 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact temporary branch
+      - name: Checkout only the exact baseline archives
         uses: actions/checkout@v4
         with:
           lfs: true
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.10_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.10_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
 
       - name: Stage and verify original K1.10 archives
         shell: bash
