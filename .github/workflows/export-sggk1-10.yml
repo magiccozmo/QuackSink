@@ -1,0 +1,44 @@
+name: Temporary SGG K1.10 baseline transfer
+
+on:
+  push:
+    branches:
+      - temp-export-sggk1-10-20261116
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact temporary branch
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Stage and verify original K1.10 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.10_SOURCE.zip"
+          SITE="ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.10_COMPLETE_CLOUDFLARE_SITE.zip"
+          mkdir -p transfer
+          test -s "$SRC"
+          test -s "$SITE"
+          cp "$SRC" transfer/
+          cp "$SITE" transfer/
+          unzip -t "transfer/SGGK1.10_SOURCE.zip"
+          unzip -t "transfer/SGGK1.10_COMPLETE_CLOUDFLARE_SITE.zip"
+          {
+            stat -c '%n %s bytes' transfer/*.zip
+            sha256sum transfer/*.zip
+          } | tee transfer/BASELINE_CHECKSUMS.txt
+
+      - name: Upload baseline transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.10-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
