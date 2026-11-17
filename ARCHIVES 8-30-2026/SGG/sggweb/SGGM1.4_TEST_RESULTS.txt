@@ -1,0 +1,36 @@
+SGGM1.4 — STATIC TEST RESULTS
+Date: 17 November 2026
+
+BASELINE / INTEGRITY
+- Retrieved the exact SGGM1.3a_SOURCE.zip (51,684,951 bytes) and SGGM1.3a_COMPLETE_CLOUDFLARE_SITE.zip (22,478,897 bytes) from GitHub main using the isolated Actions transfer branch.
+- Both baseline archives and the transfer artifact passed ZIP integrity checks. Original archives retained untouched.
+- M1.3a historical folder is preserved; M1.4 is a new version folder.
+
+WORLD / CITY LAYOUT — PASS
+- Actual SGGM1World class from the M1.3a runtime instantiated the M1.4 map and its own validate() method passed.
+- World remains 11 layers and 19 directed portals.
+- BritRun retains the same eight landmark IDs/kinds, four city NPC IDs/roles, and five outgoing city portal IDs.
+- All five city portal origins passed the actual engine's full 20x26 player-body can_move_to check.
+- All 19 directed portal arrival points, including all five city return arrivals, passed the actual engine's full player-body can_move_to check.
+- All four city NPC positions passed the same full-body walkmesh/collision check.
+- All eight city path polylines were sampled every 15 world units; all centreline samples passed full-body walkmesh checks. Road-width bands were also sampled across each road (including player-body clearance); all bands passed.
+- All eight city landmarks produced a safe fast-travel landing using the same search radii and walkmesh candidate method as the runtime.
+- The M1.3a startup anchor remains city_exterior (3400,1490) and passed unchanged.
+- Easy and Normal starts remain countryside (1070,1010); Spiffy Challenge remains hellgs_inn (650,500). All three passed the existing engine's movement check.
+
+PRESERVATION
+- Every non-city layer and its geometry remains identical to M1.3a; only the five incoming city target coordinates were adjusted.
+- City layer identity, dimensions, and other non-layout fields remain unchanged. Existing landmark/NPC/portal identities and roles are preserved.
+- The runtime main.py differs from M1.3a only by release-identification strings (M1.3a -> M1.4); no gameplay logic changes.
+- Luma asset JSON is byte-identical to M1.3a (SHA-256 194c3acd6ce6ce55cc575d586202b5dce566aff48650e98173e05fc7ee734043).
+- Generic placeholder renderer is unchanged. No artwork, drawing recipe, sprite, or background was created or modified.
+- Historical releases, Worker files, D1 configuration, saves, controls, dialogue, quests, NPC behavior, and other gameplay systems are preserved.
+
+PACKAGE / SYNTAX
+- Python syntax compilation passed.
+- New Pygbag .tar.gz and .apk runtime bundles were generated from the M1.4 main.py, map JSON, and unchanged Luma asset JSON.
+- The inner runtime .tar.gz and .apk pass integrity checks.
+- The complete source and Cloudflare deployment outer ZIPs are verified at final packaging.
+
+LIVE TEST LIMITS
+- No live Pygame render, fresh Pygbag compilation, or browser session was run in this build environment. Field deployment/browser testing remains outstanding.

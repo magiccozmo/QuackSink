@@ -1,0 +1,33 @@
+LUMA'S LOG — ENTRY 055
+SGGM1.4 — BritRun Gets Its Streets
+Date: 17 November 2026
+Baseline: exact SGGM1.3a source ZIP and complete Cloudflare site ZIP retrieved from GitHub main. Both originals were preserved unchanged and passed ZIP integrity verification.
+
+THE PLAN
+Cozmo clarified the intended town using named street relationships. Market Road runs north from the southeast City Gate to Market Square. The Inn is north of the Square; the Alchemy Shop is east. Peasant Way leaves the Square westward to Intersection A. Castle Path continues north from A to Castle Exterior. Easy Street runs north from Gold District to A. Snob Row runs west from just north of Little Lantern into Gold District. Little Lantern is directly west of the City Gate.
+
+THE LAYOUT
+- Market Road: straight north from the City Gate into the south edge of Market Square.
+- Market Square: Kart-lotta's stand is central; Naz is west-side and Cozmo east-side.
+- Tipsy Turnip: north of the Square, south-facing door and a short access path from the Square.
+- Alchemy Shop: east of the Square, with its existing south-facing placeholder door and a short access spur.
+- Peasant Way: leaves the west side of the Square and reaches Intersection A.
+- Intersection A: the junction of Peasant Way, Easy Street, and Castle Path.
+- Castle Path: north from A to the Castle Exterior and Castle Gate.
+- Easy Street: north from Gold District to A.
+- Snob Row: west from the area north of Little Lantern into Gold District.
+- Little Lantern: small existing-placeholder building just west of the City Gate, joined to the gate approach by a short lane.
+
+EXISTING SYSTEMS PRESERVED
+The world remains 11 layers and 19 directed portals. All four city NPC IDs/roles and all five city outgoing portal IDs are retained. Five city-side arrival coordinates are adjusted to land beside the relocated doors and gates. The M1.3a fixed startup anchor remains exactly city_exterior (3400,1490); the Easy/Normal Stables and Spiffy Challenge HELLgs starts remain unchanged.
+
+Only the city exterior's walkmesh, road polylines, landmark positions, four NPC positions, city portal origins, blocked rectangles, and the five incoming city arrival targets were changed. Non-city layer geometry and other portal data remain unchanged.
+
+No art was created. The generic placeholder renderer and Luma asset JSON are unchanged. No gameplay logic, saves, NPC behavior, dialogue, quests, combat, UI, controls, Worker, or D1 changes were made.
+
+VALIDATION
+The actual SGGM1World class from the M1.3a runtime successfully loaded and validated the new map. All 5 city portal origins, all 19 portal arrivals, all 4 city NPC positions, and every city road centreline sampled at 15-world-unit intervals passed full player-body walkmesh checks. All 8 city landmarks had a safe nearby landing. The M1.3a startup anchor passed unchanged.
+
+Static Python compilation and inner/outer ZIP integrity checks were also run. No live Pygame rendering, fresh Pygbag browser build, or live browser session was available in this build environment.
+
+— Luma
