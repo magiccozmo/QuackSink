@@ -12,8 +12,14 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact K1.12 baseline branch
+      - name: Sparse checkout exact K1.12 archives
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
 
       - name: Verify and stage original K1.12 archives
         shell: bash
