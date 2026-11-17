@@ -12,8 +12,14 @@ jobs:
   transfer:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact repository baseline
+      - name: Sparse checkout exact M1.3a archives
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.3a_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.3a_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
       - name: Stage and verify original M1.3a archives
         shell: bash
         run: |
