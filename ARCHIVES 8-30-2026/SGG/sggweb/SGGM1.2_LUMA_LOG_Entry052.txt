@@ -1,0 +1,52 @@
+LUMA'S LOG — ENTRY 052
+SGGM1.2 — BritRun Finds Its Streets
+Date: 17 November 2026
+Baseline: SGGM1.1 exact source and complete Cloudflare site archives from live GitHub main
+Scope: BritRun city layout, the four NPCs placed in the city, and the reciprocal city-side transition arrivals required by the new gate/door locations.
+
+THE PURPOSE
+M1.1 established the continuous world and working layer transitions. Cozmo then supplied the rough street plan for BritRun: a compact, Whiterun-like town with a central square, an entrance at the southeast corner, and a clear route structure. M1.2 turns that plan into the actual city walkmesh, road network, landmarks, portals and city NPC placements. Geography leads; buildings and transitions are positioned to agree with it.
+
+THE NEW BRITRUN PLAN
+- The Front Gate is on the south edge near the southeast corner. The city-side arrival from the Countryside is just inside the gate, at (3220,1640); the exit portal is at (3220,1744).
+- The main road runs north from the gate and enters the central Market Square.
+- Karlotta's Market Square is the hub. The Market landmark represents the small central market/stand; Kart-lotta is positioned immediately south of it in the square.
+- The Tipsy Turnip exterior is directly north of the square, with its door on the south-facing frontage.
+- The Alchemy Shop sits on the east side of the square, with its entrance placed on the connecting east-side approach.
+- The west street from the square reaches the clear three-way Intersection A.
+- From Intersection A, Castle Path runs north to the Castle Exterior and Castle Gate.
+- From Intersection A, the southern branch leads to Gold District. The Gold District road then sweeps east/southeast and returns to the south-wall City Gate, creating the town's loop.
+- The Little Lantern remains available as a side destination on the southern return loop rather than competing with the main square.
+
+CITY NPC PLACEMENT
+The four existing city NPC IDs and roles are retained; only their city coordinates are changed:
+- Kart-lotta (merchant): (2120,1090), the centre of Market Square beside her stand.
+- Naz (merchant): (1800,1080), on the western side of the square.
+- BritRun Guard (guard): (3190,1570), inside the southeast gate approach.
+- Cozmo (magician): (2420,1100), on the eastern side of the square.
+No new city NPCs were added. NPCs and behavior inside the Alchemy Shop, Inn, Castle Hall or any other interior layer were not changed. No dialogue, quest, follower, combat, or NPC behavior was added or altered.
+
+TRANSITIONS AND WALKMESH
+The city retains its five portals and the world retains all 11 layers and 19 directed portals. The city portal locations now match the redesigned town. The incoming Countryside-to-City arrival and the reciprocal returns from the Alchemy Shop, Tipsy Turnip, Castle Hall and Little Lantern now place the player at the corresponding city-side door/route, rather than at old, unrelated coordinates.
+
+PRESERVATION / SCOPE
+- No gameplay behavior or UI/control behavior was changed. The only runtime changes are release-version labels from M1.1 to M1.2.
+- No other layer's geography, walkmesh, landmark or NPC data was changed. The four reciprocal portal target coordinates are the only non-city-layer data changes; they are city-side return points for this city redesign.
+- The Luma art JSON remains byte-identical. No image/background assets were changed.
+- The existing M1.1, M1.0a, M1.0, K1.12 and legacy editions remain preserved as separate historical folders.
+- No Global Usage Log Worker or D1 database change was made.
+
+VALIDATION
+- Map JSON parses and retains the 11-layer / 19-directed-portal world.
+- All 19 portal destination points pass the full player-body walkmesh and blocked-area check.
+- All five city portal origins pass the same body check.
+- All five arrivals from other layers into BritRun pass the same body check.
+- Every authored city road/plaza path was sampled at 15-world-unit intervals; all samples remain on walkable ground.
+- All four city NPC positions pass the player-body walkmesh check.
+- All eight city landmark centres are walkable and therefore support safe fast-travel landing.
+- Runtime version mirrors, map mirrors and M1.2 deployment copies are checked for identity; package ZIP/TAR integrity is checked.
+
+NOT LIVE TESTED
+The build environment does not provide a live Pygame render or browser gameplay session. This release repackages the existing M1.1 Pygbag payloads with the M1.2 runtime version labels and city map; no fresh Pygbag compiler build was run. Cozmo's deployed field test remains the live verification for street navigation, door approaches, gate entry/exit and the Gold District return loop.
+
+— Luma

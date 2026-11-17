@@ -1,0 +1,28 @@
+SGGM1.2 — TEST RESULTS
+
+BASELINE
+- Exact SGGM1.1_SOURCE.zip and SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip retrieved from the live main commit a8badd2761e179f40551a2ab7e26690b5a5c1eb3.
+- Both original archives passed ZIP integrity checks and their SHA-256 values matched the release manifest.
+- M1.1 historical directories were retained; the deployed M1.1 site folder and source/deploy/SGGM1.1 folder compare byte-for-byte with their original M1.1 release ZIPs.
+
+CITY DESIGN / STATIC VALIDATION — PASS
+- 11 world layers and 19 directed portals retained.
+- city_exterior contains 8 walkmesh rectangles, 9 road/plaza polylines, 8 landmarks, 4 existing NPCs and 5 existing outgoing portals.
+- All five city portal origins pass full-body walkmesh and blocked-area checks.
+- All 19 layer-to-layer arrival points pass full-body walkmesh and blocked-area checks.
+- All five incoming city-side arrivals (Countryside, Alchemy Shop, Tipsy Turnip, Castle Hall, Little Lantern) are on safe walkmesh locations.
+- All city NPC coordinates pass full-body walkmesh checks.
+- All eight city landmark centres pass full-body walkmesh checks.
+- Every road/plaza polyline was sampled every 15 world units; no sample left the walkmesh or entered a blocked area.
+- The City Gate is on the south edge near the southeast corner. The northbound road reaches Market Square. The west street reaches Intersection A; Castle Path branches north, Gold District south, and Gold District's return loop reaches the City Gate.
+- Runtime version labels identify M1.2. No gameplay logic was changed.
+- All M1.2 map mirrors are byte-identical. M1.1 map and release folders remain preserved.
+- Existing Luma art JSON SHA-256 remains unchanged from M1.1.
+- `main.py` Python syntax compilation passed.
+- M1.2 APK ZIP and TAR.GZ contents pass integrity checks and contain the same updated map/runtime assets.
+- Final source and complete Cloudflare site ZIPs pass integrity checks.
+
+LIVE TEST LIMITS
+- No fresh Pygbag compiler build, live Pygame render, or browser gameplay test was run.
+- Cozmo should field-test the south-wall gate entry/exit, northbound Market Square approach, Inn and Alchemy doors, west street to Intersection A, Castle Gate, Gold District south branch, and the Gold District return loop.
+- No Worker or D1 changes.
