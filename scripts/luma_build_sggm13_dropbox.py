@@ -239,11 +239,16 @@ subprocess.run(["zip","-qr","-9",str(OUT/"SGGM1.3_SOURCE.zip"),".","-x","*.mp4",
 subprocess.run(["zip","-qr","-9",str(OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"),".","-x","*.mp4","*.MP4","*/.DS_Store"],cwd=DEP,check=True)
 for p in [OUT/"SGGM1.3_SOURCE.zip",OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"]:
  with zipfile.ZipFile(p) as z: assert z.testzip() is None
-sums="".join(f"{sha(p)}  {p.name}\n" for p in [OUT/"SGGM1.3_SOURCE.zip",OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"])
-sums+=f"{sha(REL/'m1_world_layers.json')}  m1_world_layers.json\n{artsha}  luma_assets_e33.json\n"
-for b in [OUT,SRC,DEP,SRC_DEP,REL,SRC_REL]:
- (b/"SGGM1.3_SHA256SUMS.txt").write_text(sums,encoding="utf-8")
-for name in ["SGGM1.3_SOURCE.zip","SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip","SGGM1.3_LUMA_LOG_Entry053.txt","SGGM1.3_TEST_RESULTS.txt","SGGM1.3_SHA256SUMS.txt"]:
- source=OUT/name if (OUT/name).exists() else SRC/name
- shutil.copy2(source,OUT/name)
+inner_sums="".join(f"{sha(p)}  {p.name}\n" for p in [REL/"m1_world_layers.json",REL/"main.py",REL/"play.html",REL/"sggm1_3.apk",REL/"sggm1_3.tar.gz"])
+inner_sums+=f"{artsha}  luma_assets_e33.json\n"
+for b in [SRC,DEP,SRC_DEP,REL,SRC_REL]:
+ (b/"SGGM1.3_SHA256SUMS.txt").write_text(inner_sums,encoding="utf-8")
+subprocess.run(["zip","-qr","-9",str(OUT/"SGGM1.3_SOURCE.zip"),".","-x","*.mp4","*.MP4","*/.DS_Store"],cwd=SRC,check=True)
+subprocess.run(["zip","-qr","-9",str(OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"),".","-x","*.mp4","*.MP4","*/.DS_Store"],cwd=DEP,check=True)
+for p in [OUT/"SGGM1.3_SOURCE.zip",OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"]:
+ with zipfile.ZipFile(p) as z: assert z.testzip() is None
+outer_sums=inner_sums+"".join(f"{sha(p)}  {p.name}\n" for p in [OUT/"SGGM1.3_SOURCE.zip",OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip"])
+(OUT/"SGGM1.3_SHA256SUMS.txt").write_text(outer_sums,encoding="utf-8")
+for name in ["SGGM1.3_LUMA_LOG_Entry053.txt","SGGM1.3_TEST_RESULTS.txt"]:
+ shutil.copy2(SRC/name,OUT/name)
 print(json.dumps({"status":"success","source_bytes":(OUT/"SGGM1.3_SOURCE.zip").stat().st_size,"site_bytes":(OUT/"SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip").stat().st_size,"art_sha256":artsha,"files":[p.name for p in OUT.iterdir()]},indent=2))
