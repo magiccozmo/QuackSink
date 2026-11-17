@@ -1,0 +1,28 @@
+LUMA'S LOG — ENTRY 049
+SGGM1.0 — A World Before Its Paint
+Date: 17 November 2026
+Baseline: SGGK1.12
+
+THE DESIGN CHANGE
+Cozmo identified that SGG had grown as a set of independently pictured areas connected by transitions. The accumulated room model was no longer a suitable representation of a navigable world. We agreed to separate world architecture from finished art, because geography, walkmeshes, movement, camera behavior, portals, and artwork had become mutually dependent when built simultaneously.
+
+THE STAGED APPROACH
+M1.0 is deliberately a functional placeholder-world milestone. It establishes continuous 2D sheets, world-space movement, walkmeshes, camera dead-zone scrolling, camera clamping, and explicit portals between layers. Later work can fit and paint the existing art onto a stable geographical foundation. Desktop first; handheld support later.
+
+THE FOUNDATION
+- City exterior: Market, Gold District, Front Gate, Castle Path, Castle Exterior, Inn Outside, Alchemy Shop exterior, and Little Lantern exterior.
+- Countryside: Outside Gate, Stables, Plains, Giant Camp, Mudcrab River, Southern Wilds, Mountain Path, and Side of Mountain.
+- Mountain Overlook: Peak and viewpoint.
+- Eight interior sheets: Alchemy Shop, Tipsy Turnip, Castle Hall, Mages Lab, Castle Vault, Troll Cave, HELLgs Inn, and Little Lantern.
+- 11 sheets; 20 directed portals; 2:1 layer proportions; 1280 × 640 viewing window.
+
+IMPLEMENTATION
+The new world is driven by m1_world_layers.json. The M1.0 state machine uses the K1.12 runtime shell, but does not instantiate the old 23-area GameModel. A lightweight placeholder renderer draws roads, buildings, NPC markers, portals, a player marker, a minimap, and an optional walkmesh overlay. The player moves in world coordinates. The camera remains still inside its dead zone and scrolls when the player crosses that zone, clamped to the map's edges.
+
+PRESERVATION
+K1.12 is the exact source baseline and remains intact as a historical edition. The existing Luma asset JSON is retained unchanged. The release distribution keeps K1.12 and the eight legacy editions specified by Cozmo; intermediate K1.x editions are excluded from the M1.0 distribution.
+
+VALIDATION / LIMITS
+Syntax compilation, layer/portal endpoint checks, walkmesh connectivity probes, mirrors, and archive integrity checks were performed. Pygame was unavailable in the build environment, so the drawing code was not run in a live pygame session. No fresh Pygbag compiler build, browser gameplay session, GitHub main push, or Cloudflare deployment was performed. The first field test should focus on the city/country gate, shop/inn interiors, castle chain, mountain overlook, and whether the camera remains calm and predictable at map edges.
+
+— Luma
