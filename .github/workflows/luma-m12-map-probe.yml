@@ -1,0 +1,139 @@
+name: Build M1.2 map-isolation probe
+on:
+  push:
+    branches:
+      - luma-m12-package-audit
+    paths:
+      - .github/workflows/luma-m12-map-probe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch only the two release packages
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+      - name: Build controlled M1.2 map probe
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, io, tarfile, zipfile
+          from pathlib import Path
+
+          root=Path("ARCHIVES 8-30-2026/SGG/sggweb")
+          with zipfile.ZipFile(root/"SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip") as z:
+              m11={n:z.read(n) for n in z.namelist() if n in {
+                  "SGGM1.1/play.html","SGGM1.1/main.py","SGGM1.1/luma_assets_e33.json"}}
+          with zipfile.ZipFile(root/"SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip") as z:
+              m12map=z.read("SGGM1.2/m1_world_layers.json")
+              base_infos=[(i,z.read(i.filename)) for i in z.infolist() if not i.is_dir()]
+          required={"SGGM1.1/play.html","SGGM1.1/main.py","SGGM1.1/luma_assets_e33.json"}
+          if set(m11)!=required:
+              raise SystemExit(f"Missing M1.1 files: {required-set(m11)}")
+          # Preserve the proven M1.1 loader and game engine. Switch only the
+          # map JSON to the M1.2 city redesign. All bundle filenames are unique
+          # so the diagnostic does not collide with a previously cached edition.
+          bundle="sggm1_2_mapprobe"
+          folder="SGGM1.2_MAP_PROBE"
+          assets={
+              "assets/main.py":m11["SGGM1.1/main.py"],
+              "assets/m1_world_layers.json":m12map,
+              "assets/luma_assets_e33.json":m11["SGGM1.1/luma_assets_e33.json"],
+          }
+          tar_buf=io.BytesIO()
+          with tarfile.open(fileobj=tar_buf,mode="w:gz") as t:
+              for name,data in assets.items():
+                  info=tarfile.TarInfo(name)
+                  info.size=len(data); info.mode=0o644; info.mtime=0
+                  t.addfile(info,io.BytesIO(data))
+          tar_bytes=tar_buf.getvalue()
+
+          apk_buf=io.BytesIO()
+          with zipfile.ZipFile(apk_buf,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for name,data in assets.items():
+                  z.writestr(name,data)
+          apk_bytes=apk_buf.getvalue()
+
+          page=m11["SGGM1.1/play.html"].decode("utf-8")
+          page=page.replace("sggm1_1",bundle)
+          page=page.replace("SPIFFY'S GIFT - M1.1","SPIFFY'S GIFT - M1.2 MAP PROBE (M1.1 ENGINE)")
+          page=page.replace("Spiffy's Gift | M1.1","Spiffy's Gift | M1.2 MAP PROBE")
+          page=page.replace("M1.1 loaded","M1.2 MAP PROBE loaded")
+          page_bytes=page.encode("utf-8")
+
+          readme=("SGGM1.2 MAP-ISOLATION PROBE\n"
+                  "Route: /SGGM1.2_MAP_PROBE/play\n\n"
+                  "This is a diagnostic build, not a release. It keeps the exact M1.1 "
+                  "play.html loader and M1.1 main.py game engine, and substitutes only "
+                  "the M1.2 m1_world_layers.json. The Luma artwork JSON is identical "
+                  "between the two releases and is taken from M1.1. The test bundle "
+                  "uses a unique archive/app directory name to avoid cache collisions.\n\n"
+                  "Interpretation:\n"
+                  "- If this starts and reaches gameplay, the M1.2 map alone does not "
+                  "cause the blank-screen failure; investigate the M1.2 edition path, "
+                  "archive naming, deployment routing/cache, or runtime packaging.\n"
+                  "- If this also blanks after difficulty selection, the M1.2 map "
+                  "change or its interaction with the unchanged engine is implicated.\n"
+                  "\nNo Worker, D1, sound, voice, or NPC behavior changes are included.\n")
+          files={
+              f"{folder}/play.html":page_bytes,
+              f"{folder}/{bundle}.tar.gz":tar_bytes,
+              f"{folder}/{bundle}.apk":apk_bytes,
+              f"{folder}/PROBE_README.txt":readme.encode("utf-8"),
+          }
+
+          # Complete site package: preserves every existing M1.2 and historical
+          # edition, adding only the isolated diagnostic route.
+          full=Path("SGGM1.2_MAP_PROBE_COMPLETE_CLOUDFLARE_SITE.zip")
+          with zipfile.ZipFile(full,"w") as out:
+              for info,data in base_infos:
+                  out.writestr(info,data)
+              for name,data in files.items():
+                  out.writestr(name,data,compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          # Probe-only convenience ZIP, containing the complete route folder.
+          only=Path("SGGM1.2_MAP_PROBE_FOLDER.zip")
+          with zipfile.ZipFile(only,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as out:
+              for name,data in files.items():
+                  out.writestr(name,data)
+          report=[
+              "SGGM1.2 MAP-ISOLATION PROBE BUILD",
+              "Route: /SGGM1.2_MAP_PROBE/play",
+              "M1.1 play.html loader: "+hashlib.sha256(page_bytes).hexdigest(),
+              "M1.1 main.py: "+hashlib.sha256(assets["assets/main.py"]).hexdigest(),
+              "M1.2 map JSON: "+hashlib.sha256(assets["assets/m1_world_layers.json"]).hexdigest(),
+              "Luma JSON (M1.1/M1.2 identical): "+hashlib.sha256(assets["assets/luma_assets_e33.json"]).hexdigest(),
+              "Probe tar.gz: "+str(len(tar_bytes))+" bytes | "+hashlib.sha256(tar_bytes).hexdigest(),
+              "Probe APK: "+str(len(apk_bytes))+" bytes | "+hashlib.sha256(apk_bytes).hexdigest(),
+              "Full Cloudflare site ZIP: "+str(full.stat().st_size)+" bytes",
+              "Probe folder ZIP: "+str(only.stat().st_size)+" bytes",
+              "",
+              readme,
+          ]
+          Path("SGGM1.2_MAP_PROBE_BUILD.txt").write_text("\n".join(report),encoding="utf-8")
+          for p in (full,only):
+              with zipfile.ZipFile(p) as z:
+                  bad=z.testzip()
+                  if bad: raise SystemExit(f"ZIP integrity failure: {p}: {bad}")
+          with tarfile.open(fileobj=io.BytesIO(tar_bytes),mode="r:gz") as t:
+              names=t.getnames()
+              if set(names)!=set(assets): raise SystemExit(f"Tar contents mismatch: {names}")
+          print("\n".join(report))
+          PY
+      - name: Upload probe packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.2-map-isolation-probe
+          path: |
+            SGGM1.2_MAP_PROBE_COMPLETE_CLOUDFLARE_SITE.zip
+            SGGM1.2_MAP_PROBE_FOLDER.zip
+            SGGM1.2_MAP_PROBE_BUILD.txt
+          if-no-files-found: error
+          retention-days: 7
