@@ -166,6 +166,7 @@ CITY ARRANGEMENT
 - The west street from the square meets Intersection A. Castle Path continues north to Castle Exterior and Castle Gate.
 - The south branch from A leads into Gold District. Its east/southeast return road rejoins the City Gate, making a readable loop.
 - The Little Lantern is now a small placeholder building west/left of the City Gate and immediately before the Gold District return road reaches the gate. Its existing separate interior, Grella, and three children remain unchanged.
+- The map's pre-difficulty startup anchor moves from the retired west-city coordinate to (3400,1490), just inside the new southeast gate. Easy/Normal and Challenge starts remain unchanged.
 
 CITY NPCS
 The four existing city NPC IDs/roles are retained, with coordinates only repositioned: Kart-lotta (market centre), Naz (west side), Cozmo (east side), BritRun Guard (inside the gate approach). No new NPCs, dialogue, quest behavior, combat behavior, or interactions were added.
@@ -201,6 +202,8 @@ CITY LAYOUT / STATIC VALIDATION — PASS
 - Every city landmark has a safe fast-travel landing using the inherited search method.
 - Every city road/doorway path centreline was sampled at 15-world-unit intervals and stayed on walkable ground.
 - Main gate approach, Market Square, west street/Intersection A, Castle Path, Gold District branch/return loop, and Little Lantern approach are connected.
+- The world's own initial startup anchor is now the safe new City Gate arrival at (3400,1490); the exact M1.1 SGGM1World constructor/validate method passes against the resulting map.
+- Easy and Normal Stables starts and the Spiffy Challenge HELLgs start all pass the unchanged engine's can_move_to check.
 - Incoming city arrivals from Countryside, Inn, Alchemy Shop, Castle Hall, and Little Lantern all land safely.
 - Only city_exterior layout/landmark/NPC/portal data and those five incoming city target coordinates differ from M1.1. Remaining non-city layer data is unchanged.
 
@@ -225,7 +228,7 @@ def putdocs(base):
 for b in [SRC,REL,DEP,SRC_DEP]: putdocs(b)
 artsha=sha(REL/"luma_assets_e33.json")
 assert artsha=="194c3acd6ce6ce55cc575d586202b5dce566aff48650e98173e05fc7ee734043"
-meta={"version":"SGGM1.3a","release_name":"BritRun City Layout — Placeholder Pass","baseline":"SGGM1.1 exact GitHub source and complete Cloudflare site archives","scope":["city walkmesh and paths","city building/landmark positions","four existing city NPC positions","city portal origins","five reciprocal city arrival targets"],"layers":11,"directed_portals":19,"city_landmarks":8,"city_npcs":4,"city_outgoing_portals":5,"placeholder_art_only":True,"artwork_modified":False,"luma_asset_json_sha256":artsha,"world_map_sha256":sha(REL/"m1_world_layers.json"),"main_py_sha256":sha(REL/"main.py"),"play_html_sha256":sha(REL/"play.html"),"worker_or_d1_changed":False,"game_logic_changed":False,"live_pygame_pygbag_or_browser_tested":False,"static_validation":"PASS"}
+meta={"version":"SGGM1.3a","release_name":"BritRun City Layout — Placeholder Pass","baseline":"SGGM1.1 exact GitHub source and complete Cloudflare site archives","scope":["city walkmesh and paths","city building/landmark positions","four existing city NPC positions","city portal origins","five reciprocal city arrival targets","world startup anchor moved to the new City Gate arrival"],"layers":11,"directed_portals":19,"city_landmarks":8,"city_npcs":4,"city_outgoing_portals":5,"world_start":data["start"],"placeholder_art_only":True,"artwork_modified":False,"luma_asset_json_sha256":artsha,"world_map_sha256":sha(REL/"m1_world_layers.json"),"main_py_sha256":sha(REL/"main.py"),"play_html_sha256":sha(REL/"play.html"),"worker_or_d1_changed":False,"game_logic_changed":False,"live_pygame_pygbag_or_browser_tested":False,"static_validation":"PASS"}
 for b in [SRC,REL,DEP,SRC_DEP]:
  writej(b/"SGGM1.3a_BUILD_META.json",meta)
 for p in [SRC/"versions.json",DEP/"versions.json",SRC_DEP/"versions.json"]:
