@@ -1,0 +1,54 @@
+name: Luma M1.3 M1.1 baseline transfer
+on:
+  push:
+    branches:
+      - luma-m13-m11-baseline-transfer
+    paths:
+      - .github/workflows/luma-m13-m11-baseline-transfer.yml
+
+permissions:
+  contents: read
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline repository state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_LUMA_LOG_Entry051.txt
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_TEST_RESULTS.txt
+          sparse-checkout-cone-mode: false
+
+      - name: Verify and stage untouched M1.1 baseline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p /tmp/m13-m11-transfer
+          cp "$ROOT/SGGM1.1_SOURCE.zip" /tmp/m13-m11-transfer/
+          cp "$ROOT/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/m13-m11-transfer/
+          cp "$ROOT/SGGM1.1_LUMA_LOG_Entry051.txt" /tmp/m13-m11-transfer/
+          cp "$ROOT/SGGM1.1_TEST_RESULTS.txt" /tmp/m13-m11-transfer/
+          unzip -t /tmp/m13-m11-transfer/SGGM1.1_SOURCE.zip
+          unzip -t /tmp/m13-m11-transfer/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          (
+            cd /tmp/m13-m11-transfer
+            sha256sum *.zip > SHA256SUMS.txt
+            stat -c '%n %s bytes' * > FILE_SIZES.txt
+          )
+          cat /tmp/m13-m11-transfer/SHA256SUMS.txt
+          cat /tmp/m13-m11-transfer/FILE_SIZES.txt
+
+      - name: Upload baseline transfer
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.1-exact-baseline-transfer
+          path: /tmp/m13-m11-transfer/
+          if-no-files-found: error
+          retention-days: 2
