@@ -1,0 +1,38 @@
+name: Temporary M1.3a baseline transfer
+
+on:
+  push:
+    branches:
+      - luma-m14-transfer-20261117
+
+permissions:
+  contents: read
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact repository baseline
+        uses: actions/checkout@v4
+      - name: Stage and verify original M1.3a archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.3a_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.3a_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGM1.3a_SOURCE.zip
+          test -s transfer/SGGM1.3a_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGM1.3a_SOURCE.zip
+          unzip -t transfer/SGGM1.3a_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip > transfer/FILE_SIZES.txt
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+      - name: Transfer original archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGG-M1.3a-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
