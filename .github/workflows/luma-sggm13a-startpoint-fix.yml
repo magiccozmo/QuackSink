@@ -1,0 +1,43 @@
+name: Corrected SGGM1.3a — preserve M1.1 startup
+
+on:
+  push:
+    branches:
+      - luma-sggm13a-startpoint-fix-20261117
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out only the exact M1.1 archive inputs and M1.3a builder
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+            scripts/luma_build_sggm13a.py
+          sparse-checkout-cone-mode: false
+      - name: Verify exact M1.1 baseline ZIPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          unzip -t "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_SOURCE.zip" >/dev/null
+          unzip -t "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip" >/dev/null
+      - name: Build corrected M1.3a and run actual M1.1 engine startup tests
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+          RUNNER_TEMP: ${{ runner.temp }}
+        run: python3 scripts/luma_build_sggm13a.py
+      - name: Upload one-step delivery bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.3a-Dropbox-Delivery
+          path: ${{ runner.temp }}/delivery/*
+          if-no-files-found: error
+          retention-days: 1
