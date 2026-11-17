@@ -21,127 +21,151 @@ jobs:
             ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
             ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip
           sparse-checkout-cone-mode: false
-      - name: Compare deployed packages and nested game payloads
+      - name: Compare the active M1.1 and M1.2 browser payloads
         shell: bash
         run: |
           python3 - <<'PY'
-          import hashlib, difflib, io, os, tarfile, zipfile
+          import hashlib, difflib, io, json, re, tarfile, zipfile
           from pathlib import Path
 
-          root = Path("ARCHIVES 8-30-2026/SGG/sggweb")
-          releases = {
-              "M1.1": root / "SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip",
-              "M1.2": root / "SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip",
-          }
+          root=Path("ARCHIVES 8-30-2026/SGG/sggweb")
+          zips={"M1.1":root/"SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip",
+                "M1.2":root/"SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip"}
           def sha(b): return hashlib.sha256(b).hexdigest()
-          report = []
-          outer = {}
-          for ver, path in releases.items():
-              report.append(f"## {ver} complete-site ZIP")
-              report.append(f"File: {path} ({path.stat().st_size:,} bytes)")
+          report=[]
+          outer={}
+          for ver,path in zips.items():
               with zipfile.ZipFile(path) as z:
-                  entries = {i.filename: z.read(i) for i in z.infolist() if not i.is_dir()}
-                  outer[ver] = entries
-                  report.append(f"Entries: {len(entries)}")
-                  for name, data in sorted(entries.items()):
-                      if (name.lower().endswith((".tar.gz", ".tgz", ".apk")) or
-                          name.lower().endswith((".html", ".json", ".py")) or
-                          "main.py" in name.lower() or "version" in name.lower()):
-                          report.append(f"- {name} | {len(data):,} bytes | sha256 {sha(data)}")
+                  outer[ver]={i.filename:z.read(i) for i in z.infolist() if not i.is_dir()}
+              report += [f"## {ver} active edition files"]
+              prefix=f"SGGM{ver[1:]}/"
+              for rel in ("play.html","main.py","m1_world_layers.json","luma_assets_e33.json",
+                          "sggm1_1.tar.gz" if ver=="M1.1" else "sggm1_2.tar.gz",
+                          "sggm1_1.apk" if ver=="M1.1" else "sggm1_2.apk"):
+                  name=prefix+rel
+                  data=outer[ver].get(name)
+                  if data is None:
+                      report.append(f"MISSING: {name}")
+                  else:
+                      report.append(f"{name} | {len(data):,} bytes | sha256 {sha(data)}")
               report.append("")
 
-          def normalize(name):
-              return (name.replace("\\", "/")
-                          .replace("SGGM1.1", "SGGM1.X")
-                          .replace("SGGM1.2", "SGGM1.X")
-                          .replace("sggm1_1", "sggm1_X")
-                          .replace("sggm1_2", "sggm1_X"))
+          def member(ver, edition, rel):
+              return outer[ver].get(f"{edition}/{rel}")
+          def add_diff(label,a,b,limit=180):
+              report.append(f"### {label} diff")
+              if a is None or b is None:
+                  report.append("One side missing."); return
+              try:
+                  x=a.decode("utf-8").splitlines()
+                  y=b.decode("utf-8").splitlines()
+                  d=list(difflib.unified_diff(x,y,fromfile="M1.1",tofile="M1.2",n=3))
+                  if not d: report.append("IDENTICAL")
+                  else: report.extend(d[:limit])
+                  if len(d)>limit: report.append(f"... truncated {len(d)-limit} additional diff lines")
+              except UnicodeDecodeError:
+                  report.append("Binary/non-UTF8 content; hashes above.")
 
-          n11 = {normalize(k): (k,v) for k,v in outer["M1.1"].items()}
-          n12 = {normalize(k): (k,v) for k,v in outer["M1.2"].items()}
-          report.append("## Outer site package comparison")
-          for key in sorted(set(n11)|set(n12)):
-              a=n11.get(key); b=n12.get(key)
-              if a is None: report.append(f"- ADDED M1.2: {b[0]} ({len(b[1]):,} bytes, {sha(b[1])})")
-              elif b is None: report.append(f"- REMOVED in M1.2: {a[0]} ({len(a[1]):,} bytes, {sha(a[1])})")
-              elif sha(a[1]) != sha(b[1]):
-                  report.append(f"- CHANGED: {a[0]} -> {b[0]} | M1.1 {len(a[1]):,} {sha(a[1])} | M1.2 {len(b[1]):,} {sha(b[1])}")
+          m11play=member("M1.1","SGGM1.1","play.html")
+          m12play=member("M1.2","SGGM1.2","play.html")
+          m11main=member("M1.1","SGGM1.1","main.py")
+          m12main=member("M1.2","SGGM1.2","main.py")
+          m11map=member("M1.1","SGGM1.1","m1_world_layers.json")
+          m12map=member("M1.2","SGGM1.2","m1_world_layers.json")
+          m11luma=member("M1.1","SGGM1.1","luma_assets_e33.json")
+          m12luma=member("M1.2","SGGM1.2","luma_assets_e33.json")
+          report.append("## Active play.html comparison")
+          add_diff("play.html",m11play,m12play,120)
+          report.append("")
+          report.append("## Active main.py comparison")
+          add_diff("main.py",m11main,m12main,180)
           report.append("")
 
-          nested={}
-          for ver in ("M1.1","M1.2"):
-              report.append(f"## {ver} nested Pygbag payload")
-              nested[ver]={}
-              tars=[(name,data) for name,data in outer[ver].items()
-                    if name.lower().endswith((".tar.gz",".tgz"))]
-              if not tars:
-                  report.append("No .tar.gz/.tgz payload found.")
+          targets=[("M1.1","SGGM1.1/sggm1_1.tar.gz"),
+                   ("M1.2","SGGM1.2/sggm1_2.tar.gz")]
+          active={}
+          for ver,path in targets:
+              raw=outer[ver].get(path)
+              report.append(f"## {ver} ACTUAL browser bundle: {path}")
+              if raw is None:
+                  report.append("MISSING bundle")
+                  active[ver]={}
                   continue
-              for name, raw in tars:
-                  report.append(f"Bundle: {name} | {len(raw):,} bytes | sha256 {sha(raw)}")
-                  try:
-                      with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as t:
-                          files={m.name: t.extractfile(m).read() for m in t.getmembers() if m.isfile()}
-                      nested[ver].update(files)
-                      report.append(f"Unpacked files: {len(files)}")
-                      for fn,data in sorted(files.items()):
-                          if (fn.lower().endswith((".py",".json",".toml",".txt",".ini")) or
-                              "main.py" in fn.lower() or "world" in fn.lower()):
-                              report.append(f"- {fn} | {len(data):,} bytes | sha256 {sha(data)}")
-                  except Exception as e:
-                      report.append(f"ERROR unpacking tarball: {type(e).__name__}: {e}")
+              report.append(f"gzip size {len(raw):,} | sha256 {sha(raw)}")
+              try:
+                  with tarfile.open(fileobj=io.BytesIO(raw),mode="r:gz") as t:
+                      active[ver]={m.name:t.extractfile(m).read() for m in t.getmembers() if m.isfile()}
+                  report.append(f"Unpacked files: {len(active[ver])}")
+                  for name,data in sorted(active[ver].items()):
+                      report.append(f"- {name} | {len(data):,} bytes | sha256 {sha(data)}")
+              except Exception as e:
+                  report.append(f"UNPACK ERROR: {type(e).__name__}: {e}")
+                  active[ver]={}
               report.append("")
 
-          report.append("## Nested game payload comparison (edition labels normalized)")
-          def norm_nested(name):
-              return (name.replace("\\", "/")
-                          .replace("SGGM1.1", "SGGM1.X")
-                          .replace("SGGM1.2", "SGGM1.X")
-                          .replace("sggm1_1", "sggm1_X")
-                          .replace("sggm1_2", "sggm1_X"))
-          a11={norm_nested(k):(k,v) for k,v in nested["M1.1"].items()}
-          a12={norm_nested(k):(k,v) for k,v in nested["M1.2"].items()}
-          for key in sorted(set(a11)|set(a12)):
-              a=a11.get(key); b=a12.get(key)
-              if a is None: report.append(f"- ADDED M1.2: {b[0]} ({len(b[1]):,} bytes, {sha(b[1])})")
-              elif b is None: report.append(f"- REMOVED in M1.2: {a[0]} ({len(a[1]):,} bytes, {sha(a[1])})")
-              elif sha(a[1]) != sha(b[1]):
-                  report.append(f"- CHANGED: {a[0]} -> {b[0]} | M1.1 {len(a[1]):,} {sha(a[1])} | M1.2 {len(b[1]):,} {sha(b[1])}")
-                  if len(a[1]) < 2_000_000 and len(b[1]) < 2_000_000 and key.lower().endswith((".py",".json",".txt",".ini",".toml")):
-                      try:
-                          x=a[1].decode("utf-8").splitlines()
-                          y=b[1].decode("utf-8").splitlines()
-                          diff=list(difflib.unified_diff(x,y,fromfile="M1.1/"+a[0],tofile="M1.2/"+b[0],n=2))
-                          if diff:
-                              report.append("  Diff (first 120 lines):")
-                              report.extend("  "+line for line in diff[:120])
-                      except UnicodeDecodeError:
-                          pass
+          report.append("## Exact active tarball file comparison")
+          for name in sorted(set(active.get("M1.1",{}))|set(active.get("M1.2",{}))):
+              a=active.get("M1.1",{}).get(name); b=active.get("M1.2",{}).get(name)
+              if a is None: report.append(f"ADDED M1.2: {name}")
+              elif b is None: report.append(f"REMOVED M1.2: {name}")
+              elif sha(a)!=sha(b):
+                  report.append(f"CHANGED: {name} | M1.1 {len(a):,} {sha(a)} | M1.2 {len(b):,} {sha(b)}")
+                  if name.endswith((".py",".json",".txt")) and len(a)<2_000_000 and len(b)<2_000_000:
+                      add_diff(name,a,b,220)
           report.append("")
 
-          report.append("## HTML loader settings")
+          # Validate the exact active art JSONs, and check whether they contain
+          # any Kart-lotta/audio/voice assets or references.
+          report.append("## Active Luma JSON validation and audio/name scan")
           for ver in ("M1.1","M1.2"):
-              for name,data in sorted(outer[ver].items()):
-                  if name.lower().endswith(".html") and len(data)<500_000:
-                      txt=data.decode("utf-8", "replace")
-                      matches=[line.strip() for line in txt.splitlines()
-                               if any(k in line.lower() for k in ("archive", "data-python", "game bundle", "sggm1_"))]
-                      if matches:
-                          report.append(f"- {ver} {name}:")
-                          report.extend("  "+line[:500] for line in matches[:20])
+              raw=active.get(ver,{}).get("assets/luma_assets_e33.json")
+              if raw is None:
+                  report.append(f"{ver}: no assets/luma_assets_e33.json inside game bundle")
+                  continue
+              try:
+                  obj=json.loads(raw.decode("utf-8"))
+                  report.append(f"{ver}: valid JSON; root type={type(obj).__name__}; root keys={list(obj)[:25] if isinstance(obj,dict) else 'n/a'}")
+                  found=[]
+                  def walk(v,path="$"):
+                      if isinstance(v,dict):
+                          for k,x in v.items():
+                              p=f"{path}.{k}"
+                              if re.search(r"kart|lotta|audio|voice|sound|wav|mp3|ogg",str(k),re.I):
+                                  found.append(f"KEY {p}={str(x)[:180]}")
+                              walk(x,p)
+                      elif isinstance(v,list):
+                          for i,x in enumerate(v):
+                              walk(x,f"{path}[{i}]")
+                      elif isinstance(v,str) and re.search(r"kart|lotta|audio|voice|sound|\\.(wav|mp3|ogg)",v,re.I):
+                          found.append(f"VALUE {path}={v[:180]}")
+                  walk(obj)
+                  report.extend(found[:100] or ["No Kart-lotta/audio/voice/sound references found in this JSON."])
+              except Exception as e:
+                  report.append(f"{ver}: JSON INVALID: {type(e).__name__}: {e}")
+          report.append("")
+
+          # The APK should be a ZIP container. Inspect its members and compare
+          # its payload to the corresponding .tar.gz.
+          report.append("## Active APK archive inspection")
+          for ver,path in targets:
+              apkname=("SGGM1.1/sggm1_1.apk" if ver=="M1.1" else "SGGM1.2/sggm1_2.apk")
+              raw=outer[ver].get(apkname)
+              try:
+                  with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                      report.append(f"{ver} {apkname}: "+", ".join(f"{i.filename} ({i.file_size})" for i in z.infolist()[:25]))
+              except Exception as e: report.append(f"{ver} APK inspect failed: {type(e).__name__}: {e}")
           report.append("")
 
           out="\n".join(report)+"\n"
-          Path("M1.1_M1.2_PACKAGE_AUDIT.txt").write_text(out, encoding="utf-8")
-          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
-              f.write("## M1.1 vs M1.2 package audit\n\n")
-              f.write(out)
+          Path("M1.1_M1.2_ACTIVE_PAYLOAD_AUDIT.txt").write_text(out,encoding="utf-8")
+          with open(Path(__import__("os").environ["GITHUB_STEP_SUMMARY"]),"a",encoding="utf-8") as f:
+              f.write("## Active M1.1 vs M1.2 browser payload audit\n\n"+out)
           print(out)
           PY
-      - name: Preserve audit report
+      - name: Preserve active payload audit
         uses: actions/upload-artifact@v4
         with:
-          name: M1.1-M1.2-package-audit
-          path: M1.1_M1.2_PACKAGE_AUDIT.txt
+          name: M1.1-M1.2-active-payload-audit
+          path: M1.1_M1.2_ACTIVE_PAYLOAD_AUDIT.txt
           if-no-files-found: error
           retention-days: 3
