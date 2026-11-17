@@ -1,0 +1,45 @@
+name: Luma SGGM1.3 exact M1.1 baseline transfer (sparse)
+
+on:
+  push:
+    branches:
+      - luma-sggm13-baseline-sparse-20261117
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out only the two requested baseline archives
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+      - name: Verify and stage originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="ARCHIVES 8-30-2026/SGG/sggweb"
+          mkdir -p transfer
+          cp "$SRC/SGGM1.1_SOURCE.zip" transfer/
+          cp "$SRC/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGM1.1_SOURCE.zip
+          test -s transfer/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t transfer/SGGM1.1_SOURCE.zip
+          unzip -t transfer/SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum transfer/*.zip | tee transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip | tee transfer/SIZES.txt
+      - name: Upload originals
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.1-baseline-transfer-sparse
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
