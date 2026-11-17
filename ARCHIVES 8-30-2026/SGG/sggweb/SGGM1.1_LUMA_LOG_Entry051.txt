@@ -1,0 +1,43 @@
+LUMA'S LOG — ENTRY 051
+SGGM1.1 — The World Gets Its Bearings
+Date: 17 November 2026
+Baseline: SGGM1.0a (exact GitHub source and complete deployment archives)
+Behavior/UI reference: SGGK1.12
+
+THE PURPOSE
+M1.0a proved that the continuous-world sheets, world-space movement, walkmeshes, portals, and scrolling camera worked in Cozmo's desktop field test. His next exploration identified concrete geography and interface refinements. M1.1 keeps that working world engine and makes those focused changes; it does not begin the later artwork or behavior-integration stages.
+
+GEOGRAPHY
+- Troll Cave moved to the former Mudcrab River location in the Countryside. Its entrance and return use the new world-space position.
+- Mudcrab River and three simple mudcrab placeholders moved to the former outdoor HELLgs Inn location, south of Giant Camp.
+- The Countryside-to-HELLgs portal was removed. HELLgs remains a separate Challenge interior layer, entered only by the Spiffy Challenge start; its exit returns to the Outside Gate.
+- Southern Wilds moved farther east to make distinct room for the relocated Mudcrab River landmark and trail.
+- The world still contains 11 continuous sheets. The geography now has 19 directed layer portals.
+
+CAMERA / MINIMAP
+- The top-right minimap remains fixed in its current position and size.
+- Camera right-edge dead-zone uses a 260px margin so the player is kept clear of the minimap; map bounds remain clamped.
+- Minimap symbols: blue dots for portals/transitions, yellow stars for NPC placeholders, white stars for named places.
+- Z toggles walkmesh visibility. The walkmesh remains active at all times.
+
+NAVIGATION / UI
+- M opens the M1.1 fast-travel panel, whose entries are real layer/world-coordinate destinations with walkmesh-safe arrivals. Easy offers 26 ordinary destinations; Normal filters to discovered places; Spiffy Challenge and HELLgs are excluded from fast travel.
+- F3 opens the M1.1 controls guide. E uses the nearest portal.
+- The current K1.12 header is restored, including Export Log, the current anonymous Leave a Comment form, tip link, and text-size controls. The obsolete early Leave a Note start-screen is not reintroduced.
+- The K1.6/K1.7 Player Says composer remains on the period key (.). Its text is added to the private local Player Log and detailed exported flight recorder. It is not submitted to the Global Usage Log.
+- The local session log and anonymous Global Usage Log integration remain in place.
+
+PRESERVATION / SCOPE
+- K1.12 remains the behavioral authority for later NPC and object integration.
+- No NPC behavior, object behavior, dialogue, Grella quest behavior, or Grella flee route was wired in M1.1. The new geography only prepares the future Giant-to-Mudcrab relationship.
+- The original Luma asset JSON and drawing recipes remain byte-identical to K1.12. The placeholder renderer remains deliberately simple; area-by-area art restoration is a later stage.
+- M1.0a, M1.0, K1.12, and retained legacy editions remain available in the distribution. No historical release folder was overwritten.
+- No Global Usage Log Worker or D1 database change was made.
+
+VALIDATION
+Python syntax compilation passed. Static layer/portal checks passed for all 11 sheets and 19 directed portals. Every portal arrival passed the full player-body walkmesh check. The Easy fast-travel catalogue produced 26 safe destinations, all walkmesh-checked; Normal discovery filtering passed. A right-edge camera test across all 11 sheets kept the player's body outside the fixed minimap area. Runtime mirrors matched and the preserved Luma JSON hash matched K1.12.
+
+NOT LIVE TESTED
+The build environment did not contain Pygame. No live Pygame render, fresh Pygbag compiler build, or browser gameplay session was run. Cozmo should field-test the current K1.12 header controls, Export Log, Player Says, comment form, M/Z/F3 controls, fast-travel map, changed geography/portal return points, minimap symbols, and camera boundary. No GitHub main push or Cloudflare deployment was performed.
+
+— Luma

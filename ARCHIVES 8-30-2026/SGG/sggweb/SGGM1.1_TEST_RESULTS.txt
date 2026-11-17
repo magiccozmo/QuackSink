@@ -1,0 +1,30 @@
+SGGM1.1 — TEST RESULTS
+
+BASELINE
+- Exact SGGM1.0a source and complete Cloudflare site ZIPs retrieved from GitHub using the isolated GitHub Actions artifact bridge.
+- Both original archives passed ZIP integrity checks before extraction.
+- K1.12 current UI and inherited control/service code inspected as the reference.
+
+STATIC VALIDATION — ALL PASS
+- Python syntax compilation of the M1.1 runtime and active assets/main.py mirror.
+- Root main.py and assets/main.py byte-identical.
+- Root m1_world_layers.json and assets/m1_world_layers.json byte-identical.
+- Existing Luma art JSON byte-identical to the K1.12 asset file.
+- World data loads and validates: 11 sheets, each 2:1 aspect ratio.
+- 19 directed portals; all target layers exist and all 19 arrival points pass the full player-body walkmesh test.
+- Countryside has no HELLgs entrance portal.
+- Troll Cave is at the former Mudcrab River site; Mudcrab River is at the former outdoor HELLgs site, south of Giant Camp; Southern Wilds is offset to avoid overlap.
+- HELLgs challenge interior remains present, and its exit returns to the Outside Gate.
+- Easy fast-travel list contains 26 safe destinations, all checked against the new layer walkmeshes; HELLgs is excluded.
+- Normal fast-travel list filters to discovered destinations; Challenge fast travel remains blocked.
+- Right-edge camera test across all 11 sheets: the player's body right edge remained at or left of screen x=1030; top-right minimap begins at x=1054.
+- The K1.12 current header is called from M1.1; dispatch paths exist for Export Log, current anonymous Comment form, tip link and font-size controls.
+- Period Player Says still uses the local-only K1.6/K1.7 submit path; no executable call to the global event recorder is made for Player Says.
+- M opens fast travel, Z toggles walkmesh visibility, F3 opens controls, and the new play.html uses the M1.1 bundle names.
+- Both active deployment and source catalogues select SGGM1.1 while retaining M1.0a, M1.0, K1.12 and legacy entries.
+- Historical M1.0a, M1.0, K1.12 and legacy folders were preserved; no prior release was overwritten.
+
+LIVE TEST LIMITS
+The build environment does not contain Pygame. Therefore no live Pygame rendering, fresh Pygbag compile, or browser gameplay test was possible. Cozmo should field-test the difficulty chooser, current K1.12 header, Export Log, Player Says, Comment form, tip/font buttons, M fast travel, Z walkmesh overlay, F3 controls, minimap colors, relocated Troll Cave/Mudcrab geography, portal returns, and camera boundary.
+
+No Worker or D1 change. No NPC/object/Grella behavior wiring. No GitHub main push or Cloudflare deployment.
