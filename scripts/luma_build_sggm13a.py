@@ -116,7 +116,7 @@ for p in [SRC/"assets/m1_world_layers.json",SRC/"m1_world_layers.json",DEP/"m1_w
 # Real engine startup validation: execute the unchanged M1.1 SGGM1World class.
 tree=ast.parse((SRC/"main.py").read_text(encoding="utf-8"))
 world_cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=="SGGM1World")
-ns={"Path":pathlib.Path,"json":json,"math":math,"GAME_WIDTH":1360,"GAME_HEIGHT":780}
+ns={"Path":pathlib.Path,"json":json,"math":math,"GAME_WIDTH":1360,"GAME_HEIGHT":780,"M1_WORLD_JSON_PATH":mp}
 exec(compile(ast.Module(body=[world_cls],type_ignores=[]),"<SGGM1World M1.1>","exec"),ns)
 world=ns["SGGM1World"](mp)
 assert world.current_layer_id=="city_exterior" and world.can_move_to(3400,1490)
