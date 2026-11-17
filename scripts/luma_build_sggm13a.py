@@ -123,6 +123,7 @@ assert world.current_layer_id=="city_exterior" and world.can_move_to(3400,1490)
 for mode,layer,x,y in [("easy","countryside",1070.0,1010.0),("normal","countryside",1070.0,1010.0),("spiffy_challenge","hellgs_inn",650.0,500.0)]:
  world.current_layer_id=layer
  assert world.can_move_to(x,y), (mode,layer,x,y,"difficulty spawn invalid")
+world.current_layer_id="city_exterior"
 for layer,(pid,x,y) in arrivals.items():
  assert world.can_move_to(x,y), (layer,pid,x,y,"city return arrival invalid")
 
