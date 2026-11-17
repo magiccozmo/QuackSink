@@ -1,0 +1,29 @@
+LUMA'S LOG — ENTRY 053
+SGGM1.3 — BritRun Gets Its Bearings
+Date: 17 November 2026
+Baseline: SGGM1.1 exact source and complete Cloudflare site archives retrieved from GitHub main; original archives preserved unchanged.
+Scope: BritRun city exterior layout, building/landmark placement, the four existing city NPC positions, city portal positions, and reciprocal city-side arrival points. No art work.
+
+THE DESIGN
+Cozmo supplied the town's essential relationships: the southeast City Gate; entry facing north into a main street; a central Market Square; the Tipsy Turnip on the north side; the Alchemy Shop to the east; a westbound street to Intersection A; Castle Path and Castle Gate to the north; and a southbound Gold District route returning to the City Gate.
+
+M1.3 uses the existing 2:1 city sheet, walkmesh, connected road polylines, eight named landmarks, four existing NPC placeholders and portal system. It retains the simple generic building/NPC placeholder renderer. No art or drawing recipes were created or modified.
+
+CITY ARRANGEMENT
+- City Gate is on the south wall near the southeast corner. The city-side arrival is just inside the gate, facing north; the main street turns northwest toward Market Square.
+- Market Square is the public centre. Kart-lotta's stand is the central placeholder; Kart-lotta stands beside it. Naz occupies the west side and Cozmo the east side.
+- Tipsy Turnip faces south from the north edge of the square, with its south-side door.
+- Alchemy Shop is east of the square, approached from its west/southwest side.
+- The west street from the square meets Intersection A. Castle Path continues north to Castle Exterior and Castle Gate.
+- The south branch from A leads into Gold District. Its east/southeast return road rejoins the City Gate, making a readable loop.
+- The Little Lantern is now a small placeholder building west/left of the City Gate and immediately before the Gold District return road reaches the gate. Its existing separate interior, Grella, and three children remain unchanged.
+
+CITY NPCS
+The four existing city NPC IDs/roles are retained, with coordinates only repositioned: Kart-lotta (market centre), Naz (west side), Cozmo (east side), BritRun Guard (inside the gate approach). No new NPCs, dialogue, quest behavior, combat behavior, or interactions were added.
+
+TRANSITIONS AND PRESERVATION
+The 11-layer / 19-directed-portal continuous world remains. The five outgoing city portals remain the same set: Tipsy Turnip, Alchemy Shop, Castle Hall, Little Lantern, and City Gate. Only their city-side origins were moved to agree with the new doors/gate. Reciprocal city arrival coordinates on Countryside, Inn Interior, Alchemy Shop, Castle Hall, and Little Lantern were moved to corresponding safe city locations. All other non-city layer data and portal fields are unchanged.
+
+Only city_exterior geometry/landmarks/NPC/portal positions and five incoming city target coordinates were changed in the world map. Runtime Python changes are limited to SGGM1.3 version-identification strings. The loader changes only release labels and bundle filenames to sggm1_3 while retaining M1.1 loader logic. Luma art JSON, renderer, other gameplay systems, save systems, UI, workers, D1, and every historical release remain untouched.
+
+— Luma

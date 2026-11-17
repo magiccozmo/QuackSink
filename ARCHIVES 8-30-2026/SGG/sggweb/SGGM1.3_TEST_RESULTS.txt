@@ -1,0 +1,27 @@
+SGGM1.3 — STATIC TEST RESULTS
+
+BASELINE / INTEGRITY
+- Exact M1.1 source ZIP and complete Cloudflare site ZIP retrieved from GitHub main; both passed ZIP integrity checks.
+- Original M1.1 archives and historical folders were preserved unchanged.
+
+CITY LAYOUT / STATIC VALIDATION — PASS
+- World retains 11 layers and 19 directed portals.
+- BritRun retains 8 named landmarks, 4 existing city NPCs, and 5 outgoing city portals.
+- All 19 destination points pass a full 20x26 player-body walkmesh and blocked-area check.
+- All 5 city portal origins and all 4 city NPC positions pass the same full-body check.
+- Every city landmark has a safe fast-travel landing using the inherited search method.
+- Every city road/doorway path centreline was sampled at 15-world-unit intervals and stayed on walkable ground.
+- Main gate approach, Market Square, west street/Intersection A, Castle Path, Gold District branch/return loop, and Little Lantern approach are connected.
+- Incoming city arrivals from Countryside, Inn, Alchemy Shop, Castle Hall, and Little Lantern all land safely.
+- Only city_exterior layout/landmark/NPC/portal data and those five incoming city target coordinates differ from M1.1. Remaining non-city layer data is unchanged.
+
+PRESERVATION
+- Luma art JSON is byte-identical to M1.1. No artwork or drawing recipes were modified or created.
+- Main Python game logic is unchanged; only SGGM1.1 release-identification strings are relabeled SGGM1.3.
+- Pygbag loader logic is unchanged; only edition and bundle identifiers change to SGGM1.3 / sggm1_3.
+- Historical M1.1, M1.0a, M1.0, K1.12 and legacy folders remain present.
+- No Worker, D1, UI, controls, save-state, quest, dialogue, NPC behavior, or combat system change.
+- Python syntax compilation, inner package integrity, and release ZIP integrity pass.
+
+LIVE TEST LIMITS
+- No Pygame library is installed in the build environment; no live Pygame rendering, Pygbag compilation, or browser session was run.
