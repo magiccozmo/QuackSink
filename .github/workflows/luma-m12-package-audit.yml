@@ -1,0 +1,149 @@
+name: Luma M1.1-M1.2 package audit
+on:
+  push:
+    branches:
+      - luma-m12-package-audit
+    paths:
+      - .github/workflows/luma-m12-package-audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Compare deployed packages and nested game payloads
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, difflib, io, os, re, tarfile, zipfile
+          from pathlib import Path
+
+          root = Path("ARCHIVES 8-30-2026/SGG/sggweb")
+          releases = {
+              "M1.1": root / "SGGM1.1_COMPLETE_CLOUDFLARE_SITE.zip",
+              "M1.2": root / "SGGM1.2_COMPLETE_CLOUDFLARE_SITE.zip",
+          }
+          def sha(b): return hashlib.sha256(b).hexdigest()
+          report = []
+          outer = {}
+          for ver, path in releases.items():
+              report.append(f"## {ver} complete-site ZIP")
+              report.append(f"File: {path} ({path.stat().st_size:,} bytes)")
+              with zipfile.ZipFile(path) as z:
+                  entries = {i.filename: z.read(i) for i in z.infolist() if not i.is_dir()}
+                  outer[ver] = entries
+                  report.append(f"Entries: {len(entries)}")
+                  for name, data in sorted(entries.items()):
+                      if (name.lower().endswith((".tar.gz", ".tgz", ".apk")) or
+                          name.lower().endswith((".html", ".json", ".py")) or
+                          "main.py" in name.lower() or "version" in name.lower()):
+                          report.append(f"- {name} | {len(data):,} bytes | sha256 {sha(data)}")
+              report.append("")
+
+          def normalize(name):
+              name = name.replace("\\", "/")
+              name = re.sub(r"^SGGM1\\.[12]/", "SGGMX/", name)
+              name = re.sub(r"^SGGM1\\.[12]$", "SGGMX", name)
+              name = re.sub(r"sggm1_[12]", "sggm1_X", name, flags=re.I)
+              return name
+
+          n11 = {normalize(k): (k,v) for k,v in outer["M1.1"].items()}
+          n12 = {normalize(k): (k,v) for k,v in outer["M1.2"].items()}
+          report.append("## Outer site package comparison")
+          for key in sorted(set(n11)|set(n12)):
+              a=n11.get(key); b=n12.get(key)
+              if a is None: report.append(f"- ADDED M1.2: {b[0]} ({len(b[1]):,} bytes, {sha(b[1])})")
+              elif b is None: report.append(f"- REMOVED in M1.2: {a[0]} ({len(a[1]):,} bytes, {sha(a[1])})")
+              elif sha(a[1]) != sha(b[1]):
+                  report.append(f"- CHANGED: {a[0]} -> {b[0]} | M1.1 {len(a[1]):,} {sha(a[1])} | M1.2 {len(b[1]):,} {sha(b[1])}")
+          report.append("")
+
+          def find_tar(entries):
+              found=[]
+              for name,data in entries.items():
+                  low=name.lower()
+                  if low.endswith((".tar.gz",".tgz")):
+                      found.append((name,data))
+              return found
+
+          nested={}
+          for ver in ("M1.1","M1.2"):
+              report.append(f"## {ver} nested Pygbag payload")
+              tars=find_tar(outer[ver])
+              nested[ver]={}
+              if not tars:
+                  report.append("No .tar.gz/.tgz payload found.")
+                  continue
+              for name, raw in tars:
+                  report.append(f"Bundle: {name} | {len(raw):,} bytes | sha256 {sha(raw)}")
+                  try:
+                      with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as t:
+                          files={m.name: t.extractfile(m).read() for m in t.getmembers() if m.isfile()}
+                      nested[ver].update(files)
+                      report.append(f"Unpacked files: {len(files)}")
+                      for fn,data in sorted(files.items()):
+                          if (fn.lower().endswith((".py",".json",".toml",".txt",".ini")) or
+                              "main.py" in fn.lower() or "world" in fn.lower()):
+                              report.append(f"- {fn} | {len(data):,} bytes | sha256 {sha(data)}")
+                  except Exception as e:
+                      report.append(f"ERROR unpacking tarball: {type(e).__name__}: {e}")
+              report.append("")
+
+          report.append("## Nested game payload comparison (normalized edition names)")
+          def norm_nested(name):
+              name=name.replace("\\","/")
+              name=re.sub(r"sggm1_[12]", "sggm1_X", name, flags=re.I)
+              name=re.sub(r"SGGM1\\.[12]", "SGGMX", name, flags=re.I)
+              return name
+          a11={norm_nested(k):(k,v) for k,v in nested["M1.1"].items()}
+          a12={norm_nested(k):(k,v) for k,v in nested["M1.2"].items()}
+          for key in sorted(set(a11)|set(a12)):
+              a=a11.get(key); b=a12.get(key)
+              if a is None: report.append(f"- ADDED M1.2: {b[0]} ({len(b[1]):,} bytes, {sha(b[1])})")
+              elif b is None: report.append(f"- REMOVED M1.2: {a[0]} ({len(a[1]):,} bytes, {sha(a[1])})")
+              elif sha(a[1]) != sha(b[1]):
+                  report.append(f"- CHANGED: {a[0]} -> {b[0]} | M1.1 {len(a[1]):,} {sha(a[1])} | M1.2 {len(b[1]):,} {sha(b[1])}")
+                  if len(a[1]) < 2_000_000 and len(b[1]) < 2_000_000 and (key.lower().endswith((".py",".json",".txt",".ini",".toml"))):
+                      try:
+                          x=a[1].decode("utf-8").splitlines()
+                          y=b[1].decode("utf-8").splitlines()
+                          diff=list(difflib.unified_diff(x,y,fromfile="M1.1/"+a[0],tofile="M1.2/"+b[0],n=2))
+                          if diff:
+                              report.append("  Diff (first 120 lines):")
+                              report.extend("  "+line for line in diff[:120])
+                      except UnicodeDecodeError:
+                          pass
+          report.append("")
+
+          # Parse each top-level HTML file to expose the actual loader/bundle wiring.
+          report.append("## HTML loader settings")
+          for ver in ("M1.1","M1.2"):
+              for name,data in sorted(outer[ver].items()):
+                  if name.lower().endswith(".html") and len(data)<500_000:
+                      txt=data.decode("utf-8", "replace")
+                      vals=[]
+                      for pattern in (r'archive\\s*[:=]\\s*["\\']([^"\\']+)',r'data-python=["\\']([^"\\']+)',
+                                      r'load(?:ing)?\\s+game\\s+bundle[^\\n]*'):
+                          vals += re.findall(pattern,txt,re.I)
+                      if vals:
+                          report.append(f"- {ver} {name}: {vals[:12]}")
+          report.append("")
+
+          out="\n".join(report)+"\n"
+          Path("M1.1_M1.2_PACKAGE_AUDIT.txt").write_text(out, encoding="utf-8")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## M1.1 vs M1.2 package audit\n\n")
+              f.write(out)
+          print(out)
+          PY
+      - name: Preserve audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: M1.1-M1.2-package-audit
+          path: M1.1_M1.2_PACKAGE_AUDIT.txt
+          if-no-files-found: error
+          retention-days: 3
