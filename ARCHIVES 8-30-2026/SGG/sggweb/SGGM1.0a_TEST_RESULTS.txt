@@ -1,0 +1,43 @@
+SGGM1.0a — BUILD AND VALIDATION REPORT
+
+BASELINE
+- Built from the exact SGGK1.12 source and complete Cloudflare site archives retrieved from GitHub Actions.
+- The original SGGK1.12 baseline is preserved unchanged.
+- The earlier SGGM1.0 package remains preserved as the previous test release; this compatibility repair is separately versioned as SGGM1.0a.
+
+ROOT CAUSE FOUND
+- M1.0 bypassed the inherited F2.0 difficulty picker by transitioning directly to PLAY_GAME.
+- It assigned a bare object() to self.game. The inherited E4.1 flight-recorder _log hook assumes every non-None game is a GameModel and reads current_area_id, player_x and player_y. The first state transition therefore raised AttributeError before a gameplay frame could render. This explains the blank/black browser view.
+- M1.0 also replaced the inherited update loop without calling global session-result polling or heartbeat logic, and its interface bypassed the inherited latest-event/local-log/Player Says overlays.
+
+FIXES
+- Fresh launch now opens the inherited Easy / Normal / Spiffy Challenge selection cards.
+- A read-only M1 log-context adapter exposes the active layer and player coordinates to the inherited flight recorder; the old GameModel is not instantiated.
+- Easy and Normal start on the Countryside sheet near the Stables; Challenge starts in the HELLgs Inn layer. All three selected spawns pass player-footprint walkmesh/collision checks.
+- Difficulty selection calls the inherited anonymous session-start routine.
+- The M1 update loop polls the asynchronous global session bridge and checks the existing activity heartbeat. Browser network behavior still needs field testing.
+- Layer discoveries are recorded as public area-discovery events once per layer.
+- Latest-event HUD and private local session log are restored (L opens/closes the local log).
+- Player Says is restored (period opens, Enter records); it remains local-only and is not sent to the public Global Usage Log. A test confirmed no public event was queued.
+- Existing 11 world sheets, 20 directed portals, world coordinates, walkmeshes, placeholder art and camera logic are retained.
+
+STATIC TESTS PASSED
+- Python syntax compilation across all four M runtime mirrors.
+- Fresh startup opens MAIN with the inherited difficulty picker enabled.
+- Easy, Normal and Spiffy Challenge selections all enter PLAY_GAME with their intended layer and valid spawn.
+- All 20 portal destination coordinates pass full player-body walkmesh/collision checks across 11 layers.
+- M1 interface method resolution retains the inherited F2.0 chooser and K1.6/G1 local/global log overlays.
+- Player Says adds a private local note and queues no public event. L toggles the local session log state.
+- Source, assets, deploy and site M1 runtime mirrors are byte-identical. The world-data mirrors are byte-identical. The original Luma asset JSON is unchanged.
+- M1a APK ZIP and TAR.GZ bundle integrity checks passed.
+- Complete SGGM1.0a source and Cloudflare site ZIPs were built and both passed unzip integrity checks.
+- Distribution catalogue retains only the eight requested legacy editions, K1.12, the original M1.0 test edition, and M1.0a as current.
+
+NOT LIVE TESTED
+- Pygame is not installed in the build container; no native visual smoke test was possible.
+- No fresh Pygbag compiler build or browser/WASM session was run. Cozmo must confirm the difficulty cards appear, the first frame renders, and the public log receives a new SGGM1.0a session plus subsequent area-discovery events.
+- Camera feel and actual portal traversal remain field tests.
+- No GitHub main push or Cloudflare deployment performed.
+- No Worker, D1 database or Cloudflare service configuration changed.
+
+— Luma

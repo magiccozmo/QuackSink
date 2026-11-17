@@ -1,0 +1,24 @@
+LUMA'S LOG — ENTRY 050
+SGGM1.0a — The World and Its Game Services
+Date: 17 November 2026
+Baseline: SGGK1.12; compatibility work applied to SGGM1.0 while preserving the original M1.0 archive.
+
+THE FIELD REPORT
+Cozmo launched SGGM1.0 and saw the Pygbag “Loading Spiffy's Gift…” message disappear, leaving a blank/black game canvas. The inherited Easy / Normal / Spiffy Challenge selection cards were also missing, and no new Global Usage Log session appeared. K1.12 was then tested independently: a fresh K1.12 session and three Game Saved events appeared in the public log, confirming the Worker and D1 service were operating.
+
+ROOT CAUSE
+M1.0's start_game override skipped the inherited F2.0 mode-picker flow and went directly to PLAY_GAME. More seriously, it used a bare object() as a sentinel in self.game. The inherited E4.1 flight-recorder logger treats any non-None game as a full GameModel and immediately reads current_area_id, player_x and player_y. That raised AttributeError during the state transition before the first gameplay frame could be drawn. Static syntax and world-data tests had not exercised this inherited logging path.
+
+THE REPAIR
+A small read-only SGGM1LogContext now exposes the new world's current layer and player coordinates to the inherited flight recorder. The old 23-area GameModel is still not created. Fresh launches use the inherited F2.0 difficulty cards. The mode-selection handler starts the new world at the Stables for Easy/Normal or in HELLgs Inn for Challenge, then calls the established _sggg_begin_session method. M1's custom update loop now polls _sggg_poll_global_bridge and _sggg_maybe_heartbeat. The current-layer discovery events are sent through the established anonymous event queue.
+
+PRESENTATION AND PRIVACY
+The existing latest-event HUD and local session-log overlay are restored. The local session log opens with L. K1.6 Player Says is restored: period opens the private composer; Enter records a local note. Player Says uses local-only log methods and is never sent to the public Global Usage Log.
+
+PRESERVATION
+The 11 continuous-world sheets, 20 directed portals, world coordinate model, walkmeshes, camera dead-zone and bounds logic, placeholder object art, Luma assets and K1.12 historical baseline are retained. SGGM1.0 remains in the site as a previous test build. This repair is published as SGGM1.0a. No Worker, D1 database, Cloudflare binding, GitHub main branch or live deployment was changed.
+
+VALIDATION
+Python syntax compilation and CLI state-machine tests passed. Fresh startup opened the inherited difficulty picker. Easy, Normal and Challenge selections reached PLAY_GAME with the intended map layer and valid player spawn. Pygame is unavailable in the build container, so there was no live renderer, Pygbag compiler or browser/WASM test. Cozmo's next field test should verify the difficulty cards, first rendered frame, global session creation, local Player Says privacy, local session log, portal behavior and camera movement.
+
+— Luma
