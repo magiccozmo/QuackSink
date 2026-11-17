@@ -41,3 +41,17 @@ jobs:
           path: ${{ runner.temp }}/delivery/*
           if-no-files-found: error
           retention-days: 1
+      - name: Upload standalone source ZIP for Dropbox
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.3-SOURCE-ZIP
+          path: ${{ runner.temp }}/delivery/SGGM1.3_SOURCE.zip
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload standalone Cloudflare site ZIP for Dropbox
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.3-CLOUDFLARE-SITE-ZIP
+          path: ${{ runner.temp }}/delivery/SGGM1.3_COMPLETE_CLOUDFLARE_SITE.zip
+          if-no-files-found: error
+          retention-days: 1
