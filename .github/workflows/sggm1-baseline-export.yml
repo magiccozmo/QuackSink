@@ -1,0 +1,35 @@
+name: Temporary SGG M1.0 baseline export
+on:
+  push:
+    branches:
+      - luma-sggm1-baseline-export-20261117
+permissions:
+  contents: read
+  actions: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage exact K1.12 baseline materials
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.11_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SHA256SUMS.txt" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_LUMA_LOG_Entry048.txt" transfer/
+          for f in transfer/*.zip; do
+            test -s "$f"
+            unzip -t "$f"
+          done
+          sha256sum transfer/* > transfer/TRANSFER_SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/* > transfer/TRANSFER_FILE_SIZES.txt
+      - name: Upload transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.12-M1.0-baseline-transfer
+          path: transfer/
+          retention-days: 1
+          if-no-files-found: error
