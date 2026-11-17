@@ -1,0 +1,45 @@
+name: Temporary K1.12 baseline transfer
+
+on:
+  push:
+    branches:
+      - luma-m1-k112-transfer
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact K1.12 baseline branch
+        uses: actions/checkout@v4
+
+      - name: Verify and stage original K1.12 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="ARCHIVES 8-30-2026/SGG/sggweb"
+          SOURCE="$ROOT/SGGK1.12_SOURCE.zip"
+          SITE="$ROOT/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip"
+          test -s "$SOURCE"
+          test -s "$SITE"
+          unzip -tq "$SOURCE"
+          unzip -tq "$SITE"
+          mkdir -p transfer
+          cp "$SOURCE" "$SITE" transfer/
+          (
+            cd transfer
+            sha256sum SGGK1.12_SOURCE.zip SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip > SHA256SUMS.txt
+            wc -c SGGK1.12_SOURCE.zip SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip > FILE_SIZES.txt
+          )
+          cat transfer/SHA256SUMS.txt
+          cat transfer/FILE_SIZES.txt
+
+      - name: Upload verified source and deployment archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.12-baseline-transfer
+          path: transfer/*
+          if-no-files-found: error
+          retention-days: 1
