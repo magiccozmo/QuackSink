@@ -1,0 +1,21 @@
+SGGM1.2 MAP-ISOLATION PROBE BUILD
+Route: /SGGM1.2_MAP_PROBE/play
+M1.1 play.html loader: f4101af73ce6142de4e272eabff49732ebcc42cc99fb15db66a64d8662766323
+M1.1 main.py: 2ff6c5805bdcd54382c7c25fada093312c15276b253704028458f853cbfae204
+M1.2 map JSON: 05213f68bb5220dfa04f3ec73073d5a74f092b53187b766238fa152524e10458
+Luma JSON (M1.1/M1.2 identical): 194c3acd6ce6ce55cc575d586202b5dce566aff48650e98173e05fc7ee734043
+Probe tar.gz: 568991 bytes | f8c8c282c058adac8f69455afefbbacf9439f51dc4b045fab0e7806e4f6b3e0d
+Probe APK: 569332 bytes | 0847eb650e9c0757d72f9c0292b8b93b54233fab77065d692e17c547244de03f
+Full Cloudflare site ZIP: 26286712 bytes
+Probe folder ZIP: 1134709 bytes
+
+SGGM1.2 MAP-ISOLATION PROBE
+Route: /SGGM1.2_MAP_PROBE/play
+
+This is a diagnostic build, not a release. It keeps the exact M1.1 play.html loader and M1.1 main.py game engine, and substitutes only the M1.2 m1_world_layers.json. The Luma artwork JSON is identical between the two releases and is taken from M1.1. The test bundle uses a unique archive/app directory name to avoid cache collisions.
+
+Interpretation:
+- If this starts and reaches gameplay, the M1.2 map alone does not cause the blank-screen failure; investigate the M1.2 edition path, archive naming, deployment routing/cache, or runtime packaging.
+- If this also blanks after difficulty selection, the M1.2 map change or its interaction with the unchanged engine is implicated.
+
+No Worker, D1, sound, voice, or NPC behavior changes are included.
