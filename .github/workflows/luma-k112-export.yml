@@ -1,0 +1,42 @@
+name: Temporary K1.12 binary baseline export
+
+on:
+  push:
+    branches:
+      - luma-sggk112-baseline-bridge-20261116
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  export-k112:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact baseline branch
+        uses: actions/checkout@v4
+
+      - name: Stage and verify original K1.12 archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k112-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip" /tmp/k112-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/k112-transfer/
+          cd /tmp/k112-transfer
+          test -s SGGK1.12_SOURCE.zip
+          test -s SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t SGGK1.12_SOURCE.zip
+          unzip -t SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
+          sha256sum SGGK1.12_SOURCE.zip SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip > SGGK1.12_TRANSFER_SHA256SUMS.txt
+          stat -c '%n %s bytes' SGGK1.12_SOURCE.zip SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip > SGGK1.12_TRANSFER_FILE_SIZES.txt
+          cat SGGK1.12_TRANSFER_SHA256SUMS.txt
+          cat SGGK1.12_TRANSFER_FILE_SIZES.txt
+
+      - name: Upload baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGK1.12-baseline-transfer
+          path: /tmp/k112-transfer/*
+          if-no-files-found: error
+          retention-days: 1
