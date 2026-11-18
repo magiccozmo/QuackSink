@@ -1,0 +1,38 @@
+name: Luma Mage Lab baseline transfer
+on:
+  push:
+    branches:
+      - luma-mage-lab-baseline-20261118
+permissions:
+  contents: read
+jobs:
+  export-baselines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact temporary branch
+        uses: actions/checkout@v4
+      - name: Stage and verify original archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          base="ARCHIVES 8-30-2026/SGG/sggweb"
+          cp "$base/SGGM1.7f_SOURCE.zip" transfer/
+          cp "$base/SGGM1.7f_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "$base/SGGK1.12_SOURCE.zip" transfer/
+          cp "$base/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          for f in transfer/*.zip; do
+            test -s "$f"
+            unzip -tq "$f" >/dev/null
+          done
+          (cd transfer && sha256sum *.zip > SHA256SUMS.txt)
+          (cd transfer && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          cat transfer/FILE_SIZES.txt
+          cat transfer/SHA256SUMS.txt
+      - name: Upload verified archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGG-M1.7f-K1.12-mage-baseline-20261118
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
