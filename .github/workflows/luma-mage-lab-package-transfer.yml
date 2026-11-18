@@ -219,8 +219,10 @@ jobs:
           # Refresh root/deploy current-version launch references and copies.
           cp "$src/m1_world_layers.json" "$src/SGGM1.7g/m1_world_layers.json"
           cp "$src/m1_world_layers.json" "$site/SGGM1.7g/m1_world_layers.json"
-          cp "$src/main.py" "$src/SGGM1.7g/main.py" "$site/SGGM1.7g/main.py"
-          cp "$src/luma_assets_e33.json" "$src/SGGM1.7g/luma_assets_e33.json" "$site/SGGM1.7g/luma_assets_e33.json"
+          cp "$src/main.py" "$src/SGGM1.7g/main.py"
+          cp "$src/main.py" "$site/SGGM1.7g/main.py"
+          cp "$src/luma_assets_e33.json" "$src/SGGM1.7g/luma_assets_e33.json"
+          cp "$src/luma_assets_e33.json" "$site/SGGM1.7g/luma_assets_e33.json"
           cp "$src/SGGM1.7g/sggm1_7g.tar.gz" "$site/SGGM1.7g/sggm1_7g.tar.gz"
           cp "$src/SGGM1.7g/sggm1_7g.apk" "$site/SGGM1.7g/sggm1_7g.apk"
           cp "$src/SGGM1.7g/play.html" "$site/SGGM1.7g/play.html"
@@ -272,12 +274,12 @@ jobs:
           mkdir -p "$work/delivery"
           (cd "$src" && zip -qr -X "$work/delivery/SGGM1.7g_SOURCE.zip" . -x '*/__pycache__/*' '__pycache__/*' '*.pyc' '*.mp4' '*.MP4' 'tmp/*' 'temp/*' '.git/*' '*/.git/*')
           (cd "$site" && zip -qr -X "$work/delivery/SGGM1.7g_COMPLETE_CLOUDFLARE_SITE.zip" . -x '*/__pycache__/*' '__pycache__/*' '*.pyc' '*.mp4' '*.MP4')
-          cp "$out/SGGM1.7g_LUMA_LOG_Entry066.txt" "$out/SGGM1.7g_TEST_RESULTS.txt" "$out/SGGM1.7g_BUILD_META.json" "$out/SGGM1.7g_README.txt" "$out/SGGM1.7g_DELIVERY_README.txt" "$out/SGGM1.7g_WORKER_DEPLOYMENT.txt" "$out/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$work/delivery/" 2>/dev/null || true
+          cp "$out/SGGM1.7g_LUMA_LOG_Entry066.txt" "$out/SGGM1.7g_TEST_RESULTS.txt" "$out/SGGM1.7g_BUILD_META.json" "$out/SGGM1.7g_README.txt" "$out/SGGM1.7g_DELIVERY_README.txt" "$out/SGGM1.7g_WORKER_DEPLOYMENT.txt" "$work/delivery/"
+          cp "$src/SGGM1.7g/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$work/delivery/"
           unzip -tq "$work/delivery/SGGM1.7g_SOURCE.zip"
           unzip -tq "$work/delivery/SGGM1.7g_COMPLETE_CLOUDFLARE_SITE.zip"
           (cd "$work/delivery" && sha256sum *.zip *.txt *.json > SGGM1.7g_OUTER_SHA256SUMS.txt)
           (cd "$work/delivery" && stat -c '%n %s bytes' *.zip *.txt *.json > SGGM1.7g_OUTER_FILE_SIZES.txt)
-          cp "$work/delivery/SGGM1.7g_OUTER_SHA256SUMS.txt" "$work/delivery/SGGM1.7g_OUTER_FILE_SIZES.txt"
       - name: Upload source archive as a direct artifact ZIP
         uses: actions/upload-artifact@v4
         with:
