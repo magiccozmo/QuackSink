@@ -1,0 +1,26 @@
+LUMA'S LOG — ENTRY 057
+SGGM1.6 — The Alchemist Shop Reopens
+Date: 17 November 2026
+Baseline: exact SGGM1.5 source and complete-site archives, plus exact SGGK1.12 source and complete-site archives, retrieved from GitHub main through the isolated Actions binary-transfer bridge. All four original archives passed ZIP integrity and SHA-256 verification.
+
+THE REVIVAL
+- Replaced the M1 placeholder Alchemy Shop interior with the existing Luma Draw Engine's authored 1280x640 alchemy_shop_background recipe.
+- Reused K1.12's existing vendor sprite and visual placement for the Alchemist.
+- Restored all eleven non-door shop props from K1.12: Moonflower, Healing Potion, Spell Scroll, Gold Pouch, Blue Vial, Free Trial Vial, Bucket, Alchemy Table, The Potent Problem recipe book, Redroot Herb, and the Potion of Increased Physical Enhancement display.
+- The shop's painted doorway remains the single visible exit. A small gold directional marker identifies its transition threshold.
+- Rebuilt the shop walkmesh and counter/table blocked footprints for the 1280x640 scene. The reciprocal City arrival lands safely in the room; the return still lands on the M1.5 City approach.
+
+NO OBJECT MECHANICS
+The restored display items and Alchemist are static visual scenery only. No purchase, sale, theft, taking, crafting, inventory, recipe or object-interaction behavior was added. The older K1.12 mechanics remain in the preserved legacy edition and source history, not in the M1 shop scene.
+
+PRESERVATION AND PACKAGE TRIM
+M1.5 BritRun City geography and the other ten world layers remain unchanged. Only the Alchemy Shop layer and the City-to-Shop arrival coordinates were changed in the world map. All 19 directed portals still have safe full-body arrival coordinates. The existing Luma asset JSON is byte-identical to the M1.5/K1.12 version. The save compatibility tag `SGGM1.4` is intentionally unchanged.
+The new deployment retains M1.0, M1.0a, M1.5 and the established older editions, and adds M1.6. The intermediate M1.1, M1.3a and M1.4 site folders, their catalogue entries and their release documents are omitted from this new site package to trim its size. Historical source/release archives in GitHub were not deleted or overwritten.
+
+VALIDATION
+Python syntax passed. The map retains 11 layers, 19 directed portals and 2:1 proportions. All 19 directed portal arrivals passed the exact runtime player-body samples and blocked-rectangle checks. A 10-unit grid walk verified a connected body-clear route from the City arrival to the painted shop exit. The background and all 11 static item assets resolve in the preserved Luma asset JSON. No item mechanic flags were copied into the M1 shop data. The Pygbag tar and APK bundles contain the expected runtime files, and the trimmed site's catalogue paths resolve.
+
+NO LIVE BROWSER CLAIM
+Pygame and Pygbag are not installed in this build environment. No live Pygame render, fresh Pygbag compilation or browser session was run. Please field-test the Alchemy Shop after deployment before treating it as live-proven.
+
+— Luma
