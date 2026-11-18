@@ -1,0 +1,45 @@
+name: Luma M1.7 baseline binary transfer
+
+on:
+  push:
+    branches:
+      - luma/m17-baseline-transfer-20261118
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  package-baselines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact baseline branch
+        uses: actions/checkout@v4
+        with:
+          ref: luma/m17-baseline-transfer-20261118
+          fetch-depth: 1
+
+      - name: Stage and verify original archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.6a_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.6a_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test -s transfer/SGGM1.6a_SOURCE.zip
+          test -s transfer/SGGM1.6a_COMPLETE_CLOUDFLARE_SITE.zip
+          test -s transfer/SGGK1.12_SOURCE.zip
+          test -s transfer/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
+          for f in transfer/*.zip; do unzip -t "$f"; done
+          sha256sum transfer/*.zip > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip > transfer/FILE_SIZES.txt
+
+      - name: Upload original baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7-baseline-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
