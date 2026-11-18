@@ -1,0 +1,35 @@
+{
+  "release": "SGGM1.7b",
+  "date_utc": "2026-11-18",
+  "baseline": {
+    "source": "SGGM1.7a_SOURCE.zip",
+    "deployment": "SGGM1.7a_COMPLETE_CLOUDFLARE_SITE.zip",
+    "repository": "magiccozmo/QuackSink",
+    "main_commit": "c036577edc88f5b3ff1abb42ec98261fc6180e6a"
+  },
+  "requested_changes": [
+    "Removed obsolete centre-square blocked rectangle [3235,1080,130,95].",
+    "Ended Peasant Way road artwork at player-marked point (2800.4,1143.8), preserving the remaining route and cobblestone background.",
+    "Added a 200x335 Luma Draw Engine Alchemy Shop facade at world origin (3800,865), filling the marked east-side footprint.",
+    "Moved the Alchemy Shop Door portal to (3854,1140), preserved interior target (alchemy_shop,640,500), and adjusted only the local approach path, walkmesh and facade collision."
+  ],
+  "preserved": [
+    "Kart-lotta position (2986.6,1010.1), original K1.12 stall, goods and theft/ownership metadata",
+    "Copper Flask, compass/walkway, right stall, Guard, Naz, Cozmo and other market art",
+    "Tipsy Turnip entrance and Alchemy Shop interior content/return route",
+    "All other world layers, gameplay mechanics, NPCs, saves and historical versions"
+  ],
+  "no_new_mechanics": true,
+  "packaging": {
+    "source_archive": "SGGM1.7b_SOURCE.zip",
+    "deployment_archive": "SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip",
+    "browser_launcher": "play.html",
+    "bundle": "sggm1_7b.tar.gz",
+    "apk": "sggm1_7b.apk",
+    "repacked_from": "M1.7a Pygbag payload with updated main.py and JSON files",
+    "fresh_pygbag_compile": false
+  },
+  "live_runtime_test": "Not performed; static validation only.",
+  "pushed_to_github_main": false,
+  "deployed_to_cloudflare": false
+}

@@ -1,0 +1,26 @@
+LUMA LOG — Entry 061
+Project: Spiffy's Gift (SGG)
+Release: SGGM1.7b
+Date: 2026-11-18
+Baseline: SGGM1.7a — exact source and complete Cloudflare-site archives retrieved from GitHub main at c036577edc88f5b3ff1abb42ec98261fc6180e6a.
+
+REQUESTED MARKET-SQUARE CORRECTIONS ONLY
+
+1. Removed the obsolete centre-square collision rectangle [3235,1080,130,95], left over from the former centre placement. The existing central compass/walkway artwork remains.
+2. Shortened the Peasant Way road artwork so its eastern endpoint is the player-marked location (2800.4,1143.8). The cobblestone plaza remains visible, and the rest of Peasant Way continues westward unchanged.
+3. Replaced the small generic Alchemy Shop exterior placeholder with a larger Luma Draw Engine facade filling the marked east-side footprint (world origin 3800,865; 200x335). The facade includes a visible doorway on the plaza-facing side.
+4. Moved the Alchemy Shop entrance trigger to (3854,1140), aligned it with the painted doorway. The existing destination remains alchemy_shop at (640,500). The approach path and its local walkmesh/collision envelope were adjusted only as needed to reach the new door and keep the building walls solid.
+
+PRESERVED
+
+- Kart-lotta's recorded location (2986.6,1010.1), original K1.12 stall, goods and object metadata.
+- Existing Copper Flask, central compass/walkway, right-hand merchant/stall, guard, Naz, Cozmo and other market artwork.
+- Inn entrance and Alchemy Shop interior content and return transition.
+- Every other area, NPC, item, quest, mechanic, save behavior and historical version.
+- No new gameplay mechanics.
+
+VALIDATION
+
+Static checks only. World/asset JSON parse, source syntax, Luma operation schema, path/portal destination checks, unchanged non-city layers and unchanged unrelated city entities were checked. Source and Cloudflare ZIPs pass archive integrity checks. The Pygbag tar/APK packages are repacked with the updated runtime and JSON; a fresh Pygbag compile and live browser gameplay test were not performed.
+
+No changes were pushed to GitHub main. No Cloudflare deployment was performed by Luma.

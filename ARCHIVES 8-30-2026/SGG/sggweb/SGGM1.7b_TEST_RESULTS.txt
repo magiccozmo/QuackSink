@@ -1,0 +1,20 @@
+SGGM1.7b STATIC TEST RESULTS
+Date: 2026-11-18 UTC
+
+PASS — exact SGGM1.7a source and complete Cloudflare-site baseline archives were retrieved from the user's pushed GitHub main at c036577edc88f5b3ff1abb42ec98261fc6180e6a; both baseline ZIPs passed unzip integrity checks.
+PASS — original baseline copies and SGGM1.7a historical release directories remain untouched.
+PASS — obsolete centre-square blocker [3235,1080,130,95] removed; central compass and walkway artwork retained.
+PASS — Peasant Way road begins at the exact player-marked endpoint (2800.4,1143.8); remaining westward route points, width and style are unchanged.
+PASS — Alchemy Shop facade is a new Luma Draw Engine asset (200x335) occupying the marked east-side world footprint (3800,865) through (4000,1200).
+PASS — Alchemy Shop exterior landmark aligned to the new facade; old generic exterior drawing suppressed only for this landmark.
+PASS — Alchemy Shop Door moved to (3854,1140), aligned to the painted entrance; target layer and arrival remain alchemy_shop (640,500).
+PASS — Alchemy approach route and walkmesh were extended only to reach the new doorway; facade collision is split around the doorway opening.
+PASS — all other city NPCs, items, object ownership/theft metadata, portals (except the requested Alchemy door relocation), landmarks, paths (except the requested Peasant Way trim and Alchemy approach), blocked geometry and all non-city layers remain unchanged.
+PASS — all Luma recipe operations are supported native operations: rect, line, polygon, circle, ellipse.
+PASS — source main.py syntax compiles; world and asset JSON parse.
+PASS — version catalog marks SGGM1.7b current and retains SGGM1.7a as a historical edition.
+PASS — source, site, bundle and APK archive integrity checks; no MP4 files in source handoff.
+
+NOT RUN — live Pygbag/browser gameplay session. No browser runtime was available in the build environment. The tar.gz and APK payloads were repacked from the M1.7a payload with updated main.py and JSON; they were not freshly compiled by Pygbag.
+
+No changes were pushed to GitHub main and no Cloudflare deployment was performed by Luma.
