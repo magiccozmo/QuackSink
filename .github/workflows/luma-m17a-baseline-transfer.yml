@@ -1,0 +1,48 @@
+name: Luma M1.7a exact baseline transfer
+
+on:
+  push:
+    branches:
+      - luma/m17a-baseline-transfer-20261118
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sparse checkout exact M1.7 and K1.12 archives
+        uses: actions/checkout@v4
+        with:
+          ref: luma/m17a-baseline-transfer-20261118
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            /ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7_SOURCE.zip
+            /ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7_COMPLETE_CLOUDFLARE_SITE.zip
+            /ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip
+            /ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+
+      - name: Stage, test, and checksum the original archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          for f in transfer/*.zip; do test -s "$f"; unzip -t "$f"; done
+          sha256sum transfer/*.zip > transfer/SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip > transfer/FILE_SIZES.txt
+
+      - name: Upload transfer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7a-exact-baselines
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
