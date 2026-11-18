@@ -1,0 +1,19 @@
+SGGM1.7c STATIC TEST RESULTS
+Date: 2026-11-18 UTC
+
+PASS — exact SGGM1.7b source and complete Cloudflare-site baseline archives were retrieved from the user's pushed GitHub main at 6244dd3f557b02aaa1fda8c1faacee20e6a2d615; both original ZIPs passed integrity checks.
+PASS — original M1.7b source and deployment directories remain byte-for-byte unchanged in the new release package.
+PASS — M1.7c adds exactly one city_exterior blocked rectangle: [2812,941,373,156].
+PASS — blocker matches the native market_kart_stall_k112 recipe's drawn footprint at world origin (2760,745), covering awning, posts, counter and displayed goods.
+PASS — city walkmesh rectangles are unchanged; player-space checks reject positions inside the vendor and counter footprint.
+PASS — player-space checks accept the cobbled approach at (2986.6,1110) and (3100,1110), the market plaza anchor (3300,1125), the open space to the stall's right (3200,1050), and the Alchemy Shop Door threshold (3854,1140).
+PASS — Kart-lotta's position, all paths, landmarks, NPCs, portals, market objects and ownership/theft metadata, other blocked geometry, and all non-city world layers remain unchanged.
+PASS — Alchemy Shop facade collision and doorway opening remain unchanged; the door still targets alchemy_shop (640,500).
+PASS — source main.py syntax compilation; world and Luma asset JSON parsing.
+PASS — version labels, browser bundle/APK names, and version catalog mark SGGM1.7c current while retaining prior editions as historical.
+PASS — browser tarball and APK contain updated SGGM1.7c main.py and world JSON; both payload archives pass integrity checks.
+PASS — complete source and Cloudflare site archives preserve historical editions; no MP4 files are included.
+
+NOT RUN — live Pygbag/browser gameplay session. The tar.gz and APK were repacked from the M1.7b payload; they were not freshly compiled by Pygbag.
+
+No changes were pushed to GitHub main and no Cloudflare deployment was performed by Luma.

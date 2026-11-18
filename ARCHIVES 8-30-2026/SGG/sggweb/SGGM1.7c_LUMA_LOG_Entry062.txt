@@ -1,0 +1,19 @@
+LUMA LOG — ENTRY 062
+Release: SGGM1.7c — Kart-lotta Stall Walkmesh Correction
+Date: 2026-11-18
+
+Baseline
+- Exact SGGM1.7b_SOURCE.zip and SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip retrieved from the user's current GitHub main commit 6244dd3f557b02aaa1fda8c1faacee20e6a2d615.
+- Both untouched baseline ZIPs passed integrity verification before extraction.
+
+Requested change
+- Prevent player movement through Kart-lotta's original K1.12 produce stall, counter, displayed goods and occupied stall footprint.
+- Preserve the cobblestone plaza immediately in front of the stall as walkable ground.
+
+Implementation
+- Added one city_exterior blocked rectangle: [2812, 941, 373, 156].
+- The rectangle matches the bounding footprint of the native market_kart_stall_k112 Luma Draw Engine recipe placed at world origin (2760, 745): recipe bounds x=52.5..425 and y=196..352.
+- The existing broad city walkmesh remains unchanged. The blocker overlays only the stall footprint; the cobblestone approach south of y=1097 remains within the existing walkmesh.
+- Kart-lotta remains at (2986.6, 1010.1). Her artwork, original K1.12 stall and stock, all object ownership/theft metadata, other vendors, NPCs, guard, paths, portals, Alchemy facade/door, compass and other world layers are unchanged.
+
+No new mechanics were added. No changes were pushed to GitHub main or deployed to Cloudflare by Luma.
