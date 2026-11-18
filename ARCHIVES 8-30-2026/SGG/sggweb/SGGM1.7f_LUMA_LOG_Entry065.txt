@@ -1,0 +1,34 @@
+LUMA LOG — ENTRY 065
+Release: SGGM1.7f — Troll Cave K1.12 Visual Restoration
+Date: 2026-11-18
+
+Baseline and references
+- Continued from the exact SGGM1.7e source and complete Cloudflare-site packages.
+- Used Cozmo's newly committed side-by-side references: pics/k1.12 troll cave.png and pics/m1.7e troll cave.png.
+- The comparison made the actual scope clear: K1.12 shows the icy cavern scene with Frosty, the Purple Passion Pineapple and the painted cave opening; M1.7e still showed the brown procedural placeholder room with a pool panel, generic shrine and generic portal UI.
+- Confirmed the original c1_bg_troll_cave, troll and pineapple Luma asset recipes were already present in the M1.7e asset collection. No new artwork or asset recipes were needed.
+
+Implementation
+- Set the M1 troll_cave layer to use c1_bg_troll_cave at the original 1280x640 room dimensions.
+- Restored Frosty using the original troll sprite at the K1.12 position (160,393), with no generated name label.
+- Restored the Purple Passion Pineapple using the original pineapple sprite beside Frosty.
+- Removed the brown procedural cave pool, purple shrine placeholder and floor-path overlay from this layer.
+- Replaced the oversized rectangular walkmesh with connected floor-region rectangles approximating the K1.12 cave-floor navigation polygon.
+- Moved the M1 incoming countryside portal arrival to (640,480), a clear point on the restored floor.
+- Aligned the cave return trigger to the painted opening at (598,516). Hid the generic portal marker and label because the opening is already painted into the cave artwork.
+- Hid the minimap and nearest-portal hint in this room only.
+
+Scope and preservation
+- This is a visual set-dressing/navigation pass. The pineapple and Frosty are rendered from their original assets; no new pickup, interaction, combat or NPC logic is introduced.
+- Preserved the M1 countryside connection and return destination, all unrelated M1 layers, the M1.7e inn restoration, Market Square, Alchemy Shop door correction, game controls, fast travel, saves and logging.
+- Historical SGGM1.7e, SGGM1.7d, SGGM1.7c, SGGM1.0 and all non-M1 editions remain intact.
+- No Worker, D1 schema, binding, route, secret or logging protocol was changed.
+
+Validation and limitations
+- JSON, asset-reference, portal and walkmesh checks passed.
+- The inbound entry and outbound exit positions are valid on the new floor walkmesh.
+- Updated source and deployment runtime folders and repacked APK/TAR payloads were checked for consistency and container integrity.
+- NOT LIVE TESTED: no fresh Pygbag compile or browser/Pygame gameplay session was run. Cozmo's field test remains necessary for visual scale, floor feel and the return transition.
+- No GitHub main push or Cloudflare deployment was performed.
+
+— Luma

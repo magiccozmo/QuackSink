@@ -1,0 +1,143 @@
+{
+  "release": "SGGM1.7f",
+  "date_utc": "2026-11-18",
+  "baseline": {
+    "source": "SGGM1.7e_SOURCE.zip",
+    "deployment": "SGGM1.7e_COMPLETE_CLOUDFLARE_SITE.zip",
+    "reference_source": "SGGK1.12_SOURCE.zip",
+    "reference_deployment": "SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip",
+    "repository": "magiccozmo/QuackSink",
+    "main_commit": "7952189c83c901b06423269414418c677e3e0208"
+  },
+  "reference_images": [
+    "pics/k1.12 troll cave.png",
+    "pics/m1.7e troll cave.png"
+  ],
+  "requested_changes": [
+    "Build the M1 Troll Cave visual scene from the K1.12 icy cavern reference rather than retaining the M1.7e brown placeholder room.",
+    "Reuse the existing c1_bg_troll_cave background and original troll and pineapple Luma recipes; do not create substitute art.",
+    "Restore Frosty and the Purple Passion Pineapple to their K1.12 cave-floor positions.",
+    "Align the floor walkmesh to the visible cave floor and the return portal to the painted cave opening; preserve the M1 countryside connection."
+  ],
+  "explicit_scope_limit": [
+    "Visual set-dressing and navigation-layout only. No new pineapple pickup, object interaction, combat, Frosty AI or quest behavior is introduced."
+  ],
+  "preserved": [
+    "M1.7e inn restoration, M1.7d Market Square and Alchemy Shop doorway, all unrelated M1 layers, portals, controls, fast travel, saves, logging and gameplay.",
+    "Existing Luma asset recipes and all historical editions; SGGM1.7e and earlier archives are unchanged.",
+    "No Global Usage Log Worker, D1 schema, binding, route, secret or logging protocol change."
+  ],
+  "troll_cave_layout": {
+    "size": [
+      1280,
+      640
+    ],
+    "background_asset": "c1_bg_troll_cave",
+    "walkmesh": [
+      [
+        85,
+        280,
+        1113,
+        55
+      ],
+      [
+        52,
+        325,
+        1198,
+        65
+      ],
+      [
+        22,
+        390,
+        1248,
+        80
+      ],
+      [
+        12,
+        470,
+        1254,
+        70
+      ],
+      [
+        83,
+        540,
+        1156,
+        50
+      ],
+      [
+        160,
+        590,
+        958,
+        30
+      ],
+      [
+        505,
+        620,
+        255,
+        20
+      ]
+    ],
+    "static_items": [
+      {
+        "id": "purple_passion_pineapple",
+        "name": "Purple Passion Pineapple",
+        "asset": "pineapple",
+        "x": 224,
+        "y": 339,
+        "width": 42,
+        "height": 62
+      }
+    ],
+    "npcs": [
+      {
+        "id": "frosty",
+        "name": "Frosty the Ice Troll",
+        "asset": "troll",
+        "x": 160,
+        "y": 393,
+        "width": 109,
+        "height": 144,
+        "draw_width": 109,
+        "draw_height": 144,
+        "role": "creature",
+        "show_label": false
+      }
+    ],
+    "exit_portal": {
+      "id": "cave_to_country",
+      "name": "Return to Countryside",
+      "x": 598,
+      "y": 516,
+      "radius": 60,
+      "target_layer": "countryside",
+      "target_x": 1640,
+      "target_y": 1540,
+      "style": "cave",
+      "show_marker": false,
+      "show_label": false
+    },
+    "arrival_from_countryside": [
+      640,
+      480
+    ],
+    "show_minimap": false,
+    "show_portal_hint": false
+  },
+  "packaging": {
+    "retained_previous_m_versions": [
+      "SGGM1.0",
+      "SGGM1.7c",
+      "SGGM1.7d",
+      "SGGM1.7e"
+    ],
+    "current": "SGGM1.7f",
+    "browser_launcher": "play.html",
+    "bundle": "sggm1_7f.tar.gz",
+    "apk": "sggm1_7f.apk",
+    "repacked_from": "M1.7e Pygbag payload with updated main.py and m1_world_layers.json; Luma asset recipes unchanged",
+    "fresh_pygbag_compile": false
+  },
+  "live_runtime_test": "Not performed. Static JSON, asset-reference, walkmesh, portal and archive validation only.",
+  "pushed_to_github_main": false,
+  "deployed_to_cloudflare": false
+}

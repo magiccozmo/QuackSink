@@ -1,0 +1,21 @@
+SGGM1.7f — STATIC VALIDATION RESULTS
+Date: 2026-11-18
+
+PASS — World JSON parses successfully.
+PASS — Troll Cave layer is 1280x640 (2:1) and uses background_asset c1_bg_troll_cave.
+PASS — Required Luma asset recipes exist: c1_bg_troll_cave, troll and pineapple.
+PASS — Frosty uses the original troll asset and K1.12 floor position (160,393), with generated label disabled.
+PASS — Purple Passion Pineapple uses the original pineapple asset and is positioned beside Frosty.
+PASS — The placeholder pool, shrine, generic floor path and broad rectangular room walkmesh have been removed from the cave layer.
+PASS — The incoming countryside portal arrives at (640,480), on the cave floor.
+PASS — The cave exit trigger is aligned to the painted opening at (598,516); its marker and label are disabled.
+PASS — Player-body walkmesh samples at the entry and exit locations are valid.
+PASS — The return portal still targets the existing countryside layer and coordinates.
+PASS — Active source, release-folder and deployment-folder world JSON/main.py copies are byte-identical where required.
+PASS — Runtime TAR.GZ and APK containers contain the updated main.py, world JSON and unchanged Luma asset definitions.
+PASS — Runtime ZIP/TAR container integrity checks passed.
+
+NOT LIVE TESTED: no browser/Pygbag gameplay session was run. No fresh Pygbag compilation was performed; the existing Pygbag payload containers were repacked with the updated runtime files. Cozmo's in-game field test remains the final confirmation of visual scale, walkable floor feel and return transition.
+
+No GitHub main push or Cloudflare deployment was performed by Luma.
+PASS — Existing Luma asset validator: 125 recipes / 23,186 drawing commands; supported operations and flat RGB/RGBA colours verified.
