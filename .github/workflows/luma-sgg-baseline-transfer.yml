@@ -9,14 +9,14 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Download exact baseline archives
+      - name: Download exact M1.7e baseline and K1.12 reference archives
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p transfer
           base="https://raw.githubusercontent.com/magiccozmo/QuackSink/main/ARCHIVES%208-30-2026/SGG/sggweb"
-          curl -fL --retry 3 "$base/SGGM1.7d_SOURCE.zip" -o transfer/SGGM1.7d_SOURCE.zip
-          curl -fL --retry 3 "$base/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip
+          curl -fL --retry 3 "$base/SGGM1.7e_SOURCE.zip" -o transfer/SGGM1.7e_SOURCE.zip
+          curl -fL --retry 3 "$base/SGGM1.7e_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGM1.7e_COMPLETE_CLOUDFLARE_SITE.zip
           curl -fL --retry 3 "$base/SGGK1.12_SOURCE.zip" -o transfer/SGGK1.12_SOURCE.zip
           curl -fL --retry 3 "$base/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
           test "$(find transfer -maxdepth 1 -name '*.zip' -type f | wc -l)" -eq 4
@@ -29,7 +29,7 @@ jobs:
       - name: Upload verified archives
         uses: actions/upload-artifact@v4
         with:
-          name: sgg-m1-7d-k1-12-baseline-20261118
+          name: sgg-m1-7e-k1-12-troll-cave-baseline-20261118
           path: transfer/
           if-no-files-found: error
           retention-days: 1
