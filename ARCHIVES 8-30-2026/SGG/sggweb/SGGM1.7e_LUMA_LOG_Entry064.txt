@@ -1,0 +1,35 @@
+LUMA LOG — ENTRY 064
+Release: SGGM1.7e — Tipsy Turnip Interior Set Dressing Restored
+Date: 2026-11-18
+
+Baseline and reference
+- Retrieved the exact SGGM1.7d source and complete Cloudflare-site archives from the current repository snapshot at bf5d35a1efcfc3b4d8a2a68a340259979ecce74e.
+- Retrieved both K1.12 archives as the visual and data reference. All four source archives passed independent SHA-256 comparison against the GitHub Actions transfer manifest and passed ZIP integrity tests.
+- The K1.12 screenshot supplied by Cozmo was inspected. The original c1_bg_inn_interior asset and the original inn prop/NPC recipes were found already present in M1.7d's asset JSON.
+
+Requested change
+- Restore the Inn Interior visually to its K1.12 appearance as part of the larger world set-dressing pass.
+- Do not restore object interaction behavior in this version. Cozmo explicitly deferred all object wiring to a later pass.
+
+Implementation
+- Replaced the inn_interior placeholder background with the original c1_bg_inn_interior Luma Draw Engine asset at its authored 1280×640 dimensions.
+- Restored the original hearth, cookpot, serving platter and mead bottle as static visual items using their existing asset recipes and K1.12 world coordinates.
+- Restored the original Inn Lout and Innkeeper sprites using the existing lout/vendor assets and original coordinates; suppressed only their generated M1 name labels.
+- Removed placeholder landmarks and procedural floor path overlays from this room because the original artwork already contains the room architecture, floor, rugs, shelves, counter, windows, tables and door.
+- Restored the old floor walkmesh rectangle and solid rectangles. Kept the painted exit door as the actual visual doorway and suppressed the generic portal marker/label, minimap and nearest-portal hint in this room only.
+- Adjusted the city-to-inn portal arrival to (640,480), a clear point inside the restored floor walkmesh. The inn-to-city exit portal is centred on the original K1.12 door object.
+- Added optional renderer flags for NPC labels, portal marker/label, minimap and portal hint. Defaults remain unchanged for every other layer.
+
+Preserved
+- M1.7d Market Square, its Alchemy door fix, all other world layers, routes, walkmeshes, collision, portals, objects, NPCs, game mechanics, logging, dialogue and saves.
+- Existing K1.12 asset definitions and historical releases. No old release archive was overwritten.
+- Object interaction wiring, deliberately left for a future pass as requested.
+
+Testing and limitations
+- JSON parsing and portal arrival validation passed for all layers.
+- All four static item assets and both NPC assets are present and match the original K1.12 object/NPC records.
+- Inn exit position matches the centre of the original K1.12 door object; walkmesh and blockers match the old area geometry.
+- Source Python syntax compilation passed. New Pygbag tar/APK member contents match the active main.py and JSON files; ZIP/tar integrity checks passed.
+- Generated a static 1280×640 visual preview using the Luma asset commands to inspect the composition. This is not a live game rendering.
+- NOT RUN: fresh Pygbag compilation or live browser/Pygame field test. Cozmo's in-game test remains necessary.
+- No GitHub main push or Cloudflare deployment was performed.

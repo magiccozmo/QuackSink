@@ -1,0 +1,17 @@
+SGGM1.7e — STATIC / SET-DRESSING TEST RESULTS
+
+PASS — Exact M1.7d source and complete Cloudflare-site archives, plus K1.12 reference source/site archives, were retrieved from the current GitHub snapshot; Actions-generated SHA-256 records matched all four files and each ZIP passed integrity validation.
+PASS — `m1_world_layers.json` parses; all layer IDs remain unique; all portals resolve to existing target layers and their arrival coordinates lie inside target walkmeshes and layer bounds.
+PASS — The inn layer uses the original 1280×640 `c1_bg_inn_interior` background asset at its authored size.
+PASS — All four static visual prop assets exist (`hearth`, `cookpot`, `plate`, `mead`) and match the corresponding original K1.12 object kind/IDs.
+PASS — Both NPC assets (`lout`, `vendor`) exist and match original K1.12 NPC records/IDs. Original positions and dimensions are retained.
+PASS — Inn walkmesh and blocker rectangles match the original K1.12 inn geometry. The arrival point (640,480) is inside the floor walkmesh and does not overlap a blocked rectangle. The exit portal is centred on the old exit door object at (634.5,547.5), rounded to (635,548).
+PASS — The city-to-inn arrival points to (640,480), inside the restored inn walkmesh. The inn-to-city exit destination remains the existing city point (3400,900).
+PASS — Only the intended city-to-inn target coordinate changed outside the inn layer; all other non-inn layer definitions are preserved. M1.7d Market Square geometry, Alchemy doorway fix and all other routes remain intact.
+PASS — Display-only renderer options are opt-in; all existing layers keep their former minimap, portal hint, portal marker and NPC label defaults.
+PASS — Main source Python syntax compilation and JSON parsing completed successfully.
+PASS — New Pygbag tarball and APK payloads contain the current `main.py`, `m1_world_layers.json` and unchanged `luma_assets_e33.json`; tar and APK integrity checks completed successfully.
+PASS — Existing SGGM1.7d, SGGM1.7c, SGGM1.0 and non-M1 historic release directories remain present; catalogue identifies SGGM1.7e as current.
+PASS — Static 1280×640 scene preview generated from the same Luma drawing commands and reviewed for overall composition.
+NOT RUN — Fresh Pygbag build/compile or live browser/Pygame test. Static preview and structural checks cannot replace Cozmo's in-game field test.
+NOT PERFORMED — GitHub main push or Cloudflare deployment.

@@ -1,0 +1,11 @@
+SGGM1.7e — THE TIPSY TURNIP GETS ITS K1.12 INTERIOR BACK
+
+Built from the exact SGGM1.7d source and complete-site archives, with both K1.12 archives used as the visual/reference source.
+
+This release restores the Tipsy Turnip interior as a fully dressed scene. It reuses the original c1_bg_inn_interior background and the old hearth, cookpot, platter, mead bottle, Inn Lout and Innkeeper assets/positions. The old floor walkmesh and furniture blockers are restored. The room's original painted exit door remains the visible exit.
+
+IMPORTANT SCOPE NOTE: this is a visual set-dressing pass. Cookpot, hearth, platter, bottle and other object interaction behavior is deliberately NOT wired up here; Cozmo and Luma will reconnect those behaviors in a later pass.
+
+The M1.7d Market Square, Alchemy Shop entrance fix, routes, other areas, gameplay and historical editions are preserved. No Cloudflare Worker or logging infrastructure changed.
+
+Pygbag payloads were repacked from the existing M1.7d build with the updated runtime and world JSON. No fresh Pygbag compile or live browser/Pygame test was performed. See TEST_RESULTS and LUMA_LOG.

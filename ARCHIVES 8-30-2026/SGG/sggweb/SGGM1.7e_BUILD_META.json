@@ -1,0 +1,101 @@
+{
+  "release": "SGGM1.7e",
+  "date_utc": "2026-11-18",
+  "baseline": {
+    "source": "SGGM1.7d_SOURCE.zip",
+    "deployment": "SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip",
+    "reference_source": "SGGK1.12_SOURCE.zip",
+    "reference_deployment": "SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip",
+    "repository": "magiccozmo/QuackSink",
+    "main_commit": "bf5d35a1efcfc3b4d8a2a68a340259979ecce74e"
+  },
+  "requested_changes": [
+    "Restore the K1.12 Tipsy Turnip interior as the active M1 inn_interior layer using the original c1_bg_inn_interior 1280x640 Luma artwork.",
+    "Restore the original static visual props: hearth, cookpot, platter and mead bottle; restore original Inn Lout and Innkeeper sprites.",
+    "Use the original inn floor navigation polygon and solid rectangles. Hide new-world minimap, nearest-portal hint, NPC labels and generic portal marker so the restored room artwork remains visually faithful.",
+    "Keep the old door painted in the background as the portal visual. Move the city-to-inn arrival target to an open floor position inside the restored walkmesh."
+  ],
+  "explicit_scope_limit": [
+    "Object behavior and interaction wiring are intentionally not restored in this pass. Inn set-dressing items are rendered as static Luma props; their later gameplay wiring remains deferred."
+  ],
+  "preserved": [
+    "Existing M1.7d Market Square art, geometry, Alchemy doorway correction, collision, walkmesh, portals, fast travel, save state, dialogue, logs and gameplay outside the inn.",
+    "Original Luma asset JSON and all old K1.12 object/NPC metadata; existing inn background, prop and NPC asset recipes are reused without re-authoring.",
+    "Historical SGGM1.7d, SGGM1.7c, SGGM1.0 and non-M1 editions; no earlier release was overwritten.",
+    "No Global Usage Log Worker, D1 schema, binding, route, secret, or logging protocol change."
+  ],
+  "inn_layout": {
+    "size": [
+      1280,
+      640
+    ],
+    "background_asset": "c1_bg_inn_interior",
+    "walkmesh": [
+      [
+        22,
+        324,
+        1236,
+        301
+      ]
+    ],
+    "blocked": [
+      [
+        151,
+        155,
+        270,
+        169
+      ],
+      [
+        781,
+        188,
+        398,
+        276
+      ],
+      [
+        403,
+        423,
+        139,
+        35
+      ]
+    ],
+    "static_items": [
+      "inn_hearth_c13",
+      "inn_cookpot",
+      "inn_plate",
+      "inn_mead_bottle"
+    ],
+    "npcs": [
+      "inn_lout",
+      "innkeeper"
+    ],
+    "exit_portal": {
+      "id": "inn_to_city",
+      "x": 635,
+      "y": 548,
+      "radius": 60,
+      "target_layer": "city_exterior",
+      "target_x": 3400,
+      "target_y": 900
+    },
+    "arrival_from_city": [
+      640,
+      480
+    ]
+  },
+  "packaging": {
+    "retained_previous_m_versions": [
+      "SGGM1.0",
+      "SGGM1.7c",
+      "SGGM1.7d"
+    ],
+    "current": "SGGM1.7e",
+    "browser_launcher": "play.html",
+    "bundle": "sggm1_7e.tar.gz",
+    "apk": "sggm1_7e.apk",
+    "repacked_from": "M1.7d Pygbag payload with updated main.py and world JSON; luma asset recipes are unchanged",
+    "fresh_pygbag_compile": false
+  },
+  "live_runtime_test": "Not performed; static world/portal validation, Luma asset-reference checks, source syntax and package integrity checks only.",
+  "pushed_to_github_main": false,
+  "deployed_to_cloudflare": false
+}
