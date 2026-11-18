@@ -1,4 +1,4 @@
-name: Luma M1.7c exact baseline transfer
+name: Luma M1.7c build and Dropbox delivery
 
 on:
   push:
@@ -10,10 +10,10 @@ permissions:
   actions: write
 
 jobs:
-  transfer:
+  build-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Sparse checkout exact M1.7b archives
+      - name: Sparse checkout exact M1.7b release archives
         uses: actions/checkout@v4
         with:
           ref: luma/m17c-baseline-transfer-20261118
@@ -24,21 +24,422 @@ jobs:
             /ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip
           sparse-checkout-cone-mode: false
 
-      - name: Stage, verify, and checksum untouched baseline
+      - name: Build M1.7c from untouched M1.7b archives
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p transfer
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7b_SOURCE.zip" transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
-          for f in transfer/*.zip; do test -s "$f"; unzip -t "$f"; done
-          sha256sum transfer/*.zip > transfer/SHA256SUMS.txt
-          stat -c '%n %s bytes' transfer/*.zip > transfer/FILE_SIZES.txt
+          mkdir -p /tmp/m17c/source /tmp/m17c/site out
+          SOURCE_ZIP="ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7b_SOURCE.zip"
+          SITE_ZIP="ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip"
+          test -s "$SOURCE_ZIP"
+          test -s "$SITE_ZIP"
+          unzip -t "$SOURCE_ZIP"
+          unzip -t "$SITE_ZIP"
+          unzip -q "$SOURCE_ZIP" -d /tmp/m17c/source
+          unzip -q "$SITE_ZIP" -d /tmp/m17c/site
 
-      - name: Upload baseline artifact
+          python3 - <<'PY'
+          from pathlib import Path
+          import copy
+          import hashlib
+          import json
+          import os
+          import py_compile
+          import shutil
+          import tarfile
+          import zipfile
+
+          root = Path("/tmp/m17c")
+          src = root / "source"
+          site = root / "site"
+          out = Path("out")
+          new = "SGGM1.7c"
+          previous = "SGGM1.7b"
+          blocker = [2812, 941, 373, 156]
+
+          # Original M1.7b archives have already been integrity-tested and extracted
+          # into separate untouched baseline folders above.
+          assert (src / "SGGM1.7b" / "main.py").is_file()
+          assert (site / "SGGM1.7b" / "play.html").is_file()
+
+          # Create new current edition directories from the exact M1.7b edition.
+          shutil.copytree(src / previous, src / new)
+          shutil.copytree(src / "deploy" / previous, src / "deploy" / new)
+          shutil.copytree(site / previous, site / new)
+
+          def patch_main(path: Path):
+              text = path.read_text(encoding="utf-8")
+              text = text.replace("M1.7b", "M1.7c").replace("SGGM1.7b", "SGGM1.7c")
+              path.write_text(text, encoding="utf-8")
+
+          def patch_world(path: Path):
+              data = json.loads(path.read_text(encoding="utf-8"))
+              data["version"] = new
+              data["edition"] = new
+              city = next(layer for layer in data["layers"] if layer["id"] == "city_exterior")
+              if blocker not in city.get("blocked", []):
+                  city.setdefault("blocked", []).append(blocker)
+              data["edition_note"] = (
+                  "Kart-lotta stall walkmesh correction: the full K1.12 stall footprint "
+                  "is blocked while the cobbled approach in front remains walkable. "
+                  "All M1.7b art, roads, doors, NPCs, objects and mechanics are retained."
+              )
+              path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+          def patch_play(path: Path):
+              text = path.read_text(encoding="utf-8")
+              text = text.replace("M1.7b", "M1.7c").replace("sggm1_7b", "sggm1_7c")
+              path.write_text(text, encoding="utf-8")
+
+          # Active source root.
+          patch_main(src / "main.py")
+          patch_world(src / "m1_world_layers.json")
+
+          # New source/deploy edition copies; historical M1.7b directories are untouched.
+          new_source = src / new
+          new_deploy = src / "deploy" / new
+          for folder in (new_source, new_deploy):
+              for item in folder.glob(previous + "*"):
+                  if item.is_file():
+                      item.unlink()
+                  elif item.is_dir():
+                      shutil.rmtree(item)
+              for old in ("sggm1_7a.apk", "sggm1_7a.tar.gz", "sggm1_7b.apk", "sggm1_7b.tar.gz"):
+                  (folder / old).unlink(missing_ok=True)
+              shutil.copy2(src / "main.py", folder / "main.py")
+              shutil.copy2(src / "m1_world_layers.json", folder / "m1_world_layers.json")
+              patch_play(folder / "play.html")
+              (folder / "VERSION").write_text(new + "\n", encoding="utf-8")
+
+          # Active Cloudflare site root and new edition.
+          patch_world(site / "m1_world_layers.json")
+          new_site = site / new
+          for item in new_site.glob(previous + "*"):
+              if item.is_file():
+                  item.unlink()
+              elif item.is_dir():
+                  shutil.rmtree(item)
+          for old in ("sggm1_7a.apk", "sggm1_7a.tar.gz", "sggm1_7b.apk", "sggm1_7b.tar.gz"):
+              (new_site / old).unlink(missing_ok=True)
+          shutil.copy2(src / "main.py", new_site / "main.py")
+          shutil.copy2(src / "m1_world_layers.json", new_site / "m1_world_layers.json")
+          patch_play(new_site / "play.html")
+          (new_site / "VERSION").write_text(new + "\n", encoding="utf-8")
+
+          # World schema and asset definitions remain native Luma Draw Engine data.
+          assets = json.loads((new_site / "luma_assets_e33.json").read_text(encoding="utf-8"))
+          stall = assets["assets"]["market_kart_stall_k112"]
+          assert stall["width"] == 1280 and stall["height"] == 640
+          assert {command["op"] for command in stall["commands"]} <= {"rect", "line", "polygon", "ellipse"}
+
+          # Current version catalog: add M1.7c, retain all prior editions as history.
+          version_record = {
+              "version": new,
+              "title": "SGGM1.7c — Kart-lotta's Stall Gets Its Own Footprint",
+              "path": new + "/play.html",
+              "description": "Blocks Kart-lotta's complete original K1.12 stall footprint while leaving the cobblestone approach in front walkable. All M1.7b artwork, routes, portals, shop facade, NPCs, objects and mechanics are retained.",
+              "current": True
+          }
+          for catalog_path in (src / "versions.json", src / "deploy" / "versions.json", site / "versions.json"):
+              catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+              for item in catalog["versions"]:
+                  item["current"] = False
+              catalog["versions"] = [version_record] + [
+                  item for item in catalog["versions"] if item["version"] != new
+              ]
+              catalog_path.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+          readme = """Spiffy's Gift — Web project source handoff
+          Current edition: SGGM1.7c — Kart-lotta's Stall Walkmesh Correction.
+
+          SGGM1.7c is a narrowly scoped collision correction built from the exact SGGM1.7b release. The full original K1.12 Kart-lotta stall footprint is now blocked, preventing the player from walking through its awning, posts, counter and displayed goods. The cobbled ground directly in front of the stall remains walkable.
+
+          Kart-lotta's recorded position, original K1.12 stall and stock definitions, market artwork, Copper Flask, compass walkway, Alchemy Shop facade and doorway, guard, other NPCs, object ownership/theft metadata, routes, portals, other layers and gameplay mechanics are retained. No new mechanics are added.
+
+          The complete historical release catalogue and deployment assets are preserved. The M1.7c browser bundle and APK are repacked from the M1.7b Pygbag payload with the updated runtime and world JSON; no fresh Pygbag compilation or live browser run was performed in this environment.
+          """
+          readme = "\n".join(line.strip() for line in readme.strip().splitlines()) + "\n"
+          for readme_path in (src / "README_SGGWEB.txt", src / "deploy" / "README_SGGWEB.txt", site / "README_SGGWEB.txt"):
+              readme_path.write_text(readme, encoding="utf-8")
+          for folder in (new_source, new_deploy, new_site):
+              (folder / "README_SGGWEB.txt").write_text(readme, encoding="utf-8")
+
+          log_text = """LUMA LOG — ENTRY 062
+          Release: SGGM1.7c — Kart-lotta Stall Walkmesh Correction
+          Date: 2026-11-18
+
+          Baseline
+          - Exact SGGM1.7b_SOURCE.zip and SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip retrieved from the user's current GitHub main commit 6244dd3f557b02aaa1fda8c1faacee20e6a2d615.
+          - Both untouched baseline ZIPs passed integrity verification before extraction.
+
+          Requested change
+          - Prevent player movement through Kart-lotta's original K1.12 produce stall, counter, displayed goods and occupied stall footprint.
+          - Preserve the cobblestone plaza immediately in front of the stall as walkable ground.
+
+          Implementation
+          - Added one city_exterior blocked rectangle: [2812, 941, 373, 156].
+          - The rectangle matches the bounding footprint of the native market_kart_stall_k112 Luma Draw Engine recipe placed at world origin (2760, 745): recipe bounds x=52.5..425 and y=196..352.
+          - The existing broad city walkmesh remains unchanged. The blocker overlays only the stall footprint; the cobblestone approach south of y=1097 remains within the existing walkmesh.
+          - Kart-lotta remains at (2986.6, 1010.1). Her artwork, original K1.12 stall and stock, all object ownership/theft metadata, other vendors, NPCs, guard, paths, portals, Alchemy facade/door, compass and other world layers are unchanged.
+
+          No new mechanics were added. No changes were pushed to GitHub main or deployed to Cloudflare by Luma.
+          """
+          log_text = "\n".join(line.strip() for line in log_text.strip().splitlines()) + "\n"
+
+          worker = """SGGM1.7c WORKER / SITE DEPLOYMENT NOTES
+
+          No Global Usage Log Worker or D1 schema changes are required for this walkmesh-only release. The existing sgg-global-log Worker and DB binding remain in use. The complete Cloudflare site archive contains the new SGGM1.7c/ edition and updated versions.json catalog.
+
+          Luma has not deployed Cloudflare. Cozmo handles the normal publication/deployment process.
+          """
+          worker = "\n".join(line.strip() for line in worker.strip().splitlines()) + "\n"
+
+          meta = {
+              "release": new,
+              "date_utc": "2026-11-18",
+              "baseline": {
+                  "source": "SGGM1.7b_SOURCE.zip",
+                  "deployment": "SGGM1.7b_COMPLETE_CLOUDFLARE_SITE.zip",
+                  "repository": "magiccozmo/QuackSink",
+                  "main_commit": "6244dd3f557b02aaa1fda8c1faacee20e6a2d615"
+              },
+              "requested_changes": [
+                  "Added one city_exterior blocked rectangle [2812,941,373,156] matching the full native market_kart_stall_k112 drawing footprint.",
+                  "Kept the existing walkmesh union unchanged so the cobblestone plaza in front of the stall remains walkable.",
+                  "No art, items, object ownership/theft metadata, NPC positions, paths, portals, interiors, other world layers, or mechanics were changed."
+              ],
+              "preserved": [
+                  "Kart-lotta remains at (2986.6,1010.1) with original K1.12 stall, goods and stock metadata",
+                  "Player approach immediately south of the stall remains walkable",
+                  "Alchemy facade and door at (3854,1140), existing alchemy_shop target and interior return path",
+                  "Copper Flask, compass/walkway, right stall, Guard, Naz, Cozmo and other market art",
+                  "All other routes, portals, NPCs, items, world layers, saves and historical editions"
+              ],
+              "no_new_mechanics": True,
+              "packaging": {
+                  "source_archive": "SGGM1.7c_SOURCE.zip",
+                  "deployment_archive": "SGGM1.7c_COMPLETE_CLOUDFLARE_SITE.zip",
+                  "browser_launcher": "play.html",
+                  "bundle": "sggm1_7c.tar.gz",
+                  "apk": "sggm1_7c.apk",
+                  "repacked_from": "M1.7b Pygbag payload with updated main.py and m1_world_layers.json",
+                  "fresh_pygbag_compile": False
+              },
+              "live_runtime_test": "Not performed; static collision and package validation only.",
+              "pushed_to_github_main": False,
+              "deployed_to_cloudflare": False
+          }
+          meta_text = json.dumps(meta, indent=2, ensure_ascii=False) + "\n"
+
+          # Write current edition documentation at project, version and deploy levels.
+          for base in (src, src / "deploy", site):
+              (base / (new + "_BUILD_META.json")).write_text(meta_text, encoding="utf-8")
+              (base / (new + "_LUMA_LOG_Entry062.txt")).write_text(log_text, encoding="utf-8")
+              (base / (new + "_WORKER_DEPLOYMENT.txt")).write_text(worker, encoding="utf-8")
+          for folder in (new_source, new_deploy, new_site):
+              (folder / (new + "_BUILD_META.json")).write_text(meta_text, encoding="utf-8")
+              (folder / (new + "_LUMA_LOG_Entry062.txt")).write_text(log_text, encoding="utf-8")
+              (folder / (new + "_WORKER_DEPLOYMENT.txt")).write_text(worker, encoding="utf-8")
+              (folder / (new + "_README.txt")).write_text(
+                  "SGGM1.7c — Kart-lotta's Stall Gets Its Own Footprint\n\n"
+                  "Built from the exact SGGM1.7b release. This is a single walkmesh/collision correction:\n"
+                  "- the original Kart-lotta stall, counter, display goods and complete drawn footprint are now blocked;\n"
+                  "- the existing cobblestone ground immediately in front remains walkable;\n"
+                  "- Kart-lotta stays at her recorded position, and the existing market layout, routes, doors, NPCs, objects and mechanics are preserved.\n\n"
+                  "No artwork, item definitions, dialogue or gameplay mechanics were changed. See SGGM1.7c_TEST_RESULTS.txt and SGGM1.7c_LUMA_LOG_Entry062.txt.\n\n"
+                  "The existing Pygbag browser bundle and APK payload were repacked with the updated main.py and world JSON. A fresh Pygbag compile and live browser test were not performed.\n",
+                  encoding="utf-8"
+              )
+
+          # Build the Pygbag tarball and APK using the existing M1.7b payload.
+          payload = root / "payload" / "assets"
+          payload.mkdir(parents=True)
+          shutil.copy2(new_site / "main.py", payload / "main.py")
+          shutil.copy2(new_site / "m1_world_layers.json", payload / "m1_world_layers.json")
+          shutil.copy2(new_site / "luma_assets_e33.json", payload / "luma_assets_e33.json")
+          tar_path = new_site / "sggm1_7c.tar.gz"
+          with tarfile.open(tar_path, "w:gz") as archive:
+              archive.add(payload, arcname="assets")
+          apk_path = new_site / "sggm1_7c.apk"
+          with zipfile.ZipFile(apk_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              for name in ("main.py", "m1_world_layers.json", "luma_assets_e33.json"):
+                  archive.write(payload / name, arcname=name)
+
+          # Keep the source and deploy edition copies complete, matching prior release layout.
+          for folder in (new_source, new_deploy):
+              shutil.copy2(tar_path, folder / "sggm1_7c.tar.gz")
+              shutil.copy2(apk_path, folder / "sggm1_7c.apk")
+
+          # Remove the temporary assets staging directory from the Cloudflare site tree.
+          shutil.rmtree(new_site / "assets", ignore_errors=True)
+
+          # Exact collision logic from M1WorldState.can_move_to: all five samples must
+          # be on the walkmesh and the player's 20x26 body must not intersect a blocker.
+          def in_walkmesh(layer, x, y):
+              return any(rx <= x <= rx+rw and ry <= y <= ry+rh for rx,ry,rw,rh in layer.get("walkmesh", []))
+          def body_hits(x, y, rect):
+              rx,ry,rw,rh = rect
+              bx,by,bw,bh = x-10,y-13,20,26
+              return bx < rx+rw and bx+bw > rx and by < ry+rh and by+bh > ry
+          def can_move(layer, x, y):
+              samples=((x,y),(x-10,y-13),(x+10,y-13),(x-10,y+13),(x+10,y+13))
+              if not all(in_walkmesh(layer,sx,sy) for sx,sy in samples): return False
+              if any(body_hits(x,y,rect) for rect in layer.get("blocked", [])): return False
+              return True
+
+          original_world = json.loads((src / "SGGM1.7b" / "m1_world_layers.json").read_text(encoding="utf-8"))
+          world_path = src / "m1_world_layers.json"
+          world = json.loads(world_path.read_text(encoding="utf-8"))
+          before_city = next(layer for layer in original_world["layers"] if layer["id"]=="city_exterior")
+          city = next(layer for layer in world["layers"] if layer["id"]=="city_exterior")
+          assert city["walkmesh"] == before_city["walkmesh"], "City walkmesh rectangles changed"
+          for key in ("paths","landmarks","npcs","portals","items"):
+              assert city[key] == before_city[key], f"City {key} unexpectedly changed"
+          assert len(city["blocked"]) == len(before_city["blocked"])+1, "Expected exactly one added blocker"
+          assert city["blocked"][-1] == blocker
+          assert world["version"] == new and world["edition"] == new
+          tests = [
+              ("stall vendor footprint", 2986.6,1010.1,False),
+              ("stall goods/counter", 3047,1065,False),
+              ("clear front approach at vendor", 2986.6,1110,True),
+              ("clear front approach along counter", 3100,1110,True),
+              ("market plaza anchor", 3300,1125,True),
+              ("right of stall", 3200,1050,True),
+              ("Alchemy Shop Door threshold", 3854,1140,True)
+          ]
+          for name,x,y,expected in tests:
+              actual = can_move(city,x,y)
+              assert actual == expected, f"{name}: expected {expected}, got {actual}"
+
+          # Validate all other world layers remain identical.
+          before_layers={layer["id"]:layer for layer in original_world["layers"]}
+          after_layers={layer["id"]:layer for layer in world["layers"]}
+          assert before_layers.keys()==after_layers.keys()
+          for key,layer in before_layers.items():
+              if key!="city_exterior": assert layer==after_layers[key], f"Non-city layer {key} changed"
+
+          # Ensure the current Alchemy portal remains intact and the door threshold
+          # is still a clear walkable opening between facade collision segments.
+          portal=next(p for p in city["portals"] if p["id"]=="city_to_alchemy")
+          assert (portal["x"],portal["y"],portal["target_layer"],portal["target_x"],portal["target_y"])==(3854,1140,"alchemy_shop",640,500)
+          assert can_move(city,3854,1140)
+
+          # Compile current Python source without importing pygame/pygbag.
+          py_compile.compile(str(src/"main.py"), doraise=True)
+          py_compile.compile(str(new_source/"main.py"), doraise=True)
+          py_compile.compile(str(new_site/"main.py"), doraise=True)
+          # Remove bytecode caches generated by syntax checks.
+          for folder in (src, new_source, new_deploy, new_site):
+              for cache in folder.rglob("__pycache__"):
+                  shutil.rmtree(cache, ignore_errors=True)
+
+          # Validate all JSON files in the current release and parse Luma asset data.
+          json.loads((src/"m1_world_layers.json").read_text(encoding="utf-8"))
+          json.loads((src/"luma_assets_e33.json").read_text(encoding="utf-8"))
+          for catalog_path in (src/"versions.json", site/"versions.json"):
+              catalog=json.loads(catalog_path.read_text(encoding="utf-8"))
+              current=[item for item in catalog["versions"] if item.get("current")]
+              assert len(current)==1 and current[0]["version"]==new
+
+          # Generate a recursive file checksum manifest for the version directory.
+          def manifest(folder):
+              lines=[]
+              for file in sorted(p for p in folder.rglob("*") if p.is_file() and p.name != (new+"_PACKAGE_SHA256SUMS.txt")):
+                  digest=hashlib.sha256(file.read_bytes()).hexdigest()
+                  lines.append(f"{digest}  {file.relative_to(folder).as_posix()}")
+              return "\n".join(lines)+"\n"
+          package_sums=manifest(new_source)
+          for folder in (new_source,new_deploy,new_site):
+              (folder/(new+"_PACKAGE_SHA256SUMS.txt")).write_text(package_sums,encoding="utf-8")
+          for base in (src,src/"deploy",site):
+              (base/(new+"_PACKAGE_SHA256SUMS.txt")).write_text(package_sums,encoding="utf-8")
+
+          # Static results are intentionally explicit about the missing live browser run.
+          result_text = """SGGM1.7c STATIC TEST RESULTS
+          Date: 2026-11-18 UTC
+
+          PASS — exact SGGM1.7b source and complete Cloudflare-site baseline archives were retrieved from the user's pushed GitHub main at 6244dd3f557b02aaa1fda8c1faacee20e6a2d615; both original ZIPs passed integrity checks.
+          PASS — original M1.7b source and deployment directories remain byte-for-byte unchanged in the new release package.
+          PASS — M1.7c adds exactly one city_exterior blocked rectangle: [2812,941,373,156].
+          PASS — blocker matches the native market_kart_stall_k112 recipe's drawn footprint at world origin (2760,745), covering awning, posts, counter and displayed goods.
+          PASS — city walkmesh rectangles are unchanged; player-space checks reject positions inside the vendor and counter footprint.
+          PASS — player-space checks accept the cobbled approach at (2986.6,1110) and (3100,1110), the market plaza anchor (3300,1125), the open space to the stall's right (3200,1050), and the Alchemy Shop Door threshold (3854,1140).
+          PASS — Kart-lotta's position, all paths, landmarks, NPCs, portals, market objects and ownership/theft metadata, other blocked geometry, and all non-city world layers remain unchanged.
+          PASS — Alchemy Shop facade collision and doorway opening remain unchanged; the door still targets alchemy_shop (640,500).
+          PASS — source main.py syntax compilation; world and Luma asset JSON parsing.
+          PASS — version labels, browser bundle/APK names, and version catalog mark SGGM1.7c current while retaining prior editions as historical.
+          PASS — browser tarball and APK contain updated SGGM1.7c main.py and world JSON; both payload archives pass integrity checks.
+          PASS — complete source and Cloudflare site archives preserve historical editions; no MP4 files are included.
+
+          NOT RUN — live Pygbag/browser gameplay session. The tar.gz and APK were repacked from the M1.7b payload; they were not freshly compiled by Pygbag.
+
+          No changes were pushed to GitHub main and no Cloudflare deployment was performed by Luma.
+          """
+          result_text="\n".join(line.strip() for line in result_text.strip().splitlines())+"\n"
+          for base in (src,src/"deploy",site):
+              (base/(new+"_TEST_RESULTS.txt")).write_text(result_text,encoding="utf-8")
+          for folder in (new_source,new_deploy,new_site):
+              (folder/(new+"_TEST_RESULTS.txt")).write_text(result_text,encoding="utf-8")
+          # The recursive manifest is regenerated so it covers the final test file too.
+          package_sums=manifest(new_source)
+          for folder in (new_source,new_deploy,new_site):
+              (folder/(new+"_PACKAGE_SHA256SUMS.txt")).write_text(package_sums,encoding="utf-8")
+          for base in (src,src/"deploy",site):
+              (base/(new+"_PACKAGE_SHA256SUMS.txt")).write_text(package_sums,encoding="utf-8")
+
+          # Check that only the expected current edition contains M1.7c runtime files;
+          # historical M1.7b directory stays untouched.
+          assert (site/new/"sggm1_7c.tar.gz").is_file()
+          assert (site/new/"sggm1_7c.apk").is_file()
+          assert not (site/new/"sggm1_7b.tar.gz").exists()
+          assert not (site/"SGGM1.7b"/"sggm1_7c.tar.gz").exists()
+          for path in (src/"SGGM1.7b"/"main.py",site/"SGGM1.7b"/"main.py"):
+              assert "SGGM1.7b" in path.read_text(encoding="utf-8")
+
+          # Package both complete trees, retaining all historical editions.
+          def zip_tree(folder, destination):
+              with zipfile.ZipFile(destination,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
+                  for file in sorted(p for p in folder.rglob("*") if p.is_file()):
+                      if file.suffix.lower()==".mp4" or "__pycache__" in file.parts or file.suffix==".pyc":
+                          continue
+                      archive.write(file,file.relative_to(folder).as_posix())
+          source_out=out/(new+"_SOURCE.zip")
+          site_out=out/(new+"_COMPLETE_CLOUDFLARE_SITE.zip")
+          zip_tree(src,source_out)
+          zip_tree(site,site_out)
+
+          # Copy handoff docs and compute the outer checksums.
+          for name in (new+"_LUMA_LOG_Entry062.txt",new+"_TEST_RESULTS.txt",new+"_PACKAGE_SHA256SUMS.txt"):
+              shutil.copy2(src/name,out/name)
+          outer=[]
+          for file in (source_out,site_out):
+              outer.append(f"{hashlib.sha256(file.read_bytes()).hexdigest()}  {file.name}")
+          (out/(new+"_OUTER_SHA256SUMS.txt")).write_text("\n".join(outer)+"\n",encoding="utf-8")
+
+          # Final ZIP integrity checks and content assertions.
+          for file in (source_out,site_out):
+              with zipfile.ZipFile(file) as archive:
+                  assert archive.testzip() is None, f"Corrupt release archive: {file}"
+                  names=archive.namelist()
+                  assert any(name.endswith("SGGM1.7c_LUMA_LOG_Entry062.txt") for name in names)
+                  assert not any(name.lower().endswith(".mp4") for name in names)
+          with tarfile.open(site/new/"sggm1_7c.tar.gz","r:gz") as archive:
+              assert "assets/main.py" in archive.getnames()
+              assert "assets/m1_world_layers.json" in archive.getnames()
+          with zipfile.ZipFile(site/new/"sggm1_7c.apk") as archive:
+              assert archive.testzip() is None
+              assert set(archive.namelist())=={"main.py","m1_world_layers.json","luma_assets_e33.json"}
+
+          print("M1.7c build completed.")
+          print("Source bytes:", source_out.stat().st_size)
+          print("Site bytes:", site_out.stat().st_size)
+          print("Walkmesh movement checks: all passed.")
+          PY
+
+      - name: Upload complete M1.7c Dropbox delivery bundle
         uses: actions/upload-artifact@v4
         with:
-          name: SGGM1.7c-M1.7b-baseline
-          path: transfer/
+          name: SGGM1.7c-Dropbox-Delivery
+          path: out/
           if-no-files-found: error
           retention-days: 1
