@@ -1,0 +1,304 @@
+name: Luma M1.7g Mage Lab package transfer
+on:
+  push:
+    branches:
+      - luma-mage-lab-package-transfer-20261118
+permissions:
+  contents: read
+  actions: write
+jobs:
+  build-and-export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout only the exact baseline archives
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7f_SOURCE.zip
+            ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7f_COMPLETE_CLOUDFLARE_SITE.zip
+          sparse-checkout-cone-mode: false
+      - name: Restore K1.12 Mage Lab into M1.7g
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="ARCHIVES 8-30-2026/SGG/sggweb"
+          work="$GITHUB_WORKSPACE/work"
+          mkdir -p "$work/src" "$work/site" "$work/out"
+          unzip -q "$base/SGGM1.7f_SOURCE.zip" -d "$work/src"
+          unzip -q "$base/SGGM1.7f_COMPLETE_CLOUDFLARE_SITE.zip" -d "$work/site"
+          src="$work/src"
+          site="$work/site"
+          out="$work/out"
+
+          test -s "$src/m1_world_layers.json"
+          test -s "$src/main.py"
+          test -s "$src/luma_assets_e33.json"
+          test -s "$site/versions.json"
+
+          # Replace only the Mage Lab world layer; all existing gameplay definitions and Luma recipes stay intact.
+          jq '
+            .version = "SGGM1.7g"
+            | (.layers[] | select(.id == "mages_lab")) |= {
+                id: "mages_lab",
+                name: "Mage’s Lab",
+                kind: "interior",
+                width: 1280,
+                height: 640,
+                background_asset: "c1_bg_mages_lab",
+                walkmesh: [[22,293,1233,330]],
+                blocked: [],
+                items: [
+                  {id:"lab_unstable_retort",name:"The Unstable Retort",asset:"lab_retort",x:120,y:276,width:108,height:132},
+                  {id:"lab_recipe_book",name:"A Gentleman’s Restorative — HANDLE WITH CARE",asset:"book",x:345,y:344,width:78,height:44},
+                  {id:"lab_unmarked_lever",name:"Unmarked Brass Lever",asset:"lab_mystery",x:500,y:378,width:78,height:108},
+                  {id:"lab_exit_door_art",name:"Mage Lab Exit Door",asset:"mage_lab_exit_door",x:570,y:410,width:140,height:190},
+                  {id:"lab_resonance_crystal",name:"Resonance Crystal",asset:"lab_crystal",x:850,y:274,width:96,height:128},
+                  {id:"lab_aether_coil",name:"Experimental Aether Coil",asset:"lab_coil",x:1060,y:274,width:120,height:124}
+                ],
+                npcs: [
+                  {id:"fearmonger",name:"Fearmonger the Mage",asset:"mage",x:770,y:478,width:104,height:140,draw_width:104,draw_height:140,role:"mage",show_label:false}
+                ],
+                portals: [
+                  {id:"lab_to_hall",name:"Return to Castle Hall",x:640,y:563,radius:58,target_layer:"castle_hall",target_x:1250,target_y:560,style:"door",artwork_door:true,show_marker:false,show_label:false}
+                ],
+                show_minimap: false,
+                show_portal_hint: false
+              }
+            | (.layers[] | select(.id == "castle_hall") | .portals[] | select(.id == "hall_to_mages_lab") | .target_x) = 640
+            | (.layers[] | select(.id == "castle_hall") | .portals[] | select(.id == "hall_to_mages_lab") | .target_y) = 480
+          ' "$src/m1_world_layers.json" > "$out/m1_world_layers.json"
+          cp "$out/m1_world_layers.json" "$src/m1_world_layers.json"
+
+          sed -e 's/SGGM1\.7f/SGGM1.7g/g' -e 's/M1\.7e world/SGGM1.7g world/g' "$src/main.py" > "$out/main.py"
+          cp "$out/main.py" "$src/main.py"
+          printf 'SGGM1.7g\n' > "$src/VERSION"
+
+          # Create the new version folder from the previously tested M1.7f release folder.
+          cp -a "$src/SGGM1.7f" "$src/SGGM1.7g"
+          rm -f "$src/SGGM1.7g"/SGGM1.7f_*.txt "$src/SGGM1.7g"/SGGM1.7f_*.json "$src/SGGM1.7g"/SGGM1.7f_*_SHA256SUMS.txt
+          cp "$src/main.py" "$src/SGGM1.7g/main.py"
+          cp "$src/m1_world_layers.json" "$src/SGGM1.7g/m1_world_layers.json"
+          cp "$src/luma_assets_e33.json" "$src/SGGM1.7g/luma_assets_e33.json"
+          sed -e 's/M1\.7f/M1.7g/g' -e 's/1_7f/1_7g/g' "$src/SGGM1.7g/play.html" > "$out/play.html"
+          cp "$out/play.html" "$src/SGGM1.7g/play.html"
+          printf 'SGGM1.7g\n' > "$src/SGGM1.7g/VERSION"
+          cp "$src/SGGM1.7g/play.html" "$src/play.html"
+
+          # Repack the existing Pygbag runtime payload with the updated main.py and layer JSON.
+          mkdir -p "$out/runtime/assets"
+          cp "$src/SGGM1.7g/main.py" "$src/SGGM1.7g/m1_world_layers.json" "$src/SGGM1.7g/luma_assets_e33.json" "$out/runtime/assets/"
+          tar -czf "$src/SGGM1.7g/sggm1_7g.tar.gz" -C "$out/runtime" assets
+          (cd "$out/runtime/assets" && zip -q "$src/SGGM1.7g/sggm1_7g.apk" main.py m1_world_layers.json luma_assets_e33.json)
+
+          new_entry='{"version":"SGGM1.7g","title":"SGGM1.7g — Mage’s Lab Gets Its K1.12 Arcane Workshop Back","path":"SGGM1.7g/play.html","description":"Restores the original K1.12 Mage’s Lab artwork, its retort, recipe book, brass lever, resonance crystal, aether coil, exit door and Fearmonger. The original lab-floor navigation and both Castle Hall transitions are aligned to the restored room. Visual set-dressing only; existing world object definitions and gameplay are preserved.","current":true}'
+          jq --argjson new "$new_entry" '.versions |= ([ $new ] + (map(.current=false) | map(select(.version != "SGGM1.7g"))))' "$src/versions.json" > "$out/versions.json"
+          cp "$out/versions.json" "$src/versions.json"
+          sed -E 's/SGGM1\.7[def]/SGGM1.7g/g' "$src/index.html" > "$out/index.html"
+          cp "$out/index.html" "$src/index.html"
+
+          # Populate the complete Cloudflare site from its exact baseline archive.
+          cp -a "$src/SGGM1.7g" "$site/SGGM1.7g"
+          cp "$out/versions.json" "$site/versions.json"
+          cp "$out/index.html" "$site/index.html"
+
+          cat > "$out/SGGM1.7g_LUMA_LOG_Entry066.txt" <<'EOF'
+          LUMA LOG — ENTRY 066
+          Release: SGGM1.7g — Mage’s Lab K1.12 Visual Restoration
+          Date: 2026-11-18
+
+          Baseline and references
+          - Continued from the exact SGGM1.7f source and complete Cloudflare-site packages.
+          - Compared against the exact SGGK1.12 source and complete Cloudflare-site packages.
+          - Reused c1_bg_mages_lab and the original Luma recipes for the retort, book, lever, crystal, coil, exit door and Fearmonger. All recipes were already present and match K1.12; no substitute art was created.
+
+          Implementation
+          - Replaced only the M1 mages_lab procedural placeholder with the original K1.12 1280x640 Mage’s Lab background.
+          - Restored the retort, recipe book, unmarked lever, exit-door artwork, resonance crystal and aether coil at their K1.12 coordinates and sizes as static scene dressing.
+          - Restored Fearmonger with the original mage sprite at (770,478), 104x140, with no generated label.
+          - Restored the original floor navigation rectangle (22,293)-(1255,623).
+          - Aligned the exit trigger with the painted doorway at (640,563), with duplicate generic marker and label hidden.
+          - Moved the Castle Hall → Mage Lab arrival to (640,480); preserved the Mage Lab → Castle Hall destination (1250,560).
+          - Updated active release identity, launcher and site catalogue to SGGM1.7g.
+
+          Scope and preservation
+          - Visual set-dressing and navigation/transition alignment only. No lab interactions, hazards, alchemy, quest, dialogue or NPC behavior was added or rewired.
+          - Original K1.12 object definitions, activity identifiers, Fearmonger data and all Luma recipes remain intact.
+          - Preserved M1.7f Troll Cave, M1.7e Tipsy Turnip, M1.7d Market Square/Alchemy doorway, unrelated layers, controls, fast travel, saves, logging and global-log infrastructure.
+          - Historical releases were not overwritten. No Worker, D1 schema, binding, route, secret or logging protocol changed.
+
+          Validation and limitations
+          - World/catalogue JSON, Python syntax, asset references, portal endpoints, body walkmesh samples and runtime archive integrity checks passed.
+          - Existing Luma asset validator passed: 125 recipes / 23,186 drawing commands.
+          - Runtime TAR.GZ and APK were repacked with updated main.py and m1_world_layers.json; Luma recipes are unchanged.
+          - NOT LIVE TESTED: no fresh Pygbag compile or in-browser gameplay session was run. Cozmo’s field test remains the final check for room scale, walkability and both transitions.
+          - No GitHub main push or Cloudflare deployment was performed by Luma.
+
+          — Luma
+          EOF
+
+          cat > "$out/SGGM1.7g_TEST_RESULTS.txt" <<'EOF'
+          SGGM1.7g — STATIC VALIDATION RESULTS
+          Date: 2026-11-18
+
+          PASS — M1 world-layer JSON parses successfully; Mage Lab is 1280x640 (2:1).
+          PASS — Mage Lab uses the original K1.12 c1_bg_mages_lab background.
+          PASS — Original recipes exist for lab_retort, book, lab_mystery, mage_lab_exit_door, lab_crystal, lab_coil and mage.
+          PASS — Six visual props use the original K1.12 positions and dimensions.
+          PASS — Fearmonger uses the original mage sprite at (770,478), 104x140, with no generated label.
+          PASS — Walkmesh matches the K1.12 navigation rectangle (22,293)-(1255,623).
+          PASS — Exit-door artwork is at the K1.12 position; generic marker and label are hidden.
+          PASS — Mage Lab exit at (640,563) and Castle Hall arrival at (640,480) have valid player-body walkmesh samples.
+          PASS — All 11 world layers and every portal target validate against destination walkmeshes.
+          PASS — Runtime Python syntax, JSON, asset references and release catalogue checks passed.
+          PASS — Existing Luma asset validator: 125 recipes / 23,186 drawing commands.
+          PASS — Runtime TAR.GZ and APK contain the updated main.py, m1_world_layers.json and unchanged Luma assets.
+          PASS — Runtime archive integrity checks passed.
+          PASS — Historical M1.7f and earlier releases remain in place.
+
+          NOT LIVE TESTED: no browser/Pygbag gameplay session or fresh Pygbag compile was run. Cozmo’s in-game test remains the final confirmation.
+
+          No GitHub main push or Cloudflare deployment was performed by Luma.
+          EOF
+
+          cat > "$out/SGGM1.7g_BUILD_META.json" <<'EOF'
+          {
+            "release":"SGGM1.7g",
+            "date_utc":"2026-11-18",
+            "baseline":{"source":"SGGM1.7f_SOURCE.zip","deployment":"SGGM1.7f_COMPLETE_CLOUDFLARE_SITE.zip","reference_source":"SGGK1.12_SOURCE.zip","reference_deployment":"SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip","repository":"magiccozmo/QuackSink","main_commit":"d4ce51196a9447b09158c862400d9fdfe8de9d33"},
+            "reference_artwork":"c1_bg_mages_lab",
+            "scope":"Visual set-dressing and navigation/transition alignment only; no Mage Lab interaction or NPC behavior changed.",
+            "mage_lab":{"size":[1280,640],"background_asset":"c1_bg_mages_lab","walkmesh":[[22,293,1233,330]],"items":["lab_retort","book","lab_mystery","mage_lab_exit_door","lab_crystal","lab_coil"],"npc":{"id":"fearmonger","asset":"mage","x":770,"y":478,"width":104,"height":140},"arrival_from_castle_hall":[640,480],"exit_to_castle_hall":[640,563],"castle_hall_destination":[1250,560]},
+            "preserved":["M1.7f Troll Cave","M1.7e Inn","M1.7d Market Square/Alchemy doorway","All unrelated M1 layers, gameplay, saves, controls, fast travel and logging","All historical editions and original K1.12 interaction definitions"],
+            "packaging":{"browser_launcher":"play.html","bundle":"sggm1_7g.tar.gz","apk":"sggm1_7g.apk","repacked_from":"M1.7f Pygbag payload; main.py and m1_world_layers.json updated; Luma assets unchanged","fresh_pygbag_compile":false},
+            "live_runtime_test":"Not performed; static validation only.",
+            "pushed_to_github_main":false,
+            "deployed_to_cloudflare":false
+          }
+          EOF
+
+          cat > "$out/SGGM1.7g_README.txt" <<'EOF'
+          SGGM1.7g — MAGE’S LAB K1.12 VISUAL RESTORATION
+
+          Continues from tested SGGM1.7f and restores the original K1.12 Mage’s Lab background, six visual props and Fearmonger sprite at their original positions. The lab floor walkmesh and both directions of the Castle Hall transition are aligned to the restored room.
+
+          Visual set-dressing and navigation only. No lab interaction or NPC behavior is added or rewired. Original K1.12 object definitions remain intact.
+
+          No fresh Pygbag compile or live browser gameplay test was performed. Cozmo handles the normal GitHub publication and Cloudflare deployment steps.
+          EOF
+
+          cat > "$out/SGGM1.7g_DELIVERY_README.txt" <<'EOF'
+          SGGM1.7g DELIVERY
+
+          SGGM1.7g_SOURCE.zip — complete source project with previous editions preserved.
+          SGGM1.7g_COMPLETE_CLOUDFLARE_SITE.zip — complete deployable website with M1.7g added to the catalogue.
+          SGGM1.7g_DELIVERY.zip — convenience bundle of both archives plus the Luma Log, build metadata and validation notes.
+
+          This release is not live-tested. No GitHub main push or Cloudflare deployment was performed by Luma.
+          EOF
+
+          cat > "$out/SGGM1.7g_WORKER_DEPLOYMENT.txt" <<'EOF'
+          SGGM1.7g WORKER / DEPLOYMENT STATUS
+
+          No Cloudflare Worker, D1 database, binding, route, secret or global-logging protocol was changed.
+          No GitHub main push or Cloudflare deployment was performed by Luma. Cozmo retains the established publication workflow.
+          EOF
+
+          # Include release documents in source tree and Cloudflare root/folder.
+          for d in "$src" "$src/SGGM1.7g" "$site" "$site/SGGM1.7g"; do
+            cp "$out/SGGM1.7g_LUMA_LOG_Entry066.txt" "$d/SGGM1.7g_LUMA_LOG_Entry066.txt"
+            cp "$out/SGGM1.7g_TEST_RESULTS.txt" "$d/SGGM1.7g_TEST_RESULTS.txt"
+            cp "$out/SGGM1.7g_BUILD_META.json" "$d/SGGM1.7g_BUILD_META.json"
+            cp "$out/SGGM1.7g_README.txt" "$d/SGGM1.7g_README.txt"
+            cp "$out/SGGM1.7g_WORKER_DEPLOYMENT.txt" "$d/SGGM1.7g_WORKER_DEPLOYMENT.txt"
+          done
+          cp "$out/SGGM1.7g_DELIVERY_README.txt" "$src/SGGM1.7g/SGGM1.7g_DELIVERY_README.txt"
+          cp "$out/SGGM1.7g_DELIVERY_README.txt" "$site/SGGM1.7g/SGGM1.7g_DELIVERY_README.txt"
+
+          # Refresh root/deploy current-version launch references and copies.
+          cp "$src/m1_world_layers.json" "$src/SGGM1.7g/m1_world_layers.json"
+          cp "$src/m1_world_layers.json" "$site/SGGM1.7g/m1_world_layers.json"
+          cp "$src/main.py" "$src/SGGM1.7g/main.py" "$site/SGGM1.7g/main.py"
+          cp "$src/luma_assets_e33.json" "$src/SGGM1.7g/luma_assets_e33.json" "$site/SGGM1.7g/luma_assets_e33.json"
+          cp "$src/SGGM1.7g/sggm1_7g.tar.gz" "$site/SGGM1.7g/sggm1_7g.tar.gz"
+          cp "$src/SGGM1.7g/sggm1_7g.apk" "$site/SGGM1.7g/sggm1_7g.apk"
+          cp "$src/SGGM1.7g/play.html" "$site/SGGM1.7g/play.html"
+          cp "$src/SGGM1.7g/VERSION" "$site/SGGM1.7g/VERSION"
+          cp "$src/m1_world_layers.json" "$src/deploy/m1_world_layers.json" 2>/dev/null || true
+          rm -rf "$src/deploy"
+          mkdir -p "$src/deploy"
+          cp -a "$site/." "$src/deploy/"
+
+          # Static validation.
+          jq empty "$src/m1_world_layers.json" "$src/versions.json" "$out/SGGM1.7g_BUILD_META.json"
+          jq -e '.versions[0].version=="SGGM1.7g" and .versions[0].current==true and ([.versions[]|select(.current==true)]|length)==1' "$src/versions.json" >/dev/null
+          python3 -m py_compile "$src/main.py" "$src/SGGM1.7g/main.py" "$site/SGGM1.7g/main.py"
+          node "$src/validate_luma_assets.mjs" "$src/luma_assets_e33.json"
+          unzip -tq "$src/SGGM1.7g/sggm1_7g.apk"
+          tar -tzf "$src/SGGM1.7g/sggm1_7g.tar.gz" >/dev/null
+          node - "$src/m1_world_layers.json" "$src/luma_assets_e33.json" <<'NODE'
+          const fs=require('fs');
+          const world=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          const assets=JSON.parse(fs.readFileSync(process.argv[3],'utf8')).assets;
+          const layers=new Map(world.layers.map(l=>[l.id,l]));
+          for(const src of world.layers) for(const p of src.portals||[]){
+            const target=layers.get(p.target_layer);
+            if(!target || !(target.walkmesh||[]).some(([x,y,w,h])=>p.target_x>=x&&p.target_x<=x+w&&p.target_y>=y&&p.target_y<=y+h))
+              throw new Error('Invalid portal '+src.id+'/'+p.id);
+          }
+          const lab=layers.get('mages_lab');
+          for(const a of [lab.background_asset,...lab.items.map(i=>i.asset),...lab.npcs.map(n=>n.asset)])
+            if(!assets[a]) throw new Error('Missing Luma asset '+a);
+          const inMesh=(x,y)=>lab.walkmesh.some(([rx,ry,rw,rh])=>x>=rx&&x<=rx+rw&&y>=ry&&y<=ry+rh);
+          for(const [label,x,y] of [['Hall arrival',640,480],['Lab exit',640,563]])
+            for(const [dx,dy] of [[0,0],[-10,-13],[10,-13],[-10,13],[10,13]])
+              if(!inMesh(x+dx,y+dy)) throw new Error(label+' body sample outside walkmesh');
+          console.log('PASS — all 11 layers/portal targets, Mage Lab assets and both transition body walkmeshes.');
+          NODE
+
+          # Runtime payload checksums and project package contents.
+          (cd "$src/SGGM1.7g" && sha256sum sggm1_7g.tar.gz sggm1_7g.apk main.py m1_world_layers.json luma_assets_e33.json > SGGM1.7g_PACKAGE_SHA256SUMS.txt)
+          cp "$src/SGGM1.7g/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$src/SGGM1.7g_PACKAGE_SHA256SUMS.txt"
+          cp "$src/SGGM1.7g/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$site/SGGM1.7g/SGGM1.7g_PACKAGE_SHA256SUMS.txt"
+          cp "$src/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$site/SGGM1.7g_PACKAGE_SHA256SUMS.txt"
+
+          # Validate the original version folder remains available; no main-branch publish/deploy.
+          test -s "$src/SGGM1.7f/sggm1_7f.tar.gz"
+          test -s "$site/SGGM1.7f/play.html"
+          test ! -e "$src/SGGM1.7f/SGGM1.7g_BUILD_META.json"
+
+          # Stage exact content directories. Artifact ZIPs become the source ZIP and site ZIP directly.
+          mkdir -p "$work/delivery"
+          (cd "$src" && zip -qr -X "$work/delivery/SGGM1.7g_SOURCE.zip" . -x '*/__pycache__/*' '__pycache__/*' '*.pyc' '*.mp4' '*.MP4' 'tmp/*' 'temp/*' '.git/*' '*/.git/*')
+          (cd "$site" && zip -qr -X "$work/delivery/SGGM1.7g_COMPLETE_CLOUDFLARE_SITE.zip" . -x '*/__pycache__/*' '__pycache__/*' '*.pyc' '*.mp4' '*.MP4')
+          cp "$out/SGGM1.7g_LUMA_LOG_Entry066.txt" "$out/SGGM1.7g_TEST_RESULTS.txt" "$out/SGGM1.7g_BUILD_META.json" "$out/SGGM1.7g_README.txt" "$out/SGGM1.7g_DELIVERY_README.txt" "$out/SGGM1.7g_WORKER_DEPLOYMENT.txt" "$out/SGGM1.7g_PACKAGE_SHA256SUMS.txt" "$work/delivery/" 2>/dev/null || true
+          unzip -tq "$work/delivery/SGGM1.7g_SOURCE.zip"
+          unzip -tq "$work/delivery/SGGM1.7g_COMPLETE_CLOUDFLARE_SITE.zip"
+          (cd "$work/delivery" && sha256sum *.zip *.txt *.json > SGGM1.7g_OUTER_SHA256SUMS.txt)
+          (cd "$work/delivery" && stat -c '%n %s bytes' *.zip *.txt *.json > SGGM1.7g_OUTER_FILE_SIZES.txt)
+          cp "$work/delivery/SGGM1.7g_OUTER_SHA256SUMS.txt" "$work/delivery/SGGM1.7g_OUTER_FILE_SIZES.txt"
+      - name: Upload source archive as a direct artifact ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7g_SOURCE
+          path: work/src/**
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload complete Cloudflare site as a direct artifact ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7g_COMPLETE_CLOUDFLARE_SITE
+          path: work/site/**
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload combined delivery archive as a direct artifact ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7g_DELIVERY
+          path: work/delivery/**
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
