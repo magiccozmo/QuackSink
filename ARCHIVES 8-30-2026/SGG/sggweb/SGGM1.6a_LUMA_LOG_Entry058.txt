@@ -1,0 +1,39 @@
+LUMA'S LOG — ENTRY 058
+SGGM1.6a — The Alchemist Shop Actually Loads
+Date: 18 November 2026
+Baseline: the exact SGGM1.6_SOURCE.zip and SGGM1.6_COMPLETE_CLOUDFLARE_SITE.zip produced for Entry 057. Both originals passed ZIP integrity checks and remain unchanged.
+
+THE FIELD REPORT
+Cozmo's M1.6 flight recorder shows a successful fast-travel arrival in `alchemy_shop` at (640, 500), activation of the walkmesh overlay, and a successful return to BritRun City through `alchemy_to_city`. The recorder contains no Player Says description or screenshot, so it cannot independently itemize what appeared on screen. Cozmo's report was that the shop was almost empty.
+
+THE ACTUAL CAUSE
+The M1.6 layer JSON did contain the 1280x640 `alchemy_shop_background`, all eleven static item records, and the vendor record. The Luma asset JSON also contained every referenced recipe. However, M1's difficulty-selection path replaces the inherited legacy GameModel with an `SGGM1LogContext` sentinel and bypasses the older `start_game()` initialization that normally creates `self.draw_engine`.
+
+The M1 shop renderer reads `self.machine.draw_engine`. When that object is absent, `_m1_draw_background` deliberately falls back to the plain procedural interior, `_m1_draw_items` returns without drawing props, and `_m1_draw_npc` uses a placeholder instead of the vendor sprite. The previous static checks confirmed that the art recipes existed, but failed to verify that the live M1 state machine actually instantiated the renderer. This was Luma's implementation and validation error.
+
+THE FIX
+- M1.6a initializes `LumaDrawEngine(ASSET_JSON_PATH)` during difficulty selection, before creating the M1 logging sentinel and before the first world frame.
+- The engine is initialized once per application session and retained when the player returns to the tool and resumes the world.
+- The existing renderer now has the engine required to draw the authored shop background, all eleven static display props, and the K1.12 Alchemist sprite.
+- No buy, sell, steal, take, craft, recipe, inventory, or other object mechanics were added.
+
+PRESERVATION
+- The M1.6 world map is byte-identical: 11 layers, 19 directed portals, all walkmeshes, blocked regions, landmarks, and arrival coordinates remain unchanged.
+- The Luma asset JSON is byte-identical to M1.6/K1.12. No new art recipes or image assets were created.
+- The Alchemist Shop's 11 static item records, vendor placement, background key, and shop exit remain unchanged.
+- The other ten world layers, BritRun City geography, fast travel, Player Says, local/global logging, difficulty starts, and save compatibility are unchanged.
+- M1.6 remains included as a historical edition. M1.6a is the current edition. The existing M1.0, M1.0a, M1.5, and older legacy editions remain available; the previously pruned intermediate M1.1–M1.4 editions are not reintroduced.
+- GitHub `main` was not modified and no Cloudflare deployment was performed.
+
+VALIDATION
+- Python syntax compilation passed.
+- The exact Luma Draw Engine loaded the bundled JSON and validated all 122 asset recipes against its embedded world definitions.
+- Assertions verified the M1 difficulty-selection path initializes the engine before the first world frame, and that the background, vendor, and all eleven item asset keys resolve in that engine.
+- Assertions verified the M1.6 world map is unchanged, all 19 directed portal arrivals remain body-safe, and the shop entry-to-exit route remains connected.
+- The new Pygbag TAR and APK bundles contain the patched main.py and the same unchanged world/asset JSON payloads.
+- Source/deployment mirrors, version catalogue paths, release labels, and ZIP integrity passed.
+
+NOT LIVE-TESTED
+Pygame and Pygbag are unavailable in this build environment. I could not run a live Pygame frame, freshly compile the Pygbag bundle, or open a browser session. The code path and bundle are statically validated, but Cozmo's deployed field test is still required to confirm the full rendered shop on screen.
+
+— Luma
