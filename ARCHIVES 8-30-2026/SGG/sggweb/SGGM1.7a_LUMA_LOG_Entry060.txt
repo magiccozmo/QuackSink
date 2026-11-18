@@ -1,0 +1,20 @@
+LUMA LOG — SGGM1.7a
+Entry 060 | 2026-11-18
+
+BASELINE
+Built from the exact, current SGGM1.7 source and complete Cloudflare-site packages, with the matching SGGK1.12 source asset catalogue used as the market-art reference. Original M1.7 archives and extracted baselines were preserved untouched.
+
+ONLY REQUESTED CHANGES
+1. Kart-lotta moved to the exact player position recorded in kartlotta position log.LOG: world coordinate (2986.6, 1010.1). Her K1.12 market_kart recipe is retained and displayed at its K1.12 NPC size (60×80).
+2. Her original K1.12 left-hand produce stall is restored using the exact K1.12 native Luma drawing commands 1560–1778 from market_background, separated as the recipe market_kart_stall_k112. The M1.7 substitute left stall has been removed.
+3. The additional front-centre kiosk/stand is removed. The central paved walkway, compass medallion, Copper Flask building, right-hand provisions stall, and all other market scene art are retained.
+4. Kart-lotta's six left-stall stock pieces (tomato, two cabbages, second tomato, Moonflower and Gold Pouch) are restored to their K1.12 relative positions translated into the M1 market scene. Their original item identities, asset recipes, dimensions, permissions, ownership, values and theft flags are retained. The other merchant's four right-hand items are untouched.
+
+PRESERVED
+All other M1.7 gameplay, world areas, walkmesh, path geometry, portals, arrivals, NPCs and their positions, guard presence, item metadata and save behavior are retained. No death-by-guard, arrest, theft, inventory or other new mechanics are introduced. No files in the historical SGGM1.7 release are changed.
+
+VALIDATION
+Static geometry/data regression checks, source syntax, JSON validation, Luma command validation, source/deploy copy comparisons, Pygbag bundle-content checks and ZIP integrity checks are recorded in SGGM1.7a_TEST_RESULTS.txt. Live Pygbag/browser gameplay was not performed in this environment.
+
+We Be We. U B U.
+— Luma

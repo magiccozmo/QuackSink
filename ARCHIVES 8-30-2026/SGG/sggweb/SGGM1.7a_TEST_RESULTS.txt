@@ -1,0 +1,29 @@
+SGGM1.7a STATIC TEST RESULTS
+Date: 2026-11-18 UTC
+
+PASS — exact SGGM1.7 source and complete Cloudflare-site baseline archives were used; original baseline directories and historical SGGM1.7 release folders remain untouched.
+PASS — Kart-lotta is at the exact logged world position (2986.6, 1010.1); display size is restored to K1.12's 60x80.
+PASS — original K1.12 produce-stall drawing commands 1560–1778 are used exactly as a separate Luma recipe.
+PASS — the M1.7 replacement left-stall drawing commands 789–821 have been removed.
+PASS — the extra front-centre kiosk commands 843–854 have been removed.
+PASS — central walkway, compass medallion, building, right-hand stall, lamps and remaining scene commands are retained.
+PASS — only Kart-lotta's six left-stall stock pieces were repositioned, using original K1.12 coordinates translated by M1 market origin (2760,745).
+PASS — all six Kart-lotta stock objects retain original metadata (identity, kind, dimensions, ownership, permission/theft distinctions, value and other fields).
+PASS — all ten market objects match K1.12 names, kinds, dimensions, takeable/stealable flags, ownership, respawn and value metadata.
+PASS — the tomato/cabbage permission rule, free Moonflower and always-stealable Gold Pouch remain unchanged.
+PASS — other merchant's four items and all other item records are unchanged.
+PASS — all other market NPC records and all non-market world layers are unchanged.
+PASS — city walkmesh, blocked geometry, path list, portal list/arrivals and market discovery landmark are unchanged.
+PASS — all other world layers are byte-for-byte semantically identical to M1.7.
+PASS — market_kart and all referenced market item sprite recipes match K1.12 exactly.
+PASS — all Luma recipe commands use supported native drawing operations (rect, line, polygon, circle, ellipse).
+PASS — root runtime, SGGM1.7a release folder and complete-site SGGM1.7a folder contain matching current main/world/assets/launcher files.
+PASS — Python source syntax validation.
+PASS — world and asset JSON parse and static schema checks.
+PASS — Pygbag tar.gz bundle structure and APK ZIP member integrity.
+PASS — complete source/deployment ZIP archives tested with unzip -t.
+PASS — source archive excludes MP4 files; historical versions are retained.
+
+NOT RUN — live Pygbag/browser gameplay session. No live runtime was available in this build environment. The Pygbag tar/APK bundles are repacked from the M1.7 payload with the updated runtime and JSON; they are not a fresh Pygbag compilation.
+
+No changes were pushed to GitHub main and no Cloudflare deployment was performed by Luma.
