@@ -1,0 +1,42 @@
+name: Luma temporary SGGM1.7c baseline export
+
+on:
+  push:
+    branches:
+      - luma-export-m17c-20261118
+
+permissions:
+  contents: read
+
+jobs:
+  export-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact main snapshot
+        uses: actions/checkout@v4
+        with:
+          ref: luma-export-m17c-20261118
+          fetch-depth: 1
+
+      - name: Stage exact M1.7c archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sggm17c-transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7c_SOURCE.zip" /tmp/sggm17c-transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7c_COMPLETE_CLOUDFLARE_SITE.zip" /tmp/sggm17c-transfer/
+          test -s /tmp/sggm17c-transfer/SGGM1.7c_SOURCE.zip
+          test -s /tmp/sggm17c-transfer/SGGM1.7c_COMPLETE_CLOUDFLARE_SITE.zip
+          unzip -t /tmp/sggm17c-transfer/SGGM1.7c_SOURCE.zip
+          unzip -t /tmp/sggm17c-transfer/SGGM1.7c_COMPLETE_CLOUDFLARE_SITE.zip
+          (cd /tmp/sggm17c-transfer && sha256sum *.zip > SHA256SUMS.txt && stat -c '%n %s bytes' *.zip > FILE_SIZES.txt)
+          cat /tmp/sggm17c-transfer/SHA256SUMS.txt
+          cat /tmp/sggm17c-transfer/FILE_SIZES.txt
+
+      - name: Upload exact baseline archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: SGGM1.7c-baseline-transfer
+          path: /tmp/sggm17c-transfer/*
+          if-no-files-found: error
+          retention-days: 1
