@@ -1,0 +1,32 @@
+LUMA LOG — ENTRY 066
+Release: SGGM1.7g — Mage’s Lab K1.12 Visual Restoration
+Date: 2026-11-18
+
+Baseline and references
+- Continued from the exact SGGM1.7f source and complete Cloudflare-site packages.
+- Compared against the exact SGGK1.12 source and complete Cloudflare-site packages.
+- Reused c1_bg_mages_lab and the original Luma recipes for the retort, book, lever, crystal, coil, exit door and Fearmonger. All recipes were already present and match K1.12; no substitute art was created.
+
+Implementation
+- Replaced only the M1 mages_lab procedural placeholder with the original K1.12 1280x640 Mage’s Lab background.
+- Restored the retort, recipe book, unmarked lever, exit-door artwork, resonance crystal and aether coil at their K1.12 coordinates and sizes as static scene dressing.
+- Restored Fearmonger with the original mage sprite at (770,478), 104x140, with no generated label.
+- Restored the original floor navigation rectangle (22,293)-(1255,623).
+- Aligned the exit trigger with the painted doorway at (640,563), with duplicate generic marker and label hidden.
+- Moved the Castle Hall → Mage Lab arrival to (640,480); preserved the Mage Lab → Castle Hall destination (1250,560).
+- Updated active release identity, launcher and site catalogue to SGGM1.7g.
+
+Scope and preservation
+- Visual set-dressing and navigation/transition alignment only. No lab interactions, hazards, alchemy, quest, dialogue or NPC behavior was added or rewired.
+- Original K1.12 object definitions, activity identifiers, Fearmonger data and all Luma recipes remain intact.
+- Preserved M1.7f Troll Cave, M1.7e Tipsy Turnip, M1.7d Market Square/Alchemy doorway, unrelated layers, controls, fast travel, saves, logging and global-log infrastructure.
+- Historical releases were not overwritten. No Worker, D1 schema, binding, route, secret or logging protocol changed.
+
+Validation and limitations
+- World/catalogue JSON, Python syntax, asset references, portal endpoints, body walkmesh samples and runtime archive integrity checks passed.
+- Existing Luma asset validator passed: 125 recipes / 23,186 drawing commands.
+- Runtime TAR.GZ and APK were repacked with updated main.py and m1_world_layers.json; Luma recipes are unchanged.
+- NOT LIVE TESTED: no fresh Pygbag compile or in-browser gameplay session was run. Cozmo’s field test remains the final check for room scale, walkability and both transitions.
+- No GitHub main push or Cloudflare deployment was performed by Luma.
+
+— Luma
