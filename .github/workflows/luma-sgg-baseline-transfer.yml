@@ -9,17 +9,16 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact temporary branch
-        uses: actions/checkout@v4
-      - name: Stage and verify baseline archives
+      - name: Download exact baseline archives
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p transfer
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7d_SOURCE.zip" transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip" transfer/
-          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          base="https://raw.githubusercontent.com/magiccozmo/QuackSink/main/ARCHIVES%208-30-2026/SGG/sggweb"
+          curl -fL --retry 3 "$base/SGGM1.7d_SOURCE.zip" -o transfer/SGGM1.7d_SOURCE.zip
+          curl -fL --retry 3 "$base/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip
+          curl -fL --retry 3 "$base/SGGK1.12_SOURCE.zip" -o transfer/SGGK1.12_SOURCE.zip
+          curl -fL --retry 3 "$base/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" -o transfer/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip
           test "$(find transfer -maxdepth 1 -name '*.zip' -type f | wc -l)" -eq 4
           for f in transfer/*.zip; do
             test -s "$f"
