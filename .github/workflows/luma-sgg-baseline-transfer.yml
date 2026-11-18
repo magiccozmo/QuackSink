@@ -1,0 +1,36 @@
+name: Temporary SGG baseline transfer
+on:
+  push:
+    branches:
+      - luma-inn-restore-baseline-20261118
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact temporary branch
+        uses: actions/checkout@v4
+      - name: Stage and verify baseline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7d_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_SOURCE.zip" transfer/
+          cp "ARCHIVES 8-30-2026/SGG/sggweb/SGGK1.12_COMPLETE_CLOUDFLARE_SITE.zip" transfer/
+          test "$(find transfer -maxdepth 1 -name '*.zip' -type f | wc -l)" -eq 4
+          for f in transfer/*.zip; do
+            test -s "$f"
+            unzip -t "$f"
+          done
+          sha256sum transfer/*.zip > transfer/BASELINE_SHA256SUMS.txt
+          stat -c '%n %s bytes' transfer/*.zip > transfer/BASELINE_FILE_SIZES.txt
+      - name: Upload verified archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: sgg-m1-7d-k1-12-baseline-20261118
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
