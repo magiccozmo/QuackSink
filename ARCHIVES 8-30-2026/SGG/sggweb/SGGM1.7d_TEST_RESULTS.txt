@@ -1,0 +1,13 @@
+SGGM1.7d — STATIC / TOPOLOGY TEST RESULTS
+
+PASS — exact SGGM1.7c source and complete Cloudflare-site archives were retrieved from the current GitHub main snapshot and passed ZIP integrity validation before extraction.
+PASS — exactly one blocker was removed: city_exterior [3800,1090,18,92]. No other blocked rectangle was removed or changed.
+PASS — Alchemy upper facade [3800,865,200,225], east jamb [3882,1090,118,92], lower sill [3800,1182,200,18], doorway coordinate/radius, portal target, and all other portals remain unchanged.
+PASS — static player geometry check: at the former stopping point (3790,1140), the portal is 64 units away and the automatic walk-through threshold is only 28.6 units (radius 52 × 0.55). At (3830,1140), distance is 24 units; the full 20×26 player body and its four corner samples lie within the existing walkmesh and overlap no remaining blocked rectangle.
+PASS — doorway remains connected to the existing alchemy_shop destination at (640,500); the E-key interaction range is unchanged.
+PASS — all other world layers, city walkmesh rectangles, object definitions, Luma Draw assets, item metadata, NPC positions, scene artwork, transition records and runtime mechanics are semantically unchanged from M1.7c.
+PASS — site catalogue includes SGGM1.7d as the sole current edition, preserves SGGM1.7c and SGGM1.0, and retains all non-M1 historical entries. M1 intermediate test editions are omitted from this package.
+PASS — source and deploy copies of the current M1.7d runtime files match; tar and APK payload files match current main.py, world JSON and Luma asset data.
+PASS — Python syntax compilation; JSON parsing; tar archive integrity; APK ZIP integrity; source ZIP, site ZIP and delivery ZIP integrity.
+NOT RUN — fresh Pygbag compilation or live browser/Pygame test. Static checks cannot substitute for Cozmo's in-game field test.
+NOT PERFORMED — GitHub main push or Cloudflare deployment.

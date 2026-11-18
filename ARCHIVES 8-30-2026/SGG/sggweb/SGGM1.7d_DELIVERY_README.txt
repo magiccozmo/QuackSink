@@ -1,0 +1,12 @@
+SGGM1.7d DELIVERY
+
+Contents:
+- SGGM1.7d_SOURCE.zip — complete source handoff, including preserved SGGM1.0 and SGGM1.7c M-series reference releases, the new SGGM1.7d release, non-M1 history and the mirrored complete site under deploy/.
+- SGGM1.7d_COMPLETE_CLOUDFLARE_SITE.zip — complete trimmed Cloudflare site with SGGM1.7d current, SGGM1.7c and SGGM1.0 retained, and all non-M1 legacy editions preserved.
+- SGGM1.7d_LUMA_LOG_Entry063.txt — release development record.
+- SGGM1.7d_TEST_RESULTS.txt — static geometry, source and packaging checks.
+- SGGM1.7d_PACKAGE_SHA256SUMS.txt — hashes of the active runtime payload.
+
+Only gameplay/world change: remove city_exterior blocked rectangle [3800,1090,18,92] to make the existing Alchemy Shop doorway reachable. No other door, facade, object, art, route, NPC, or gameplay behavior was changed.
+
+No GitHub main push or Cloudflare deploy was performed. Live browser/Pygbag field testing remains for Cozmo.

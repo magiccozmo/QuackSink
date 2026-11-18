@@ -1,0 +1,31 @@
+LUMA LOG — ENTRY 063
+Release: SGGM1.7d — Alchemy Shop Door Approach Correction
+Date: 2026-11-18
+
+Baseline
+- Exact SGGM1.7c_SOURCE.zip and SGGM1.7c_COMPLETE_CLOUDFLARE_SITE.zip retrieved from the user's current GitHub main snapshot (2a4a7a1dc2b323a0047813f5a1cad97d0291c12b).
+- Both original project archives and the outer transfer artifact passed ZIP integrity checks. Baseline SHA-256 values and file sizes were independently recorded.
+
+Requested change
+- Make the existing Alchemy Shop door physically reachable from the Market Square, without changing the facade, door, portal destination, artwork, or anything else.
+- Reduce the packaged M1 test-version clutter: retain SGGM1.0, SGGM1.7c, and the new SGGM1.7d. Intermediate M1 test editions are omitted from this release package only; GitHub history is untouched.
+
+Implementation
+- Removed exactly one city_exterior blocker: [3800, 1090, 18, 92], the narrow west-side doorway jamb strip.
+- Retained the upper facade blocker [3800, 865, 200, 225], east-side jamb [3882, 1090, 118, 92], and lower sill [3800, 1182, 200, 18].
+- The existing doorway remains at (3854, 1140), radius 52, targeting alchemy_shop at (640, 500).
+- The existing auto-walk portal trigger uses 0.55 × radius = 28.6 units. Before the fix, the west blocker stopped the player's 20×26 collision body with center near x=3790, 64 units from the portal; the auto-walk threshold could not be reached. After the fix, the walkable route can reach x=3830 at y=1140 (24 units from the portal), inside the trigger range, with the complete collision body on the walkmesh and clear of all remaining blockers.
+- The E-key portal interaction range and all transition logic are unchanged.
+- M1 site catalogue and archive folders now retain only SGGM1.0 and SGGM1.7c as previous M1 references, plus SGGM1.7d as current. Non-M1 historical editions and milestone archives are preserved.
+
+Preserved
+- Alchemy Shop artwork, facade position, dimensions, door artwork and portal destination.
+- Kart-lotta stall and its blocked footprint; central compass; street overlays; stalls; guard; NPC positions; all other city collision, paths, walkmesh rectangles, portals and all other world layers.
+- All item/ownership metadata, game mechanics, global logging, local logging, dialogue, save compatibility and other runtime features.
+- No new gameplay mechanics.
+
+Testing and limitations
+- Static geometry simulation confirms the old approach was outside the automatic trigger and the new approach is inside it, with all five player-body walkmesh samples valid and no remaining blocker overlap.
+- JSON parsing, source Python syntax compilation, archive payload consistency, package catalogue pruning and ZIP integrity checks were run.
+- The existing Pygbag tar/APK containers were repacked with the updated main.py and world JSON; no fresh Pygbag compilation or live browser/Pygame field test was performed here. Cozmo's field test remains the final confirmation.
+- No GitHub main changes and no Cloudflare deployment by Luma.
