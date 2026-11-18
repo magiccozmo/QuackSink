@@ -1,0 +1,29 @@
+LUMA'S LOG — ENTRY 056
+SGGM1.5 — BritRun Streets Become One Connected Town
+Date: 18 November 2026
+Baseline: exact SGGM1.4 source and complete-site archives retrieved from GitHub main and independently verified.
+
+THE EVIDENCE
+Cozmo's narrated M1.4 walkthrough, local flight recorder, and nine binary screenshots showed that the visual road surfaces did not form one reliable walkable town. Most importantly, the old Snob Row walkmesh ended at y=1460 while the Gate Lane began at y=1530: a 70-unit gap, despite both road segments passing separate static samples. The Market Square also read as overlapping roads rather than an open plaza. The fixed minimap obscured the upper/right-side building labels.
+
+THE REPAIR
+- Rebuilt only the city_exterior geometry.
+- Added Lantern Rise around the east side of Little Lantern, explicitly connecting Snob Row to Gate Lane.
+- Connected Gate Lane, Market Road, and the City Gate with overlapping full-body-safe walkmesh junctions.
+- Made Market Square a distinct open plaza. Market Road and Peasant Way stop at the plaza boundary.
+- Made Peasant Way, Castle Path, Easy Street, and Snob Row meet at the intended A / Gold District junction.
+- Kept Little Lantern west of the gate and just south of Snob Row; its own door and return are retained.
+- Kept the Inn north and Alchemy Shop east of the plaza. Reduced only their placeholder footprints so their names/doors sit more clearly below the existing minimap overlay. No UI code was altered.
+- Repositioned only the existing four city NPCs; all IDs and roles remain.
+- Adjusted five reciprocal arrival positions to land on the new approaches.
+
+THE PRESERVATION PROMISE
+The 11-layer world, 19 directed portals, interiors, NPC identities/behaviors, dialogue, quests, combat, saves, difficulty starts, controls, Worker/D1 and all artwork assets are preserved. No new art or draw recipes were made. Luma asset JSON is unchanged. The M1.3a startup-anchor safeguard remains, with its validation anchor placed on the new gate approach. The old RunArchive compatibility tag remains SGGM1.4 intentionally.
+
+VALIDATION
+The entire city street network—not just separate road samples—was checked with the runtime's 20x26 player-body and blocked-rectangle movement rules. A 10-unit grid flood-fill reached every path sample, portal threshold, reciprocal arrival and city NPC from the gate. All 19 directed portal arrivals and all eight fast-travel landmarks have safe body-clear coordinates. Syntax and archive integrity checks passed.
+
+NO LIVE BROWSER CLAIM
+Pygame and Pygbag were unavailable locally, so no live browser render/session was run. M1.5 needs Cozmo's deployment field test before we call it proven.
+
+— Luma
