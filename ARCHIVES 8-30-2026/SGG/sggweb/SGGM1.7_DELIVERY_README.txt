@@ -1,0 +1,20 @@
+SGGM1.7 DELIVERY PACKAGE
+
+SGGM1.7_SOURCE.zip
+  Complete source archive, including the M1.7 root source, current version folder, deployment staging copy and retained historical release material.
+
+SGGM1.7_COMPLETE_CLOUDFLARE_SITE.zip
+  Complete static Cloudflare site, including the existing historical edition catalogue and the new SGGM1.7/ edition. The root index and versions catalogue point to M1.7 as current.
+
+SGGM1.7_LUMA_LOG_Entry059.txt
+  Full development and validation record.
+
+SGGM1.7_MARKET_ART_PREVIEW.png
+  Raster preview rendered directly from the new 1280x640 Luma Draw Engine recipe. It is not a screenshot of the live game.
+
+SGGM1.7_PACKAGE_SHA256SUMS.txt
+  Checksums for the current M1.7 runtime, launcher and release documentation.
+
+The new market is integrated into the M1.6a continuous-world coordinates. Existing paths, walkmesh and portals are unchanged. K1.12 market item identity and theft/permission metadata are carried forward; M1.7 currently renders these as static display props. The Market Guard is present visually, but no death-by-guard mechanics are activated.
+
+No live Pygbag build or browser playtest was available during this packaging pass. The runtime TAR/ APK payloads are repackaged from the M1.6a payload with the new M1.7 main.py, world JSON and Luma assets; they were not freshly compiled by Pygbag.

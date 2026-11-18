@@ -1,0 +1,39 @@
+LUMA LOG — Entry 059
+Project: Spiffy's Gift / SGGM1.7
+Date: 2026-11-18 UTC
+Release: SGGM1.7 — BritRun Market Square Reimagined
+
+BASELINE RESTORATION
+Used the exact M1.6a source and complete Cloudflare site ZIPs from GitHub main commit 9efa1ace6c346214f7527c80ffab0431c0ba63d1. Independently verified their file sizes, SHA-256 values and ZIP integrity. Used the exact K1.12 source and Cloudflare ZIPs as the legacy object/art reference and verified those archives too. Original ZIPs remain untouched.
+
+MARKET SQUARE ART
+Created a new 1280x640 Luma Draw Engine recipe, m1_market_square, for the continuous-world city layer. It reimagines the old medieval market theme with timbered market frontage, the Copper Flask sign, contrasting red produce and teal provisions stalls, cobbled paving, edge greenery, hanging lanterns, bunting and a circular compass medallion. The legacy market.png was a visual reference only and was not reused as scene art.
+
+GEOGRAPHY AND ROUTE RELATIONSHIPS
+Kept the M1.6a world topology intact: Inn remains north; Alchemy Shop remains east; Kart-lotta remains in the middle. The existing Market Square discovery/fast-travel landmark id is retained while its generic placeholder building render is replaced by the Luma scene. Existing city walkmesh, path list, portals and their target/arrival coordinates were left unchanged. The custom artwork is drawn before visible path strokes and active portal labels so the routes remain legible over the art.
+
+NPCS
+Kart-lotta and Naz now use their K1.12 market sprites. Added the K1.12 market-side vendor sprite. Moved the BritRun Guard from the Market Road south of the square to a visible position inside the market plaza and restored the guard sprite. No arrest, chase, death or other guard mechanics were introduced; the NPC record only notes its future role. Cozmo's city presence is retained.
+
+K1.12 OBJECT RESTORATION
+Added all ten K1.12 BritRun Market collectable stock objects as static M1 market display props, retaining their original ids, names, kind, takeable/stealable booleans, owners, respawn data and value where present. The separate Alchemy Shop door was not duplicated because M1 already has its own city_to_alchemy portal.
+- Tomato and the two cabbages plus Kart-lotta tomato: Kart-lotta-owned, initially unauthorized to take; the K1.12 permission rule makes tomato/cabbage stock permitted after kart_lotta permission.
+- Market Moonflower and Free Herb Sample: non-stealable/free under the K1.12 definitions.
+- Gold Pouch: remains stealable, owned by Kart-lotta, value 180; it does not acquire the tomato/cabbage permission exemption.
+- Healing Potion, Spell Scroll and Odd Souvenir: remain stealable.
+The M1 renderer currently treats layer.items as static Luma props, so the display objects are visual-only in M1.7. The object metadata records their later theft/permission behavior; no new interaction or inventory system is claimed.
+
+VALIDATION
+- Source and deployment ZIP baseline archives passed ZIP CRC/integrity testing before modification.
+- New Luma asset uses only the renderer's supported rect, line, polygon, circle and ellipse operations.
+- Static geometry tests compare the M1.6a and M1.7 paths, walkmesh and portals for exact equality.
+- Static reference checks confirm all ten K1.12 market objects and all referenced Luma recipes exist.
+- Guard and object world positions are checked against the market-area bounds; no route/path/portal coords were changed.
+- Python source syntax, JSON parse, TAR/ APK archive contents and output ZIP integrity are checked.
+- A live Pygbag/browser gameplay run was not available and is not claimed. The runtime TAR/ APK payloads are repacked from M1.6a with the new files, not freshly compiled by Pygbag.
+
+DUCKSPACE NOTE
+This is a relational change: the visual square is painted into the same coordinates as the existing world paths and portal network; the old item identities and permission semantics travel forward; and the Market Guard occupies the same playable plaza without implementing the future consequence system. The art, topology, objects and NPCs are meant to read as one coherent place.
+
+We Be We. U B U.
+— Luma
