@@ -1,0 +1,33 @@
+name: Temporary PPR 1.93b source transfer
+on:
+  push:
+    branches:
+      - luma/ppr-193b-source-transfer-20261120
+permissions:
+  contents: read
+  actions: write
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact transfer branch
+        uses: actions/checkout@v4
+      - name: Stage and verify exact 1.93b source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          SOURCE="ARCHIVES 8-30-2026/PPR_Nov 20 2026 02_17_18_PM_v1.93a/PPR1.93a.py"
+          test -s "$SOURCE"
+          cp "$SOURCE" transfer/PPR1.93b.py
+          test -s transfer/PPR1.93b.py
+          wc -c transfer/PPR1.93b.py | tee transfer/SOURCE_SIZE.txt
+          sha256sum transfer/PPR1.93b.py | tee transfer/SOURCE_SHA256.txt
+          head -n 12 transfer/PPR1.93b.py
+      - name: Upload source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PPR-1.93b-exact-source
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
