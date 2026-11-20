@@ -3704,7 +3704,7 @@ try {
     $cropSize = [int]($side - (2 * $margin))
 
     $bitmap = [System.Drawing.Bitmap]::new(
-        128, 128, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb
+        256, 256, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb
     )
     $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
     $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
@@ -3712,13 +3712,24 @@ try {
     $graphics.Clear([System.Drawing.Color]::Transparent)
 
     $path = [System.Drawing.Drawing2D.GraphicsPath]::new()
-    $path.AddEllipse(1, 1, 126, 126)
+    $path.AddEllipse(1, 1, 254, 254)
     $graphics.SetClip($path)
-    $dest = [System.Drawing.Rectangle]::new(0, 0, 128, 128)
+    $dest = [System.Drawing.Rectangle]::new(0, 0, 256, 256)
     $srcRect = [System.Drawing.Rectangle]::new($cropX, $cropY, $cropSize, $cropSize)
     $graphics.DrawImage($source, $dest, $srcRect, [System.Drawing.GraphicsUnit]::Pixel)
     $graphics.ResetClip()
-    $bitmap.Save($pngPath, [System.Drawing.Imaging.ImageFormat]::Png)
+    # Save a 48px header image for Tk; the 256px master feeds the Windows ICO.
+    $headerBitmap = [System.Drawing.Bitmap]::new(
+        48, 48, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb
+    )
+    $headerGraphics = [System.Drawing.Graphics]::FromImage($headerBitmap)
+    $headerGraphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+    $headerGraphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+    $headerGraphics.Clear([System.Drawing.Color]::Transparent)
+    $headerGraphics.DrawImage($bitmap, 0, 0, 48, 48)
+    $headerBitmap.Save($pngPath, [System.Drawing.Imaging.ImageFormat]::Png)
+    $headerGraphics.Dispose()
+    $headerBitmap.Dispose()
 
     $sizes = @(16, 32, 48, 64, 128, 256)
     $frames = @()
