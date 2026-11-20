@@ -10297,13 +10297,13 @@ class QSController:
                         if (el && !elements.includes(el) && visible(el)) elements.push(el);
                     }};
 
-                    // Prefer the current outer assistant wrapper, then the
-                    // legacy explicit role marker. Keep handshake extraction
-                    // independent of generic response candidates.
+                    // GPT has a precise assistant-message selector. Prefer it
+                    // so parent <article> nodes cannot confuse the handshake
+                    // detector with historical content.
                     try {{
-                        const current = document.querySelectorAll('[data-conversation-role="assistant"]');
-                        if (current.length) current.forEach(pushUnique);
-                        else document.querySelectorAll('[data-message-author-role="assistant"]').forEach(pushUnique);
+                        if (document.querySelector('[data-message-author-role="assistant"]')) {{
+                            document.querySelectorAll('[data-message-author-role="assistant"]').forEach(pushUnique);
+                        }}
                     }} catch (_) {{}}
 
                     // Other nodes may expose only their discovered output selector.
