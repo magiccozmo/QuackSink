@@ -12,8 +12,12 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact temporary branch
+      - name: Sparse checkout of captured visual files only
         uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/random stuff/hogf
+          sparse-checkout-cone-mode: true
 
       - name: Stage captured video files
         shell: bash
@@ -25,15 +29,11 @@ jobs:
           cp "ARCHIVES 8-30-2026/random stuff/hogf/(1) Terry Prachett's The Hogfather - YouTube - Opera 2026-11-24 14-56-51.mp4" _hogf_export/
           cp "ARCHIVES 8-30-2026/random stuff/hogf/(1) Terry Prachett's The Hogfather - YouTube - Opera 2026-11-24 14-57-30.mp4" _hogf_export/
           test "$(find _hogf_export -maxdepth 1 -type f -name '*.mp4' | wc -l)" -eq 4
-          echo "File sizes:"
-          du -b _hogf_export/*
-          echo "SHA-256:"
-          sha256sum _hogf_export/*
-          echo "Archive integrity and file inventory recorded in manifest.txt"
           {
             du -b _hogf_export/*
             sha256sum _hogf_export/*
           } > _hogf_export/manifest.txt
+          cat _hogf_export/manifest.txt
 
       - name: Upload captured videos
         uses: actions/upload-artifact@v4
