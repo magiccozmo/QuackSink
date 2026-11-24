@@ -9,8 +9,14 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out exact archive branch
+      - name: Check out only the archived PPR source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            ARCHIVES 8-30-2026/PPR_Nov 23 2026 08_17_45_AM_v1.94a/PPR1.94a.py
+          sparse-checkout-cone-mode: false
       - name: Stage and verify archived PPR source
         shell: bash
         run: |
