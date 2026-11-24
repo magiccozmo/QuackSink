@@ -660,7 +660,7 @@ jobs:
           from pathlib import Path
           import re
           root = Path("ARCHIVES 8-30-2026")
-pattern = re.compile(r'(?i)mystical|guessing.{0,60}game|game.{0,60}guessing|qbasic|gw[- ]?basic|BASIC.{0,60}guess|guess.{0,60}BASIC')
+          pattern = re.compile(r'(?i)mystical|guessing.{0,60}game|game.{0,60}guessing|qbasic|gw[- ]?basic|BASIC.{0,60}guess|guess.{0,60}BASIC')
           hits = []
           for path in root.rglob("*.CONVO"):
               try:
