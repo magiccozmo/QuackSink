@@ -1,4 +1,4 @@
-name: Temporary TOWEL archive search
+name: Temporary Mystical Guessing archive search
 
 on:
   push:
@@ -660,7 +660,7 @@ jobs:
           from pathlib import Path
           import re
           root = Path("ARCHIVES 8-30-2026")
-          pattern = re.compile(r"(?i)(?<![A-Z0-9])T(?:[\\s._-]*)O(?:[\\s._-]*)W(?:[\\s._-]*)E(?:[\\s._-]*)L(?![A-Z0-9])|towel|xenoanthrop")
+pattern = re.compile(r'(?i)mystical|guessing.{0,60}game|game.{0,60}guessing|qbasic|gw[- ]?basic|BASIC.{0,60}guess|guess.{0,60}BASIC')
           hits = []
           for path in root.rglob("*.CONVO"):
               try:
@@ -672,14 +672,14 @@ jobs:
                   end = min(len(data), match.end()+650)
                   hits.append(f"FILE: {path}\\nMATCH: {data[start:end]}\\n{'='*70}")
           out = "\\n".join(hits) if hits else "NO MATCHES FOUND"
-          Path("towel-archive-search.txt").write_text(out, encoding="utf-8")
+          Path("mystical-guessing-search.txt").write_text(out, encoding="utf-8")
           print(out[:20000])
           PY
 
       - name: Upload search findings
         uses: actions/upload-artifact@v4
         with:
-          name: towel-archive-search
-          path: towel-archive-search.txt
+          name: mystical-guessing-search
+          path: mystical-guessing-search.txt
           if-no-files-found: error
           retention-days: 1
