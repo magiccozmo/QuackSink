@@ -1,0 +1,36 @@
+name: Luma PPR source transfer
+on:
+  push:
+    branches:
+      - tmp-luma-ppr-source-20261124
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact archive branch
+        uses: actions/checkout@v4
+      - name: Stage and verify archived PPR source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer
+          cp "ARCHIVES 8-30-2026/PPR_Nov 23 2026 08_17_45_AM_v1.94a/PPR1.94a.py" transfer/PPR1.94a.py
+          test -s transfer/PPR1.94a.py
+          python -m py_compile transfer/PPR1.94a.py
+          rm -rf transfer/__pycache__
+          {
+            echo "File: PPR1.94a.py"
+            echo "Bytes: $(wc -c < transfer/PPR1.94a.py | tr -d ' ')"
+            echo "SHA256:"
+            sha256sum transfer/PPR1.94a.py
+          } > transfer/TRANSFER_VERIFICATION.txt
+          cat transfer/TRANSFER_VERIFICATION.txt
+      - name: Upload source artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PPR1.94a-source-transfer
+          path: transfer/
+          if-no-files-found: error
+          retention-days: 1
